@@ -3,24 +3,6 @@
 namespace CsharpTest
 {
 
-    interface ILiveBirth
-    {
-        string BabyCalled();
-    }
-
-    class Animal { }
-    class Cat : Animal, ILiveBirth
-    {
-        public string BabyCalled() { return "kitten"; }
-    }
-    class Dog : Animal, ILiveBirth
-    {
-        public string BabyCalled() { return "puppy"; }
-    }
-    class Bird : Animal
-    {
-
-    }
     class Program
     {
         static void Main(string[] args)
@@ -50,17 +32,15 @@ namespace CsharpTest
             // test interface 
             InterfaceTest.Test();
 
-            Animal[] animalArray = new Animal[3];
-            animalArray[0] = new Cat();
-            animalArray[1] = new Dog();
-            animalArray[2] = new Bird();
-            foreach (Animal a in animalArray)
+            Animal[] myAnimalZoo = { new Cat(), new Sheep(), 
+                    new Frog(), new Bird(), new StrangeAnimal() };
+
+            foreach (var myAnimal in myAnimalZoo)
             {
-                ILiveBirth b = a as ILiveBirth;
-                if (b != null)
-                {
-                    Console.WriteLine("Baya is called: {0}", b.BabyCalled());
-                }
+                Console.WriteLine("=============");
+                myAnimal.Fly();
+                myAnimal.Quack();
+                Console.WriteLine(myAnimal);
             }
 
         }
