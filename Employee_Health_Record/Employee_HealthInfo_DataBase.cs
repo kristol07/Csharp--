@@ -78,9 +78,9 @@ namespace CsharpTest
         {
             List<Employee> listOfSuspectEmployee = new List<Employee>();
 
-            foreach(var Employee in EmployeeData)
+            foreach (var Employee in EmployeeData)
             {
-                if(!string.IsNullOrEmpty(Employee.FormatForAbnormalInfoPrinting()))
+                if (!string.IsNullOrEmpty(Employee.FormatForAbnormalInfoPrinting()))
                 {
                     listOfSuspectEmployee.Add(Employee);
                 }
@@ -181,12 +181,15 @@ namespace CsharpTest
         {
             int indexOfEmployee = FindEmployee(ginNumber);
 
-            EmployeeData.RemoveAt(indexOfEmployee);
+            if (indexOfEmployee != -1)
+            {
+                EmployeeData.RemoveAt(indexOfEmployee);
+            }
         }
 
         public bool IsEmpty()
         {
-            if(EmployeeData.Count == 0)
+            if (EmployeeData.Count == 0)
             {
                 return true;
             }
