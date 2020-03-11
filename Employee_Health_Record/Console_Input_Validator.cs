@@ -5,28 +5,30 @@ using System.Linq;
 
 namespace CsharpTest
 {
-    public static class InputValidator
+    public static class ConsoleInputValidator
     {
 
         public static void ValidNewGinNumberInput(EmployeeDatabase employeeDatabase, out string inputGinNumber)
         {
             Console.WriteLine("Input valid GinNumber:");
             inputGinNumber = Console.ReadLine();
+
             int GinNumber;
-            while (employeeDatabase.HasEmployee(inputGinNumber))
+            while (!Int32.TryParse(inputGinNumber, out GinNumber))
             {
-                Console.WriteLine("Employee already existed!");
-                Console.WriteLine("Try new GinNumber. (Press 'q' to quit)");
+                Console.WriteLine("Invalid GinNumber!");
+                Console.WriteLine("GinNumber is an Integer. (Press 'q' to quit)");
                 inputGinNumber = Console.ReadLine();
                 if (inputGinNumber == "q")
                 {
                     return;
                 }
             }
-            while (!Int32.TryParse(inputGinNumber, out GinNumber))
+
+            while (employeeDatabase.HasEmployee(inputGinNumber))
             {
-                Console.WriteLine("Invalid GinNumber!");
-                Console.WriteLine("Try new GinNumber(Integer). (Press 'q' to quit)");
+                Console.WriteLine("Employee already existed!");
+                Console.WriteLine("Try new GinNumber. (Press 'q' to quit)");
                 inputGinNumber = Console.ReadLine();
                 if (inputGinNumber == "q")
                 {
@@ -39,6 +41,19 @@ namespace CsharpTest
         {
             Console.WriteLine("Input valid GinNubmer:");
             inputGinNumber = Console.ReadLine();
+
+            int GinNumber;
+            while (!Int32.TryParse(inputGinNumber, out GinNumber))
+            {
+                Console.WriteLine("Invalid GinNumber!");
+                Console.WriteLine("GinNumber is an Integer. (Press 'q' to quit)");
+                inputGinNumber = Console.ReadLine();
+                if (inputGinNumber == "q")
+                {
+                    return;
+                }
+            }
+
             while (!employeeDatabase.HasEmployee(inputGinNumber))
             {
                 Console.WriteLine("Employee not found!");
@@ -74,22 +89,6 @@ namespace CsharpTest
             }
         }
 
-        public static void ValidBodyTemperatureInput(out string inputBodyTemperature)
-        {
-            Console.WriteLine("Input valid Body Temperature:");
-            inputBodyTemperature = Console.ReadLine();
-            double bodyTemperature;
-            while (!double.TryParse(inputBodyTemperature, out bodyTemperature))
-            {
-                Console.WriteLine("Body Temperature invalid! Retry. (Press 'q' to quit)");
-                inputBodyTemperature = Console.ReadLine();
-                if (inputBodyTemperature == "q")
-                {
-                    return;
-                }
-            }
-        }
-
         public static void ValidHasSymptomsInput(out string inputHasSymptoms)
         {
             Console.WriteLine("Any symptoms of being affected? (y/yes/n/no)");
@@ -101,6 +100,22 @@ namespace CsharpTest
                 Console.WriteLine("'y'/'Y'/'yes'/'Yes' to confirm. 'n'/'N'/'no'/'No' to deny. (Press 'q' to quit)");
                 inputHasSymptoms = Console.ReadLine().ToLower();
                 if (inputHasSymptoms == "q")
+                {
+                    return;
+                }
+            }
+        }
+
+        public static void ValidBodyTemperatureInput(out string inputBodyTemperature)
+        {
+            Console.WriteLine("Input valid Body Temperature:");
+            inputBodyTemperature = Console.ReadLine();
+            double bodyTemperature;
+            while (!double.TryParse(inputBodyTemperature, out bodyTemperature))
+            {
+                Console.WriteLine("Body Temperature invalid! Retry. (Press 'q' to quit)");
+                inputBodyTemperature = Console.ReadLine();
+                if (inputBodyTemperature == "q")
                 {
                     return;
                 }
@@ -186,6 +201,5 @@ namespace CsharpTest
                 }
             }
         }
-
     }
 }

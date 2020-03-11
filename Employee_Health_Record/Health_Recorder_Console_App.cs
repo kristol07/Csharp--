@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 
 namespace CsharpTest
@@ -16,7 +17,7 @@ namespace CsharpTest
         {
             Console.WriteLine("Trying to print all employee data...");
 
-            if (employeeDatabase.EmployeeData.Count != 0)
+            if (!employeeDatabase.IsEmpty())
             {
                 foreach (var employee in employeeDatabase.EmployeeData)
                 {
@@ -33,18 +34,18 @@ namespace CsharpTest
         {
             Console.WriteLine("Trying to print all suspects data...");
 
-            if (employeeDatabase.EmployeeData.Count != 0)
+            if (!employeeDatabase.IsEmpty())
             {
-                int suspectsCount = 0;
-                foreach (Employee employee in employeeDatabase.EmployeeData)
+                List<Employee> suspectEmployee = employeeDatabase.GetListOfSuspectEmployee();
+
+                if (suspectEmployee.Count != 0)
                 {
-                    if (!string.IsNullOrEmpty(employee.FormatForAbnormalInfoPrinting()))
+                    foreach (Employee employee in suspectEmployee)
                     {
                         Console.WriteLine(employee.FormatForAbnormalInfoPrinting());
-                        suspectsCount++;
                     }
                 }
-                if (suspectsCount == 0)
+                else
                 {
                     Console.WriteLine("All employees are healthy!");
                 }
@@ -58,20 +59,15 @@ namespace CsharpTest
         public static void PrintSelectedEmployeeData()
         {
             string ginNumber;
-            InputValidator.ValidExistingGinNumberInput(employeeDatabase, out ginNumber);
+            ConsoleInputValidator.ValidExistingGinNumberInput(employeeDatabase, out ginNumber);
             if (ginNumber == "q")
             {
                 return;
             }
-            else
-            {
-                int indexOfEmployee;
 
-                employeeDatabase.HasEmployee(ginNumber, out indexOfEmployee);
+            int indexOfEmployee = employeeDatabase.FindEmployee(ginNumber);
+            Console.WriteLine(employeeDatabase.EmployeeData[indexOfEmployee]);
 
-                Console.WriteLine(employeeDatabase.EmployeeData[indexOfEmployee]);
-
-            }
         }
 
         public static void AddNewEmployeeData()
@@ -80,7 +76,7 @@ namespace CsharpTest
 
             // valid GinNumber input
             string ginNumber;
-            InputValidator.ValidNewGinNumberInput(employeeDatabase, out ginNumber);
+            ConsoleInputValidator.ValidNewGinNumberInput(employeeDatabase, out ginNumber);
             if (ginNumber == "q")
             {
                 return;
@@ -89,12 +85,12 @@ namespace CsharpTest
 
             // valid name input ?
             string name;
-            InputValidator.ValidNameInput(out name);
+            ConsoleInputValidator.ValidNameInput(out name);
 
 
             // valid body tempeature input
             string inputBodyTemperature;
-            InputValidator.ValidBodyTemperatureInput(out inputBodyTemperature);
+            ConsoleInputValidator.ValidBodyTemperatureInput(out inputBodyTemperature);
             if (inputBodyTemperature == "q")
             {
                 return;
@@ -105,7 +101,7 @@ namespace CsharpTest
 
             // valid Hubei travel history input
             string inputHubeiTravelHistory;
-            InputValidator.ValidHasHubeiTravelHistoryInput(out inputHubeiTravelHistory);
+            ConsoleInputValidator.ValidHasHubeiTravelHistoryInput(out inputHubeiTravelHistory);
             if (inputHubeiTravelHistory == "q")
             {
                 return;
@@ -119,7 +115,7 @@ namespace CsharpTest
 
             // valid Symptoms input
             string inputHasSymptoms;
-            InputValidator.ValidHasSymptomsInput(out inputHasSymptoms);
+            ConsoleInputValidator.ValidHasSymptomsInput(out inputHasSymptoms);
             if (inputHasSymptoms == "q")
             {
                 return;
@@ -138,11 +134,25 @@ namespace CsharpTest
 
         }
 
+        public static void DeleteSelectedEmployee()
+        {
+            // input valid ginnumber to edit
+            string ginNumber;
+            ConsoleInputValidator.ValidExistingGinNumberInput(employeeDatabase, out ginNumber);
+            if (ginNumber == "q")
+            {
+                return;
+            }
+
+            employeeDatabase.RemoveEmployee(ginNumber);
+            Console.WriteLine("Deleting Employee succeeded...");
+        }
+
         public static void EditSelectedEmployeeData()
         {
             // input valid ginnumber to edit
             string ginNumber;
-            InputValidator.ValidExistingGinNumberInput(employeeDatabase, out ginNumber);
+            ConsoleInputValidator.ValidExistingGinNumberInput(employeeDatabase, out ginNumber);
             if (ginNumber == "q")
             {
                 return;
@@ -151,7 +161,7 @@ namespace CsharpTest
 
             //input valid option to edit
             string option;
-            InputValidator.ValidOptionInput(out option);
+            ConsoleInputValidator.ValidOptionInput(out option);
             if (option == "q")
             {
                 return;
@@ -160,7 +170,7 @@ namespace CsharpTest
 
             // input valid option value to edit
             string optionValue;
-            InputValidator.ValidOptionValueInput(employeeDatabase, option, out optionValue);
+            ConsoleInputValidator.ValidOptionValueInput(employeeDatabase, option, out optionValue);
             if (optionValue == "q")
             {
                 return;
@@ -176,29 +186,55 @@ namespace CsharpTest
         public static void SaveDataToFile()
         {
             string fileName;
-            InputValidator.ValidFilePathToWriteInput(out fileName);
+            ConsoleInputValidator.ValidFilePathToWriteInput(out fileName);
             if (fileName == "q")
             {
                 return;
             }
 
             Console.WriteLine("Trying to save data to file: {0}.csv", fileName);
-            EmployeeDataFileOperation.SaveDatabaseToCSVFile(fileName, employeeDatabase);
-            Console.WriteLine("Saving data succeeded...");
+
+            string saveOperationResult = EmployeeDataFileOperation.SaveDatabaseToCSVFile(fileName, employeeDatabase);
+
+            if (saveOperationResult == "done")
+            {
+                Console.WriteLine("Saving database succeeded...");
+            }
+            else if (saveOperationResult == "error")
+            {
+                Console.WriteLine("Saving database failed...");
+            }
+            else
+            {
+                Console.WriteLine("Saving operation error: " + saveOperationResult);
+            }
         }
 
         public static void ReadDataFromFile()
         {
             string fileName;
-            InputValidator.ValidFilePathToReadInput(out fileName);
+            ConsoleInputValidator.ValidFilePathToReadInput(out fileName);
             if (fileName == "q")
             {
                 return;
             }
 
             Console.WriteLine("Trying to read data from file: {0}.csv", fileName);
-            EmployeeDataFileOperation.ReadDatabaseFromCSVFile(fileName, out employeeDatabase);
-            Console.WriteLine("Reading data succeeded...");
+
+            string readOperationResult = EmployeeDataFileOperation.ReadDatabaseFromCSVFile(fileName, ref employeeDatabase);
+
+            switch (readOperationResult)
+            {
+                case "0":
+                    Console.WriteLine("Reading database from file succeeded...");
+                    break;
+                case "-1":
+                    Console.WriteLine("Format error in data of database saved in file.");
+                    break;
+                case "error":
+                    Console.WriteLine("Reading operation error.");
+                    break;
+            }
         }
 
         public void Run()
@@ -211,9 +247,10 @@ namespace CsharpTest
                 Console.WriteLine("2. Print Suspected Employee Data");
                 Console.WriteLine("3. Print Selected Employee Data");
                 Console.WriteLine("4. Add New Employee Data");
-                Console.WriteLine("5. Edit Selected Employee Data");
-                Console.WriteLine("6. Save data to a file");
-                Console.WriteLine("7. Read data from a file");
+                Console.WriteLine("5. Delete Selected Employee Data");
+                Console.WriteLine("6. Edit Selected Employee Data");
+                Console.WriteLine("7. Save data to a file");
+                Console.WriteLine("8. Read data from a file");
                 Console.WriteLine("===============");
 
                 string moduleSelected = Console.ReadLine();
@@ -232,12 +269,15 @@ namespace CsharpTest
                         AddNewEmployeeData();
                         break;
                     case "5":
-                        EditSelectedEmployeeData();
+                        DeleteSelectedEmployee();
                         break;
                     case "6":
-                        SaveDataToFile();
+                        EditSelectedEmployeeData();
                         break;
                     case "7":
+                        SaveDataToFile();
+                        break;
+                    case "8":
                         ReadDataFromFile();
                         break;
                     default:
