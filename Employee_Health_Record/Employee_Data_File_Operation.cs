@@ -14,8 +14,8 @@ namespace CsharpTest
                     string header = "GinNumber,Name,BodyTemperature,HasHubeiTravelHistory,HasSymptoms,Symptoms";
                     sw.WriteLine(header);
 
-                    employeeDatabase.EmployeeData.Sort();
-                    foreach (Employee employee in employeeDatabase.EmployeeData)
+                    // employeeDatabase.EmployeeData.Sort();
+                    foreach (Employee employee in employeeDatabase.EmployeeData.Values)
                     {
                         sw.WriteLine(employee.FormatForSave());
                     }
@@ -53,7 +53,8 @@ namespace CsharpTest
                         double bodyTemperature = double.Parse(employeeInfo[2]);
                         bool hasHubeiTravelHistory = bool.Parse(employeeInfo[3]);
                         bool hasSymptoms = bool.Parse(employeeInfo[4]);
-                        employeeDatabase.EmployeeData.Add(new Employee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms));
+                        // employeeDatabase.EmployeeData.Add(new Employee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms));
+                        employeeDatabase.AddEmployee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
                     }
                 }
 

@@ -65,8 +65,11 @@ namespace CsharpTest
                 return;
             }
 
-            int indexOfEmployee = employeeDatabase.FindEmployee(ginNumber);
-            Console.WriteLine(employeeDatabase.EmployeeData[indexOfEmployee]);
+            // int indexOfEmployee = employeeDatabase.FindEmployee(ginNumber);
+            // Console.WriteLine(employeeDatabase.EmployeeData[indexOfEmployee]);
+
+            Employee employee = employeeDatabase.FindEmployee(ginNumber);
+            Console.WriteLine(employee);
 
         }
 

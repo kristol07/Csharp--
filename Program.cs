@@ -72,7 +72,7 @@ namespace CsharpTest
             // equilateralTriangle.PrintName();
             // equilateralTriangle.PrintPerimeter();
 
-            ConsoleApp app = new ConsoleApp();
+            DrillTrajectoryPlotConsoleApp app = new DrillTrajectoryPlotConsoleApp();
             app.Run();
 
         }
