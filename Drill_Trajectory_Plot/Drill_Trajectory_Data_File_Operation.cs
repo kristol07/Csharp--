@@ -82,7 +82,7 @@ namespace CsharpTest
                     return -1;
                 }
 
-                using (StreamWriter sw = new StreamWriter(filePath + fileName + "-" + viewName +"-View.txt"))
+                using (StreamWriter sw = new StreamWriter(filePath + fileName + "-" + viewName + "-View.txt"))
                 {
                     foreach (var row in matrixOfPixels)
                     {
@@ -94,6 +94,25 @@ namespace CsharpTest
             catch (Exception ex)
             {
                 return ex.GetHashCode();
+            }
+        }
+
+        public static string[] GetFilenamesToPlot(string filePath = "Drill_Trajectory_Plot/datafile/")
+        {
+            try
+            {
+                string[] files = Directory.GetFiles(filePath, "*.csv");
+
+                for (int i = 0; i < files.Length; i++)
+                {
+                    files[i] = files[i].Substring(files[i].LastIndexOf('/')+1).Split('.')[0];
+                }
+
+                return files;  
+            }
+            catch
+            {
+                return new string[] {};
             }
         }
     }

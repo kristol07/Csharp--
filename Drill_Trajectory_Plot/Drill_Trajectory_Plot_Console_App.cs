@@ -8,22 +8,15 @@ namespace CsharpTest
     {
         private PolyLineIn3D drillTrajectory;
         private string dataFilename;
+        public double Magnification
+        {
+            get; set;
+        }
 
         public DrillTrajectoryPlotConsoleApp()
         {
             drillTrajectory = new PolyLineIn3D();
-        }
-
-
-        public int PlotView(string fileName, string viewName)
-        {
-            List<Point> projectionInPlane = drillTrajectory.GetProjectionInPlane(viewName);
-
-            List<List<char>> matrixOfPixels = FigureTool.PlotPolyLineWithAnnotation(projectionInPlane, 0.5);
-
-            int saveResult = DrillTrajectoryDataFileOperation.SavePlotToTxtFile(matrixOfPixels, fileName, viewName);
-
-            return saveResult;
+            Magnification = 1;
         }
 
         public void ReadTrajectoryFromFile()
@@ -89,6 +82,31 @@ namespace CsharpTest
             }
         }
 
+        public void SetMagnification()
+        {
+            string inputMagnification;
+
+            DrillTrajectoryAppInputValidator.ValidMagnificationInput(out inputMagnification);
+            if (inputMagnification == "q")
+            {
+                return;
+            }
+
+            Magnification = double.Parse(inputMagnification);
+            Console.WriteLine("Magnification set to: {0}", Magnification);
+        }
+
+        public int PlotView(string fileName, string viewName, double magnification)
+        {
+            List<Point> projectionInPlane = drillTrajectory.GetProjectionInPlane(viewName);
+
+            List<List<char>> matrixOfPixels = FigureTool.PlotPolyLineWithAnnotation(projectionInPlane, magnification);
+
+            int saveResult = DrillTrajectoryDataFileOperation.SavePlotToTxtFile(matrixOfPixels, fileName, viewName);
+
+            return saveResult;
+        }
+
         public void plotViewToFile()
         {
             string inputViewName;
@@ -109,7 +127,7 @@ namespace CsharpTest
 
             Console.WriteLine("Trying to plot view to file: {0}-{1}-View.txt", dataFilename, viewName);
 
-            int plotResult = PlotView(dataFilename, viewName);
+            int plotResult = PlotView(dataFilename, viewName, Magnification);
 
             switch (plotResult)
             {
@@ -126,6 +144,36 @@ namespace CsharpTest
 
         }
 
+        public void AutoPlot()
+        {
+            string[] viewNames = { "Main", "Left", "Top" };
+
+            string[] filenames = DrillTrajectoryDataFileOperation.GetFilenamesToPlot();
+
+            foreach (var filename in filenames)
+            {
+                DrillTrajectoryDataFileOperation.ReadDataFromCSVFile(ref drillTrajectory, filename);
+                foreach (var viewName in viewNames)
+                {
+                    Console.WriteLine("Trying to plot view to file: {0}-{1}-View.txt", filename, viewName);
+                    int plotResult = PlotView(filename, viewName, Magnification);
+
+                    switch (plotResult)
+                    {
+                        case 0:
+                            Console.WriteLine("Saving {0} View succeeded...", viewName);
+                            break;
+                        case -1:
+                            Console.WriteLine("Nothing to plot.");
+                            break;
+                        default:
+                            Console.WriteLine("Saving operation failed...");
+                            break;
+                    }
+                }
+            }
+        }
+
         public void Run()
         {
             while (true)
@@ -135,6 +183,8 @@ namespace CsharpTest
                 Console.WriteLine("1. Plot Trajectory in Different Views");
                 Console.WriteLine("2. Save Trajectory to CSV file");
                 Console.WriteLine("3. Read Trajectory from CSV file");
+                Console.WriteLine("4. Set Magnification for data plot");
+                Console.WriteLine("5. AutoPlot for data files.");
                 Console.WriteLine("===============");
 
                 string moduleSelected = Console.ReadLine();
@@ -148,6 +198,12 @@ namespace CsharpTest
                         break;
                     case "3":
                         ReadTrajectoryFromFile();
+                        break;
+                    case "4":
+                        SetMagnification();
+                        break;
+                    case "5":
+                        AutoPlot();
                         break;
                     default:
                         return;

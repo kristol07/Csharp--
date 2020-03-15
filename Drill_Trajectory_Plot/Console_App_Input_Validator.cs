@@ -61,5 +61,22 @@ namespace CsharpTest
                 }
             }
         }
+
+        public static void ValidMagnificationInput(out string inputMagnification)
+        {
+            Console.WriteLine("Input magnification for data:");
+            inputMagnification = Console.ReadLine();
+            double result;
+
+            while(!double.TryParse(inputMagnification, out result))
+            {
+                Console.WriteLine("Magnification invalid! Retry. (Press 'q' to quit)");
+                inputMagnification = Console.ReadLine();
+                if (inputMagnification == "q")
+                {
+                    return;
+                }                
+            }
+        }
     }
 }

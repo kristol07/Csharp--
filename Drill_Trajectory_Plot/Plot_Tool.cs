@@ -266,9 +266,8 @@ namespace CsharpTest
             }
         }
 
-        public static Dictionary<Pixel, Pixel> MapPixelToFigure(List<Pixel> pixels)
+        public static int[] GetAxis(List<Pixel> pixels)
         {
-
             List<int> xcoordinate = new List<int>();
             List<int> ycoordinate = new List<int>();
 
@@ -286,11 +285,18 @@ namespace CsharpTest
             int ymin = ycoordinate[0];
             int ymax = ycoordinate[ycoordinate.Count - 1];
 
+            return new int[] { xmin, ymin, xmax, ymax };
+        }
+
+        public static Dictionary<Pixel, Pixel> MapPixelToFigure(List<Pixel> pixels)
+        {
+            int[] axis = GetAxis(pixels);
+
             Dictionary<Pixel, Pixel> pixelToFigure = new Dictionary<Pixel, Pixel>();
 
             foreach (var pixel in pixels)
             {
-                pixelToFigure[pixel] = new Pixel(pixel.X - xmin + 10, pixel.Y - ymin + 10, pixel.Symbol);
+                pixelToFigure[pixel] = new Pixel(pixel.X - axis[0] + 5, pixel.Y - axis[1] + 5, pixel.Symbol);
             }
 
             return pixelToFigure;
@@ -311,19 +317,21 @@ namespace CsharpTest
 
 
         // if x or y is negative ????
-        public static List<List<char>> PlotPolyLine(List<Point> polyLineNodes,
-                                                                        double magnification = 1.0,
-                                                                        int width = 1600,
-                                                                        int height = 1600)
+        public static List<List<char>> PlotPolyLine(List<Point> polyLineNodes, double magnification = 1.0)
         {
             List<Pixel> pixelsOfLines = RasterizeTool.GetPixelsOfPolyLine(polyLineNodes, magnification);
             List<Pixel> pixelsOfNodes = RasterizeTool.GetPixelsOfPolyLineNodes(polyLineNodes, magnification);
 
-            List<List<char>> matrixOfPixels = InitFigure(width, height);
-
             List<Pixel> pixelsToPlot = new List<Pixel>();
             pixelsToPlot.AddRange(pixelsOfLines); // plot lines at first
             pixelsToPlot.AddRange(pixelsOfNodes); // plot nodes at last
+
+            int[] axis = GetAxis(pixelsToPlot);
+            int width = axis[2] - axis[0] + 20;
+            int height = axis[3] - axis[1] + 10;
+
+            List<List<char>> matrixOfPixels = InitFigure(width, height);
+
 
             foreach (var pixel in MapPixelToFigure(pixelsToPlot).Values)
             {
@@ -337,12 +345,9 @@ namespace CsharpTest
             return matrixOfPixels;
         }
 
-        public static List<List<char>> PlotPolyLineWithAnnotation(List<Point> polyLineNodes,
-                                                                        double magnification = 1.0,
-                                                                        int width = 1600,
-                                                                        int height = 1600)
+        public static List<List<char>> PlotPolyLineWithAnnotation(List<Point> polyLineNodes, double magnification = 1.0)
         {
-            List<List<char>> figure = PlotPolyLine(polyLineNodes, magnification, width, height);
+            List<List<char>> figure = PlotPolyLine(polyLineNodes, magnification);
 
             Dictionary<Point, Pixel> pixelOfNodes = RasterizeTool.MapNodeToPixel(polyLineNodes, magnification);
 
