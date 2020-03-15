@@ -50,6 +50,21 @@ namespace CsharpTest
         {
             return "(" + X.ToString() + "," + Y.ToString() + ")";
         }
+
+        public string GetAnnotation()
+        {
+            string xCoordinate = X.ToString();
+            string yCoordinate = Y.ToString();
+            if (xCoordinate.Contains('.'))
+            {
+                xCoordinate = xCoordinate.Remove(xCoordinate.IndexOf('.'));
+            }
+            if (yCoordinate.Contains('.'))
+            {
+                yCoordinate = yCoordinate.Remove(yCoordinate.IndexOf('.'));
+            }
+            return "(" + xCoordinate + "," + yCoordinate + ")";
+        }
     }
 
     public struct PointIn3D
@@ -194,7 +209,7 @@ namespace CsharpTest
         public double GetxMax()
         {
             List<double> xCoordinates = GetxCoordinates();
-            return xCoordinates[xCoordinates.Count-1];
+            return xCoordinates[xCoordinates.Count - 1];
         }
 
         public double GetyMin()
@@ -206,7 +221,7 @@ namespace CsharpTest
         public double GetyMax()
         {
             List<double> yCoordinates = GetyCoordinates();
-            return yCoordinates[yCoordinates.Count-1];
+            return yCoordinates[yCoordinates.Count - 1];
         }
 
         public double GetzMin()
@@ -218,7 +233,7 @@ namespace CsharpTest
         public double GetzMax()
         {
             List<double> zCoordinates = GetzCoordinates();
-            return zCoordinates[zCoordinates.Count-1];
+            return zCoordinates[zCoordinates.Count - 1];
         }
     }
 }

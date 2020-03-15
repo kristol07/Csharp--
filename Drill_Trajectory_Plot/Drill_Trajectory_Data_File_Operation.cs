@@ -14,6 +14,7 @@ namespace CsharpTest
                 using (StreamReader sr = new StreamReader(filePath + fileName + ".csv"))
                 {
                     string line;
+                    wellTrajectory = new PolyLineIn3D();
                     while (!string.IsNullOrEmpty(line = sr.ReadLine()))
                     {
                         try

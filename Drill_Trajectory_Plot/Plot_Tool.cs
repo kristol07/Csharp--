@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 
 namespace CsharpTest
@@ -143,16 +144,16 @@ namespace CsharpTest
             return pixelsOfLines;
         }
 
-        public static Dictionary<Pixel, Point> MapNodeToPixel(List<Point> polyLineNodes, double magnification)
+        public static Dictionary<Point, Pixel> MapNodeToPixel(List<Point> polyLineNodes, double magnification)
         {
-            Dictionary<Pixel, Point> map = new Dictionary<Pixel, Point>();
+            Dictionary<Point, Pixel> map = new Dictionary<Point, Pixel>();
 
             foreach (var node in polyLineNodes)
             {
                 int x = (int)Math.Round(node.X * magnification);
                 int y = (int)Math.Round(node.Y * magnification);
 
-                map[new Pixel(x, y, '+')] = node;
+                map[node] = new Pixel(x, y, '+');
             }
 
             return map;
@@ -255,22 +256,65 @@ namespace CsharpTest
             }
         }
 
-        ////////////////////////////////////////////////////////
-        public static void AddCoordinateAnnotationForPolyLineNodes(List<List<char>> matrixOfPixels, Dictionary<Pixel, Point> DictAnnotation)
+
+        public static void AddCoordinateAnnotationForPolyLineNodes(List<List<char>> matrixOfPixels, Dictionary<Point, Pixel> dictAnnotation)
         {
-            foreach (var pixel in DictAnnotation.Keys)
+            foreach (var point in dictAnnotation.Keys)
             {
-                string annotation = DictAnnotation[pixel].ToString();
-                AddAnnotationForPixel(matrixOfPixels, pixel, annotation);
+                string annotation = point.GetAnnotation();
+                AddAnnotationForPixel(matrixOfPixels, dictAnnotation[point], annotation);
             }
+        }
+
+        public static Dictionary<Pixel, Pixel> MapPixelToFigure(List<Pixel> pixels)
+        {
+
+            List<int> xcoordinate = new List<int>();
+            List<int> ycoordinate = new List<int>();
+
+            foreach (var pixel in pixels)
+            {
+                xcoordinate.Add(pixel.X);
+                ycoordinate.Add(pixel.Y);
+            }
+
+            xcoordinate.Sort();
+            ycoordinate.Sort();
+
+            int xmin = xcoordinate[0];
+            int xmax = xcoordinate[xcoordinate.Count - 1];
+            int ymin = ycoordinate[0];
+            int ymax = ycoordinate[ycoordinate.Count - 1];
+
+            Dictionary<Pixel, Pixel> pixelToFigure = new Dictionary<Pixel, Pixel>();
+
+            foreach (var pixel in pixels)
+            {
+                pixelToFigure[pixel] = new Pixel(pixel.X - xmin + 10, pixel.Y - ymin + 10, pixel.Symbol);
+            }
+
+            return pixelToFigure;
+        }
+
+        public static Dictionary<Point, Pixel> MapNodeToFigure(Dictionary<Point, Pixel> pixelOfNodes)
+        {
+            Dictionary<Pixel, Pixel> pixeltoFigure = MapPixelToFigure(pixelOfNodes.Values.ToList());
+
+            Dictionary<Point, Pixel> pixelOfNodesInFigure = new Dictionary<Point, Pixel>();
+            foreach (var point in pixelOfNodes.Keys)
+            {
+                pixelOfNodesInFigure[point] = pixeltoFigure[pixelOfNodes[point]];
+            }
+
+            return pixelOfNodesInFigure;
         }
 
 
         // if x or y is negative ????
         public static List<List<char>> PlotPolyLine(List<Point> polyLineNodes,
                                                                         double magnification = 1.0,
-                                                                        int width = 400,
-                                                                        int height = 900)
+                                                                        int width = 1600,
+                                                                        int height = 1600)
         {
             List<Pixel> pixelsOfLines = RasterizeTool.GetPixelsOfPolyLine(polyLineNodes, magnification);
             List<Pixel> pixelsOfNodes = RasterizeTool.GetPixelsOfPolyLineNodes(polyLineNodes, magnification);
@@ -281,7 +325,7 @@ namespace CsharpTest
             pixelsToPlot.AddRange(pixelsOfLines); // plot lines at first
             pixelsToPlot.AddRange(pixelsOfNodes); // plot nodes at last
 
-            foreach (var pixel in pixelsToPlot)
+            foreach (var pixel in MapPixelToFigure(pixelsToPlot).Values)
             {
                 // Console.WriteLine("{0}, {1}, {2}", pixel.X, pixel.Y, pixel.Symbol);
                 if (pixel.X < width && pixel.Y < height)
@@ -295,17 +339,18 @@ namespace CsharpTest
 
         public static List<List<char>> PlotPolyLineWithAnnotation(List<Point> polyLineNodes,
                                                                         double magnification = 1.0,
-                                                                        int width = 400,
-                                                                        int height = 900)
+                                                                        int width = 1600,
+                                                                        int height = 1600)
         {
             List<List<char>> figure = PlotPolyLine(polyLineNodes, magnification, width, height);
 
-            Dictionary<Pixel, Point> dictAnnotation = RasterizeTool.MapNodeToPixel(polyLineNodes, magnification);
+            Dictionary<Point, Pixel> pixelOfNodes = RasterizeTool.MapNodeToPixel(polyLineNodes, magnification);
 
-            AddCoordinateAnnotationForPolyLineNodes(figure, dictAnnotation);
+            Dictionary<Point, Pixel> pixelOfNodesInFigure = MapNodeToFigure(pixelOfNodes);
+
+            AddCoordinateAnnotationForPolyLineNodes(figure, pixelOfNodesInFigure);
 
             return figure;
         }
-
     }
 }
