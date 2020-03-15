@@ -204,6 +204,36 @@ namespace CsharpTest
             return matrixOfPixels;
         }
 
+
+        public static void AddAxisNotationFoFigure(List<List<char>> matrixOfPixels, string viewName)
+        {
+            if (GetWidth(matrixOfPixels) > 3 && GetHeight(matrixOfPixels) > 3)
+            {
+                matrixOfPixels[0][0] = '+';
+                matrixOfPixels[0][1] = '-';
+                matrixOfPixels[0][2] = '\u02C3';
+                matrixOfPixels[1][0] = '|';
+                matrixOfPixels[2][0] = '\u02C5';
+
+                switch (viewName)
+                {
+                    case "Main":
+                        matrixOfPixels[0][3] = 'x';
+                        matrixOfPixels[3][0] = 'z';
+                        break;
+                    case "Left":
+                        matrixOfPixels[0][3] = 'y';
+                        matrixOfPixels[3][0] = 'z';
+                        break;
+                    case "Top":
+                        matrixOfPixels[0][3] = 'x';
+                        matrixOfPixels[3][0] = 'y';
+                        break;
+                }
+            }
+        }
+
+
         public static void AddGridFoFigure(List<List<char>> matrixOfPixels, int xGridDistance, int yGridDistance)
         {
             if (GetWidth(matrixOfPixels) > 0 && GetHeight(matrixOfPixels) > 0)
@@ -332,6 +362,7 @@ namespace CsharpTest
 
             List<List<char>> matrixOfPixels = InitFigure(width, height);
 
+            AddCoordinateGridForPixel(matrixOfPixels, new Pixel(-axis[0]+5, -axis[1]+5, '*'));
 
             foreach (var pixel in MapPixelToFigure(pixelsToPlot).Values)
             {

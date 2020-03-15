@@ -102,6 +102,8 @@ namespace CsharpTest
 
             List<List<char>> matrixOfPixels = FigureTool.PlotPolyLineWithAnnotation(projectionInPlane, magnification);
 
+            FigureTool.AddAxisNotationFoFigure(matrixOfPixels, viewName);
+
             int saveResult = DrillTrajectoryDataFileOperation.SavePlotToTxtFile(matrixOfPixels, fileName, viewName);
 
             return saveResult;

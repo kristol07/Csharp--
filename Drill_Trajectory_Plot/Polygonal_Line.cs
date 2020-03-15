@@ -53,8 +53,8 @@ namespace CsharpTest
 
         public string GetAnnotation()
         {
-            string xCoordinate = X.ToString();
-            string yCoordinate = Y.ToString();
+            string xCoordinate = Math.Round(X).ToString();
+            string yCoordinate = Math.Round(Y).ToString();
             if (xCoordinate.Contains('.'))
             {
                 xCoordinate = xCoordinate.Remove(xCoordinate.IndexOf('.'));
