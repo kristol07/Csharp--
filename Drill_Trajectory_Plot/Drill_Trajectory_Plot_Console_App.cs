@@ -109,6 +109,13 @@ namespace CsharpTest
 
         public void plotViewToFile()
         {
+
+            if(string.IsNullOrWhiteSpace(dataFilename))
+            {
+                Console.WriteLine("You didn't read trajectory data from file!");
+                return;
+            }
+
             string inputViewName;
             DrillTrajectoryAppInputValidator.ValidViewNameInput(out inputViewName);
 
