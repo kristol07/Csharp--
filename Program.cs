@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace CsharpTest
 {
@@ -56,7 +57,7 @@ namespace CsharpTest
             //     {
             //         quackAnimal.Quack();
             //     }
-                
+
             //     Console.WriteLine(myAnimal);
             // }
 
@@ -75,6 +76,7 @@ namespace CsharpTest
             DrillTrajectoryPlotConsoleApp app = new DrillTrajectoryPlotConsoleApp();
             app.Run();
 
+            // Reflection.Test();
         }
     }
 
