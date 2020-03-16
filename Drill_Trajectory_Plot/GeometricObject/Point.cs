@@ -27,8 +27,9 @@ namespace GeometricObject
 
         public string GetAnnotation()
         {
-            int xCoordinate = (int)Math.Round(X);
-            int yCoordinate = (int)Math.Round(Y);
+            double xCoordinate = Math.Round(X, 1);
+            double yCoordinate = Math.Round(Y, 1);
+            
 
             return "(" + xCoordinate + "," + yCoordinate + ")";
         }
