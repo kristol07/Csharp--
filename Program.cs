@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using DrillTrajectoryPlot;
 
 namespace CsharpTest
 {
@@ -73,7 +74,7 @@ namespace CsharpTest
             // equilateralTriangle.PrintName();
             // equilateralTriangle.PrintPerimeter();
 
-            DrillTrajectoryPlotConsoleApp app = new DrillTrajectoryPlotConsoleApp();
+            DrillTrajectoryPlot.ConsoleApp app = new DrillTrajectoryPlot.ConsoleApp();
             app.Run();
 
             // Reflection.Test();

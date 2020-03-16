@@ -31,15 +31,7 @@ namespace GeometricObject
 
         public string FormatForSave()
         {
-            List<string> coordinates = new List<string>();
-
-            coordinates.Add(X.ToString());
-            coordinates.Add(Y.ToString());
-            coordinates.Add(Z.ToString());
-
-            string seperator = ",";
-
-            return string.Join(seperator, coordinates);
+            return X + "," + Y + "," + Z;
         }
     }
 }

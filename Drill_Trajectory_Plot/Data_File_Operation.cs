@@ -3,9 +3,9 @@ using System.IO;
 using System.Collections.Generic;
 using GeometricObject;
 
-namespace CsharpTest
+namespace DrillTrajectoryPlot
 {
-    public static class DrillTrajectoryDataFileOperation
+    public static class DataFileOperation
     {
         public static int ReadDataFromCSVFile(ref PolyLineIn3D wellTrajectory, string fileName, string filePath = "Drill_Trajectory_Plot/datafile/")
         {

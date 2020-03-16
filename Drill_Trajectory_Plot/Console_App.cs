@@ -4,9 +4,9 @@ using PlotTool;
 using GeometricObject;
 
 
-namespace CsharpTest
+namespace DrillTrajectoryPlot
 {
-    public class DrillTrajectoryPlotConsoleApp
+    public class ConsoleApp
     {
         private PolyLineIn3D drillTrajectory;
         private string dataFilename;
@@ -15,7 +15,7 @@ namespace CsharpTest
             get; set;
         }
 
-        public DrillTrajectoryPlotConsoleApp()
+        public ConsoleApp()
         {
             drillTrajectory = new PolyLineIn3D();
             Magnification = 1;
@@ -23,8 +23,7 @@ namespace CsharpTest
 
         public void ReadTrajectoryFromFile()
         {
-            string fileName;
-            DrillTrajectoryAppInputValidator.ValidFileNameForRead(out fileName);
+            string fileName = InputValidator.ReadTrajectoryFilename();
             if (fileName == "q")
             {
                 return;
@@ -34,7 +33,7 @@ namespace CsharpTest
 
             Console.WriteLine("Trying to read data from file: {0}.csv", fileName);
 
-            int readOperationResult = DrillTrajectoryDataFileOperation.ReadDataFromCSVFile(ref drillTrajectory, fileName);
+            int readOperationResult = DataFileOperation.ReadDataFromCSVFile(ref drillTrajectory, fileName);
 
             switch (readOperationResult)
             {
@@ -59,8 +58,7 @@ namespace CsharpTest
 
         public void SaveTrajectoryToFile()
         {
-            string fileName;
-            DrillTrajectoryAppInputValidator.ValidFileNameForSave(out fileName);
+            string fileName = InputValidator.ValidTrajectoryFilenameForSave();
             if (fileName == "q")
             {
                 return;
@@ -68,7 +66,7 @@ namespace CsharpTest
 
             Console.WriteLine("Trying to save data to file: {0}.csv", fileName);
 
-            int saveOperationResult = DrillTrajectoryDataFileOperation.SaveDataToCSVFile(drillTrajectory, fileName);
+            int saveOperationResult = DataFileOperation.SaveDataToCSVFile(drillTrajectory, fileName);
 
             switch (saveOperationResult)
             {
@@ -86,9 +84,7 @@ namespace CsharpTest
 
         public void SetMagnification()
         {
-            string inputMagnification;
-
-            DrillTrajectoryAppInputValidator.ValidMagnificationInput(out inputMagnification);
+            string inputMagnification = InputValidator.ReadMagnification();
             if (inputMagnification == "q")
             {
                 return;
@@ -106,7 +102,7 @@ namespace CsharpTest
 
             FigureTool.AddAxisNotationFoFigure(matrixOfPixels, viewName);
 
-            int saveResult = DrillTrajectoryDataFileOperation.SavePlotToTxtFile(matrixOfPixels, fileName, viewName);
+            int saveResult = DataFileOperation.SavePlotToTxtFile(matrixOfPixels, fileName, viewName);
 
             return saveResult;
         }
@@ -120,8 +116,7 @@ namespace CsharpTest
                 return;
             }
 
-            string inputViewName;
-            DrillTrajectoryAppInputValidator.ValidViewNameInput(out inputViewName);
+            string inputViewName = InputValidator.ReadViewName();
 
             Dictionary<string, string> viewNameDict = new Dictionary<string, string>();
             viewNameDict["1"] = "Main";
@@ -159,11 +154,11 @@ namespace CsharpTest
         {
             string[] viewNames = { "Main", "Left", "Top" };
 
-            string[] filenames = DrillTrajectoryDataFileOperation.GetFilenamesToPlot();
+            string[] filenames = DataFileOperation.GetFilenamesToPlot();
 
             foreach (var filename in filenames)
             {
-                DrillTrajectoryDataFileOperation.ReadDataFromCSVFile(ref drillTrajectory, filename);
+                DataFileOperation.ReadDataFromCSVFile(ref drillTrajectory, filename);
                 foreach (var viewName in viewNames)
                 {
                     Console.WriteLine("Trying to plot view to file: {0}-{1}-View.txt", filename, viewName);

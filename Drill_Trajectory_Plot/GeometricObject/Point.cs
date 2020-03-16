@@ -22,21 +22,14 @@ namespace GeometricObject
 
         public override string ToString()
         {
-            return "(" + X.ToString() + "," + Y.ToString() + ")";
+            return "(" + X + "," + Y + ")";
         }
 
         public string GetAnnotation()
         {
-            string xCoordinate = Math.Round(X).ToString();
-            string yCoordinate = Math.Round(Y).ToString();
-            if (xCoordinate.Contains('.'))
-            {
-                xCoordinate = xCoordinate.Remove(xCoordinate.IndexOf('.'));
-            }
-            if (yCoordinate.Contains('.'))
-            {
-                yCoordinate = yCoordinate.Remove(yCoordinate.IndexOf('.'));
-            }
+            int xCoordinate = (int)Math.Round(X);
+            int yCoordinate = (int)Math.Round(Y);
+
             return "(" + xCoordinate + "," + yCoordinate + ")";
         }
     }
