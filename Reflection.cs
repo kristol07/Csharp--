@@ -115,7 +115,6 @@ namespace CsharpTest
                     {
                         PrintEnumFields(type);
                     }
-
                 }
             }
 
