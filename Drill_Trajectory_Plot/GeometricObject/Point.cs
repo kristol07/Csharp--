@@ -14,10 +14,13 @@ namespace GeometricObject
             get; set;
         }
 
-        public Point(double x, double y)
+        public string Annotation { get; set; }
+
+        public Point(double x, double y, string annotation = "")
         {
             X = x;
             Y = y;
+            Annotation = annotation;
         }
 
         public override string ToString()
@@ -25,14 +28,7 @@ namespace GeometricObject
             return "(" + X + "," + Y + ")";
         }
 
-        public string GetAnnotation()
-        {
-            double xCoordinate = Math.Round(X, 1);
-            double yCoordinate = Math.Round(Y, 1);
-            
 
-            return "(" + xCoordinate + "," + yCoordinate + ")";
-        }
     }
 
 }

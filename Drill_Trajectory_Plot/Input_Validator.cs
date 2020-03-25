@@ -50,14 +50,14 @@ namespace DrillTrajectoryPlot
 
         public static string ReadViewName()
         {
-            Console.WriteLine("Input View to Plot: '1: Main', '2: Left', '3: Top'");
+            Console.WriteLine("Input View to Plot: '1: Main', '2: Left', '3: Top', '4: Knee'");
             string viewName = Console.ReadLine();
-            string[] options = { "1", "2", "3" };
+            string[] options = { "1", "2", "3", "4" };
 
             while (!options.Contains(viewName))
             {
                 Console.WriteLine("Invalid View input!");
-                Console.WriteLine("Available Views: '1: Main', '2: Left', '3: Top'. (Press 'q' to quit)");
+                Console.WriteLine("Available Views: '1: Main', '2: Left', '3: Top', '4: Knee'. (Press 'q' to quit)");
                 viewName = Console.ReadLine();
                 if (viewName == "q")
                 {

@@ -135,24 +135,146 @@ namespace PlotTool
             if (width > 0 && height > 0 && pixel.X < width && pixel.Y < height)
             {
                 char[] charArrayOfAnnotation = annotation.ToCharArray();
-                if (charArrayOfAnnotation.Length + pixel.X < width)
+
+                List<int[]> startingPositions = GetStartingPositions();
+
+                int k = 0;
+                while (k < 9 && CheckStartingPosition(matrixOfPixels, pixel, charArrayOfAnnotation, startingPositions[k]))
                 {
-                    for (int i = 0; i < charArrayOfAnnotation.Length; i++)
+                    k++;
+                }
+                int[] startingPosition = startingPositions[k];
+
+                for (int i = 0; i < charArrayOfAnnotation.Length; i++)
+                {
+                    if (startingPosition[1] == -1)
                     {
-                        // matrixOfPixels[pixel.Y][pixel.X + i + 1] = charArrayOfAnnotation[i];
-                        matrixOfPixels[pixel.Y + 1][pixel.X + i + 1] = charArrayOfAnnotation[i];
+                        matrixOfPixels[pixel.Y + startingPosition[0]][pixel.X + startingPosition[1] - (charArrayOfAnnotation.Length - 1) + i] = charArrayOfAnnotation[i];
+                    }
+                    else
+                    {
+                        matrixOfPixels[pixel.Y + startingPosition[0]][pixel.X + startingPosition[1] + i] = charArrayOfAnnotation[i];
                     }
                 }
             }
+
         }
+
+        // ------------
+        // | 8 |   | 7 |
+        // -------------
+        // | 2 |   | 1 |
+        // -------------
+        // | 3 | X | 0 |
+        // -------------
+        // | 4 |   | 5 |
+        // -------------
+        // | 9 |   | 6 |
+        // -------------
+
+        public static List<int[]> GetStartingPositions()
+        {
+            List<int[]> startingPositions = new List<int[]>();
+
+            startingPositions.Add(new int[] { 0, 1 });
+            startingPositions.Add(new int[] { -1, 1 });
+            startingPositions.Add(new int[] { -1, -1 });
+            startingPositions.Add(new int[] { 0, -1 });
+            startingPositions.Add(new int[] { 1, -1 });
+            startingPositions.Add(new int[] { 1, 1 });
+            startingPositions.Add(new int[] { 2, 1 });
+            startingPositions.Add(new int[] { -2, 1 });
+            startingPositions.Add(new int[] { -2, -1 });
+            startingPositions.Add(new int[] { 2, -1 });
+
+            return startingPositions;
+        }
+
+        public static bool CheckStartingPosition(List<List<char>> matrixOfPixels, Pixel pixel, char[] charArrayOfAnnotation, int[] startingPosition)
+        {
+            for (int i = 0; i < charArrayOfAnnotation.Length; i++)
+            {
+                if (startingPosition[1] == -1)
+                {
+                    if (matrixOfPixels[pixel.Y + startingPosition[0]][pixel.X + startingPosition[1] - (charArrayOfAnnotation.Length - 1) + i] != ' ')
+                    {
+                        return true;
+                    }
+                }
+                else
+                {
+                    if (matrixOfPixels[pixel.Y + startingPosition[0]][pixel.X + startingPosition[1] + i] != ' ')
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        // public static int[] GetAnnotationStartingPosition(List<List<char>> matrixOfPixels, Pixel pixel)
+        // {
+        //     int[] startingPosition = { 1, 1 }; // Y, X
+
+        //     // up
+        //     if (matrixOfPixels[pixel.Y - 1][pixel.X - 1] == ' ' && matrixOfPixels[pixel.Y - 1][pixel.X] == ' ' && matrixOfPixels[pixel.Y - 1][pixel.X + 1] == ' ')
+        //     {
+        //         startingPosition[0] = -1;
+        //         startingPosition[1] = 0;
+        //         return startingPosition;
+        //     }
+        //     //down
+        //     if (matrixOfPixels[pixel.Y + 1][pixel.X - 1] == ' ' && matrixOfPixels[pixel.Y + 1][pixel.X] == ' ' && matrixOfPixels[pixel.Y + 1][pixel.X + 1] == ' ')
+        //     {
+        //         startingPosition[0] = 1;
+        //         startingPosition[1] = -1;
+        //         return startingPosition;
+        //     }
+        //     //left
+        //     if (matrixOfPixels[pixel.Y - 1][pixel.X - 1] == ' ' && matrixOfPixels[pixel.Y][pixel.X - 1] == ' ' && matrixOfPixels[pixel.Y + 1][pixel.X - 1] == ' ')
+        //     {
+        //         startingPosition[0] = 0;
+        //         startingPosition[1] = -1;
+        //         return startingPosition;
+        //     }
+        //     //right
+        //     if (matrixOfPixels[pixel.Y - 1][pixel.X + 1] == ' ' && matrixOfPixels[pixel.Y][pixel.X + 1] == ' ' && matrixOfPixels[pixel.Y + 1][pixel.X + 1] == ' ')
+        //     {
+        //         startingPosition[0] = 0;
+        //         startingPosition[1] = 1;
+        //         return startingPosition;
+        //     }
+
+        //     // left-down
+        //     if (matrixOfPixels[pixel.Y + 1][pixel.X - 1] == ' ')
+        //     {
+        //         startingPosition[0] = 1;
+        //         startingPosition[1] = -1;
+        //         return startingPosition;
+        //     }
+        //     // // right-up
+        //     // if (matrixOfPixels[pixel.Y - 1][pixel.X + 1] == ' ')
+        //     // {
+        //     //     startingPosition[0] = -1;
+        //     //     startingPosition[1] = 1;
+        //     // }
+
+        //     // if(matrixOfPixels[pixel.Y + 1][pixel.X + 1] == ' ')
+        //     // {
+        //     //     startingPosition[0] = 1;
+        //     //     startingPosition[1] = 1;
+        //     // }
+
+        //     return startingPosition;
+        // }
 
 
         public static void AddCoordinateAnnotationForPolyLineNodes(List<List<char>> matrixOfPixels, Dictionary<Point, Pixel> dictAnnotation)
         {
             foreach (var point in dictAnnotation.Keys)
             {
-                string annotation = point.GetAnnotation();
-                AddAnnotationForPixel(matrixOfPixels, dictAnnotation[point], annotation);
+                AddAnnotationForPixel(matrixOfPixels, dictAnnotation[point], point.Annotation);
             }
         }
 
@@ -186,7 +308,7 @@ namespace PlotTool
 
             foreach (var pixel in pixels)
             {
-                pixelToFigure[pixel] = new Pixel(pixel.X - axis[0] + 5, pixel.Y - axis[1] + 5, pixel.Symbol);
+                pixelToFigure[pixel] = new Pixel(pixel.X - axis[0] + 20, pixel.Y - axis[1] + 10, pixel.Symbol);
             }
 
             return pixelToFigure;
@@ -230,8 +352,8 @@ namespace PlotTool
             List<Pixel> pixelsToPlot = GetPolyLinePixels(polyLineNodes, magnification);
 
             int[] axis = GetAxis(pixelsToPlot);
-            int width = axis[2] - axis[0] + 20;
-            int height = axis[3] - axis[1] + 10;
+            int width = axis[2] - axis[0] + 40;
+            int height = axis[3] - axis[1] + 20;
 
             List<List<char>> matrixOfPixels = InitFigure(width, height);
 

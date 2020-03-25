@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace CsharpTest
+namespace EmployeeHealthRecord
 {
     [Flags]
     public enum Symptoms : uint

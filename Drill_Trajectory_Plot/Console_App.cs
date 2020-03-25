@@ -122,6 +122,7 @@ namespace DrillTrajectoryPlot
             viewNameDict["1"] = "Main";
             viewNameDict["2"] = "Left";
             viewNameDict["3"] = "Top";
+            viewNameDict["4"] = "Knee";
             viewNameDict["q"] = "q";
 
             string viewName = viewNameDict[inputViewName];
@@ -152,7 +153,7 @@ namespace DrillTrajectoryPlot
 
         public void AutoPlot()
         {
-            string[] viewNames = { "Main", "Left", "Top" };
+            string[] viewNames = { "Main", "Left", "Top", "Knee" };
 
             string[] filenames = DataFileOperation.GetFilenamesToPlot();
 

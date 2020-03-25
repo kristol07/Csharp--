@@ -2,8 +2,7 @@ using System;
 using System.IO;
 using System.Linq;
 
-
-namespace CsharpTest
+namespace EmployeeHealthRecord
 {
     public static class ConsoleInputValidator
     {

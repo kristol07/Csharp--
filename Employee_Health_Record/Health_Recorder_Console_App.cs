@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace CsharpTest
+namespace EmployeeHealthRecord
 {
     public class ConsoleApp
     {

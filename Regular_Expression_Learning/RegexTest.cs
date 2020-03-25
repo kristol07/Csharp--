@@ -1,11 +1,11 @@
 using System;
 using System.Text.RegularExpressions;
 
-namespace RegularExpression
+namespace RegularExpressionLearning
 {
     public class RegexTest
     {
-        public static void Main(string[] args)
+        public static void Test(string[] args)
         {
             // replace strings
             string pattern = @"([a-zA-Z]+) (\d+)";

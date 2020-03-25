@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using DrillTrajectoryPlot;
+using EmployeeHealthRecord;
+using ReflectionLearning;
 
 namespace CsharpTest
 {
@@ -74,13 +76,11 @@ namespace CsharpTest
             // equilateralTriangle.PrintName();
             // equilateralTriangle.PrintPerimeter();
 
-            // DrillTrajectoryPlot.ConsoleApp app = new DrillTrajectoryPlot.ConsoleApp();
-            // app.Run();
+            DrillTrajectoryPlot.ConsoleApp app = new DrillTrajectoryPlot.ConsoleApp();
+            app.Run();
 
-            Reflection.Test();
+            // ReflectionTest.Test();
         }
     }
-
-
 
 }
