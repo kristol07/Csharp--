@@ -3,8 +3,10 @@ using System.Reflection;
 using DrillTrajectoryPlot;
 using EmployeeHealthRecord;
 using ReflectionLearning;
+using SortMethod;
+using ClassLearning;
 
-namespace CsharpTest
+namespace ConsoleTest
 {
 
     class Program
@@ -80,6 +82,8 @@ namespace CsharpTest
             app.Run();
 
             // ReflectionTest.Test();
+
+            // SortByParity.Sort(new int[] {3,2,1,3,2,1,0});
         }
     }
 

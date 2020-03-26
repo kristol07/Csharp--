@@ -2,8 +2,8 @@
 
 .vscode
 
-bin
+**/bin
 
-obj
+**/obj
 
 .git

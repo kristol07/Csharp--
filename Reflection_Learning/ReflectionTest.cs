@@ -84,7 +84,7 @@ namespace ReflectionLearning
 
         public static void Test()
         {
-            Assembly myAssembly = Assembly.LoadFrom("Reflection_Learning/Microsoft.CSharp.dll");
+            Assembly myAssembly = Assembly.LoadFrom("../Reflection_Learning/Microsoft.CSharp.dll");
             Console.WriteLine(myAssembly.FullName);
 
             Type[] allTypes = myAssembly.GetTypes();

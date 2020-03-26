@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using CsharpTest;
 using GeometricObject;
 
 namespace PlotTool

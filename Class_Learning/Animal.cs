@@ -1,16 +1,16 @@
 using System;
 
-namespace CsharpTest
+namespace ClassLearning
 {
 
     public interface IFlyable
     {
-        public void Fly();
+        void Fly();
     }
 
     public interface IQuackable
     {
-        public void Quack();
+        void Quack();
     }
 
     public abstract class Animal
