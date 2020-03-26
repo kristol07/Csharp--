@@ -6,9 +6,9 @@ namespace SortMethod.Tests
     {
         public static bool IsSameArray(int[] expected, int[] result)
         {
-            for(int i =0; i < result.Length; i++)
+            for (int i = 0; i < result.Length; i++)
             {
-                if(expected[i] != result[i])
+                if (expected[i] != result[i])
                 {
                     return false;
                 }
@@ -16,6 +16,16 @@ namespace SortMethod.Tests
 
             return true;
         }
+
+        [Fact]
+        public void IsNotSameArray()
+        {
+            int[] array1 = { 1, 2, 3 };
+            int[] array2 = { 0, 2, 0 };
+            
+            Assert.False(IsSameArray(array1, array2));
+        }
+
 
         [Fact]
         public void SortedArrayInput_ReturnSelf()
@@ -27,6 +37,7 @@ namespace SortMethod.Tests
             Assert.True(IsSameArray(expected, inputArray));
         }
 
+
         [Fact]
         public void DescendingArrayInput_ReturnAscendingArray()
         {
@@ -36,6 +47,7 @@ namespace SortMethod.Tests
 
             Assert.True(IsSameArray(expected, inputArray));
         }
+
 
         [Fact]
         public void SingleElementArrayInput_ReturnSelf()
@@ -47,10 +59,11 @@ namespace SortMethod.Tests
             Assert.True(IsSameArray(expected, inputArray));
         }
 
+
         [Fact]
         public void RandomArrayInput_ReturnSortedArray()
         {
-            int[] inputArray = { 1, 3, 2, 5, 1};
+            int[] inputArray = { 1, 3, 2, 5, 1 };
             int[] expected = { 1, 1, 2, 3, 5 };
             SelectionSort.Sort(inputArray);
 

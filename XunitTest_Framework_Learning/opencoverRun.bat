@@ -1,0 +1,1 @@
+OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test \"SortMethodTests\SortMethodTests.csproj\" --configuration Debug --no-build" -output:coverage.xml -register:user -filter:"+[*]* -[*Moq]* -[xunit*]*" -oldstyle

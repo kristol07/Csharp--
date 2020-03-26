@@ -1,0 +1,1 @@
+ReportGenerator.exe "-reports:coverage.xml" "-targetdir:report"
