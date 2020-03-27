@@ -5,7 +5,7 @@
   - [Const vs Static vs Readonly in C#](#const-vs-static-vs-readonly-in-c)
 - [如何组织你的文件和项目？](#%e5%a6%82%e4%bd%95%e7%bb%84%e7%bb%87%e4%bd%a0%e7%9a%84%e6%96%87%e4%bb%b6%e5%92%8c%e9%a1%b9%e7%9b%ae)
   - [Purpose of Solution Files](#purpose-of-solution-files)
-  - [为已有项目添加测试](#%e4%b8%ba%e5%b7%b2%e6%9c%89%e9%a1%b9%e7%9b%ae%e6%b7%bb%e5%8a%a0%e6%b5%8b%e8%af%95)
+  - [Ex: 为已有项目添加测试](#ex-%e4%b8%ba%e5%b7%b2%e6%9c%89%e9%a1%b9%e7%9b%ae%e6%b7%bb%e5%8a%a0%e6%b5%8b%e8%af%95)
   - [Solutions and Projects](#solutions-and-projects)
 
 
@@ -140,7 +140,7 @@ Solution file works as container for application's project/projects. It comes ha
 These are some of advantages of solution file and there can be many more. However solution file is not must have thing and you can still live without it. Its just makes developer's life easy and improves productivity.
 
 
-### 为已有项目添加测试
+### Ex: 为已有项目添加测试
 
 [Walkthrough: Create and run unit tests for managed code](https://docs.microsoft.com/en-us/visualstudio/test/walkthrough-creating-and-running-unit-tests-for-managed-code?view=vs-2019)
 
@@ -156,6 +156,12 @@ These are some of advantages of solution file and there can be many more. Howeve
 为了解决这个问题，可以在待测试项目的csproj文件中加入对测试目录不编译的设定:
 
 ![explicite-exclude-files-to-compile](img/explicite-exclude-files-to-compile.PNG)
+
+Readings:
+- [Default compilation includes in .NET Core projects](https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#default-compilation-includes-in-net-core-projects)
+- [Exclude files from Compile while showing them in Visual Studio](https://stackoverflow.com/questions/52231030/exclude-files-from-compile-while-showing-them-in-visual-studio)
+- [How to: Exclude files from the build](https://docs.microsoft.com/en-us/visualstudio/msbuild/how-to-exclude-files-from-the-build?view=vs-2019)
+- [Including / Excluding files from build with VS2017 and .NET Core](http://dan.clarke.name/2017/02/including-excluding-files-from-build-with-vs2017-and-net-core/)
 
 这样的操作之后我们可以对待测试项目进行编译，也能对测试项目进行运行了。
 
