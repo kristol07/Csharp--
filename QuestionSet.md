@@ -117,12 +117,14 @@ A `const` value is also implicitly `static`.
 但一种更便利的方式是通过 `solution(.sln) file`。
 通过 `dotnet new sln -o <solution-name>` 命令在文件夹中建立解决方案（`solution-name.sln`），并将各相关项目加入到该解决方案中，这样sln文件便充当了虚拟文件夹的角色，将各个项目集中整合了起来，为项目的编译和部署发布阶段提供很多的便利。
 例如，运行 `dotnet build` 命令即可一次性编译所有的projects，这在通过命令行执行编译时会十分地方便，否则我们只能对每个project分别编译。
-另外，也可以通过sln文件对所有项目的编译进行统一的配置。
+另外，也可以通过sln文件对所有项目的编译或部署进行一些统一的配置。
 
 ![solution-way-to-manage-projects](img/solution-file-way-to-manage-multiple-projects.PNG)
 
 - `dotnet sln list` 命令可列出解决方案中的所有项目。
 - `dotnet sln add/remove <project-name>.csproj` 命令可为解决方案添加或移除项目。
+
+不过正如前面的实验可知，sln文件并不是必须的，但它的存在会为应用的开发提供更多的便利，这在以后的学习使用过程中会有更深刻的理解。
 
 More readings:
 - [How to Bootstrap and Create .NET Projects](https://www.toptal.com/dot-net/bootstrap-and-create-dot-net-projects)
