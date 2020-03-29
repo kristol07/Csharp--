@@ -8,9 +8,9 @@ namespace PlotTool
     public static class FigureTool
     {
 
-        public static int GetWidth(List<List<char>> matrixOfPixels)
+        public static int GetWidthOfFigure(List<List<char>> matrixOfPixels)
         {
-            if (GetHeight(matrixOfPixels) > 0)
+            if (GetHeightOfFigure(matrixOfPixels) > 0)
             {
                 return matrixOfPixels[0].Count;
             }
@@ -21,7 +21,7 @@ namespace PlotTool
         }
 
 
-        public static int GetHeight(List<List<char>> matrixOfPixels)
+        public static int GetHeightOfFigure(List<List<char>> matrixOfPixels)
         {
             return matrixOfPixels.Count;
         }
@@ -51,7 +51,7 @@ namespace PlotTool
 
         public static void AddAxisNotationFoFigure(List<List<char>> matrixOfPixels, string viewName)
         {
-            if (GetWidth(matrixOfPixels) > 3 && GetHeight(matrixOfPixels) > 3)
+            if (GetWidthOfFigure(matrixOfPixels) > 3 && GetHeightOfFigure(matrixOfPixels) > 3)
             {
                 matrixOfPixels[0][0] = '+';
                 matrixOfPixels[0][1] = '-';
@@ -87,7 +87,7 @@ namespace PlotTool
 
         public static void AddGridFoFigure(List<List<char>> matrixOfPixels, int xGridDistance, int yGridDistance)
         {
-            if (GetWidth(matrixOfPixels) > 0 && GetHeight(matrixOfPixels) > 0)
+            if (GetWidthOfFigure(matrixOfPixels) > 0 && GetHeightOfFigure(matrixOfPixels) > 0)
             {
                 for (int i = 0; i < matrixOfPixels[0].Count; i = i + xGridDistance)
                 {
@@ -108,8 +108,8 @@ namespace PlotTool
 
         public static void AddCoordinateGridForPixel(List<List<char>> matrixOfPixels, Pixel pixel)
         {
-            int width = GetWidth(matrixOfPixels);
-            int height = GetHeight(matrixOfPixels);
+            int width = GetWidthOfFigure(matrixOfPixels);
+            int height = GetHeightOfFigure(matrixOfPixels);
 
             if (width > 0 && height > 0 && pixel.X < width && pixel.Y < height)
             {
@@ -128,8 +128,8 @@ namespace PlotTool
 
         public static void AddAnnotationForPixel(List<List<char>> matrixOfPixels, Pixel pixel, string annotation)
         {
-            int width = GetWidth(matrixOfPixels);
-            int height = GetHeight(matrixOfPixels);
+            int width = GetWidthOfFigure(matrixOfPixels);
+            int height = GetHeightOfFigure(matrixOfPixels);
 
             if (width > 0 && height > 0 && pixel.X < width && pixel.Y < height)
             {
@@ -344,7 +344,6 @@ namespace PlotTool
         }
 
 
-        // if x or y is negative ????
         public static List<List<char>> PlotPolyLine(List<Point> polyLineNodes, double magnification = 1.0)
         {
 

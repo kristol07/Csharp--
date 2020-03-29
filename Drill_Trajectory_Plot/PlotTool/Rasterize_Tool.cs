@@ -138,7 +138,7 @@ namespace PlotTool
                 int x0 = (int)Math.Round(polyLineNodes[i].X * magnification), y0 = (int)Math.Round(polyLineNodes[i].Y * magnification);
                 int x1 = (int)Math.Round(polyLineNodes[i + 1].X * magnification), y1 = (int)Math.Round(polyLineNodes[i + 1].Y * magnification);
 
-                pixelsOfLines.AddRange(RasterizeTool.GetPixelsOfLine(x0, y0, x1, y1));
+                pixelsOfLines.AddRange(GetPixelsOfLine(x0, y0, x1, y1));
             }
 
             return pixelsOfLines;

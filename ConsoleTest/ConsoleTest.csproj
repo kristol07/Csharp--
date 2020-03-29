@@ -2,11 +2,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\XunitTest_Framework_Learning\SortMethod\SortMethod.csproj" />
-    <ProjectReference Include="..\Drill_Trajectory_Plot\Drill_Trajectory_Plot.csproj" />
     <ProjectReference Include="..\Employee_Health_Record\Employee_Health_Record.csproj" />
     <ProjectReference Include="..\Reflection_Learning\Reflection_Learning.csproj" />
     <ProjectReference Include="..\Regular_Expression_Learning\Regular_Expression_Learning.csproj" />
     <ProjectReference Include="..\Class_Learning\Class_Learning.csproj" />
+    <ProjectReference Include="..\Drill_Trajectory_Plot\DrillTrajectoryPlot\DrillTrajectoryPlot.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

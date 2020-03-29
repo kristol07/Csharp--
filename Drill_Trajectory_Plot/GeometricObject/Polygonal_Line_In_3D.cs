@@ -35,7 +35,6 @@ namespace GeometricObject
             double cosQ = PolyLineNodes[kneeIndex].X / (Math.Sqrt(sideLength));
             double sinQ = PolyLineNodes[kneeIndex].Y / (Math.Sqrt(sideLength));
 
-
             foreach (var point in PolyLineNodes)
             {
                 string annotation = point.GetAnnotation();
@@ -56,10 +55,7 @@ namespace GeometricObject
                 }
             }
 
-
-
             return pojectionInPlane;
-
         }
 
         public int GetKneeNodeIndex()
