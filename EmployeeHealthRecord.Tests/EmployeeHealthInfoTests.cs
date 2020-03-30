@@ -6,15 +6,19 @@ namespace EmployeeHealthRecord.Tests
 {
     public class EmployeeTests
     {
+        private readonly Employee _employee;
+
+        public EmployeeTests()
+        {
+            _employee = new Employee("1", "test", 36.5, false, false);
+        }
 
         [Fact]
         public void FormatForSave_ReturnCorrectStringFormat()
         {
-            Employee employee = new Employee("0", "Test", 0, false, false);
+            string result = _employee.FormatForSave();
 
-            string result = employee.FormatForSave();
-
-            Assert.Equal("0,Test,0,False,False,0", result);
+            Assert.Equal("1,test,36.5,False,False,0", result);
         }
 
         [Theory]
@@ -29,15 +33,64 @@ namespace EmployeeHealthRecord.Tests
         [Fact]
         public void IsSuspected_ReturnFalse_ForNormalEmployee()
         {
-            Employee employee = new Employee("0", "Test", 36.5, false, false);
-
-            bool result = employee.IsSuspected();
+            bool result = _employee.IsSuspected();
 
             Assert.False(result);
         }
 
+
+        [Fact]
+        public void EditValue_WithGinNumberEdited()
+        {
+            _employee.EditValue("GinNumber", "0");
+
+            string result = _employee.GinNumber;
+
+            Assert.Equal("0", result);
+        }
+
+        [Fact]
+        public void EditValue_WithNameEdited()
+        {
+            _employee.EditValue("Name", "Test");
+
+            string result = _employee.Name;
+
+            Assert.Equal("Test", result);
+        }
+
+        [Fact]
+        public void EditValue_WithBodyTemperatureEdited()
+        {
+            _employee.EditValue("Body Temperature", "36.0");
+
+            double result = _employee.BodyTemperature;
+
+            Assert.Equal(36.0, result);
+        }
+
+        [Fact]
+        public void EditValue_WithHasHubeiTravelHistoryEdited()
+        {
+            _employee.EditValue("Has Hubei Travel History", "y");
+
+            bool result = _employee.HasHubeiTravelHistory;
+
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void EditValue_WithHasSymptomsEdited()
+        {
+            _employee.EditValue("Has Symptoms", "y");
+
+            bool result = _employee.HasSymptoms;
+
+            Assert.True(result);
+        }
+
         [Theory]
-        [MemberData(nameof(EmployeeTestData.TestAbnormalInfoData), MemberType = typeof(EmployeeTestData))]        
+        [MemberData(nameof(EmployeeTestData.TestAbnormalInfoData), MemberType = typeof(EmployeeTestData))]
         public void GetAbnormalInfo_ReturnCorrectAbnormalInfo_ForSuspectEmployee(Employee employee, string expected)
         {
             string result = employee.GetAbnormalInfo();
@@ -48,9 +101,7 @@ namespace EmployeeHealthRecord.Tests
         [Fact]
         public void GetAbnormalInfo_ReturnEmptyString_For_NormalEmployee()
         {
-            Employee employee = new Employee("0", "test", 36.5, false, false);
-
-            string result = employee.GetAbnormalInfo();
+            string result = _employee.GetAbnormalInfo();
 
             Assert.Equal("", result);
         }
@@ -58,10 +109,9 @@ namespace EmployeeHealthRecord.Tests
         [Fact]
         public void CompareTo_ReturnZero_IfTwoEmployeesHaveSameGinNumber()
         {
-            Employee employee1 = new Employee("0", "test", 36.5, false, false);
-            Employee employee2 = new Employee("0", "test", 36.5, false, false);
+            Employee anotherEmployee = new Employee("1", "test", 36.5, false, false);
 
-            int result = employee1.CompareTo(employee2);
+            int result = _employee.CompareTo(anotherEmployee);
 
             Assert.Equal(0, result);
         }
@@ -70,10 +120,9 @@ namespace EmployeeHealthRecord.Tests
         [Fact]
         public void CompareTo_ReturnOne_IfEmployeesHaveLargerGinNumber()
         {
-            Employee employee1 = new Employee("1", "test", 36.5, false, false);
-            Employee employee2 = new Employee("0", "test", 36.5, false, false);
+            Employee anotherEmployee = new Employee("0", "test", 36.5, false, false);
 
-            int result = employee1.CompareTo(employee2);
+            int result = _employee.CompareTo(anotherEmployee);
 
             Assert.Equal(1, result);
         }
@@ -81,10 +130,9 @@ namespace EmployeeHealthRecord.Tests
         [Fact]
         public void CompareTo_ReturnMinusOne_IfTwoEmployeesHaveSmallerGinNumber()
         {
-            Employee employee1 = new Employee("0", "test", 36.5, false, false);
-            Employee employee2 = new Employee("1", "test", 36.5, false, false);
+            Employee anotherEmployee = new Employee("2", "test", 36.5, false, false);
 
-            int result = employee1.CompareTo(employee2);
+            int result = _employee.CompareTo(anotherEmployee);
 
             Assert.Equal(-1, result);
         }

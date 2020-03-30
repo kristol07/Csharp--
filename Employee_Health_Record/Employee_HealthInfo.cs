@@ -73,57 +73,66 @@ namespace EmployeeHealthRecord
 
         public string FormatForSave()
         {
-            List<string> allInfo = new List<string>();
-
-            allInfo.Add(GinNumber);
-            allInfo.Add(Name);
-            allInfo.Add(BodyTemperature.ToString());
-            allInfo.Add(HasHubeiTravelHistory.ToString());
-            allInfo.Add(HasSymptoms.ToString());
-            allInfo.Add(Symptoms.ToString("d"));
+            string[] allInfo = { GinNumber, 
+                                 Name, 
+                                 BodyTemperature.ToString(), 
+                                 HasHubeiTravelHistory.ToString(), 
+                                 HasSymptoms.ToString(), 
+                                 Symptoms.ToString("d")};
 
             string seperator = ",";
 
             return string.Join(seperator, allInfo);
-            // return GinNumber + "," + Name 
-            //         + "," + BodyTemperature.ToString()
-            //         + "," + HasSymptoms.ToString() + "," + Symptoms.ToString("d")
-            //         +"," + HasHubeiTravelHistory.ToString();
         }
 
-        // public bool IsSuspected(out List<string> abnormalInfo)
-        // {
-        //     abnormalInfo = new List<string>();
-        //     abnormalInfo.Add(GinNumber + "-" + Name);
+        public void EditValue(string option, string editedValue)
+        {
+            switch (option)
+                {
+                    case "1":
+                    case "GinNumber":
+                        GinNumber = editedValue;
+                        break;
+                    case "2":
+                    case "Name":
+                        Name = editedValue;
+                        break;
+                    case "3":
+                    case "Body Temperature":
+                        BodyTemperature = double.Parse(editedValue);
+                        break;
+                    case "4":
+                    case "Has Hubei Travel History":
+                        if (editedValue == "no" || editedValue == "n")
+                        {
+                            HasHubeiTravelHistory = false;
+                        }
+                        else
+                        {
+                            HasHubeiTravelHistory = true;
+                        }
+                        break;
+                    case "5":
+                    case "Has Symptoms":
+                        if (editedValue == "no" || editedValue == "n")
+                        {
+                            HasSymptoms = false;
+                        }
+                        else
+                        {
+                            HasSymptoms = true;
+                        }
+                        break;
+                }
+        }
 
-        //     bool isSuspected = false;
-
-        //     if (BodyTemperature > 37.3 || BodyTemperature < 36.0)
-        //     {
-        //         abnormalInfo.Add("BodyTempeature: " + BodyTemperature.ToString());
-        //         isSuspected = true;
-        //     }
-
-        //     if (HasSymptoms)
-        //     {
-        //         abnormalInfo.Add("Has symptoms");
-        //         isSuspected = true;
-        //     }
-
-        //     if (HasHubeiTravelHistory)
-        //     {
-        //         abnormalInfo.Add("Has been to Hubei");
-        //         isSuspected = true;
-        //     }
-
-        //     return isSuspected;
-        // }
 
         public bool IsSuspected()
         {
             bool isSuspected = false;
 
-            if (BodyTemperature > 37.3 || BodyTemperature < 36.0)
+            // if (BodyTemperature > 37.3 || BodyTemperature < 36.0)
+            if (BodyTemperature > 37.3)
             {
                 isSuspected = true;
             }
@@ -148,7 +157,8 @@ namespace EmployeeHealthRecord
                 List<string> abnormalInfo = new List<string>();
                 abnormalInfo.Add(GinNumber + "-" + Name);
 
-                if (BodyTemperature > 37.3 || BodyTemperature < 36.0)
+                // if (BodyTemperature > 37.3 || BodyTemperature < 36.0)
+                if (BodyTemperature > 37.3)
                 {
                     abnormalInfo.Add("BodyTempeature: " + BodyTemperature.ToString());
                 }
