@@ -1,6 +1,6 @@
 using System;
 
-namespace CsharpTest
+namespace CsharpConcepts
 {
     interface IInfo
     {
@@ -25,14 +25,14 @@ namespace CsharpTest
         public string GetAge() { return PersonAge.ToString(); }
     }
 
-    public class InterfaceTest
+    public class InterfaceLearning
     {
         static void PrintInfo(IInfo item)
         {
             Console.WriteLine("Name: {0}, Age {1}", item.GetName(), item.GetAge());
         }
 
-        public static void Test()
+        public static void RunExample()
         {
             CA a = new CA() { Name = "John Doe", Age = 35 };
             CB b = new CB() { First = "Jane", Last = "Doe", PersonAge = 33 };

@@ -118,7 +118,7 @@ namespace EmployeeHealthRecord.Tests
 
 
         [Fact]
-        public void CompareTo_ReturnOne_IfEmployeesHaveLargerGinNumber()
+        public void CompareTo_ReturnOne_IfEmployeeHasLargerGinNumber()
         {
             Employee anotherEmployee = new Employee("0", "test", 36.5, false, false);
 
@@ -128,7 +128,7 @@ namespace EmployeeHealthRecord.Tests
         }
 
         [Fact]
-        public void CompareTo_ReturnMinusOne_IfTwoEmployeesHaveSmallerGinNumber()
+        public void CompareTo_ReturnMinusOne_IfEmployeeHasSmallerGinNumber()
         {
             Employee anotherEmployee = new Employee("2", "test", 36.5, false, false);
 

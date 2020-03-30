@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace RegularExpressionLearning
 {
-    public class RegexTest
+    public class RegexLearning
     {
-        public static void Test(string[] args)
+        public static void RunExample(string[] args)
         {
             // replace strings
             string pattern = @"([a-zA-Z]+) (\d+)";

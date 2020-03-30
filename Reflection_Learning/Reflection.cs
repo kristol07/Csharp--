@@ -3,9 +3,9 @@ using System.Reflection;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ReflectionLearning
+namespace MyReflection
 {
-    public class ReflectionTest
+    public class ReflectionLearning
     {
 
         public static Dictionary<string, List<Type>> GetVisibleTypeCategoriedByNamespace(Type[] types)
@@ -82,7 +82,7 @@ namespace ReflectionLearning
             }
         }
 
-        public static void Test()
+        public static void RunExample()
         {
             Assembly myAssembly = Assembly.LoadFrom("../Reflection_Learning/Microsoft.CSharp.dll");
             Console.WriteLine(myAssembly.FullName);

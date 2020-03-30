@@ -78,7 +78,7 @@ namespace EmployeeHealthRecord
                                  BodyTemperature.ToString(), 
                                  HasHubeiTravelHistory.ToString(), 
                                  HasSymptoms.ToString(), 
-                                 Symptoms.ToString("d")};
+                                 Symptoms.ToString("d") };
 
             string seperator = ",";
 

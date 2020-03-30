@@ -1,6 +1,6 @@
 using System;
 
-namespace CsharpTest
+namespace CsharpConcepts
 {
     [Flags]
     enum CardDeckSettings : uint

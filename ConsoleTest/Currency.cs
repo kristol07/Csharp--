@@ -1,6 +1,6 @@
 using System;
 
-namespace CsharpTest
+namespace CsharpConcepts
 {
 
     [Flags]

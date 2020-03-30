@@ -55,7 +55,7 @@ namespace EmployeeHealthRecord.Tests
             List<Employee> expected = new List<Employee> {  new Employee("0", "test", 36.5, false, false),
                                                             new Employee("1", "test", 36, false, false),
                                                             new Employee("2", "test", 40, true, false),
-                                                            new Employee("3", "test", 36, false, true)};
+                                                            new Employee("3", "test", 36, false, true) };
 
             List<Employee> result = _employeeDatabase.GetAllEmployee();
 
@@ -66,7 +66,7 @@ namespace EmployeeHealthRecord.Tests
         public void GetAllSuspectEmployee_ReturnListOfAllSuspectEmployeeInDatabase()
         {
             List<Employee> expected = new List<Employee> {  new Employee("2", "test", 40, true, false),
-                                                            new Employee("3", "test", 36, false, true)};
+                                                            new Employee("3", "test", 36, false, true) };
 
             List<Employee> result = _employeeDatabase.GetAllSuspectEmployee();
 

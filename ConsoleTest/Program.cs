@@ -2,11 +2,11 @@
 using System.Reflection;
 using DrillTrajectoryPlot;
 using EmployeeHealthRecord;
-using ReflectionLearning;
+using MyReflection;
 using SortMethod;
 using ClassLearning;
 
-namespace ConsoleTest
+namespace CsharpConcepts
 {
 
     class Program
@@ -35,8 +35,8 @@ namespace ConsoleTest
             // // test Flags attribute in Chapter Enum
             // FlagsEnum.PrintEnumNames();
 
-            // // test interface 
-            // InterfaceTest.Test();
+            // test interface 
+            // InterfaceLearning.RunExample();
 
             // Animal[] myAnimalZoo = { new Cat(), new Sheep(), new Bird() };
 
@@ -81,7 +81,7 @@ namespace ConsoleTest
             DrillTrajectoryPlot.ConsoleApp app = new DrillTrajectoryPlot.ConsoleApp();
             app.Run();
 
-            // ReflectionTest.Test();
+            // ReflectionLearning.RunExample();
 
             // SortByParity.Sort(new int[] {3,2,1,3,2,1,0});
         }

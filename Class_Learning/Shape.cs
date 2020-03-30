@@ -1,7 +1,7 @@
 using System;
 using System.Linq;
 
-namespace CsharpTest
+namespace ClassLearning
 {
     public abstract class Shape
     {

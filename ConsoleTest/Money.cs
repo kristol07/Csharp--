@@ -1,6 +1,6 @@
 //using System;
 
-namespace CsharpTest
+namespace CsharpConcepts
 {
     public class Money
     {
