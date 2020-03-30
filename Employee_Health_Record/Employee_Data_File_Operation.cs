@@ -15,7 +15,7 @@ namespace EmployeeHealthRecord
                     sw.WriteLine(header);
 
                     // employeeDatabase.EmployeeData.Sort();
-                    foreach (Employee employee in employeeDatabase.EmployeeData.Values)
+                    foreach (Employee employee in employeeDatabase.GetAllEmployee())
                     {
                         sw.WriteLine(employee.FormatForSave());
                     }

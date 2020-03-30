@@ -91,40 +91,78 @@ namespace EmployeeHealthRecord
             //         +"," + HasHubeiTravelHistory.ToString();
         }
 
-        public bool IsSuspected(out List<string> abnormalInfo)
-        {
-            abnormalInfo = new List<string>();
-            abnormalInfo.Add(GinNumber + "-" + Name);
+        // public bool IsSuspected(out List<string> abnormalInfo)
+        // {
+        //     abnormalInfo = new List<string>();
+        //     abnormalInfo.Add(GinNumber + "-" + Name);
 
+        //     bool isSuspected = false;
+
+        //     if (BodyTemperature > 37.3 || BodyTemperature < 36.0)
+        //     {
+        //         abnormalInfo.Add("BodyTempeature: " + BodyTemperature.ToString());
+        //         isSuspected = true;
+        //     }
+
+        //     if (HasSymptoms)
+        //     {
+        //         abnormalInfo.Add("Has symptoms");
+        //         isSuspected = true;
+        //     }
+
+        //     if (HasHubeiTravelHistory)
+        //     {
+        //         abnormalInfo.Add("Has been to Hubei");
+        //         isSuspected = true;
+        //     }
+
+        //     return isSuspected;
+        // }
+
+        public bool IsSuspected()
+        {
             bool isSuspected = false;
 
             if (BodyTemperature > 37.3 || BodyTemperature < 36.0)
             {
-                abnormalInfo.Add("BodyTempeature: " + BodyTemperature.ToString());
                 isSuspected = true;
             }
 
             if (HasSymptoms)
             {
-                abnormalInfo.Add("Has symptoms");
                 isSuspected = true;
             }
 
             if (HasHubeiTravelHistory)
             {
-                abnormalInfo.Add("Has been to Hubei");
                 isSuspected = true;
             }
 
             return isSuspected;
         }
 
-        public string FormatForAbnormalInfoPrinting()
+        public string GetAbnormalInfo()
         {
-            List<string> abnormalInfo;
-
-            if (IsSuspected(out abnormalInfo))
+            if (IsSuspected())
             {
+                List<string> abnormalInfo = new List<string>();
+                abnormalInfo.Add(GinNumber + "-" + Name);
+
+                if (BodyTemperature > 37.3 || BodyTemperature < 36.0)
+                {
+                    abnormalInfo.Add("BodyTempeature: " + BodyTemperature.ToString());
+                }
+
+                if (HasHubeiTravelHistory)
+                {
+                    abnormalInfo.Add("Has been to Hubei");
+                }
+
+                if (HasSymptoms)
+                {
+                    abnormalInfo.Add("Has symptoms");
+                }
+
                 return string.Join("||", abnormalInfo);
             }
             else
@@ -135,7 +173,7 @@ namespace EmployeeHealthRecord
 
         public int CompareTo(object obj)
         {
-            Employee anotherEmployee = (Employee) obj;
+            Employee anotherEmployee = (Employee)obj;
             if (Int32.Parse(this.GinNumber) < Int32.Parse(anotherEmployee.GinNumber))
             {
                 return -1;

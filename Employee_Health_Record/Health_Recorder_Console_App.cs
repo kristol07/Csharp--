@@ -19,7 +19,7 @@ namespace EmployeeHealthRecord
 
             if (!employeeDatabase.IsEmpty())
             {
-                foreach (var employee in employeeDatabase.EmployeeData)
+                foreach (var employee in employeeDatabase.GetAllEmployee())
                 {
                     Console.WriteLine(employee);
                 }
@@ -36,13 +36,13 @@ namespace EmployeeHealthRecord
 
             if (!employeeDatabase.IsEmpty())
             {
-                List<Employee> suspectEmployee = employeeDatabase.GetListOfSuspectEmployee();
+                List<Employee> suspectEmployee = employeeDatabase.GetAllSuspectEmployee();
 
                 if (suspectEmployee.Count != 0)
                 {
                     foreach (Employee employee in suspectEmployee)
                     {
-                        Console.WriteLine(employee.FormatForAbnormalInfoPrinting());
+                        Console.WriteLine(employee.GetAbnormalInfo());
                     }
                 }
                 else
@@ -68,7 +68,7 @@ namespace EmployeeHealthRecord
             // int indexOfEmployee = employeeDatabase.FindEmployee(ginNumber);
             // Console.WriteLine(employeeDatabase.EmployeeData[indexOfEmployee]);
 
-            Employee employee = employeeDatabase.FindEmployee(ginNumber);
+            Employee employee = employeeDatabase.GetEmployee(ginNumber);
             Console.WriteLine(employee);
 
         }
