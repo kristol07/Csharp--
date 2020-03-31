@@ -23,7 +23,7 @@ namespace MyForm
                 {
                     if (SodokuTable[i, j] == 0)
                     {
-                        return Possible(i, j);
+                        return SolveCell(i, j);
                     }
                 }
             }
@@ -31,7 +31,7 @@ namespace MyForm
             return true;
         }
 
-        public bool Possible(int i, int j)
+        public bool SolveCell(int i, int j)
         {
             for (int number = 1; number <= 9; number++)
             {
