@@ -5,11 +5,11 @@ namespace EmployeeHealthRecord
 {
     public static class EmployeeDataFileOperation
     {
-        public static string SaveDatabaseToCSVFile(string fileName, EmployeeDatabase employeeDatabase)
+        public static string SaveDatabaseToCSVFile(string filePath, EmployeeDatabase employeeDatabase)
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter(fileName + ".csv"))
+                using (StreamWriter sw = new StreamWriter(filePath + ".csv"))
                 {
                     string header = "GinNumber,Name,BodyTemperature,HasHubeiTravelHistory,HasSymptoms,Symptoms";
                     sw.WriteLine(header);
@@ -32,13 +32,13 @@ namespace EmployeeHealthRecord
             }
         }
 
-        public static string ReadDatabaseFromCSVFile(string fileName, ref EmployeeDatabase employeeDatabase)
+        public static string ReadDatabaseFromCSVFile(string filePath, ref EmployeeDatabase employeeDatabase)
         {
             char splitter = ',';
 
             try
             {
-                using (StreamReader sr = new StreamReader(fileName + ".csv"))
+                using (StreamReader sr = new StreamReader(filePath + ".csv"))
                 {
                     // update only when open file without problem
                     employeeDatabase = new EmployeeDatabase();

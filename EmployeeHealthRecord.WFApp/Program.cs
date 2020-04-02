@@ -16,7 +16,7 @@ namespace EmployeeHealthRecord.WFApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new EmployeeHealthInfoRecorderWFApp());
+            Application.Run(new MainForm());
         }
     }
 }

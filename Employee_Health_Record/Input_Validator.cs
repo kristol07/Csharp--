@@ -4,7 +4,9 @@ using System.Linq;
 
 namespace EmployeeHealthRecord
 {
-    public static class ConsoleInputValidator
+    public delegate bool InputValidator(string input);
+
+    public class ConsoleInputValidator
     {
 
         public static void ValidNewGinNumberInput(EmployeeDatabase employeeDatabase, out string inputGinNumber)
@@ -201,4 +203,54 @@ namespace EmployeeHealthRecord
             }
         }
     }
+
+    public static class WFAPPInputValidator
+    {
+        public static bool IsValidNewGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
+        {
+            return !employeeDatabase.HasEmployee(ginNumber);
+        }
+
+        public static bool IsValidExistedGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
+        {
+            return employeeDatabase.HasEmployee(ginNumber);
+        }
+
+        public static bool IsValidNewName(string name)
+        {
+            return true;
+        }
+
+        public static bool IsValidExistedName(string name)
+        {
+            return true;
+        }
+
+        public static bool IsValidBodyTemperature(string bodyTemperature)
+        {
+            return double.TryParse(bodyTemperature, out _);
+        }
+
+        public static bool IsValidComboBoxInput(string input)
+        {
+            string[] options = { "yes", "y", "Y", "no", "n", "N" };
+
+            return options.Contains(input);
+        }
+
+        public static bool IsValidHasHubeiTravelHistoryChoice(string hasHubeiTravelHistoryChoice)
+        {
+            string[] options = { "yes", "y", "Y", "no", "n", "N" };
+
+            return options.Contains(hasHubeiTravelHistoryChoice);
+        }
+
+        public static bool IsValidHasSymptomsChoice(string hasSymptomsChoice)
+        {
+            string[] options = { "yes", "y", "Y", "no", "n", "N" };
+
+            return options.Contains(hasSymptomsChoice);
+        }
+    }
+
 }
