@@ -67,9 +67,25 @@ namespace EmployeeHealthRecord
             EmployeeData.Add(ginNumber, newEmployee);
         }
 
-        public void RemoveEmployee(string ginNumber)
+        //public void RemoveEmployee(string ginNumber)
+        //{
+        //    if (HasEmployee(ginNumber))
+        //    {
+        //        EmployeeData.Remove(ginNumber);
+        //    }
+        //}
+
+        public void RemoveEmployee(params string[] ginNumbers)
         {
-            if (HasEmployee(ginNumber))
+            foreach (var ginNumber in ginNumbers)
+            {
+                if (!HasEmployee(ginNumber))
+                {
+                    return;
+                }
+            }
+
+            foreach (var ginNumber in ginNumbers)
             {
                 EmployeeData.Remove(ginNumber);
             }

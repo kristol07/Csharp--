@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.employeeDataPanel = new System.Windows.Forms.TableLayoutPanel();
             this.nameLabel = new System.Windows.Forms.Label();
@@ -43,41 +44,50 @@
             this.nameTextBox = new System.Windows.Forms.TextBox();
             this.notesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.submitButton = new System.Windows.Forms.Button();
+            this.ginNumberTipLabel = new System.Windows.Forms.Label();
+            this.nameTipLabel = new System.Windows.Forms.Label();
+            this.bodyTemperatureTipLabel = new System.Windows.Forms.Label();
+            this.checkDateTipLabel = new System.Windows.Forms.Label();
+            this.clearButton = new System.Windows.Forms.Button();
             this.employeeDatabaseSplitContainer = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.saveDatabaseButton = new System.Windows.Forms.Button();
             this.loadDatabaseButton = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.employeeDatabaseDataGridView = new System.Windows.Forms.DataGridView();
+            this.ginNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bodyTemperatureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.hasSymptomsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.symptomsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.AllSuspectsListView = new System.Windows.Forms.ListView();
             this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.employeeToRemoveTextBox = new System.Windows.Forms.TextBox();
             this.addItemToRemoveButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.listView3 = new System.Windows.Forms.ListView();
+            this.employeeToRemoveListListView = new System.Windows.Forms.ListView();
             this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listAllSuspectsLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.listView4 = new System.Windows.Forms.ListView();
+            this.employeeToEditInfoListView = new System.Windows.Forms.ListView();
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.itemToEditLabel = new System.Windows.Forms.Label();
+            this.valueToEditLabel = new System.Windows.Forms.Label();
+            this.valueToEditTextBox = new System.Windows.Forms.TextBox();
+            this.confirmEditButton = new System.Windows.Forms.Button();
             this.removeButton = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.itemToEditComboBox = new System.Windows.Forms.ComboBox();
+            this.removeGinNumberTipLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.employeeToEditTextBox = new System.Windows.Forms.TextBox();
+            this.editGinNumberTipLabel = new System.Windows.Forms.Label();
+            this.valueToEditTipLabel = new System.Windows.Forms.Label();
             this.loadDatabaseOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveDatabaseSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -90,6 +100,8 @@
             this.employeeDatabaseSplitContainer.Panel2.SuspendLayout();
             this.employeeDatabaseSplitContainer.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -107,7 +119,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.employeeDatabaseSplitContainer);
-            this.splitContainer1.Size = new System.Drawing.Size(1166, 579);
+            this.splitContainer1.Size = new System.Drawing.Size(1166, 612);
             this.splitContainer1.SplitterDistance = 392;
             this.splitContainer1.SplitterWidth = 10;
             this.splitContainer1.TabIndex = 1;
@@ -121,30 +133,37 @@
             this.employeeDataPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.employeeDataPanel.Controls.Add(this.nameLabel, 2, 0);
             this.employeeDataPanel.Controls.Add(this.ginNumberLabel, 0, 0);
-            this.employeeDataPanel.Controls.Add(this.notesLabel, 0, 5);
-            this.employeeDataPanel.Controls.Add(this.hubeiTravelHistoryCheckBox, 0, 4);
-            this.employeeDataPanel.Controls.Add(this.symptomsCheckBox, 2, 4);
-            this.employeeDataPanel.Controls.Add(this.bodyTemperatureTextBox, 0, 3);
-            this.employeeDataPanel.Controls.Add(this.checkDateLabel, 2, 2);
-            this.employeeDataPanel.Controls.Add(this.bodyTemperatureLabel, 0, 2);
+            this.employeeDataPanel.Controls.Add(this.notesLabel, 0, 7);
+            this.employeeDataPanel.Controls.Add(this.hubeiTravelHistoryCheckBox, 0, 6);
+            this.employeeDataPanel.Controls.Add(this.symptomsCheckBox, 2, 6);
+            this.employeeDataPanel.Controls.Add(this.bodyTemperatureTextBox, 0, 4);
+            this.employeeDataPanel.Controls.Add(this.checkDateLabel, 2, 3);
+            this.employeeDataPanel.Controls.Add(this.bodyTemperatureLabel, 0, 3);
             this.employeeDataPanel.Controls.Add(this.ginNumberTextBox, 0, 1);
-            this.employeeDataPanel.Controls.Add(this.checkDateTimePicker, 2, 3);
+            this.employeeDataPanel.Controls.Add(this.checkDateTimePicker, 2, 4);
             this.employeeDataPanel.Controls.Add(this.nameTextBox, 2, 1);
-            this.employeeDataPanel.Controls.Add(this.notesRichTextBox, 0, 6);
-            this.employeeDataPanel.Controls.Add(this.submitButton, 0, 7);
+            this.employeeDataPanel.Controls.Add(this.notesRichTextBox, 0, 8);
+            this.employeeDataPanel.Controls.Add(this.submitButton, 0, 9);
+            this.employeeDataPanel.Controls.Add(this.ginNumberTipLabel, 0, 2);
+            this.employeeDataPanel.Controls.Add(this.nameTipLabel, 2, 2);
+            this.employeeDataPanel.Controls.Add(this.bodyTemperatureTipLabel, 0, 5);
+            this.employeeDataPanel.Controls.Add(this.checkDateTipLabel, 2, 5);
+            this.employeeDataPanel.Controls.Add(this.clearButton, 2, 9);
             this.employeeDataPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.employeeDataPanel.Location = new System.Drawing.Point(0, 0);
             this.employeeDataPanel.Name = "employeeDataPanel";
-            this.employeeDataPanel.RowCount = 8;
-            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.496504F));
-            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.993007F));
-            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.496504F));
-            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.993007F));
-            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.48951F));
-            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.496504F));
-            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 55.94406F));
-            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
-            this.employeeDataPanel.Size = new System.Drawing.Size(388, 575);
+            this.employeeDataPanel.RowCount = 10;
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.26776F));
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.521739F));
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.043478F));
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.26776F));
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.695652F));
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.869565F));
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.803279F));
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 3.26776F));
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 52.28416F));
+            this.employeeDataPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.496176F));
+            this.employeeDataPanel.Size = new System.Drawing.Size(388, 608);
             this.employeeDataPanel.TabIndex = 2;
             // 
             // nameLabel
@@ -152,7 +171,7 @@
             this.nameLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.nameLabel.AutoSize = true;
             this.employeeDataPanel.SetColumnSpan(this.nameLabel, 2);
-            this.nameLabel.Location = new System.Drawing.Point(196, 8);
+            this.nameLabel.Location = new System.Drawing.Point(196, 7);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(29, 12);
             this.nameLabel.TabIndex = 2;
@@ -163,7 +182,7 @@
             this.ginNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ginNumberLabel.AutoSize = true;
             this.employeeDataPanel.SetColumnSpan(this.ginNumberLabel, 2);
-            this.ginNumberLabel.Location = new System.Drawing.Point(3, 8);
+            this.ginNumberLabel.Location = new System.Drawing.Point(3, 7);
             this.ginNumberLabel.Name = "ginNumberLabel";
             this.ginNumberLabel.Size = new System.Drawing.Size(59, 12);
             this.ginNumberLabel.TabIndex = 0;
@@ -173,7 +192,7 @@
             // 
             this.notesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.notesLabel.AutoSize = true;
-            this.notesLabel.Location = new System.Drawing.Point(3, 188);
+            this.notesLabel.Location = new System.Drawing.Point(3, 218);
             this.notesLabel.Name = "notesLabel";
             this.notesLabel.Size = new System.Drawing.Size(35, 12);
             this.notesLabel.TabIndex = 12;
@@ -184,7 +203,7 @@
             this.hubeiTravelHistoryCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.hubeiTravelHistoryCheckBox.AutoSize = true;
             this.employeeDataPanel.SetColumnSpan(this.hubeiTravelHistoryCheckBox, 2);
-            this.hubeiTravelHistoryCheckBox.Location = new System.Drawing.Point(3, 142);
+            this.hubeiTravelHistoryCheckBox.Location = new System.Drawing.Point(3, 173);
             this.hubeiTravelHistoryCheckBox.Name = "hubeiTravelHistoryCheckBox";
             this.hubeiTravelHistoryCheckBox.Size = new System.Drawing.Size(168, 16);
             this.hubeiTravelHistoryCheckBox.TabIndex = 14;
@@ -196,7 +215,7 @@
             this.symptomsCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.symptomsCheckBox.AutoSize = true;
             this.employeeDataPanel.SetColumnSpan(this.symptomsCheckBox, 2);
-            this.symptomsCheckBox.Location = new System.Drawing.Point(196, 142);
+            this.symptomsCheckBox.Location = new System.Drawing.Point(196, 173);
             this.symptomsCheckBox.Name = "symptomsCheckBox";
             this.symptomsCheckBox.Size = new System.Drawing.Size(96, 16);
             this.symptomsCheckBox.TabIndex = 15;
@@ -208,7 +227,7 @@
             this.bodyTemperatureTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.employeeDataPanel.SetColumnSpan(this.bodyTemperatureTextBox, 2);
-            this.bodyTemperatureTextBox.Location = new System.Drawing.Point(3, 83);
+            this.bodyTemperatureTextBox.Location = new System.Drawing.Point(3, 98);
             this.bodyTemperatureTextBox.Name = "bodyTemperatureTextBox";
             this.bodyTemperatureTextBox.Size = new System.Drawing.Size(187, 21);
             this.bodyTemperatureTextBox.TabIndex = 5;
@@ -219,7 +238,7 @@
             this.checkDateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkDateLabel.AutoSize = true;
             this.employeeDataPanel.SetColumnSpan(this.checkDateLabel, 2);
-            this.checkDateLabel.Location = new System.Drawing.Point(196, 68);
+            this.checkDateLabel.Location = new System.Drawing.Point(196, 83);
             this.checkDateLabel.Name = "checkDateLabel";
             this.checkDateLabel.Size = new System.Drawing.Size(65, 12);
             this.checkDateLabel.TabIndex = 6;
@@ -230,7 +249,7 @@
             this.bodyTemperatureLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.bodyTemperatureLabel.AutoSize = true;
             this.employeeDataPanel.SetColumnSpan(this.bodyTemperatureLabel, 2);
-            this.bodyTemperatureLabel.Location = new System.Drawing.Point(3, 68);
+            this.bodyTemperatureLabel.Location = new System.Drawing.Point(3, 83);
             this.bodyTemperatureLabel.Name = "bodyTemperatureLabel";
             this.bodyTemperatureLabel.Size = new System.Drawing.Size(101, 12);
             this.bodyTemperatureLabel.TabIndex = 4;
@@ -241,52 +260,105 @@
             this.ginNumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.employeeDataPanel.SetColumnSpan(this.ginNumberTextBox, 2);
-            this.ginNumberTextBox.Location = new System.Drawing.Point(3, 23);
+            this.ginNumberTextBox.Location = new System.Drawing.Point(3, 22);
             this.ginNumberTextBox.Name = "ginNumberTextBox";
             this.ginNumberTextBox.Size = new System.Drawing.Size(187, 21);
             this.ginNumberTextBox.TabIndex = 1;
+            this.ginNumberTextBox.TextChanged += new System.EventHandler(this.ginNumberTextBox_TextChanged);
             // 
             // checkDateTimePicker
             // 
             this.checkDateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.employeeDataPanel.SetColumnSpan(this.checkDateTimePicker, 2);
-            this.checkDateTimePicker.Location = new System.Drawing.Point(196, 83);
+            this.checkDateTimePicker.Location = new System.Drawing.Point(196, 98);
             this.checkDateTimePicker.Name = "checkDateTimePicker";
             this.checkDateTimePicker.Size = new System.Drawing.Size(189, 21);
             this.checkDateTimePicker.TabIndex = 7;
+            this.checkDateTimePicker.ValueChanged += new System.EventHandler(this.checkDateTimePicker_ValueChanged);
             // 
             // nameTextBox
             // 
             this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.employeeDataPanel.SetColumnSpan(this.nameTextBox, 2);
-            this.nameTextBox.Location = new System.Drawing.Point(196, 23);
+            this.nameTextBox.Location = new System.Drawing.Point(196, 22);
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(189, 21);
             this.nameTextBox.TabIndex = 3;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             // 
             // notesRichTextBox
             // 
             this.employeeDataPanel.SetColumnSpan(this.notesRichTextBox, 4);
             this.notesRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.notesRichTextBox.Location = new System.Drawing.Point(3, 203);
+            this.notesRichTextBox.Location = new System.Drawing.Point(3, 233);
             this.notesRichTextBox.Name = "notesRichTextBox";
-            this.notesRichTextBox.Size = new System.Drawing.Size(382, 315);
+            this.notesRichTextBox.Size = new System.Drawing.Size(382, 313);
             this.notesRichTextBox.TabIndex = 16;
             this.notesRichTextBox.Text = "";
             // 
             // submitButton
             // 
             this.submitButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.employeeDataPanel.SetColumnSpan(this.submitButton, 4);
-            this.submitButton.Location = new System.Drawing.Point(149, 535);
+            this.employeeDataPanel.SetColumnSpan(this.submitButton, 2);
+            this.submitButton.Location = new System.Drawing.Point(51, 566);
             this.submitButton.Name = "submitButton";
             this.submitButton.Size = new System.Drawing.Size(90, 25);
             this.submitButton.TabIndex = 17;
             this.submitButton.Text = "Submit";
             this.submitButton.UseVisualStyleBackColor = true;
             this.submitButton.Click += new System.EventHandler(this.submitButton_Click);
+            // 
+            // ginNumberTipLabel
+            // 
+            this.ginNumberTipLabel.AutoSize = true;
+            this.employeeDataPanel.SetColumnSpan(this.ginNumberTipLabel, 2);
+            this.ginNumberTipLabel.Location = new System.Drawing.Point(3, 46);
+            this.ginNumberTipLabel.Name = "ginNumberTipLabel";
+            this.ginNumberTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.ginNumberTipLabel.TabIndex = 18;
+            // 
+            // nameTipLabel
+            // 
+            this.nameTipLabel.AutoSize = true;
+            this.employeeDataPanel.SetColumnSpan(this.nameTipLabel, 2);
+            this.nameTipLabel.Location = new System.Drawing.Point(196, 46);
+            this.nameTipLabel.Name = "nameTipLabel";
+            this.nameTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.nameTipLabel.TabIndex = 19;
+            // 
+            // bodyTemperatureTipLabel
+            // 
+            this.bodyTemperatureTipLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.bodyTemperatureTipLabel.AutoSize = true;
+            this.employeeDataPanel.SetColumnSpan(this.bodyTemperatureTipLabel, 2);
+            this.bodyTemperatureTipLabel.Location = new System.Drawing.Point(3, 123);
+            this.bodyTemperatureTipLabel.Name = "bodyTemperatureTipLabel";
+            this.bodyTemperatureTipLabel.Size = new System.Drawing.Size(187, 12);
+            this.bodyTemperatureTipLabel.TabIndex = 20;
+            // 
+            // checkDateTipLabel
+            // 
+            this.checkDateTipLabel.AutoSize = true;
+            this.employeeDataPanel.SetColumnSpan(this.checkDateTipLabel, 2);
+            this.checkDateTipLabel.Location = new System.Drawing.Point(196, 123);
+            this.checkDateTipLabel.Name = "checkDateTipLabel";
+            this.checkDateTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.checkDateTipLabel.TabIndex = 21;
+            // 
+            // clearButton
+            // 
+            this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.employeeDataPanel.SetColumnSpan(this.clearButton, 2);
+            this.clearButton.Location = new System.Drawing.Point(245, 566);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(90, 25);
+            this.clearButton.TabIndex = 22;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // employeeDatabaseSplitContainer
             // 
@@ -302,8 +374,8 @@
             // employeeDatabaseSplitContainer.Panel2
             // 
             this.employeeDatabaseSplitContainer.Panel2.Controls.Add(this.tableLayoutPanel2);
-            this.employeeDatabaseSplitContainer.Size = new System.Drawing.Size(760, 575);
-            this.employeeDatabaseSplitContainer.SplitterDistance = 200;
+            this.employeeDatabaseSplitContainer.Size = new System.Drawing.Size(760, 608);
+            this.employeeDatabaseSplitContainer.SplitterDistance = 211;
             this.employeeDatabaseSplitContainer.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -311,22 +383,33 @@
             this.tableLayoutPanel3.ColumnCount = 2;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.loadDatabaseButton, 1, 1);
-            this.tableLayoutPanel3.Controls.Add(this.button5, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.listView1, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.saveDatabaseButton, 1, 1);
+            this.tableLayoutPanel3.Controls.Add(this.loadDatabaseButton, 0, 1);
+            this.tableLayoutPanel3.Controls.Add(this.employeeDatabaseDataGridView, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.76237F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.23762F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(760, 200);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(760, 211);
             this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // saveDatabaseButton
+            // 
+            this.saveDatabaseButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.saveDatabaseButton.Location = new System.Drawing.Point(490, 170);
+            this.saveDatabaseButton.Name = "saveDatabaseButton";
+            this.saveDatabaseButton.Size = new System.Drawing.Size(160, 25);
+            this.saveDatabaseButton.TabIndex = 8;
+            this.saveDatabaseButton.Text = "Save database to file";
+            this.saveDatabaseButton.UseVisualStyleBackColor = true;
+            this.saveDatabaseButton.Click += new System.EventHandler(this.saveDatabaseButton_Click);
             // 
             // loadDatabaseButton
             // 
             this.loadDatabaseButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.loadDatabaseButton.Location = new System.Drawing.Point(490, 161);
+            this.loadDatabaseButton.Location = new System.Drawing.Point(110, 170);
             this.loadDatabaseButton.Name = "loadDatabaseButton";
             this.loadDatabaseButton.Size = new System.Drawing.Size(160, 25);
             this.loadDatabaseButton.TabIndex = 9;
@@ -334,123 +417,133 @@
             this.loadDatabaseButton.UseVisualStyleBackColor = true;
             this.loadDatabaseButton.Click += new System.EventHandler(this.loadDatabaseButton_Click);
             // 
-            // button5
+            // employeeDatabaseDataGridView
             // 
-            this.button5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button5.Location = new System.Drawing.Point(110, 161);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(160, 25);
-            this.button5.TabIndex = 8;
-            this.button5.Text = "Save database to file";
-            this.button5.UseVisualStyleBackColor = true;
+            this.employeeDatabaseDataGridView.AllowUserToAddRows = false;
+            this.employeeDatabaseDataGridView.AllowUserToDeleteRows = false;
+            this.employeeDatabaseDataGridView.AutoGenerateColumns = false;
+            this.employeeDatabaseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.employeeDatabaseDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ginNumberDataGridViewTextBoxColumn,
+            this.nameDataGridViewTextBoxColumn,
+            this.bodyTemperatureDataGridViewTextBoxColumn,
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn,
+            this.hasSymptomsDataGridViewCheckBoxColumn,
+            this.symptomsDataGridViewTextBoxColumn});
+            this.tableLayoutPanel3.SetColumnSpan(this.employeeDatabaseDataGridView, 2);
+            this.employeeDatabaseDataGridView.DataSource = this.employeeBindingSource;
+            this.employeeDatabaseDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.employeeDatabaseDataGridView.Location = new System.Drawing.Point(3, 3);
+            this.employeeDatabaseDataGridView.Name = "employeeDatabaseDataGridView";
+            this.employeeDatabaseDataGridView.ReadOnly = true;
+            this.employeeDatabaseDataGridView.RowTemplate.Height = 23;
+            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(754, 149);
+            this.employeeDatabaseDataGridView.TabIndex = 10;
             // 
-            // listView1
+            // ginNumberDataGridViewTextBoxColumn
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6});
-            this.tableLayoutPanel3.SetColumnSpan(this.listView1, 2);
-            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(3, 3);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(754, 141);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.ginNumberDataGridViewTextBoxColumn.DataPropertyName = "GinNumber";
+            this.ginNumberDataGridViewTextBoxColumn.HeaderText = "GinNumber";
+            this.ginNumberDataGridViewTextBoxColumn.Name = "ginNumberDataGridViewTextBoxColumn";
+            this.ginNumberDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // columnHeader1
+            // nameDataGridViewTextBoxColumn
             // 
-            this.columnHeader1.Text = "GinNumber";
-            this.columnHeader1.Width = 66;
+            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
+            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // columnHeader2
+            // bodyTemperatureDataGridViewTextBoxColumn
             // 
-            this.columnHeader2.Text = "Name";
-            this.columnHeader2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader2.Width = 52;
+            this.bodyTemperatureDataGridViewTextBoxColumn.DataPropertyName = "BodyTemperature";
+            this.bodyTemperatureDataGridViewTextBoxColumn.HeaderText = "BodyTemperature";
+            this.bodyTemperatureDataGridViewTextBoxColumn.Name = "bodyTemperatureDataGridViewTextBoxColumn";
+            this.bodyTemperatureDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // columnHeader3
+            // hasHubeiTravelHistoryDataGridViewCheckBoxColumn
             // 
-            this.columnHeader3.Text = "Body Temperature";
-            this.columnHeader3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader3.Width = 125;
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.DataPropertyName = "HasHubeiTravelHistory";
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.HeaderText = "HasHubeiTravelHistory";
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.Name = "hasHubeiTravelHistoryDataGridViewCheckBoxColumn";
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
-            // columnHeader4
+            // hasSymptomsDataGridViewCheckBoxColumn
             // 
-            this.columnHeader4.Text = "Has Hubei Travel History";
-            this.columnHeader4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader4.Width = 169;
+            this.hasSymptomsDataGridViewCheckBoxColumn.DataPropertyName = "HasSymptoms";
+            this.hasSymptomsDataGridViewCheckBoxColumn.HeaderText = "HasSymptoms";
+            this.hasSymptomsDataGridViewCheckBoxColumn.Name = "hasSymptomsDataGridViewCheckBoxColumn";
+            this.hasSymptomsDataGridViewCheckBoxColumn.ReadOnly = true;
             // 
-            // columnHeader5
+            // symptomsDataGridViewTextBoxColumn
             // 
-            this.columnHeader5.Text = "Has Symptoms";
-            this.columnHeader5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnHeader5.Width = 96;
+            this.symptomsDataGridViewTextBoxColumn.DataPropertyName = "Symptoms";
+            this.symptomsDataGridViewTextBoxColumn.HeaderText = "Symptoms";
+            this.symptomsDataGridViewTextBoxColumn.Name = "symptomsDataGridViewTextBoxColumn";
+            this.symptomsDataGridViewTextBoxColumn.ReadOnly = true;
+            this.symptomsDataGridViewTextBoxColumn.Visible = false;
             // 
-            // columnHeader6
+            // employeeBindingSource
             // 
-            this.columnHeader6.Text = "Notes";
-            this.columnHeader6.Width = 253;
+            this.employeeBindingSource.DataSource = typeof(EmployeeHealthRecord.Employee);
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 6;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.710491F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.684211F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.31579F));
-            this.tableLayoutPanel2.Controls.Add(this.listView2, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.textBox1, 1, 1);
+            this.tableLayoutPanel2.ColumnCount = 5;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.3979F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.77487F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.853404F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.638744F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33508F));
+            this.tableLayoutPanel2.Controls.Add(this.AllSuspectsListView, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.employeeToRemoveTextBox, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.addItemToRemoveButton, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.listView3, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.employeeToRemoveListListView, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.listAllSuspectsLabel, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label2, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.listView4, 3, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label4, 3, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label5, 3, 4);
-            this.tableLayoutPanel2.Controls.Add(this.textBox3, 4, 4);
-            this.tableLayoutPanel2.Controls.Add(this.button1, 3, 5);
-            this.tableLayoutPanel2.Controls.Add(this.removeButton, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.comboBox1, 4, 3);
-            this.tableLayoutPanel2.Controls.Add(this.textBox2, 5, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label3, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.employeeToEditInfoListView, 3, 3);
+            this.tableLayoutPanel2.Controls.Add(this.itemToEditLabel, 3, 4);
+            this.tableLayoutPanel2.Controls.Add(this.valueToEditLabel, 3, 5);
+            this.tableLayoutPanel2.Controls.Add(this.valueToEditTextBox, 4, 5);
+            this.tableLayoutPanel2.Controls.Add(this.confirmEditButton, 3, 7);
+            this.tableLayoutPanel2.Controls.Add(this.removeButton, 1, 7);
+            this.tableLayoutPanel2.Controls.Add(this.itemToEditComboBox, 4, 4);
+            this.tableLayoutPanel2.Controls.Add(this.removeGinNumberTipLabel, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.employeeToEditTextBox, 4, 1);
+            this.tableLayoutPanel2.Controls.Add(this.editGinNumberTipLabel, 4, 2);
+            this.tableLayoutPanel2.Controls.Add(this.valueToEditTipLabel, 4, 6);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 6;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.333652F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.778202F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 59.53486F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.847776F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.752754F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.752754F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(760, 371);
+            this.tableLayoutPanel2.RowCount = 8;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.584661F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.779548F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.061193F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 53.45453F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.046278F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.96096F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.151863F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.960961F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(760, 393);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
-            // listView2
+            // AllSuspectsListView
             // 
-            this.listView2.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.AllSuspectsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader7,
             this.columnHeader8,
             this.columnHeader9});
-            this.listView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView2.HideSelection = false;
-            this.listView2.Location = new System.Drawing.Point(3, 30);
-            this.listView2.Name = "listView2";
-            this.tableLayoutPanel2.SetRowSpan(this.listView2, 5);
-            this.listView2.Size = new System.Drawing.Size(295, 338);
-            this.listView2.TabIndex = 8;
-            this.listView2.UseCompatibleStateImageBehavior = false;
-            this.listView2.View = System.Windows.Forms.View.Details;
+            this.AllSuspectsListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AllSuspectsListView.HideSelection = false;
+            this.AllSuspectsListView.Location = new System.Drawing.Point(3, 28);
+            this.AllSuspectsListView.Name = "AllSuspectsListView";
+            this.tableLayoutPanel2.SetRowSpan(this.AllSuspectsListView, 7);
+            this.AllSuspectsListView.Size = new System.Drawing.Size(293, 362);
+            this.AllSuspectsListView.TabIndex = 8;
+            this.AllSuspectsListView.UseCompatibleStateImageBehavior = false;
+            this.AllSuspectsListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader7
             // 
@@ -467,50 +560,52 @@
             this.columnHeader9.Text = "SuspectInfo";
             this.columnHeader9.Width = 155;
             // 
-            // textBox1
+            // employeeToRemoveTextBox
             // 
-            this.textBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.textBox1.Location = new System.Drawing.Point(316, 34);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(82, 21);
-            this.textBox1.TabIndex = 10;
+            this.employeeToRemoveTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.employeeToRemoveTextBox.Location = new System.Drawing.Point(302, 31);
+            this.employeeToRemoveTextBox.Name = "employeeToRemoveTextBox";
+            this.employeeToRemoveTextBox.Size = new System.Drawing.Size(167, 21);
+            this.employeeToRemoveTextBox.TabIndex = 10;
+            this.employeeToRemoveTextBox.TextChanged += new System.EventHandler(this.employeeToRemoveTextBox_TextChanged);
             // 
             // addItemToRemoveButton
             // 
             this.addItemToRemoveButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addItemToRemoveButton.Location = new System.Drawing.Point(425, 32);
+            this.addItemToRemoveButton.Location = new System.Drawing.Point(475, 29);
             this.addItemToRemoveButton.Name = "addItemToRemoveButton";
-            this.addItemToRemoveButton.Size = new System.Drawing.Size(90, 25);
+            this.addItemToRemoveButton.Size = new System.Drawing.Size(53, 25);
             this.addItemToRemoveButton.TabIndex = 11;
             this.addItemToRemoveButton.Text = "Add";
             this.addItemToRemoveButton.UseVisualStyleBackColor = true;
+            this.addItemToRemoveButton.Click += new System.EventHandler(this.addItemToRemoveButton_Click);
             // 
             // label1
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.tableLayoutPanel2.SetColumnSpan(this.label1, 2);
-            this.label1.Location = new System.Drawing.Point(345, 7);
+            this.label1.Location = new System.Drawing.Point(346, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(137, 12);
             this.label1.TabIndex = 12;
             this.label1.Text = "Add Employee to remove";
             // 
-            // listView3
+            // employeeToRemoveListListView
             // 
-            this.listView3.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.employeeToRemoveListListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader10,
             this.columnHeader11});
-            this.tableLayoutPanel2.SetColumnSpan(this.listView3, 2);
-            this.listView3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView3.HideSelection = false;
-            this.listView3.Location = new System.Drawing.Point(304, 66);
-            this.listView3.Name = "listView3";
-            this.tableLayoutPanel2.SetRowSpan(this.listView3, 3);
-            this.listView3.Size = new System.Drawing.Size(220, 271);
-            this.listView3.TabIndex = 13;
-            this.listView3.UseCompatibleStateImageBehavior = false;
-            this.listView3.View = System.Windows.Forms.View.Details;
+            this.tableLayoutPanel2.SetColumnSpan(this.employeeToRemoveListListView, 2);
+            this.employeeToRemoveListListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.employeeToRemoveListListView.HideSelection = false;
+            this.employeeToRemoveListListView.Location = new System.Drawing.Point(302, 81);
+            this.employeeToRemoveListListView.Name = "employeeToRemoveListListView";
+            this.tableLayoutPanel2.SetRowSpan(this.employeeToRemoveListListView, 4);
+            this.employeeToRemoveListListView.Size = new System.Drawing.Size(226, 278);
+            this.employeeToRemoveListListView.TabIndex = 13;
+            this.employeeToRemoveListListView.UseCompatibleStateImageBehavior = false;
+            this.employeeToRemoveListListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader10
             // 
@@ -526,7 +621,7 @@
             // 
             this.listAllSuspectsLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.listAllSuspectsLabel.AutoSize = true;
-            this.listAllSuspectsLabel.Location = new System.Drawing.Point(97, 7);
+            this.listAllSuspectsLabel.Location = new System.Drawing.Point(96, 6);
             this.listAllSuspectsLabel.Name = "listAllSuspectsLabel";
             this.listAllSuspectsLabel.Size = new System.Drawing.Size(107, 12);
             this.listAllSuspectsLabel.TabIndex = 14;
@@ -536,45 +631,27 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.tableLayoutPanel2.SetColumnSpan(this.label2, 3);
-            this.label2.Location = new System.Drawing.Point(587, 7);
+            this.tableLayoutPanel2.SetColumnSpan(this.label2, 2);
+            this.label2.Location = new System.Drawing.Point(589, 6);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(113, 12);
             this.label2.TabIndex = 15;
             this.label2.Text = "Edit Employee Info";
             // 
-            // textBox2
+            // employeeToEditInfoListView
             // 
-            this.textBox2.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBox2.Location = new System.Drawing.Point(638, 34);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(93, 21);
-            this.textBox2.TabIndex = 16;
-            // 
-            // label3
-            // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(573, 39);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 12);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "GinNumber";
-            // 
-            // listView4
-            // 
-            this.listView4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.employeeToEditInfoListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader12,
             this.columnHeader13});
-            this.tableLayoutPanel2.SetColumnSpan(this.listView4, 3);
-            this.listView4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView4.HideSelection = false;
-            this.listView4.Location = new System.Drawing.Point(530, 66);
-            this.listView4.Name = "listView4";
-            this.listView4.Size = new System.Drawing.Size(227, 214);
-            this.listView4.TabIndex = 18;
-            this.listView4.UseCompatibleStateImageBehavior = false;
-            this.listView4.View = System.Windows.Forms.View.Details;
+            this.tableLayoutPanel2.SetColumnSpan(this.employeeToEditInfoListView, 2);
+            this.employeeToEditInfoListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.employeeToEditInfoListView.HideSelection = false;
+            this.employeeToEditInfoListView.Location = new System.Drawing.Point(534, 81);
+            this.employeeToEditInfoListView.Name = "employeeToEditInfoListView";
+            this.employeeToEditInfoListView.Size = new System.Drawing.Size(223, 204);
+            this.employeeToEditInfoListView.TabIndex = 18;
+            this.employeeToEditInfoListView.UseCompatibleStateImageBehavior = false;
+            this.employeeToEditInfoListView.View = System.Windows.Forms.View.Details;
             // 
             // columnHeader12
             // 
@@ -586,83 +663,135 @@
             this.columnHeader13.Text = "Value";
             this.columnHeader13.Width = 119;
             // 
-            // label4
+            // itemToEditLabel
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(534, 291);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(29, 12);
-            this.label4.TabIndex = 19;
-            this.label4.Text = "Item";
+            this.itemToEditLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.itemToEditLabel.AutoSize = true;
+            this.itemToEditLabel.Location = new System.Drawing.Point(549, 295);
+            this.itemToEditLabel.Name = "itemToEditLabel";
+            this.itemToEditLabel.Size = new System.Drawing.Size(29, 12);
+            this.itemToEditLabel.TabIndex = 19;
+            this.itemToEditLabel.Text = "Item";
             // 
-            // label5
+            // valueToEditLabel
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(531, 320);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 12);
-            this.label5.TabIndex = 21;
-            this.label5.Text = "Value";
+            this.valueToEditLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.valueToEditLabel.AutoSize = true;
+            this.valueToEditLabel.Location = new System.Drawing.Point(546, 322);
+            this.valueToEditLabel.Name = "valueToEditLabel";
+            this.valueToEditLabel.Size = new System.Drawing.Size(35, 12);
+            this.valueToEditLabel.TabIndex = 21;
+            this.valueToEditLabel.Text = "Value";
             // 
-            // textBox3
+            // valueToEditTextBox
             // 
-            this.tableLayoutPanel2.SetColumnSpan(this.textBox3, 2);
-            this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(573, 315);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(184, 21);
-            this.textBox3.TabIndex = 22;
+            this.valueToEditTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.valueToEditTextBox.Location = new System.Drawing.Point(599, 318);
+            this.valueToEditTextBox.Name = "valueToEditTextBox";
+            this.valueToEditTextBox.Size = new System.Drawing.Size(158, 21);
+            this.valueToEditTextBox.TabIndex = 22;
+            this.valueToEditTextBox.TextChanged += new System.EventHandler(this.valueToEditTextBox_TextChanged);
             // 
-            // button1
+            // confirmEditButton
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.tableLayoutPanel2.SetColumnSpan(this.button1, 3);
-            this.button1.Location = new System.Drawing.Point(598, 343);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 25);
-            this.button1.TabIndex = 23;
-            this.button1.Text = "Confirm";
-            this.button1.UseVisualStyleBackColor = true;
+            this.confirmEditButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.tableLayoutPanel2.SetColumnSpan(this.confirmEditButton, 2);
+            this.confirmEditButton.Location = new System.Drawing.Point(600, 366);
+            this.confirmEditButton.Name = "confirmEditButton";
+            this.confirmEditButton.Size = new System.Drawing.Size(90, 23);
+            this.confirmEditButton.TabIndex = 23;
+            this.confirmEditButton.Text = "Confirm";
+            this.confirmEditButton.UseVisualStyleBackColor = true;
+            this.confirmEditButton.Click += new System.EventHandler(this.confirmEditButton_Click);
             // 
             // removeButton
             // 
             this.removeButton.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.tableLayoutPanel2.SetColumnSpan(this.removeButton, 2);
-            this.removeButton.Location = new System.Drawing.Point(369, 343);
+            this.removeButton.Location = new System.Drawing.Point(370, 366);
             this.removeButton.Name = "removeButton";
-            this.removeButton.Size = new System.Drawing.Size(90, 25);
+            this.removeButton.Size = new System.Drawing.Size(90, 23);
             this.removeButton.TabIndex = 0;
             this.removeButton.Text = "Remove";
             this.removeButton.UseVisualStyleBackColor = true;
+            this.removeButton.Click += new System.EventHandler(this.removeButton_Click);
             // 
-            // comboBox1
+            // itemToEditComboBox
             // 
-            this.tableLayoutPanel2.SetColumnSpan(this.comboBox1, 2);
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.itemToEditComboBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.itemToEditComboBox.FormattingEnabled = true;
+            this.itemToEditComboBox.Items.AddRange(new object[] {
             "GinNumber",
             "Name",
             "Body Temperature",
             "Has Hubei Travel History",
             "Has Symptoms"});
-            this.comboBox1.Location = new System.Drawing.Point(573, 286);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(184, 20);
-            this.comboBox1.TabIndex = 24;
+            this.itemToEditComboBox.Location = new System.Drawing.Point(599, 291);
+            this.itemToEditComboBox.Name = "itemToEditComboBox";
+            this.itemToEditComboBox.Size = new System.Drawing.Size(158, 20);
+            this.itemToEditComboBox.TabIndex = 24;
+            // 
+            // removeGinNumberTipLabel
+            // 
+            this.removeGinNumberTipLabel.AutoSize = true;
+            this.tableLayoutPanel2.SetColumnSpan(this.removeGinNumberTipLabel, 2);
+            this.removeGinNumberTipLabel.Location = new System.Drawing.Point(302, 59);
+            this.removeGinNumberTipLabel.Name = "removeGinNumberTipLabel";
+            this.removeGinNumberTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.removeGinNumberTipLabel.TabIndex = 26;
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(534, 36);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 12);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "GinNumber";
+            // 
+            // employeeToEditTextBox
+            // 
+            this.employeeToEditTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.employeeToEditTextBox.Location = new System.Drawing.Point(599, 31);
+            this.employeeToEditTextBox.Name = "employeeToEditTextBox";
+            this.employeeToEditTextBox.Size = new System.Drawing.Size(158, 21);
+            this.employeeToEditTextBox.TabIndex = 16;
+            this.employeeToEditTextBox.TextChanged += new System.EventHandler(this.employeeToEditTextBox_TextChanged);
+            // 
+            // editGinNumberTipLabel
+            // 
+            this.editGinNumberTipLabel.AutoSize = true;
+            this.editGinNumberTipLabel.Location = new System.Drawing.Point(599, 59);
+            this.editGinNumberTipLabel.Name = "editGinNumberTipLabel";
+            this.editGinNumberTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.editGinNumberTipLabel.TabIndex = 27;
+            // 
+            // valueToEditTipLabel
+            // 
+            this.valueToEditTipLabel.AutoSize = true;
+            this.valueToEditTipLabel.Location = new System.Drawing.Point(599, 342);
+            this.valueToEditTipLabel.Name = "valueToEditTipLabel";
+            this.valueToEditTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.valueToEditTipLabel.TabIndex = 28;
             // 
             // loadDatabaseOpenFileDialog
             // 
-            this.loadDatabaseOpenFileDialog.FileName = "myEmployeeDatabase";
-            this.loadDatabaseOpenFileDialog.Filter = "TXT Files|*.txt|CSV Files|*.csv";
+            this.loadDatabaseOpenFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
+            this.loadDatabaseOpenFileDialog.RestoreDirectory = true;
+            this.loadDatabaseOpenFileDialog.Title = "Load database from csv file";
+            // 
+            // saveDatabaseSaveFileDialog
+            // 
+            this.saveDatabaseSaveFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
+            this.saveDatabaseSaveFileDialog.RestoreDirectory = true;
+            this.saveDatabaseSaveFileDialog.Title = "Save database to csv file";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1166, 579);
+            this.ClientSize = new System.Drawing.Size(1166, 612);
             this.Controls.Add(this.splitContainer1);
             this.Name = "MainForm";
             this.Text = "Employee Health Recorder";
@@ -677,6 +806,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseSplitContainer)).EndInit();
             this.employeeDatabaseSplitContainer.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.ResumeLayout(false);
@@ -688,17 +819,10 @@
         private System.Windows.Forms.SplitContainer employeeDatabaseSplitContainer;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Button removeButton;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button saveDatabaseButton;
         private System.Windows.Forms.Button loadDatabaseButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView AllSuspectsListView;
         private System.Windows.Forms.ColumnHeader columnHeader7;
         private System.Windows.Forms.ColumnHeader columnHeader8;
         private System.Windows.Forms.ColumnHeader columnHeader9;
@@ -714,28 +838,44 @@
         private System.Windows.Forms.TextBox ginNumberTextBox;
         private System.Windows.Forms.DateTimePicker checkDateTimePicker;
         private System.Windows.Forms.TextBox nameTextBox;
-        private System.Windows.Forms.RichTextBox notesRichTextBox;
-        private System.Windows.Forms.Button submitButton;
         private System.Windows.Forms.OpenFileDialog loadDatabaseOpenFileDialog;
         private System.Windows.Forms.SaveFileDialog saveDatabaseSaveFileDialog;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox employeeToRemoveTextBox;
         private System.Windows.Forms.Button addItemToRemoveButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView listView3;
+        private System.Windows.Forms.ListView employeeToRemoveListListView;
         private System.Windows.Forms.ColumnHeader columnHeader10;
         private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.Label listAllSuspectsLabel;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox employeeToEditTextBox;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ListView listView4;
+        private System.Windows.Forms.ListView employeeToEditInfoListView;
         private System.Windows.Forms.ColumnHeader columnHeader12;
         private System.Windows.Forms.ColumnHeader columnHeader13;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label itemToEditLabel;
+        private System.Windows.Forms.Label valueToEditLabel;
+        private System.Windows.Forms.TextBox valueToEditTextBox;
+        private System.Windows.Forms.Button confirmEditButton;
+        private System.Windows.Forms.ComboBox itemToEditComboBox;
+        private System.Windows.Forms.RichTextBox notesRichTextBox;
+        private System.Windows.Forms.Button submitButton;
+        private System.Windows.Forms.Label ginNumberTipLabel;
+        private System.Windows.Forms.Label nameTipLabel;
+        private System.Windows.Forms.Label bodyTemperatureTipLabel;
+        private System.Windows.Forms.Label checkDateTipLabel;
+        private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Label removeGinNumberTipLabel;
+        private System.Windows.Forms.Label editGinNumberTipLabel;
+        private System.Windows.Forms.Label valueToEditTipLabel;
+        private System.Windows.Forms.DataGridView employeeDatabaseDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ginNumberDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bodyTemperatureDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasHubeiTravelHistoryDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasSymptomsDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn symptomsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource employeeBindingSource;
     }
 }
 

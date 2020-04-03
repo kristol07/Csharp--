@@ -216,40 +216,61 @@ namespace EmployeeHealthRecord
             return employeeDatabase.HasEmployee(ginNumber);
         }
 
-        public static bool IsValidNewName(string name)
+        public static bool IsValidNewName(string name, ref EmployeeDatabase employeeDatabase)
         {
             return true;
         }
 
-        public static bool IsValidExistedName(string name)
+        public static bool IsValidExistedName(string name, ref EmployeeDatabase employeeDatabase)
         {
             return true;
         }
 
         public static bool IsValidBodyTemperature(string bodyTemperature)
         {
-            return double.TryParse(bodyTemperature, out _);
+            double result;
+            if(double.TryParse(bodyTemperature, out result))
+            {
+                if(result < 0)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
         }
 
-        public static bool IsValidComboBoxInput(string input)
+        public static bool IsValidCheckDate(DateTime checkDate)
         {
-            string[] options = { "yes", "y", "Y", "no", "n", "N" };
-
-            return options.Contains(input);
+            return (checkDate.Date <= DateTime.Today);
         }
+
+        //public static bool IsValidComboBoxInput(string input)
+        //{
+
+        //    string[] options = { "yes", "y", "Y", "no", "n", "N" };
+
+        //    return options.Contains(input.ToLower());
+        //}
 
         public static bool IsValidHasHubeiTravelHistoryChoice(string hasHubeiTravelHistoryChoice)
         {
             string[] options = { "yes", "y", "Y", "no", "n", "N" };
 
-            return options.Contains(hasHubeiTravelHistoryChoice);
+            return options.Contains(hasHubeiTravelHistoryChoice.ToLower());
         }
 
         public static bool IsValidHasSymptomsChoice(string hasSymptomsChoice)
         {
             string[] options = { "yes", "y", "Y", "no", "n", "N" };
 
-            return options.Contains(hasSymptomsChoice);
+            return options.Contains(hasSymptomsChoice.ToLower());
         }
     }
 

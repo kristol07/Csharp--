@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Security;
 
 namespace EmployeeHealthRecord
 {
@@ -9,7 +10,7 @@ namespace EmployeeHealthRecord
         {
             try
             {
-                using (StreamWriter sw = new StreamWriter(filePath + ".csv"))
+                using (StreamWriter sw = new StreamWriter(filePath))
                 {
                     string header = "GinNumber,Name,BodyTemperature,HasHubeiTravelHistory,HasSymptoms,Symptoms";
                     sw.WriteLine(header);
@@ -38,10 +39,12 @@ namespace EmployeeHealthRecord
 
             try
             {
-                using (StreamReader sr = new StreamReader(filePath + ".csv"))
+                EmployeeDatabase newEmployeeDatabase = new EmployeeDatabase();
+
+                using (StreamReader sr = new StreamReader(filePath))
                 {
                     // update only when open file without problem
-                    employeeDatabase = new EmployeeDatabase();
+                    
                     string header = sr.ReadLine();
 
                     string line;
@@ -54,15 +57,20 @@ namespace EmployeeHealthRecord
                         bool hasHubeiTravelHistory = bool.Parse(employeeInfo[3]);
                         bool hasSymptoms = bool.Parse(employeeInfo[4]);
                         // employeeDatabase.EmployeeData.Add(new Employee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms));
-                        employeeDatabase.AddEmployee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
+                        newEmployeeDatabase.AddEmployee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
                     }
                 }
 
-                return "0";
+                employeeDatabase = newEmployeeDatabase;
+                return "success";
             }
             catch(IndexOutOfRangeException)
             {
-                return "-1";
+                return "formatError";
+            }
+            catch(UnauthorizedAccessException)
+            {
+                return "loadError"; // without read permission
             }
             catch
             {
