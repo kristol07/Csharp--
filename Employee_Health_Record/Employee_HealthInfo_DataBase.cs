@@ -1,11 +1,48 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel;
 
 namespace EmployeeHealthRecord
 {
     public class EmployeeDatabase
     {
+
+        public BindingList<Employee> EmployeeList
+        {
+            get
+            {
+                BindingList<Employee> employeeList = new BindingList<Employee>();
+                foreach (var emplyee in GetAllEmployee())
+                {
+                    employeeList.Add(emplyee);
+                }
+                return employeeList;
+            }
+            set
+            {
+                Dictionary<string, Employee> newEmployeeData = new Dictionary<string, Employee>();
+                foreach(var employee in value)
+                {
+                    newEmployeeData.Add(employee.GinNumber, employee);
+                }
+                EmployeeData = newEmployeeData;
+            }
+        }
+
+        public BindingList<Employee> SuspectEmployeeList
+        {
+            get
+            {
+                BindingList<Employee> suspectEmployeeList = new BindingList<Employee>();
+                foreach (var emplyee in GetAllSuspectEmployee())
+                {
+                    suspectEmployeeList.Add(emplyee);
+                }
+                return suspectEmployeeList;
+            }
+        }
+
         public Dictionary<string, Employee> EmployeeData
         {
             get; set;

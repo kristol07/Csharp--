@@ -59,19 +59,13 @@
             this.bodyTemperatureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.hasSymptomsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.symptomsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.AllSuspectsListView = new System.Windows.Forms.ListView();
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.employeeToRemoveTextBox = new System.Windows.Forms.TextBox();
             this.addItemToRemoveButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.employeeToRemoveListListView = new System.Windows.Forms.ListView();
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.listAllSuspectsLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.employeeToEditInfoListView = new System.Windows.Forms.ListView();
@@ -88,8 +82,24 @@
             this.employeeToEditTextBox = new System.Windows.Forms.TextBox();
             this.editGinNumberTipLabel = new System.Windows.Forms.Label();
             this.valueToEditTipLabel = new System.Windows.Forms.Label();
+            this.suspectEmployeeDataGridView = new System.Windows.Forms.DataGridView();
+            this.ginNumberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bodyTemperatureDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.hasSymptomsDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.symptomsDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.suspectEmployeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.employeeToRemoveDataGridView = new System.Windows.Forms.DataGridView();
+            this.employeeToRemoveBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.loadDatabaseOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveDatabaseSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.ginNumberDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nameDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.hasSymptomsDataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.symptomsDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bodyTemperatureDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -103,6 +113,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.suspectEmployeeDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.suspectEmployeeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeToRemoveDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeToRemoveBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -422,6 +436,7 @@
             this.employeeDatabaseDataGridView.AllowUserToAddRows = false;
             this.employeeDatabaseDataGridView.AllowUserToDeleteRows = false;
             this.employeeDatabaseDataGridView.AutoGenerateColumns = false;
+            this.employeeDatabaseDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.employeeDatabaseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.employeeDatabaseDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ginNumberDataGridViewTextBoxColumn,
@@ -429,6 +444,7 @@
             this.bodyTemperatureDataGridViewTextBoxColumn,
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn,
             this.hasSymptomsDataGridViewCheckBoxColumn,
+            this.Notes,
             this.symptomsDataGridViewTextBoxColumn});
             this.tableLayoutPanel3.SetColumnSpan(this.employeeDatabaseDataGridView, 2);
             this.employeeDatabaseDataGridView.DataSource = this.employeeBindingSource;
@@ -442,38 +458,55 @@
             // 
             // ginNumberDataGridViewTextBoxColumn
             // 
+            this.ginNumberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.ginNumberDataGridViewTextBoxColumn.DataPropertyName = "GinNumber";
             this.ginNumberDataGridViewTextBoxColumn.HeaderText = "GinNumber";
             this.ginNumberDataGridViewTextBoxColumn.Name = "ginNumberDataGridViewTextBoxColumn";
             this.ginNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ginNumberDataGridViewTextBoxColumn.Width = 84;
             // 
             // nameDataGridViewTextBoxColumn
             // 
+            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
             this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn.Width = 54;
             // 
             // bodyTemperatureDataGridViewTextBoxColumn
             // 
+            this.bodyTemperatureDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.bodyTemperatureDataGridViewTextBoxColumn.DataPropertyName = "BodyTemperature";
             this.bodyTemperatureDataGridViewTextBoxColumn.HeaderText = "BodyTemperature";
             this.bodyTemperatureDataGridViewTextBoxColumn.Name = "bodyTemperatureDataGridViewTextBoxColumn";
             this.bodyTemperatureDataGridViewTextBoxColumn.ReadOnly = true;
+            this.bodyTemperatureDataGridViewTextBoxColumn.Width = 120;
             // 
             // hasHubeiTravelHistoryDataGridViewCheckBoxColumn
             // 
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.DataPropertyName = "HasHubeiTravelHistory";
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.HeaderText = "HasHubeiTravelHistory";
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.Name = "hasHubeiTravelHistoryDataGridViewCheckBoxColumn";
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.Width = 137;
             // 
             // hasSymptomsDataGridViewCheckBoxColumn
             // 
+            this.hasSymptomsDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.hasSymptomsDataGridViewCheckBoxColumn.DataPropertyName = "HasSymptoms";
             this.hasSymptomsDataGridViewCheckBoxColumn.HeaderText = "HasSymptoms";
             this.hasSymptomsDataGridViewCheckBoxColumn.Name = "hasSymptomsDataGridViewCheckBoxColumn";
             this.hasSymptomsDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.hasSymptomsDataGridViewCheckBoxColumn.Width = 77;
+            // 
+            // Notes
+            // 
+            this.Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Notes.HeaderText = "Notes";
+            this.Notes.Name = "Notes";
+            this.Notes.ReadOnly = true;
             // 
             // symptomsDataGridViewTextBoxColumn
             // 
@@ -495,11 +528,9 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.853404F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.638744F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33508F));
-            this.tableLayoutPanel2.Controls.Add(this.AllSuspectsListView, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.employeeToRemoveTextBox, 1, 1);
             this.tableLayoutPanel2.Controls.Add(this.addItemToRemoveButton, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.employeeToRemoveListListView, 1, 3);
             this.tableLayoutPanel2.Controls.Add(this.listAllSuspectsLabel, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label2, 3, 0);
             this.tableLayoutPanel2.Controls.Add(this.employeeToEditInfoListView, 3, 3);
@@ -514,6 +545,8 @@
             this.tableLayoutPanel2.Controls.Add(this.employeeToEditTextBox, 4, 1);
             this.tableLayoutPanel2.Controls.Add(this.editGinNumberTipLabel, 4, 2);
             this.tableLayoutPanel2.Controls.Add(this.valueToEditTipLabel, 4, 6);
+            this.tableLayoutPanel2.Controls.Add(this.suspectEmployeeDataGridView, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.employeeToRemoveDataGridView, 1, 3);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -528,37 +561,6 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.960961F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(760, 393);
             this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // AllSuspectsListView
-            // 
-            this.AllSuspectsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader9});
-            this.AllSuspectsListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AllSuspectsListView.HideSelection = false;
-            this.AllSuspectsListView.Location = new System.Drawing.Point(3, 28);
-            this.AllSuspectsListView.Name = "AllSuspectsListView";
-            this.tableLayoutPanel2.SetRowSpan(this.AllSuspectsListView, 7);
-            this.AllSuspectsListView.Size = new System.Drawing.Size(293, 362);
-            this.AllSuspectsListView.TabIndex = 8;
-            this.AllSuspectsListView.UseCompatibleStateImageBehavior = false;
-            this.AllSuspectsListView.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader7
-            // 
-            this.columnHeader7.Text = "GinNumber";
-            this.columnHeader7.Width = 61;
-            // 
-            // columnHeader8
-            // 
-            this.columnHeader8.Text = "Name";
-            this.columnHeader8.Width = 48;
-            // 
-            // columnHeader9
-            // 
-            this.columnHeader9.Text = "SuspectInfo";
-            this.columnHeader9.Width = 155;
             // 
             // employeeToRemoveTextBox
             // 
@@ -590,32 +592,6 @@
             this.label1.Size = new System.Drawing.Size(137, 12);
             this.label1.TabIndex = 12;
             this.label1.Text = "Add Employee to remove";
-            // 
-            // employeeToRemoveListListView
-            // 
-            this.employeeToRemoveListListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader10,
-            this.columnHeader11});
-            this.tableLayoutPanel2.SetColumnSpan(this.employeeToRemoveListListView, 2);
-            this.employeeToRemoveListListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.employeeToRemoveListListView.HideSelection = false;
-            this.employeeToRemoveListListView.Location = new System.Drawing.Point(302, 81);
-            this.employeeToRemoveListListView.Name = "employeeToRemoveListListView";
-            this.tableLayoutPanel2.SetRowSpan(this.employeeToRemoveListListView, 4);
-            this.employeeToRemoveListListView.Size = new System.Drawing.Size(226, 278);
-            this.employeeToRemoveListListView.TabIndex = 13;
-            this.employeeToRemoveListListView.UseCompatibleStateImageBehavior = false;
-            this.employeeToRemoveListListView.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader10
-            // 
-            this.columnHeader10.Text = "GinNumber";
-            this.columnHeader10.Width = 118;
-            // 
-            // columnHeader11
-            // 
-            this.columnHeader11.Text = "Name";
-            this.columnHeader11.Width = 111;
             // 
             // listAllSuspectsLabel
             // 
@@ -775,6 +751,115 @@
             this.valueToEditTipLabel.Size = new System.Drawing.Size(0, 12);
             this.valueToEditTipLabel.TabIndex = 28;
             // 
+            // suspectEmployeeDataGridView
+            // 
+            this.suspectEmployeeDataGridView.AllowUserToAddRows = false;
+            this.suspectEmployeeDataGridView.AllowUserToDeleteRows = false;
+            this.suspectEmployeeDataGridView.AutoGenerateColumns = false;
+            this.suspectEmployeeDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.suspectEmployeeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.suspectEmployeeDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ginNumberDataGridViewTextBoxColumn1,
+            this.nameDataGridViewTextBoxColumn1,
+            this.bodyTemperatureDataGridViewTextBoxColumn1,
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1,
+            this.hasSymptomsDataGridViewCheckBoxColumn1,
+            this.symptomsDataGridViewTextBoxColumn1});
+            this.suspectEmployeeDataGridView.DataSource = this.suspectEmployeeBindingSource;
+            this.suspectEmployeeDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.suspectEmployeeDataGridView.Location = new System.Drawing.Point(3, 28);
+            this.suspectEmployeeDataGridView.Name = "suspectEmployeeDataGridView";
+            this.suspectEmployeeDataGridView.ReadOnly = true;
+            this.tableLayoutPanel2.SetRowSpan(this.suspectEmployeeDataGridView, 7);
+            this.suspectEmployeeDataGridView.RowTemplate.Height = 23;
+            this.suspectEmployeeDataGridView.Size = new System.Drawing.Size(293, 362);
+            this.suspectEmployeeDataGridView.TabIndex = 29;
+            // 
+            // ginNumberDataGridViewTextBoxColumn1
+            // 
+            this.ginNumberDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ginNumberDataGridViewTextBoxColumn1.DataPropertyName = "GinNumber";
+            this.ginNumberDataGridViewTextBoxColumn1.HeaderText = "GinNumber";
+            this.ginNumberDataGridViewTextBoxColumn1.Name = "ginNumberDataGridViewTextBoxColumn1";
+            this.ginNumberDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.ginNumberDataGridViewTextBoxColumn1.Width = 84;
+            // 
+            // nameDataGridViewTextBoxColumn1
+            // 
+            this.nameDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.nameDataGridViewTextBoxColumn1.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn1.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
+            this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.nameDataGridViewTextBoxColumn1.Width = 54;
+            // 
+            // bodyTemperatureDataGridViewTextBoxColumn1
+            // 
+            this.bodyTemperatureDataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.bodyTemperatureDataGridViewTextBoxColumn1.DataPropertyName = "BodyTemperature";
+            this.bodyTemperatureDataGridViewTextBoxColumn1.HeaderText = "BodyTemperature";
+            this.bodyTemperatureDataGridViewTextBoxColumn1.Name = "bodyTemperatureDataGridViewTextBoxColumn1";
+            this.bodyTemperatureDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.bodyTemperatureDataGridViewTextBoxColumn1.Width = 120;
+            // 
+            // hasHubeiTravelHistoryDataGridViewCheckBoxColumn1
+            // 
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.DataPropertyName = "HasHubeiTravelHistory";
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.HeaderText = "HasHubeiTravelHistory";
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.Name = "hasHubeiTravelHistoryDataGridViewCheckBoxColumn1";
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.Width = 137;
+            // 
+            // hasSymptomsDataGridViewCheckBoxColumn1
+            // 
+            this.hasSymptomsDataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.hasSymptomsDataGridViewCheckBoxColumn1.DataPropertyName = "HasSymptoms";
+            this.hasSymptomsDataGridViewCheckBoxColumn1.HeaderText = "HasSymptoms";
+            this.hasSymptomsDataGridViewCheckBoxColumn1.Name = "hasSymptomsDataGridViewCheckBoxColumn1";
+            this.hasSymptomsDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.hasSymptomsDataGridViewCheckBoxColumn1.Width = 77;
+            // 
+            // symptomsDataGridViewTextBoxColumn1
+            // 
+            this.symptomsDataGridViewTextBoxColumn1.DataPropertyName = "Symptoms";
+            this.symptomsDataGridViewTextBoxColumn1.HeaderText = "Symptoms";
+            this.symptomsDataGridViewTextBoxColumn1.Name = "symptomsDataGridViewTextBoxColumn1";
+            this.symptomsDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.symptomsDataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // suspectEmployeeBindingSource
+            // 
+            this.suspectEmployeeBindingSource.DataSource = typeof(EmployeeHealthRecord.Employee);
+            // 
+            // employeeToRemoveDataGridView
+            // 
+            this.employeeToRemoveDataGridView.AllowUserToAddRows = false;
+            this.employeeToRemoveDataGridView.AutoGenerateColumns = false;
+            this.employeeToRemoveDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.employeeToRemoveDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.employeeToRemoveDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ginNumberDataGridViewTextBoxColumn2,
+            this.nameDataGridViewTextBoxColumn2,
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn2,
+            this.hasSymptomsDataGridViewCheckBoxColumn2,
+            this.symptomsDataGridViewTextBoxColumn2,
+            this.bodyTemperatureDataGridViewTextBoxColumn2});
+            this.tableLayoutPanel2.SetColumnSpan(this.employeeToRemoveDataGridView, 2);
+            this.employeeToRemoveDataGridView.DataSource = this.employeeToRemoveBindingSource;
+            this.employeeToRemoveDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.employeeToRemoveDataGridView.Location = new System.Drawing.Point(302, 81);
+            this.employeeToRemoveDataGridView.Name = "employeeToRemoveDataGridView";
+            this.employeeToRemoveDataGridView.ReadOnly = true;
+            this.tableLayoutPanel2.SetRowSpan(this.employeeToRemoveDataGridView, 4);
+            this.employeeToRemoveDataGridView.RowTemplate.Height = 23;
+            this.employeeToRemoveDataGridView.Size = new System.Drawing.Size(226, 278);
+            this.employeeToRemoveDataGridView.TabIndex = 30;
+            // 
+            // employeeToRemoveBindingSource
+            // 
+            this.employeeToRemoveBindingSource.DataSource = typeof(EmployeeHealthRecord.Employee);
+            // 
             // loadDatabaseOpenFileDialog
             // 
             this.loadDatabaseOpenFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
@@ -786,6 +871,53 @@
             this.saveDatabaseSaveFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
             this.saveDatabaseSaveFileDialog.RestoreDirectory = true;
             this.saveDatabaseSaveFileDialog.Title = "Save database to csv file";
+            // 
+            // ginNumberDataGridViewTextBoxColumn2
+            // 
+            this.ginNumberDataGridViewTextBoxColumn2.DataPropertyName = "GinNumber";
+            this.ginNumberDataGridViewTextBoxColumn2.HeaderText = "GinNumber";
+            this.ginNumberDataGridViewTextBoxColumn2.Name = "ginNumberDataGridViewTextBoxColumn2";
+            this.ginNumberDataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // nameDataGridViewTextBoxColumn2
+            // 
+            this.nameDataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.nameDataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.nameDataGridViewTextBoxColumn2.HeaderText = "Name";
+            this.nameDataGridViewTextBoxColumn2.Name = "nameDataGridViewTextBoxColumn2";
+            this.nameDataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // hasHubeiTravelHistoryDataGridViewCheckBoxColumn2
+            // 
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn2.DataPropertyName = "HasHubeiTravelHistory";
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn2.HeaderText = "HasHubeiTravelHistory";
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn2.Name = "hasHubeiTravelHistoryDataGridViewCheckBoxColumn2";
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn2.ReadOnly = true;
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn2.Visible = false;
+            // 
+            // hasSymptomsDataGridViewCheckBoxColumn2
+            // 
+            this.hasSymptomsDataGridViewCheckBoxColumn2.DataPropertyName = "HasSymptoms";
+            this.hasSymptomsDataGridViewCheckBoxColumn2.HeaderText = "HasSymptoms";
+            this.hasSymptomsDataGridViewCheckBoxColumn2.Name = "hasSymptomsDataGridViewCheckBoxColumn2";
+            this.hasSymptomsDataGridViewCheckBoxColumn2.ReadOnly = true;
+            this.hasSymptomsDataGridViewCheckBoxColumn2.Visible = false;
+            // 
+            // symptomsDataGridViewTextBoxColumn2
+            // 
+            this.symptomsDataGridViewTextBoxColumn2.DataPropertyName = "Symptoms";
+            this.symptomsDataGridViewTextBoxColumn2.HeaderText = "Symptoms";
+            this.symptomsDataGridViewTextBoxColumn2.Name = "symptomsDataGridViewTextBoxColumn2";
+            this.symptomsDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.symptomsDataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // bodyTemperatureDataGridViewTextBoxColumn2
+            // 
+            this.bodyTemperatureDataGridViewTextBoxColumn2.DataPropertyName = "BodyTemperature";
+            this.bodyTemperatureDataGridViewTextBoxColumn2.HeaderText = "BodyTemperature";
+            this.bodyTemperatureDataGridViewTextBoxColumn2.Name = "bodyTemperatureDataGridViewTextBoxColumn2";
+            this.bodyTemperatureDataGridViewTextBoxColumn2.ReadOnly = true;
+            this.bodyTemperatureDataGridViewTextBoxColumn2.Visible = false;
             // 
             // MainForm
             // 
@@ -810,6 +942,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.suspectEmployeeDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.suspectEmployeeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeToRemoveDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeToRemoveBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -822,10 +958,6 @@
         private System.Windows.Forms.Button saveDatabaseButton;
         private System.Windows.Forms.Button loadDatabaseButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.ListView AllSuspectsListView;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.ColumnHeader columnHeader9;
         private System.Windows.Forms.TableLayoutPanel employeeDataPanel;
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.Label ginNumberLabel;
@@ -843,9 +975,6 @@
         private System.Windows.Forms.TextBox employeeToRemoveTextBox;
         private System.Windows.Forms.Button addItemToRemoveButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListView employeeToRemoveListListView;
-        private System.Windows.Forms.ColumnHeader columnHeader10;
-        private System.Windows.Forms.ColumnHeader columnHeader11;
         private System.Windows.Forms.Label listAllSuspectsLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox employeeToEditTextBox;
@@ -869,13 +998,30 @@
         private System.Windows.Forms.Label editGinNumberTipLabel;
         private System.Windows.Forms.Label valueToEditTipLabel;
         private System.Windows.Forms.DataGridView employeeDatabaseDataGridView;
+        private System.Windows.Forms.BindingSource employeeBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn ginNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bodyTemperatureDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasHubeiTravelHistoryDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasSymptomsDataGridViewCheckBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Notes;
         private System.Windows.Forms.DataGridViewTextBoxColumn symptomsDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource employeeBindingSource;
+        private System.Windows.Forms.DataGridView suspectEmployeeDataGridView;
+        private System.Windows.Forms.BindingSource suspectEmployeeBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ginNumberDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bodyTemperatureDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasHubeiTravelHistoryDataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasSymptomsDataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn symptomsDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridView employeeToRemoveDataGridView;
+        private System.Windows.Forms.BindingSource employeeToRemoveBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ginNumberDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasHubeiTravelHistoryDataGridViewCheckBoxColumn2;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasSymptomsDataGridViewCheckBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn symptomsDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bodyTemperatureDataGridViewTextBoxColumn2;
     }
 }
 

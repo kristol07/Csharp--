@@ -25,15 +25,24 @@ namespace EmployeeHealthRecord.WFApp
         const string EMPLOYEE_NOT_FOUND_TIP = "Not found.";
 
         EmployeeDatabase employeeDatabase;
-        List<string> employeeListToRemove;
+        BindingList<Employee> employeeToRemoveList;
 
         public MainForm()
         {
             InitializeComponent();
 
             employeeDatabase = new EmployeeDatabase();
+
+            employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
+            employeeDatabaseDataGridView.DataSource = employeeBindingSource;
+
+            suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
+            suspectEmployeeDataGridView.DataSource = suspectEmployeeBindingSource;
+
+            employeeToRemoveList = new BindingList<Employee>();
+            employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
+            employeeToRemoveDataGridView.DataSource = employeeToRemoveBindingSource;
             
-            employeeListToRemove = new List<string>();
         }
 
         private void ValidInputWithTipInfo(TextBox textbox, Label tipLabel, string tipInfo, DataValidator dataValidator)
@@ -64,14 +73,14 @@ namespace EmployeeHealthRecord.WFApp
             }
         }
 
-        private void UpdateDatabaseGridView()
-        {
-            employeeBindingSource = new BindingSource();
-            foreach (var employee in employeeDatabase.EmployeeData.Values)
-            {
-                employeeBindingSource.Add(employee);
-            }
-        }
+        //private void UpdateDatabaseGridView()
+        //{
+        //    employeeBindingSource = new BindingSource();
+        //    foreach (var employee in employeeDatabase.EmployeeData.Values)
+        //    {
+        //        employeeBindingSource.Add(employee);
+        //    }
+        //}
 
         private void submitButton_Click(object sender, EventArgs e)
         {
@@ -86,9 +95,13 @@ namespace EmployeeHealthRecord.WFApp
                 bool hasSymptoms = symptomsCheckBox.Checked;
                 string notes = notesRichTextBox.Text;
 
-                employeeDatabase.AddEmployee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
+                BindingList<Employee> employeeList = this.employeeBindingSource.DataSource as BindingList<Employee>;
+                Employee newEmployee = new Employee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
+                employeeList.Add(newEmployee);
+                employeeDatabase.EmployeeData.Add(ginNumber, newEmployee);
+                //employeeDatabase.AddEmployee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
 
-                UpdateDatabaseGridView();
+                suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
 
                 MessageBox.Show($"Record of Employee \"{name}\" with GinNumber \"{ginNumber}\" added to database.", "Add Employee", MessageBoxButtons.OK);
 
@@ -115,8 +128,9 @@ namespace EmployeeHealthRecord.WFApp
                 switch (loadResult)
                 {
                     case "success":
+                        employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
+                        suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
                         MessageBox.Show($"Database loading from {filePath} succeed.", "Loading Database", MessageBoxButtons.OK);
-                        UpdateDatabaseGridView();
                         break;
                     case "formatError":
                         MessageBox.Show($"Format error in Database from {filePath}.", "Loading Database", MessageBoxButtons.OK);
@@ -136,6 +150,10 @@ namespace EmployeeHealthRecord.WFApp
             if (saveDatabaseSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveDatabaseSaveFileDialog.FileName;
+
+                //BindingList<Employee> employeeList = this.employeeBindingSource.DataSource as BindingList<Employee>;
+                //employeeDatabase.EmployeeList = employeeList;
+
                 string saveResult = EmployeeDataFileOperation.SaveDatabaseToCSVFile(filePath, employeeDatabase);
 
                 switch (saveResult)
@@ -192,7 +210,8 @@ namespace EmployeeHealthRecord.WFApp
             //if(!string.IsNullOrWhiteSpace(employeeToRemoveTextBox.Text) && WFAPPInputValidator.IsValidExistedGinNumber(employeeToRemoveTextBox.Text, ref employeeDatabase))
             if (!string.IsNullOrWhiteSpace(employeeToRemoveTextBox.Text) && removeGinNumberTipLabel.Text == "")
             {
-                employeeListToRemove.Add(employeeToRemoveTextBox.Text);
+                employeeToRemoveList.Add(employeeDatabase.GetEmployee(employeeToRemoveTextBox.Text));
+                employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
             }
         }
 
@@ -203,12 +222,42 @@ namespace EmployeeHealthRecord.WFApp
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            employeeDatabase.RemoveEmployee(employeeListToRemove.ToArray());
+            foreach(var employee in employeeToRemoveList)
+            {
+                employeeDatabase.RemoveEmployee(employee.GinNumber);
+            }
+            employeeToRemoveList.Clear();
+            employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
+
+            employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
+            suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
         }
 
         private void employeeToEditTextBox_TextChanged(object sender, EventArgs e)
         {
             ValidInputWithTipInfo(employeeToEditTextBox, editGinNumberTipLabel, EMPLOYEE_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
+
+            if(WFAPPInputValidator.IsValidExistedGinNumber(employeeToEditTextBox.Text, ref employeeDatabase))
+            {
+                Employee employeeToEdit = employeeDatabase.GetEmployee(employeeToEditTextBox.Text);
+                employeeToEditInfoListView.Items.Add(GenerateListViewItem("GinNumber", employeeToEdit.GinNumber));
+                employeeToEditInfoListView.Items.Add(GenerateListViewItem("Name", employeeToEdit.Name));
+                employeeToEditInfoListView.Items.Add(GenerateListViewItem("BodyTemperature", employeeToEdit.BodyTemperature.ToString()));
+                employeeToEditInfoListView.Items.Add(GenerateListViewItem("HasHubeiTravelHistory", employeeToEdit.HasHubeiTravelHistory.ToString()));
+                employeeToEditInfoListView.Items.Add(GenerateListViewItem("HasSymptoms", employeeToEdit.HasSymptoms.ToString()));
+            }
+            else
+            {
+                employeeToEditInfoListView.Items.Clear();
+            }
+        }
+
+        private ListViewItem GenerateListViewItem(string item, string value)
+        {
+            ListViewItem listViewItem = new ListViewItem();
+            listViewItem.SubItems.Add(item);
+            listViewItem.SubItems.Add(value);
+            return listViewItem;
         }
 
         private void valueToEditTextBox_TextChanged(object sender, EventArgs e)

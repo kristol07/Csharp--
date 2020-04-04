@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace EmployeeHealthRecord
 {
@@ -12,36 +13,109 @@ namespace EmployeeHealthRecord
     }
 
 
-    public class Employee : IComparable
+    public class Employee : IComparable, INotifyPropertyChanged
     {
+        string ginNumber;
+        string name;
+        double bodyTemperature;
+        bool hasHubeiTravelHistory;
+        bool hasSymptoms;
+        Symptoms symptoms;
+
         public string GinNumber
         {
-            get; set;
+            get
+            {
+                return this.ginNumber;
+            }
+            set
+            {
+                if(value != this.ginNumber)
+                {
+                    this.ginNumber = value;
+                    NotifyPropertyChanged("GinNumber");
+                }
+            }
         }
 
         public string Name
         {
-            get; set;
+            get
+            {
+                return this.name;
+            }
+            set
+            {
+                if (value != this.name)
+                {
+                    this.name = value;
+                    NotifyPropertyChanged("Name");
+                }
+            }
         }
 
         public bool HasHubeiTravelHistory
         {
-            get; set;
+            get
+            {
+                return this.hasHubeiTravelHistory;
+            }
+            set
+            {
+                if (value != this.hasHubeiTravelHistory)
+                {
+                    this.hasHubeiTravelHistory = value;
+                    NotifyPropertyChanged("HasHubeiTravelHistory");
+                }
+            }
         }
 
         public bool HasSymptoms
         {
-            get; set;
+            get
+            {
+                return this.hasSymptoms;
+            }
+            set
+            {
+                if (value != this.hasSymptoms)
+                {
+                    this.hasSymptoms = value;
+                    NotifyPropertyChanged("HasSymptoms");
+                }
+            }
         }
 
         public Symptoms Symptoms
         {
-            get; set;
+            get
+            {
+                return this.symptoms;
+            }
+            set
+            {
+                if (value != this.symptoms)
+                {
+                    this.symptoms = value;
+                    NotifyPropertyChanged("Symptoms");
+                }
+            }
         }
 
         public double BodyTemperature
         {
-            get; set;
+            get
+            {
+                return this.bodyTemperature;
+            }
+            set
+            {
+                if (value != this.bodyTemperature)
+                {
+                    this.bodyTemperature = value;
+                    NotifyPropertyChanged("BodyTemperature");
+                }
+            }
         }
 
         public Employee(string ginNumber, string name, double bodyTemperature, bool hasHubeiTravelHistory = false, bool hasSymptoms = false)
@@ -51,6 +125,16 @@ namespace EmployeeHealthRecord
             BodyTemperature = bodyTemperature;
             HasHubeiTravelHistory = hasHubeiTravelHistory;
             HasSymptoms = hasSymptoms;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged(string info)
+        {
+            if(PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(info));
+            }
         }
 
         public override string ToString()
@@ -125,7 +209,6 @@ namespace EmployeeHealthRecord
                         break;
                 }
         }
-
 
         public bool IsSuspected()
         {
