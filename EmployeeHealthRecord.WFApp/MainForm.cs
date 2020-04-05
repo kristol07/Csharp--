@@ -197,7 +197,9 @@ namespace EmployeeHealthRecord.WFApp
         private void addEmployeeToRemoveButton_Click(object sender, EventArgs e)
         {
             //if(!string.IsNullOrWhiteSpace(employeeToRemoveTextBox.Text) && WFAPPInputValidator.IsValidExistedGinNumber(employeeToRemoveTextBox.Text, ref employeeDatabase))
-            if (!string.IsNullOrWhiteSpace(employeeToRemoveTextBox.Text) && removeGinNumberTipLabel.Text == "")
+            if (!string.IsNullOrWhiteSpace(employeeToRemoveTextBox.Text) 
+                && removeGinNumberTipLabel.Text == ""
+                && !employeeToRemoveList.Contains(employeeDatabase.GetEmployee(employeeToRemoveTextBox.Text)))
             {
                 employeeToRemoveList.Add(employeeDatabase.GetEmployee(employeeToRemoveTextBox.Text));
                 employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
@@ -231,6 +233,8 @@ namespace EmployeeHealthRecord.WFApp
                     {
                         employeeDatabase.RemoveEmployee(employee.GinNumber);
                     }
+
+                    employeeToRemoveTextBox.Text = "";
 
                     employeeToRemoveList.Clear();
                     employeeToRemoveBindingSource.DataSource = employeeToRemoveList;

@@ -19,15 +19,15 @@ namespace EmployeeHealthRecord
                 }
                 return employeeList;
             }
-            set
-            {
-                Dictionary<string, Employee> newEmployeeData = new Dictionary<string, Employee>();
-                foreach(var employee in value)
-                {
-                    newEmployeeData.Add(employee.GinNumber, employee);
-                }
-                EmployeeData = newEmployeeData;
-            }
+            //set
+            //{
+            //    Dictionary<string, Employee> newEmployeeData = new Dictionary<string, Employee>();
+            //    foreach(var employee in value)
+            //    {
+            //        newEmployeeData.Add(employee.GinNumber, employee);
+            //    }
+            //    EmployeeData = newEmployeeData;
+            //}
         }
 
         public BindingList<Employee> SuspectEmployeeList
@@ -57,6 +57,7 @@ namespace EmployeeHealthRecord
         {
             return EmployeeData.ContainsKey(ginNumber);
         }
+
         public Employee GetEmployee(string ginNumber)
         {
             if (HasEmployee(ginNumber))
@@ -94,6 +95,12 @@ namespace EmployeeHealthRecord
             if (HasEmployee(ginNumber))
             {
                 EmployeeData[ginNumber].EditValue(option, editedValue);
+
+                if(option == "GinNumber" || option == "1")
+                {
+                    EmployeeData.Add(editedValue, EmployeeData[ginNumber]);
+                    EmployeeData.Remove(ginNumber);
+                }
             }
         }
 
