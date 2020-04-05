@@ -17,8 +17,8 @@ namespace EmployeeHealthRecord.WFApp
 
     public partial class MainForm : Form
     {
-        const string GIN_NUMBER_EXISTED_TIP = "Employee with same GinNumber existed, try new one!";
-        const string NAME_EXISTED_TIP = "Employee with same Name existed, try new one!";
+        const string GIN_NUMBER_EXISTED_TIP = "Existed!"; //"Employee with same GinNumber existed, try new one!";
+        const string NAME_EXISTED_TIP = "Existed!"; //"Employee with same Name existed, try new one!";
         const string BODY_TEMPERATURE_VALUE_TIP = "Only positive numerical value is allowed for Temperature.";
         const string HAS_HUBEI_TRAVEL_HISTORY_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
         const string HAS_SYMPTOMS_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
@@ -205,13 +205,14 @@ namespace EmployeeHealthRecord.WFApp
             ClearEmployeeDataInput();
         }
 
-        private void addItemToRemoveButton_Click(object sender, EventArgs e)
+        private void addEmployeeToRemoveButton_Click(object sender, EventArgs e)
         {
             //if(!string.IsNullOrWhiteSpace(employeeToRemoveTextBox.Text) && WFAPPInputValidator.IsValidExistedGinNumber(employeeToRemoveTextBox.Text, ref employeeDatabase))
             if (!string.IsNullOrWhiteSpace(employeeToRemoveTextBox.Text) && removeGinNumberTipLabel.Text == "")
             {
                 employeeToRemoveList.Add(employeeDatabase.GetEmployee(employeeToRemoveTextBox.Text));
                 employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
+                employeeToRemoveTextBox.Text = "";
             }
         }
 
@@ -222,15 +223,21 @@ namespace EmployeeHealthRecord.WFApp
 
         private void removeButton_Click(object sender, EventArgs e)
         {
-            foreach(var employee in employeeToRemoveList)
+            if(employeeToRemoveList.Count != 0)
             {
-                employeeDatabase.RemoveEmployee(employee.GinNumber);
-            }
-            employeeToRemoveList.Clear();
-            employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
+                if (MessageBox.Show("Confirm removing all these employees?", "Remove Employee", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    foreach (var employee in employeeToRemoveList)
+                    {
+                        employeeDatabase.RemoveEmployee(employee.GinNumber);
+                    }
+                    employeeToRemoveList.Clear();
+                    employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
 
-            employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
-            suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
+                    employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
+                    suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
+                }
+            }
         }
 
         private void employeeToEditTextBox_TextChanged(object sender, EventArgs e)
@@ -260,15 +267,20 @@ namespace EmployeeHealthRecord.WFApp
             return listViewItem;
         }
 
+        private void itemToEditComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            valueToEditTextBox.Text = "";
+        }
+
         private void valueToEditTextBox_TextChanged(object sender, EventArgs e)
         {
             switch (itemToEditComboBox.Text)
             {
                 case "GinNumber":
-                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, GIN_NUMBER_EXISTED_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
+                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, GIN_NUMBER_EXISTED_TIP, WFAPPInputValidator.IsValidNewGinNumber);
                     break;
                 case "Name":
-                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, NAME_EXISTED_TIP, WFAPPInputValidator.IsValidExistedName);
+                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, NAME_EXISTED_TIP, WFAPPInputValidator.IsValidNewName);
                     break;
                 case "Body Temperature":
                     ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, BODY_TEMPERATURE_VALUE_TIP, WFAPPInputValidator.IsValidBodyTemperature);
@@ -284,12 +296,26 @@ namespace EmployeeHealthRecord.WFApp
 
         private void confirmEditButton_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(editGinNumberTipLabel.Text)
+            if (!string.IsNullOrWhiteSpace(employeeToEditTextBox.Text)
+                && string.IsNullOrWhiteSpace(editGinNumberTipLabel.Text)
                 && itemToEditComboBox.SelectedItem != null
                 && !string.IsNullOrWhiteSpace(valueToEditTextBox.Text)
                 && string.IsNullOrWhiteSpace(valueToEditTipLabel.Text))
             {
                 employeeDatabase.EditEmployeeInfo(employeeToEditTextBox.Text, itemToEditComboBox.Text, valueToEditTextBox.Text);
+
+                employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
+                suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
+
+                string originalEmployeeToEdit = employeeToEditTextBox.Text;
+                employeeToEditTextBox.Text = "";
+                employeeToEditTextBox.Text = originalEmployeeToEdit;
+                //employeeToEditInfoListView.Items.Clear();
+                itemToEditComboBox.SelectedIndex = -1;
+                valueToEditTextBox.Text = "";
+
+                employeeToRemoveList.Clear();
+                employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
             }
         }
 

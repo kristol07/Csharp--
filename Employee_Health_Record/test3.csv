@@ -1,0 +1,6 @@
+GinNumber,Name,BodyTemperature,HasHubeiTravelHistory,HasSymptoms,Symptoms
+10,test,35,True,True,0
+21,fs,32,False,True,0
+324,bg,45,False,True,0
+dfs,33e2,3254354,False,False,0
+gfd,342,3254353645,True,False,0

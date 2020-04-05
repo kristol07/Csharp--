@@ -64,7 +64,7 @@
             this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.employeeToRemoveTextBox = new System.Windows.Forms.TextBox();
-            this.addItemToRemoveButton = new System.Windows.Forms.Button();
+            this.addEmployeeToRemoveButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.listAllSuspectsLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -91,15 +91,16 @@
             this.symptomsDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.suspectEmployeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.employeeToRemoveDataGridView = new System.Windows.Forms.DataGridView();
-            this.employeeToRemoveBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.loadDatabaseOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveDatabaseSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.ginNumberDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.hasSymptomsDataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.symptomsDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bodyTemperatureDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeToRemoveBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.loadDatabaseOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveDatabaseSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -529,7 +530,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.638744F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 21.33508F));
             this.tableLayoutPanel2.Controls.Add(this.employeeToRemoveTextBox, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.addItemToRemoveButton, 2, 1);
+            this.tableLayoutPanel2.Controls.Add(this.addEmployeeToRemoveButton, 2, 1);
             this.tableLayoutPanel2.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.listAllSuspectsLabel, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.label2, 3, 0);
@@ -571,16 +572,16 @@
             this.employeeToRemoveTextBox.TabIndex = 10;
             this.employeeToRemoveTextBox.TextChanged += new System.EventHandler(this.employeeToRemoveTextBox_TextChanged);
             // 
-            // addItemToRemoveButton
+            // addEmployeeToRemoveButton
             // 
-            this.addItemToRemoveButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.addItemToRemoveButton.Location = new System.Drawing.Point(475, 29);
-            this.addItemToRemoveButton.Name = "addItemToRemoveButton";
-            this.addItemToRemoveButton.Size = new System.Drawing.Size(53, 25);
-            this.addItemToRemoveButton.TabIndex = 11;
-            this.addItemToRemoveButton.Text = "Add";
-            this.addItemToRemoveButton.UseVisualStyleBackColor = true;
-            this.addItemToRemoveButton.Click += new System.EventHandler(this.addItemToRemoveButton_Click);
+            this.addEmployeeToRemoveButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.addEmployeeToRemoveButton.Location = new System.Drawing.Point(475, 29);
+            this.addEmployeeToRemoveButton.Name = "addEmployeeToRemoveButton";
+            this.addEmployeeToRemoveButton.Size = new System.Drawing.Size(53, 25);
+            this.addEmployeeToRemoveButton.TabIndex = 11;
+            this.addEmployeeToRemoveButton.Text = "Add";
+            this.addEmployeeToRemoveButton.UseVisualStyleBackColor = true;
+            this.addEmployeeToRemoveButton.Click += new System.EventHandler(this.addEmployeeToRemoveButton_Click);
             // 
             // label1
             // 
@@ -617,6 +618,7 @@
             // employeeToEditInfoListView
             // 
             this.employeeToEditInfoListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
             this.columnHeader12,
             this.columnHeader13});
             this.tableLayoutPanel2.SetColumnSpan(this.employeeToEditInfoListView, 2);
@@ -706,6 +708,7 @@
             this.itemToEditComboBox.Name = "itemToEditComboBox";
             this.itemToEditComboBox.Size = new System.Drawing.Size(158, 20);
             this.itemToEditComboBox.TabIndex = 24;
+            this.itemToEditComboBox.SelectedIndexChanged += new System.EventHandler(this.itemToEditComboBox_SelectedIndexChanged);
             // 
             // removeGinNumberTipLabel
             // 
@@ -856,22 +859,6 @@
             this.employeeToRemoveDataGridView.Size = new System.Drawing.Size(226, 278);
             this.employeeToRemoveDataGridView.TabIndex = 30;
             // 
-            // employeeToRemoveBindingSource
-            // 
-            this.employeeToRemoveBindingSource.DataSource = typeof(EmployeeHealthRecord.Employee);
-            // 
-            // loadDatabaseOpenFileDialog
-            // 
-            this.loadDatabaseOpenFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
-            this.loadDatabaseOpenFileDialog.RestoreDirectory = true;
-            this.loadDatabaseOpenFileDialog.Title = "Load database from csv file";
-            // 
-            // saveDatabaseSaveFileDialog
-            // 
-            this.saveDatabaseSaveFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
-            this.saveDatabaseSaveFileDialog.RestoreDirectory = true;
-            this.saveDatabaseSaveFileDialog.Title = "Save database to csv file";
-            // 
             // ginNumberDataGridViewTextBoxColumn2
             // 
             this.ginNumberDataGridViewTextBoxColumn2.DataPropertyName = "GinNumber";
@@ -918,6 +905,27 @@
             this.bodyTemperatureDataGridViewTextBoxColumn2.Name = "bodyTemperatureDataGridViewTextBoxColumn2";
             this.bodyTemperatureDataGridViewTextBoxColumn2.ReadOnly = true;
             this.bodyTemperatureDataGridViewTextBoxColumn2.Visible = false;
+            // 
+            // employeeToRemoveBindingSource
+            // 
+            this.employeeToRemoveBindingSource.DataSource = typeof(EmployeeHealthRecord.Employee);
+            // 
+            // loadDatabaseOpenFileDialog
+            // 
+            this.loadDatabaseOpenFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
+            this.loadDatabaseOpenFileDialog.RestoreDirectory = true;
+            this.loadDatabaseOpenFileDialog.Title = "Load database from csv file";
+            // 
+            // saveDatabaseSaveFileDialog
+            // 
+            this.saveDatabaseSaveFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
+            this.saveDatabaseSaveFileDialog.RestoreDirectory = true;
+            this.saveDatabaseSaveFileDialog.Title = "Save database to csv file";
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "";
+            this.columnHeader1.Width = 0;
             // 
             // MainForm
             // 
@@ -973,7 +981,7 @@
         private System.Windows.Forms.OpenFileDialog loadDatabaseOpenFileDialog;
         private System.Windows.Forms.SaveFileDialog saveDatabaseSaveFileDialog;
         private System.Windows.Forms.TextBox employeeToRemoveTextBox;
-        private System.Windows.Forms.Button addItemToRemoveButton;
+        private System.Windows.Forms.Button addEmployeeToRemoveButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label listAllSuspectsLabel;
         private System.Windows.Forms.Label label2;
@@ -1022,6 +1030,7 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasSymptomsDataGridViewCheckBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn symptomsDataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn bodyTemperatureDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
 
