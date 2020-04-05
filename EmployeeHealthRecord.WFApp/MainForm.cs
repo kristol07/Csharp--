@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EmployeeHealthRecord;
+using System.Collections.Specialized;
 
 namespace EmployeeHealthRecord.WFApp
 {
@@ -73,15 +74,6 @@ namespace EmployeeHealthRecord.WFApp
             }
         }
 
-        //private void UpdateDatabaseGridView()
-        //{
-        //    employeeBindingSource = new BindingSource();
-        //    foreach (var employee in employeeDatabase.EmployeeData.Values)
-        //    {
-        //        employeeBindingSource.Add(employee);
-        //    }
-        //}
-
         private void submitButton_Click(object sender, EventArgs e)
         {
 
@@ -95,11 +87,8 @@ namespace EmployeeHealthRecord.WFApp
                 bool hasSymptoms = symptomsCheckBox.Checked;
                 string notes = notesRichTextBox.Text;
 
-                BindingList<Employee> employeeList = this.employeeBindingSource.DataSource as BindingList<Employee>;
-                Employee newEmployee = new Employee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
-                employeeList.Add(newEmployee);
-                employeeDatabase.EmployeeData.Add(ginNumber, newEmployee);
-                //employeeDatabase.AddEmployee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
+                employeeDatabase.AddEmployee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
+                employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
 
                 suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
 
@@ -219,6 +208,10 @@ namespace EmployeeHealthRecord.WFApp
         private void employeeToRemoveTextBox_TextChanged(object sender, EventArgs e)
         {
             ValidInputWithTipInfo(employeeToRemoveTextBox, removeGinNumberTipLabel, EMPLOYEE_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
+
+            AutoCompleteStringCollection existedGinNumber = new AutoCompleteStringCollection();
+            existedGinNumber.AddRange(employeeDatabase.EmployeeData.Keys.ToArray());
+            employeeToRemoveTextBox.AutoCompleteCustomSource = existedGinNumber;
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -227,10 +220,18 @@ namespace EmployeeHealthRecord.WFApp
             {
                 if (MessageBox.Show("Confirm removing all these employees?", "Remove Employee", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
+                    if (employeeToRemoveList.Contains(employeeDatabase.GetEmployee(employeeToEditTextBox.Text)))
+                    {
+                        employeeToEditTextBox.Text = "";
+                        itemToEditComboBox.SelectedIndex = -1;
+                        valueToEditTextBox.Text = "";
+                    }
+
                     foreach (var employee in employeeToRemoveList)
                     {
                         employeeDatabase.RemoveEmployee(employee.GinNumber);
                     }
+
                     employeeToRemoveList.Clear();
                     employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
 
@@ -244,7 +245,12 @@ namespace EmployeeHealthRecord.WFApp
         {
             ValidInputWithTipInfo(employeeToEditTextBox, editGinNumberTipLabel, EMPLOYEE_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
 
-            if(WFAPPInputValidator.IsValidExistedGinNumber(employeeToEditTextBox.Text, ref employeeDatabase))
+            AutoCompleteStringCollection existedGinNumber = new AutoCompleteStringCollection();
+            existedGinNumber.AddRange(employeeDatabase.EmployeeData.Keys.ToArray());
+            employeeToEditTextBox.AutoCompleteCustomSource = existedGinNumber;
+
+            employeeToEditInfoListView.Items.Clear();
+            if (WFAPPInputValidator.IsValidExistedGinNumber(employeeToEditTextBox.Text, ref employeeDatabase))
             {
                 Employee employeeToEdit = employeeDatabase.GetEmployee(employeeToEditTextBox.Text);
                 employeeToEditInfoListView.Items.Add(GenerateListViewItem("GinNumber", employeeToEdit.GinNumber));
@@ -252,10 +258,6 @@ namespace EmployeeHealthRecord.WFApp
                 employeeToEditInfoListView.Items.Add(GenerateListViewItem("BodyTemperature", employeeToEdit.BodyTemperature.ToString()));
                 employeeToEditInfoListView.Items.Add(GenerateListViewItem("HasHubeiTravelHistory", employeeToEdit.HasHubeiTravelHistory.ToString()));
                 employeeToEditInfoListView.Items.Add(GenerateListViewItem("HasSymptoms", employeeToEdit.HasSymptoms.ToString()));
-            }
-            else
-            {
-                employeeToEditInfoListView.Items.Clear();
             }
         }
 

@@ -69,6 +69,7 @@
             this.listAllSuspectsLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.employeeToEditInfoListView = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.itemToEditLabel = new System.Windows.Forms.Label();
@@ -100,7 +101,6 @@
             this.employeeToRemoveBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.loadDatabaseOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveDatabaseSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -566,6 +566,8 @@
             // employeeToRemoveTextBox
             // 
             this.employeeToRemoveTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.employeeToRemoveTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.employeeToRemoveTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.employeeToRemoveTextBox.Location = new System.Drawing.Point(302, 31);
             this.employeeToRemoveTextBox.Name = "employeeToRemoveTextBox";
             this.employeeToRemoveTextBox.Size = new System.Drawing.Size(167, 21);
@@ -630,6 +632,11 @@
             this.employeeToEditInfoListView.TabIndex = 18;
             this.employeeToEditInfoListView.UseCompatibleStateImageBehavior = false;
             this.employeeToEditInfoListView.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "";
+            this.columnHeader1.Width = 0;
             // 
             // columnHeader12
             // 
@@ -732,6 +739,8 @@
             // employeeToEditTextBox
             // 
             this.employeeToEditTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.employeeToEditTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.employeeToEditTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.employeeToEditTextBox.Location = new System.Drawing.Point(599, 31);
             this.employeeToEditTextBox.Name = "employeeToEditTextBox";
             this.employeeToEditTextBox.Size = new System.Drawing.Size(158, 21);
@@ -921,11 +930,6 @@
             this.saveDatabaseSaveFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
             this.saveDatabaseSaveFileDialog.RestoreDirectory = true;
             this.saveDatabaseSaveFileDialog.Title = "Save database to csv file";
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "";
-            this.columnHeader1.Width = 0;
             // 
             // MainForm
             // 
