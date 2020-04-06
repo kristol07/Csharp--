@@ -206,6 +206,11 @@ namespace EmployeeHealthRecord
 
     public static class WFAPPInputValidator
     {
+        public static bool IsValidGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
+        {
+            return !employeeDatabase.HasEmployee(ginNumber) && IsValidIntegerGinNumber(ginNumber);
+        }
+
         public static bool IsValidNewGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
         {
             return !employeeDatabase.HasEmployee(ginNumber);
@@ -214,6 +219,11 @@ namespace EmployeeHealthRecord
         public static bool IsValidExistedGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
         {
             return employeeDatabase.HasEmployee(ginNumber);
+        }
+
+        public static bool IsValidIntegerGinNumber(string ginNumber)
+        {
+            return Int32.TryParse(ginNumber, out _);
         }
 
         public static bool IsValidNewName(string name, ref EmployeeDatabase employeeDatabase)
