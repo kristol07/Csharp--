@@ -206,12 +206,12 @@ namespace EmployeeHealthRecord
 
     public static class WFAPPInputValidator
     {
-        public static bool IsValidGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
+        public static bool IsValidNewGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
         {
-            return !employeeDatabase.HasEmployee(ginNumber) && IsValidIntegerGinNumber(ginNumber);
+            return IsValidNotExistedGinNumber(ginNumber, ref employeeDatabase) && IsValidGinNumberType(ginNumber);
         }
 
-        public static bool IsValidNewGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
+        public static bool IsValidNotExistedGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
         {
             return !employeeDatabase.HasEmployee(ginNumber);
         }
@@ -221,7 +221,7 @@ namespace EmployeeHealthRecord
             return employeeDatabase.HasEmployee(ginNumber);
         }
 
-        public static bool IsValidIntegerGinNumber(string ginNumber)
+        public static bool IsValidGinNumberType(string ginNumber)
         {
             return Int32.TryParse(ginNumber, out _);
         }
@@ -236,24 +236,36 @@ namespace EmployeeHealthRecord
             return true;
         }
 
-        public static bool IsValidBodyTemperature(string bodyTemperature)
+        public static bool IsValidBodyTemperatureType(string bodyTemperature)
         {
             double result;
-            if(double.TryParse(bodyTemperature, out result))
+            if (double.TryParse(bodyTemperature, out result))
             {
-                if(result < 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
+                return true;
             }
             else
             {
                 return false;
             }
+        }
+
+        public static bool IsValidBodyTemperatureValue(string bodyTemperature)
+        {
+            double result;
+            double.TryParse(bodyTemperature, out result);
+            if (result >= 35 && result <= 43)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static bool IsValidBodyTemperature(string bodyTemperature)
+        {
+            return IsValidBodyTemperatureType(bodyTemperature) && IsValidBodyTemperatureValue(bodyTemperature);
         }
 
         public static bool IsValidCheckDate(DateTime checkDate)

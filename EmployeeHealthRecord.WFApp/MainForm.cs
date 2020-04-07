@@ -23,7 +23,8 @@ namespace EmployeeHealthRecord.WFApp
         const string GIN_NUMBER_VALUE_TIP = "Only integer is allowed for ginNumber.";
         const string GIN_NUMBER_NOT_FOUND_TIP = "Not found.";
         const string NAME_EXISTED_TIP = "Existed!"; //"Employee with same Name existed, try new one!";
-        const string BODY_TEMPERATURE_VALUE_TIP = "Only positive numerical value is allowed for Temperature.";
+        const string BODY_TEMPERATURE_VALUE_TIP = "Human Body Temperature should be 35 - 43.";
+        const string BODY_TEMPERATURE_TYPE_TIP = "Only numerical value is allowed for Temperature.";
         const string HAS_HUBEI_TRAVEL_HISTORY_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
         const string HAS_SYMPTOMS_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
         const string CHECK_DATE_VALUE_TIP = "Check date can not be future date.";
@@ -85,13 +86,19 @@ namespace EmployeeHealthRecord.WFApp
             }
         }
 
+        private void RefreshEmployeeAndSuspectEmployeeDatabaseGridView()
+        {
+            employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
+            suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
+        }
+
         private void submitButton_Click(object sender, EventArgs e)
         {
 
             if ((GetEmptyInputItems().Count == 0) && IsAllItemsValid())
             {
-                string ginNumber = ginNumberTextBox.Text;
-                string name = nameTextBox.Text;
+                string ginNumber = ginNumberTextBox.Text.TrimStart(' ').TrimEnd(' ');
+                string name = nameTextBox.Text.TrimStart(' ').TrimEnd(' ');
                 double bodyTemperature = double.Parse(bodyTemperatureTextBox.Text);
                 DateTime checkDate = checkDateTimePicker.Value.Date;
                 bool hasHubeiTravelHistory = hubeiTravelHistoryCheckBox.Checked;
@@ -99,9 +106,8 @@ namespace EmployeeHealthRecord.WFApp
                 string notes = notesRichTextBox.Text;
 
                 employeeDatabase.AddEmployee(ginNumber, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms);
-                employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
 
-                suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
+                RefreshEmployeeAndSuspectEmployeeDatabaseGridView();
 
                 MessageBox.Show($"Record of Employee \"{name}\" with GinNumber \"{ginNumber}\" added to database.", "Add Employee", MessageBoxButtons.OK);
 
@@ -128,9 +134,7 @@ namespace EmployeeHealthRecord.WFApp
                 switch (loadResult)
                 {
                     case "success":
-                        // TODO: Source update function => auto update property?
-                        employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
-                        suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
+                        RefreshEmployeeAndSuspectEmployeeDatabaseGridView();
                         MessageBox.Show($"Database loading from {filePath} succeed.", "Loading Database", MessageBoxButtons.OK);
                         break;
                     case "formatError":
@@ -175,7 +179,8 @@ namespace EmployeeHealthRecord.WFApp
 
         private void ValidBodyTemperatureInputWithTipInfo(TextBox textbox, Label tipLabel)
         {
-            AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_VALUE_TIP, WFAPPInputValidator.IsValidBodyTemperature);
+            AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_VALUE_TIP, WFAPPInputValidator.IsValidBodyTemperatureValue);
+            AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_TYPE_TIP, WFAPPInputValidator.IsValidBodyTemperatureType);
             ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidBodyTemperature);
         }
 
@@ -186,9 +191,9 @@ namespace EmployeeHealthRecord.WFApp
 
         private void ValidNewGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
         {
-            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_EXISTED_TIP, WFAPPInputValidator.IsValidNewGinNumber);
-            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_VALUE_TIP, WFAPPInputValidator.IsValidIntegerGinNumber);
-            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidGinNumber);
+            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_EXISTED_TIP, WFAPPInputValidator.IsValidNotExistedGinNumber);
+            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_VALUE_TIP, WFAPPInputValidator.IsValidGinNumberType);
+            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidNewGinNumber);
         }
 
         private void checkDateTimePicker_ValueChanged(object sender, EventArgs e)
@@ -270,8 +275,7 @@ namespace EmployeeHealthRecord.WFApp
                     employeeToRemoveList.Clear();
                     employeeToRemoveBindingSource.DataSource = employeeToRemoveList;
 
-                    employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
-                    suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
+                    RefreshEmployeeAndSuspectEmployeeDatabaseGridView();
                 }
             }
         }
@@ -284,7 +288,11 @@ namespace EmployeeHealthRecord.WFApp
             existedGinNumber.AddRange(employeeDatabase.EmployeeData.Keys.ToArray());
             employeeToEditTextBox.AutoCompleteCustomSource = existedGinNumber;
 
-            employeeToEditInfoListView.Items.Clear();
+            if(employeeToEditInfoListView.Items.Count != 0 )
+            {
+                employeeToEditInfoListView.Items.Clear();
+            }
+            
             if (WFAPPInputValidator.IsValidExistedGinNumber(employeeToEditTextBox.Text, ref employeeDatabase))
             {
                 Employee employeeToEdit = employeeDatabase.GetEmployee(employeeToEditTextBox.Text);
@@ -359,8 +367,7 @@ namespace EmployeeHealthRecord.WFApp
             {
                 employeeDatabase.EditEmployeeInfo(employeeToEditTextBox.Text, itemToEditComboBox.Text, valueToEditTextBox.Text);
 
-                employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
-                suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
+                RefreshEmployeeAndSuspectEmployeeDatabaseGridView();
 
                 string originalEmployeeToEdit = employeeToEditTextBox.Text;
                 employeeToEditTextBox.Text = "";
