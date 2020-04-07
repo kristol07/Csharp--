@@ -18,14 +18,15 @@ namespace EmployeeHealthRecord.WFApp
 
     public partial class MainForm : Form
     {
+        // HACK: one Tip class ?
         const string GIN_NUMBER_EXISTED_TIP = "Existed!"; //"Employee with same GinNumber existed, try new one!";
         const string GIN_NUMBER_VALUE_TIP = "Only integer is allowed for ginNumber.";
+        const string GIN_NUMBER_NOT_FOUND_TIP = "Not found.";
         const string NAME_EXISTED_TIP = "Existed!"; //"Employee with same Name existed, try new one!";
         const string BODY_TEMPERATURE_VALUE_TIP = "Only positive numerical value is allowed for Temperature.";
         const string HAS_HUBEI_TRAVEL_HISTORY_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
         const string HAS_SYMPTOMS_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
-        const string EMPLOYEE_NOT_FOUND_TIP = "Not found.";
-        const string CHECK_DATE_WARNING_TIP = "Check date can not be future date.";
+        const string CHECK_DATE_VALUE_TIP = "Check date can not be future date.";
 
         EmployeeDatabase employeeDatabase;
         BindingList<Employee> employeeToRemoveList;
@@ -48,7 +49,7 @@ namespace EmployeeHealthRecord.WFApp
 
         }
 
-        private void ValidInputWithTipInfo(TextBox textbox, Label tipLabel, string tipInfo, DataValidator dataValidator)
+        private void AddTipInfoForInvalidInput(TextBox textbox, Label tipLabel, string tipInfo, DataValidator dataValidator)
         {
             if (!dataValidator(textbox.Text))
             {
@@ -57,7 +58,7 @@ namespace EmployeeHealthRecord.WFApp
             }
         }
 
-        private void ValidInputWithTipInfo(TextBox textbox, Label tipLabel, string tipInfo, DataValidatorWithDatabase dataValidator)
+        private void AddTipInfoForInvalidInput(TextBox textbox, Label tipLabel, string tipInfo, DataValidatorWithDatabase dataValidator)
         {
             if (!dataValidator(textbox.Text, ref employeeDatabase))
             {
@@ -127,6 +128,7 @@ namespace EmployeeHealthRecord.WFApp
                 switch (loadResult)
                 {
                     case "success":
+                        // TODO: Source update function => auto update property?
                         employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
                         suspectEmployeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
                         MessageBox.Show($"Database loading from {filePath} succeed.", "Loading Database", MessageBoxButtons.OK);
@@ -149,10 +151,6 @@ namespace EmployeeHealthRecord.WFApp
             if (saveDatabaseSaveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 string filePath = saveDatabaseSaveFileDialog.FileName;
-
-                //BindingList<Employee> employeeList = this.employeeBindingSource.DataSource as BindingList<Employee>;
-                //employeeDatabase.EmployeeList = employeeList;
-
                 string saveResult = EmployeeDataFileOperation.SaveDatabaseToCSVFile(filePath, employeeDatabase);
 
                 switch (saveResult)
@@ -172,22 +170,32 @@ namespace EmployeeHealthRecord.WFApp
 
         private void bodyTemperatureTextBox_TextChanged(object sender, EventArgs e)
         {
-            ValidInputWithTipInfo(bodyTemperatureTextBox, bodyTemperatureTipLabel, BODY_TEMPERATURE_VALUE_TIP, WFAPPInputValidator.IsValidBodyTemperature);
-            ClearTipInfoWhenInputIsEmptyOrValid(bodyTemperatureTextBox, bodyTemperatureTipLabel, WFAPPInputValidator.IsValidBodyTemperature);
+            ValidBodyTemperatureInputWithTipInfo(bodyTemperatureTextBox, bodyTemperatureTipLabel);
+        }
+
+        private void ValidBodyTemperatureInputWithTipInfo(TextBox textbox, Label tipLabel)
+        {
+            AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_VALUE_TIP, WFAPPInputValidator.IsValidBodyTemperature);
+            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidBodyTemperature);
         }
 
         private void ginNumberTextBox_TextChanged(object sender, EventArgs e)
         {
-            ValidInputWithTipInfo(ginNumberTextBox, ginNumberTipLabel, GIN_NUMBER_EXISTED_TIP, WFAPPInputValidator.IsValidNewGinNumber);
-            ValidInputWithTipInfo(ginNumberTextBox, ginNumberTipLabel, GIN_NUMBER_VALUE_TIP, WFAPPInputValidator.IsValidIntegerGinNumber);
-            ClearTipInfoWhenInputIsEmptyOrValid(ginNumberTextBox, ginNumberTipLabel, WFAPPInputValidator.IsValidGinNumber);
+            ValidNewGinNumberInputWithTipInfo(ginNumberTextBox, ginNumberTipLabel);
+        }
+
+        private void ValidNewGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
+        {
+            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_EXISTED_TIP, WFAPPInputValidator.IsValidNewGinNumber);
+            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_VALUE_TIP, WFAPPInputValidator.IsValidIntegerGinNumber);
+            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidGinNumber);
         }
 
         private void checkDateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             if (!WFAPPInputValidator.IsValidCheckDate(checkDateTimePicker.Value))
             {
-                checkDateTipLabel.Text = CHECK_DATE_WARNING_TIP;
+                checkDateTipLabel.Text = CHECK_DATE_VALUE_TIP;
             }
             else
             {
@@ -197,8 +205,13 @@ namespace EmployeeHealthRecord.WFApp
 
         private void nameTextBox_TextChanged(object sender, EventArgs e)
         {
-            ValidInputWithTipInfo(nameTextBox, nameTipLabel, NAME_EXISTED_TIP, WFAPPInputValidator.IsValidNewName);
-            ClearTipInfoWhenInputIsEmptyOrValid(nameTextBox, nameTipLabel, WFAPPInputValidator.IsValidNewName);
+            ValidNewNameInputWithTipInfo(nameTextBox, nameTipLabel);
+        }
+
+        private void ValidNewNameInputWithTipInfo(TextBox textbox, Label tipLabel)
+        {
+            AddTipInfoForInvalidInput(textbox, tipLabel, NAME_EXISTED_TIP, WFAPPInputValidator.IsValidNewName);
+            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidNewName);
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -221,12 +234,17 @@ namespace EmployeeHealthRecord.WFApp
 
         private void employeeToRemoveTextBox_TextChanged(object sender, EventArgs e)
         {
-            ValidInputWithTipInfo(employeeToRemoveTextBox, removeGinNumberTipLabel, EMPLOYEE_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
-            ClearTipInfoWhenInputIsEmptyOrValid(employeeToRemoveTextBox, removeGinNumberTipLabel, WFAPPInputValidator.IsValidExistedGinNumber);
+            ValidExistedGinNumberInputWithTipInfo(employeeToRemoveTextBox, removeGinNumberTipLabel);
 
             AutoCompleteStringCollection existedGinNumber = new AutoCompleteStringCollection();
             existedGinNumber.AddRange(employeeDatabase.EmployeeData.Keys.ToArray());
             employeeToRemoveTextBox.AutoCompleteCustomSource = existedGinNumber;
+        }
+
+        private void ValidExistedGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
+        {
+            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
+            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidExistedGinNumber);
         }
 
         private void removeButton_Click(object sender, EventArgs e)
@@ -260,8 +278,7 @@ namespace EmployeeHealthRecord.WFApp
 
         private void employeeToEditTextBox_TextChanged(object sender, EventArgs e)
         {
-            ValidInputWithTipInfo(employeeToEditTextBox, editGinNumberTipLabel, EMPLOYEE_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
-            ClearTipInfoWhenInputIsEmptyOrValid(employeeToEditTextBox, editGinNumberTipLabel, WFAPPInputValidator.IsValidExistedGinNumber);
+            ValidExistedGinNumberInputWithTipInfo(employeeToEditTextBox, editGinNumberTipLabel);
 
             AutoCompleteStringCollection existedGinNumber = new AutoCompleteStringCollection();
             existedGinNumber.AddRange(employeeDatabase.EmployeeData.Keys.ToArray());
@@ -271,12 +288,17 @@ namespace EmployeeHealthRecord.WFApp
             if (WFAPPInputValidator.IsValidExistedGinNumber(employeeToEditTextBox.Text, ref employeeDatabase))
             {
                 Employee employeeToEdit = employeeDatabase.GetEmployee(employeeToEditTextBox.Text);
-                employeeToEditInfoListView.Items.Add(GenerateListViewItem("GinNumber", employeeToEdit.GinNumber));
-                employeeToEditInfoListView.Items.Add(GenerateListViewItem("Name", employeeToEdit.Name));
-                employeeToEditInfoListView.Items.Add(GenerateListViewItem("BodyTemperature", employeeToEdit.BodyTemperature.ToString()));
-                employeeToEditInfoListView.Items.Add(GenerateListViewItem("HasHubeiTravelHistory", employeeToEdit.HasHubeiTravelHistory.ToString()));
-                employeeToEditInfoListView.Items.Add(GenerateListViewItem("HasSymptoms", employeeToEdit.HasSymptoms.ToString()));
+                GenerateEmployeeListView(employeeToEdit, employeeToEditInfoListView);
             }
+        }
+
+        private void GenerateEmployeeListView(Employee employee, ListView listView)
+        {
+            listView.Items.Add(GenerateListViewItem("GinNumber", employee.GinNumber));
+            listView.Items.Add(GenerateListViewItem("Name", employee.Name));
+            listView.Items.Add(GenerateListViewItem("BodyTemperature", employee.BodyTemperature.ToString()));
+            listView.Items.Add(GenerateListViewItem("HasHubeiTravelHistory", employee.HasHubeiTravelHistory.ToString()));
+            listView.Items.Add(GenerateListViewItem("HasSymptoms", employee.HasSymptoms.ToString()));
         }
 
         private ListViewItem GenerateListViewItem(string item, string value)
@@ -297,31 +319,38 @@ namespace EmployeeHealthRecord.WFApp
             switch (itemToEditComboBox.Text)
             {
                 case "GinNumber":
-                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, GIN_NUMBER_EXISTED_TIP, WFAPPInputValidator.IsValidNewGinNumber);
-                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, GIN_NUMBER_VALUE_TIP, WFAPPInputValidator.IsValidIntegerGinNumber);
-                    ClearTipInfoWhenInputIsEmptyOrValid(valueToEditTextBox, valueToEditTipLabel, WFAPPInputValidator.IsValidGinNumber);
+                    ValidNewGinNumberInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel);
                     break;
                 case "Name":
-                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, NAME_EXISTED_TIP, WFAPPInputValidator.IsValidNewName);
-                    ClearTipInfoWhenInputIsEmptyOrValid(valueToEditTextBox, valueToEditTipLabel, WFAPPInputValidator.IsValidNewName);
+                    ValidNewNameInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel);
                     break;
                 case "Body Temperature":
-                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, BODY_TEMPERATURE_VALUE_TIP, WFAPPInputValidator.IsValidBodyTemperature);
-                    ClearTipInfoWhenInputIsEmptyOrValid(valueToEditTextBox, valueToEditTipLabel, WFAPPInputValidator.IsValidBodyTemperature);
+                    ValidBodyTemperatureInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel);
                     break;
                 case "Has Hubei Travel History":
-                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, HAS_HUBEI_TRAVEL_HISTORY_VALUE_TIP, WFAPPInputValidator.IsValidHasHubeiTravelHistoryChoice);
-                    ClearTipInfoWhenInputIsEmptyOrValid(valueToEditTextBox, valueToEditTipLabel, WFAPPInputValidator.IsValidHasHubeiTravelHistoryChoice);
+                    ValidHasHubeiTravelHistoryInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel);
                     break;
                 case "Has Symptoms":
-                    ValidInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel, HAS_SYMPTOMS_VALUE_TIP, WFAPPInputValidator.IsValidHasSymptomsChoice);
-                    ClearTipInfoWhenInputIsEmptyOrValid(valueToEditTextBox, valueToEditTipLabel, WFAPPInputValidator.IsValidHasSymptomsChoice);
+                    ValidHasSymptomsInputWithTipInfo(valueToEditTextBox, valueToEditTipLabel);
                     break;
             }
         }
 
+        private void ValidHasHubeiTravelHistoryInputWithTipInfo(TextBox textbox, Label tipLabel)
+        {
+            AddTipInfoForInvalidInput(textbox, tipLabel, HAS_HUBEI_TRAVEL_HISTORY_VALUE_TIP, WFAPPInputValidator.IsValidHasHubeiTravelHistoryChoice);
+            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidHasHubeiTravelHistoryChoice);
+        }
+
+        private void ValidHasSymptomsInputWithTipInfo(TextBox textbox, Label tipLabel)
+        {
+            AddTipInfoForInvalidInput(textbox, tipLabel, HAS_SYMPTOMS_VALUE_TIP, WFAPPInputValidator.IsValidHasSymptomsChoice);
+            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidHasSymptomsChoice);
+        }
+
         private void confirmEditButton_Click(object sender, EventArgs e)
         {
+            // TODO: More clear and simple way ?
             if (!string.IsNullOrWhiteSpace(employeeToEditTextBox.Text)
                 && string.IsNullOrWhiteSpace(editGinNumberTipLabel.Text)
                 && itemToEditComboBox.SelectedItem != null
@@ -399,7 +428,7 @@ namespace EmployeeHealthRecord.WFApp
             notesRichTextBox.Clear();
         }
 
-        // to do
+        // UNDONE: clear all the input on the form
         private void ClearAllInput()
         {
 
