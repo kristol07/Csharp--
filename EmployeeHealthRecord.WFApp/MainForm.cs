@@ -14,7 +14,7 @@ namespace EmployeeHealthRecord.WFApp
 {
 
     public delegate bool DataValidator(string input);
-    public delegate bool DataValidatorWithDatabase(string input, ref EmployeeDatabase employeeDatabase);
+    public delegate bool DataValidatorWithDatabase(string input, EmployeeDatabase employeeDatabase);
 
     public partial class MainForm : Form
     {
@@ -61,7 +61,7 @@ namespace EmployeeHealthRecord.WFApp
 
         private void AddTipInfoForInvalidInput(TextBox textbox, Label tipLabel, string tipInfo, DataValidatorWithDatabase dataValidator)
         {
-            if (!dataValidator(textbox.Text, ref employeeDatabase))
+            if (!dataValidator(textbox.Text, employeeDatabase))
             {
                 textbox.BackColor = Color.Red;
                 tipLabel.Text = tipInfo;
@@ -79,7 +79,7 @@ namespace EmployeeHealthRecord.WFApp
 
         private void ClearTipInfoWhenInputIsEmptyOrValid(TextBox textbox, Label tipLabel, DataValidatorWithDatabase dataValidator)
         {
-            if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text, ref employeeDatabase))
+            if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text, employeeDatabase))
             {
                 textbox.BackColor = Color.White;
                 tipLabel.Text = "";
@@ -97,8 +97,8 @@ namespace EmployeeHealthRecord.WFApp
 
             if ((GetEmptyInputItems().Count == 0) && IsAllItemsValid())
             {
-                string ginNumber = ginNumberTextBox.Text.TrimStart(' ').TrimEnd(' ');
-                string name = nameTextBox.Text.TrimStart(' ').TrimEnd(' ');
+                string ginNumber = ginNumberTextBox.Text.Trim(' ');
+                string name = nameTextBox.Text.Trim(' ');
                 double bodyTemperature = double.Parse(bodyTemperatureTextBox.Text);
                 DateTime checkDate = checkDateTimePicker.Value.Date;
                 bool hasHubeiTravelHistory = hubeiTravelHistoryCheckBox.Checked;
@@ -293,7 +293,7 @@ namespace EmployeeHealthRecord.WFApp
                 employeeToEditInfoListView.Items.Clear();
             }
             
-            if (WFAPPInputValidator.IsValidExistedGinNumber(employeeToEditTextBox.Text, ref employeeDatabase))
+            if (WFAPPInputValidator.IsValidExistedGinNumber(employeeToEditTextBox.Text, employeeDatabase))
             {
                 Employee employeeToEdit = employeeDatabase.GetEmployee(employeeToEditTextBox.Text);
                 GenerateEmployeeListView(employeeToEdit, employeeToEditInfoListView);

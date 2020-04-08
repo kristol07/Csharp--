@@ -206,17 +206,17 @@ namespace EmployeeHealthRecord
 
     public static class WFAPPInputValidator
     {
-        public static bool IsValidNewGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
+        public static bool IsValidNewGinNumber(string ginNumber, EmployeeDatabase employeeDatabase)
         {
-            return IsValidNotExistedGinNumber(ginNumber, ref employeeDatabase) && IsValidGinNumberType(ginNumber);
+            return IsValidNotExistedGinNumber(ginNumber, employeeDatabase) && IsValidGinNumberType(ginNumber);
         }
 
-        public static bool IsValidNotExistedGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
+        public static bool IsValidNotExistedGinNumber(string ginNumber, EmployeeDatabase employeeDatabase)
         {
             return !employeeDatabase.HasEmployee(ginNumber);
         }
 
-        public static bool IsValidExistedGinNumber(string ginNumber, ref EmployeeDatabase employeeDatabase)
+        public static bool IsValidExistedGinNumber(string ginNumber, EmployeeDatabase employeeDatabase)
         {
             return employeeDatabase.HasEmployee(ginNumber);
         }
@@ -226,12 +226,12 @@ namespace EmployeeHealthRecord
             return Int32.TryParse(ginNumber, out _);
         }
 
-        public static bool IsValidNewName(string name, ref EmployeeDatabase employeeDatabase)
+        public static bool IsValidNewName(string name, EmployeeDatabase employeeDatabase)
         {
             return true;
         }
 
-        public static bool IsValidExistedName(string name, ref EmployeeDatabase employeeDatabase)
+        public static bool IsValidExistedName(string name, EmployeeDatabase employeeDatabase)
         {
             return true;
         }
