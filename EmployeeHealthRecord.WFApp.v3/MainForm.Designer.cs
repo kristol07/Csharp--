@@ -88,6 +88,7 @@
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.saveButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -113,6 +114,7 @@
             // 
             this.menuStrip.BackColor = System.Drawing.SystemColors.Menu;
             this.tableLayoutPanel2.SetColumnSpan(this.menuStrip, 2);
+            this.menuStrip.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.databaseToolStripMenuItem,
@@ -135,21 +137,21 @@
             // openFileToolStripMenuItem
             // 
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openFileToolStripMenuItem.Text = "Open File...";
             this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -180,15 +182,15 @@
             // viewCodeToolStripMenuItem
             // 
             this.viewCodeToolStripMenuItem.Name = "viewCodeToolStripMenuItem";
-            this.viewCodeToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.viewCodeToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.viewCodeToolStripMenuItem.Text = "View Code";
             this.viewCodeToolStripMenuItem.Click += new System.EventHandler(this.viewCodeToolStripMenuItem_Click);
             // 
             // aboutHealthRecorderToolStripMenuItem
             // 
             this.aboutHealthRecorderToolStripMenuItem.Name = "aboutHealthRecorderToolStripMenuItem";
-            this.aboutHealthRecorderToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
-            this.aboutHealthRecorderToolStripMenuItem.Text = "About Health Recorder";
+            this.aboutHealthRecorderToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
+            this.aboutHealthRecorderToolStripMenuItem.Text = "About Employee Health Recorder";
             this.aboutHealthRecorderToolStripMenuItem.Click += new System.EventHandler(this.aboutHealthRecorderToolStripMenuItem_Click);
             // 
             // panel1
@@ -198,7 +200,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 42);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(907, 558);
+            this.panel1.Size = new System.Drawing.Size(907, 556);
             this.panel1.TabIndex = 2;
             // 
             // splitContainer1
@@ -214,7 +216,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(907, 558);
+            this.splitContainer1.Size = new System.Drawing.Size(907, 556);
             this.splitContainer1.SplitterDistance = 670;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -222,9 +224,10 @@
             // 
             this.groupBox1.Controls.Add(this.tableLayoutPanel1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(670, 558);
+            this.groupBox1.Size = new System.Drawing.Size(670, 556);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "View Records";
@@ -242,12 +245,12 @@
             this.tableLayoutPanel1.Controls.Add(this.searchTipLabel, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.viewOnlySuspectCheckBox, 3, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 19);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.505747F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 91.49426F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(664, 538);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(664, 534);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // employeeDatabaseDataGridView
@@ -274,7 +277,7 @@
             this.employeeDatabaseDataGridView.Name = "employeeDatabaseDataGridView";
             this.employeeDatabaseDataGridView.ReadOnly = true;
             this.employeeDatabaseDataGridView.RowTemplate.Height = 23;
-            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(658, 487);
+            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(658, 483);
             this.employeeDatabaseDataGridView.TabIndex = 0;
             // 
             // ginNumberDataGridViewTextBoxColumn
@@ -284,7 +287,6 @@
             this.ginNumberDataGridViewTextBoxColumn.HeaderText = "GinNumber";
             this.ginNumberDataGridViewTextBoxColumn.Name = "ginNumberDataGridViewTextBoxColumn";
             this.ginNumberDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ginNumberDataGridViewTextBoxColumn.Width = 84;
             // 
             // nameDataGridViewTextBoxColumn
             // 
@@ -293,7 +295,7 @@
             this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
             this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
             this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 54;
+            this.nameDataGridViewTextBoxColumn.Width = 68;
             // 
             // bodyTemperatureDataGridViewTextBoxColumn
             // 
@@ -302,7 +304,7 @@
             this.bodyTemperatureDataGridViewTextBoxColumn.HeaderText = "BodyTemperature";
             this.bodyTemperatureDataGridViewTextBoxColumn.Name = "bodyTemperatureDataGridViewTextBoxColumn";
             this.bodyTemperatureDataGridViewTextBoxColumn.ReadOnly = true;
-            this.bodyTemperatureDataGridViewTextBoxColumn.Width = 120;
+            this.bodyTemperatureDataGridViewTextBoxColumn.Width = 138;
             // 
             // hasHubeiTravelHistoryDataGridViewCheckBoxColumn
             // 
@@ -311,7 +313,7 @@
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.HeaderText = "HasHubeiTravelHistory";
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.Name = "hasHubeiTravelHistoryDataGridViewCheckBoxColumn";
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.Width = 137;
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.Width = 146;
             // 
             // hasSymptomsDataGridViewCheckBoxColumn
             // 
@@ -320,7 +322,7 @@
             this.hasSymptomsDataGridViewCheckBoxColumn.HeaderText = "HasSymptoms";
             this.hasSymptomsDataGridViewCheckBoxColumn.Name = "hasSymptomsDataGridViewCheckBoxColumn";
             this.hasSymptomsDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.hasSymptomsDataGridViewCheckBoxColumn.Width = 77;
+            this.hasSymptomsDataGridViewCheckBoxColumn.Width = 97;
             // 
             // Notes
             // 
@@ -405,10 +407,10 @@
             // 
             this.searchLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.searchLabel.AutoSize = true;
-            this.searchLabel.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.searchLabel.Location = new System.Drawing.Point(6, 16);
+            this.searchLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.searchLabel.Location = new System.Drawing.Point(7, 14);
             this.searchLabel.Name = "searchLabel";
-            this.searchLabel.Size = new System.Drawing.Size(138, 12);
+            this.searchLabel.Size = new System.Drawing.Size(136, 17);
             this.searchLabel.TabIndex = 2;
             this.searchLabel.Text = "Search by GinNumber";
             // 
@@ -417,9 +419,9 @@
             this.searchTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.searchTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.searchTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.searchTextBox.Location = new System.Drawing.Point(154, 12);
+            this.searchTextBox.Location = new System.Drawing.Point(154, 11);
             this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(167, 21);
+            this.searchTextBox.Size = new System.Drawing.Size(167, 23);
             this.searchTextBox.TabIndex = 1;
             this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
             // 
@@ -427,18 +429,18 @@
             // 
             this.searchTipLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.searchTipLabel.AutoSize = true;
-            this.searchTipLabel.Location = new System.Drawing.Point(327, 16);
+            this.searchTipLabel.Location = new System.Drawing.Point(327, 14);
             this.searchTipLabel.Name = "searchTipLabel";
-            this.searchTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.searchTipLabel.Size = new System.Drawing.Size(0, 17);
             this.searchTipLabel.TabIndex = 3;
             // 
             // viewOnlySuspectCheckBox
             // 
             this.viewOnlySuspectCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.viewOnlySuspectCheckBox.AutoSize = true;
-            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(475, 14);
+            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(465, 12);
             this.viewOnlySuspectCheckBox.Name = "viewOnlySuspectCheckBox";
-            this.viewOnlySuspectCheckBox.Size = new System.Drawing.Size(186, 16);
+            this.viewOnlySuspectCheckBox.Size = new System.Drawing.Size(196, 21);
             this.viewOnlySuspectCheckBox.TabIndex = 4;
             this.viewOnlySuspectCheckBox.Text = "View Only Suspect Employees";
             this.viewOnlySuspectCheckBox.UseVisualStyleBackColor = true;
@@ -448,9 +450,10 @@
             // 
             this.groupBox2.Controls.Add(this.tableLayoutPanel3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(233, 558);
+            this.groupBox2.Size = new System.Drawing.Size(233, 556);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Update Record";
@@ -472,7 +475,7 @@
             this.tableLayoutPanel3.Controls.Add(this.deleteButton, 1, 7);
             this.tableLayoutPanel3.Controls.Add(this.clearButton, 2, 7);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 17);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 19);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 8;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.27212F));
@@ -483,7 +486,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.233111F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.16556F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.279735F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(227, 538);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(227, 534);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // ginNumberGroupBox
@@ -504,7 +507,7 @@
             this.ginNumberTipLabel.AutoSize = true;
             this.ginNumberTipLabel.Location = new System.Drawing.Point(7, 45);
             this.ginNumberTipLabel.Name = "ginNumberTipLabel";
-            this.ginNumberTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.ginNumberTipLabel.Size = new System.Drawing.Size(0, 17);
             this.ginNumberTipLabel.TabIndex = 1;
             // 
             // ginNumberTextBox
@@ -513,7 +516,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ginNumberTextBox.Location = new System.Drawing.Point(7, 21);
             this.ginNumberTextBox.Name = "ginNumberTextBox";
-            this.ginNumberTextBox.Size = new System.Drawing.Size(208, 21);
+            this.ginNumberTextBox.Size = new System.Drawing.Size(208, 23);
             this.ginNumberTextBox.TabIndex = 0;
             this.ginNumberTextBox.TextChanged += new System.EventHandler(this.ginNumberTextBox_TextChanged);
             // 
@@ -535,7 +538,7 @@
             this.nameTipLabel.AutoSize = true;
             this.nameTipLabel.Location = new System.Drawing.Point(6, 45);
             this.nameTipLabel.Name = "nameTipLabel";
-            this.nameTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.nameTipLabel.Size = new System.Drawing.Size(0, 17);
             this.nameTipLabel.TabIndex = 1;
             // 
             // nameTextBox
@@ -544,7 +547,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.nameTextBox.Location = new System.Drawing.Point(7, 21);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(208, 21);
+            this.nameTextBox.Size = new System.Drawing.Size(208, 23);
             this.nameTextBox.TabIndex = 0;
             this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
             // 
@@ -566,7 +569,7 @@
             this.checkdateTipLabel.AutoSize = true;
             this.checkdateTipLabel.Location = new System.Drawing.Point(7, 45);
             this.checkdateTipLabel.Name = "checkdateTipLabel";
-            this.checkdateTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.checkdateTipLabel.Size = new System.Drawing.Size(0, 17);
             this.checkdateTipLabel.TabIndex = 1;
             // 
             // checkdateTimePicker
@@ -575,7 +578,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.checkdateTimePicker.Location = new System.Drawing.Point(9, 21);
             this.checkdateTimePicker.Name = "checkdateTimePicker";
-            this.checkdateTimePicker.Size = new System.Drawing.Size(206, 21);
+            this.checkdateTimePicker.Size = new System.Drawing.Size(206, 23);
             this.checkdateTimePicker.TabIndex = 0;
             this.checkdateTimePicker.ValueChanged += new System.EventHandler(this.checkdateTimePicker_ValueChanged);
             // 
@@ -597,7 +600,7 @@
             this.bodyTemperatureTipLabel.AutoSize = true;
             this.bodyTemperatureTipLabel.Location = new System.Drawing.Point(7, 45);
             this.bodyTemperatureTipLabel.Name = "bodyTemperatureTipLabel";
-            this.bodyTemperatureTipLabel.Size = new System.Drawing.Size(0, 12);
+            this.bodyTemperatureTipLabel.Size = new System.Drawing.Size(0, 17);
             this.bodyTemperatureTipLabel.TabIndex = 1;
             // 
             // bodyTemperatureTextBox
@@ -606,7 +609,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.bodyTemperatureTextBox.Location = new System.Drawing.Point(7, 21);
             this.bodyTemperatureTextBox.Name = "bodyTemperatureTextBox";
-            this.bodyTemperatureTextBox.Size = new System.Drawing.Size(208, 21);
+            this.bodyTemperatureTextBox.Size = new System.Drawing.Size(208, 23);
             this.bodyTemperatureTextBox.TabIndex = 0;
             this.bodyTemperatureTextBox.TextChanged += new System.EventHandler(this.bodyTemperatureTextBox_TextChanged);
             // 
@@ -615,9 +618,9 @@
             this.hasHubeiTravelHistoryCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.hasHubeiTravelHistoryCheckBox.AutoSize = true;
             this.tableLayoutPanel3.SetColumnSpan(this.hasHubeiTravelHistoryCheckBox, 3);
-            this.hasHubeiTravelHistoryCheckBox.Location = new System.Drawing.Point(3, 310);
+            this.hasHubeiTravelHistoryCheckBox.Location = new System.Drawing.Point(3, 307);
             this.hasHubeiTravelHistoryCheckBox.Name = "hasHubeiTravelHistoryCheckBox";
-            this.hasHubeiTravelHistoryCheckBox.Size = new System.Drawing.Size(168, 16);
+            this.hasHubeiTravelHistoryCheckBox.Size = new System.Drawing.Size(171, 21);
             this.hasHubeiTravelHistoryCheckBox.TabIndex = 4;
             this.hasHubeiTravelHistoryCheckBox.Text = "Has Hubei Travel History";
             this.hasHubeiTravelHistoryCheckBox.UseVisualStyleBackColor = true;
@@ -628,9 +631,9 @@
             this.hasSymptomsCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.hasSymptomsCheckBox.AutoSize = true;
             this.tableLayoutPanel3.SetColumnSpan(this.hasSymptomsCheckBox, 3);
-            this.hasSymptomsCheckBox.Location = new System.Drawing.Point(3, 338);
+            this.hasSymptomsCheckBox.Location = new System.Drawing.Point(3, 334);
             this.hasSymptomsCheckBox.Name = "hasSymptomsCheckBox";
-            this.hasSymptomsCheckBox.Size = new System.Drawing.Size(120, 16);
+            this.hasSymptomsCheckBox.Size = new System.Drawing.Size(139, 21);
             this.hasSymptomsCheckBox.TabIndex = 5;
             this.hasSymptomsCheckBox.Text = "Has Any Symptoms";
             this.hasSymptomsCheckBox.UseVisualStyleBackColor = true;
@@ -641,9 +644,9 @@
             this.tableLayoutPanel3.SetColumnSpan(this.notesGroupBox, 3);
             this.notesGroupBox.Controls.Add(this.notesRichTextBox);
             this.notesGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.notesGroupBox.Location = new System.Drawing.Point(3, 363);
+            this.notesGroupBox.Location = new System.Drawing.Point(3, 361);
             this.notesGroupBox.Name = "notesGroupBox";
-            this.notesGroupBox.Size = new System.Drawing.Size(221, 134);
+            this.notesGroupBox.Size = new System.Drawing.Size(221, 133);
             this.notesGroupBox.TabIndex = 6;
             this.notesGroupBox.TabStop = false;
             this.notesGroupBox.Text = "Notes";
@@ -651,9 +654,9 @@
             // notesRichTextBox
             // 
             this.notesRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.notesRichTextBox.Location = new System.Drawing.Point(3, 17);
+            this.notesRichTextBox.Location = new System.Drawing.Point(3, 19);
             this.notesRichTextBox.Name = "notesRichTextBox";
-            this.notesRichTextBox.Size = new System.Drawing.Size(215, 114);
+            this.notesRichTextBox.Size = new System.Drawing.Size(215, 111);
             this.notesRichTextBox.TabIndex = 0;
             this.notesRichTextBox.Text = "";
             this.notesRichTextBox.TextChanged += new System.EventHandler(this.notesRichTextBox_TextChanged);
@@ -661,18 +664,19 @@
             // saveButton
             // 
             this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.saveButton.Location = new System.Drawing.Point(3, 507);
+            this.saveButton.Location = new System.Drawing.Point(3, 504);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(69, 23);
             this.saveButton.TabIndex = 7;
             this.saveButton.Text = "Save";
+            this.saveButtonToolTip.SetToolTip(this.saveButton, "Save current changes. If GinNumber is new, Add new record to database.");
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // deleteButton
             // 
             this.deleteButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.deleteButton.Location = new System.Drawing.Point(78, 507);
+            this.deleteButton.Location = new System.Drawing.Point(78, 504);
             this.deleteButton.Name = "deleteButton";
             this.deleteButton.Size = new System.Drawing.Size(69, 23);
             this.deleteButton.TabIndex = 8;
@@ -683,7 +687,7 @@
             // clearButton
             // 
             this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.clearButton.Location = new System.Drawing.Point(153, 507);
+            this.clearButton.Location = new System.Drawing.Point(153, 504);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(71, 23);
             this.clearButton.TabIndex = 9;
@@ -712,14 +716,14 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.534654F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.46535F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(913, 603);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(913, 601);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(913, 603);
+            this.ClientSize = new System.Drawing.Size(913, 601);
             this.Controls.Add(this.tableLayoutPanel2);
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
@@ -815,6 +819,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem viewOnlySuspectEployeeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewAllEmployeesToolStripMenuItem;
+        private System.Windows.Forms.ToolTip saveButtonToolTip;
     }
 }
 

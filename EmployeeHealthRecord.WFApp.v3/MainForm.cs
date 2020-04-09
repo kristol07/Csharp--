@@ -16,7 +16,7 @@ namespace EmployeeHealthRecord.WFApp.v3
     public partial class MainForm : Form
     {
         const string GIN_NUMBER_EXISTED_TIP = "Existed!"; //"Employee with same GinNumber existed, try new one!";
-        const string GIN_NUMBER_VALUE_TIP = "Only integer is allowed for ginNumber.";
+        const string GIN_NUMBER_VALUE_TIP = "Not valid GinNumber type (Integer)."; //"Only integer is allowed for ginNumber.";
         const string GIN_NUMBER_NOT_FOUND_TIP = "Not found.";
         const string NAME_EXISTED_TIP = "Existed!"; //"Employee with same Name existed, try new one!";
         const string BODY_TEMPERATURE_VALUE_TIP = "Human Body Temperature should be 35 - 43.";
@@ -42,25 +42,25 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void AddTipInfoForInvalidInput(TextBox textbox, Label tipLabel, string tipInfo, DataValidator dataValidator)
         {
-            if (!dataValidator(textbox.Text))
+            if (!dataValidator(textbox.Text.Trim()))
             {
-                textbox.BackColor = Color.Red;
+                textbox.BackColor = Color.FromArgb(255, 186, 205);
                 tipLabel.Text = tipInfo;
             }
         }
 
         private void AddTipInfoForInvalidInput(TextBox textbox, Label tipLabel, string tipInfo, DataValidatorWithDatabase dataValidator)
         {
-            if (!dataValidator(textbox.Text, employeeDatabase))
+            if (!dataValidator(textbox.Text.Trim(), employeeDatabase))
             {
-                textbox.BackColor = Color.Red;
+                textbox.BackColor = Color.FromArgb(255, 186, 205);
                 tipLabel.Text = tipInfo;
             }
         }
 
         private void ClearTipInfoWhenInputIsEmptyOrValid(TextBox textbox, Label tipLabel, DataValidator dataValidator)
         {
-            if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text))
+            if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text.Trim()))
             {
                 textbox.BackColor = Color.White;
                 tipLabel.Text = "";
@@ -69,7 +69,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void ClearTipInfoWhenInputIsEmptyOrValid(TextBox textbox, Label tipLabel, DataValidatorWithDatabase dataValidator)
         {
-            if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text, employeeDatabase))
+            if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text.Trim(), employeeDatabase))
             {
                 textbox.BackColor = Color.White;
                 tipLabel.Text = "";
@@ -141,7 +141,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
             ClearHealthInfoInput();
 
-            if (WFAPPInputValidator.IsValidExistedGinNumber(searchTextBox.Text, employeeDatabase))
+            if (WFAPPInputValidator.IsValidExistedGinNumber(searchTextBox.Text.Trim(), employeeDatabase))
             {
                 ShowCurrentEmployeeHealthInfo();
                 recordUnchanged = true;
@@ -150,7 +150,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void ShowCurrentEmployeeHealthInfo()
         {
-            Employee employee = employeeDatabase.GetEmployee(searchTextBox.Text);
+            Employee employee = employeeDatabase.GetEmployee(searchTextBox.Text.Trim());
 
             ginNumberTextBox.Text = employee.GinNumber;
             nameTextBox.Text = employee.Name;
@@ -175,6 +175,7 @@ namespace EmployeeHealthRecord.WFApp.v3
         private void ValidExistedGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
         {
             AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
+            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_VALUE_TIP, WFAPPInputValidator.IsValidGinNumberType);
             ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidExistedGinNumber);
         }
 
@@ -208,12 +209,12 @@ namespace EmployeeHealthRecord.WFApp.v3
         private void viewCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // TODO
-            System.Diagnostics.Process.Start("https://www.google.com");
+            System.Diagnostics.Process.Start("https://github.com/kristol07/Csharp--/tree/master/EmployeeHealthRecord.WFApp.v3");
         }
 
         private void aboutHealthRecorderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is an application for helping recording and management of employee health info during the outbreak of COVID-19.");
+            MessageBox.Show("This is an application for helping recording and management of employee health info during the outbreak of COVID-19.", "About Employee Health Recorder");
         }
 
         private void ginNumberTextBox_TextChanged(object sender, EventArgs e)
@@ -289,12 +290,12 @@ namespace EmployeeHealthRecord.WFApp.v3
                 return;
             }
 
-            if (WFAPPInputValidator.IsValidExistedGinNumber(ginNumberTextBox.Text, employeeDatabase))
+            if (WFAPPInputValidator.IsValidExistedGinNumber(ginNumberTextBox.Text.Trim(), employeeDatabase))
             {
                 string confirmMessage = "You are trying to update existed record, are you sure?";
                 TrySaveWithConfirmMessage(confirmMessage);
             }
-            else if (WFAPPInputValidator.IsValidNewGinNumber(ginNumberTextBox.Text, employeeDatabase))
+            else if (WFAPPInputValidator.IsValidNewGinNumber(ginNumberTextBox.Text.Trim(), employeeDatabase))
             {
                 string confirmMessage = "You are trying to add new record, are you sure?";
                 TrySaveWithConfirmMessage(confirmMessage);
@@ -305,8 +306,8 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             if (MessageBox.Show(confirmMessage, "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                string ginNumber = ginNumberTextBox.Text.Trim(' ');
-                string name = nameTextBox.Text.Trim(' ');
+                string ginNumber = ginNumberTextBox.Text.Trim();
+                string name = nameTextBox.Text.Trim();
                 double bodyTemperature = double.Parse(bodyTemperatureTextBox.Text);
                 DateTime checkDate = checkdateTimePicker.Value.Date;
                 bool hasHubeiTravelHistory = hasHubeiTravelHistoryCheckBox.Checked;
@@ -321,9 +322,10 @@ namespace EmployeeHealthRecord.WFApp.v3
                 MessageBox.Show($"Record of Employee \"{name}\" with GinNumber \"{ginNumber}\" updated.", "Update Employee", MessageBoxButtons.OK);
 
                 //ClearHealthInfoInput();
+                string memoryGinNumber = searchTextBox.Text;
                 searchTextBox.Text = "";
+                searchTextBox.Text = memoryGinNumber;
             }
-
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
@@ -337,7 +339,9 @@ namespace EmployeeHealthRecord.WFApp.v3
                     RefreshEmployeeAndSuspectEmployeeDatabaseGridView();
 
                     //ClearHealthInfoInput();
+                    string memoryGinNumber = searchTextBox.Text;
                     searchTextBox.Text = "";
+                    searchTextBox.Text = memoryGinNumber;
                 }
             }
             else
@@ -350,6 +354,7 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             //ClearHealthInfoInput();
             searchTextBox.Text = "";
+            
         }
 
         private void viewOnlySuspectEployeeToolStripMenuItem_Click(object sender, EventArgs e)
