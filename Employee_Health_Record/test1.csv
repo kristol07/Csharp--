@@ -1,0 +1,8 @@
+GinNumber,Name,BodyTemperature,HasHubeiTravelHistory,HasSymptoms,Symptoms
+0,adam,36.5,False,False,0
+1,hugo,36.7,False,False,0
+2,joel,37.5,False,False,0
+3,kris,38.3,True,True,0
+4,mathias,36.7,True,False,0
+5,erwan,37.1,False,False,0
+233,loic,36.8,False,True,0

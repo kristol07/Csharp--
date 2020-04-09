@@ -59,14 +59,20 @@
             this.employeeToRemoveDataGridView = new System.Windows.Forms.DataGridView();
             this.ginNumberDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bodyTemperatureDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.hasSymptomsDataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.symptomsDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bodyTemperatureDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.employeeToRemoveBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.removeButton = new System.Windows.Forms.Button();
             this.viewGroupBox = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.loadDatabaseButton = new System.Windows.Forms.Button();
+            this.saveDatabaseButton = new System.Windows.Forms.Button();
+            this.loadDatabaseOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.saveDatabaseSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.searchTextBox = new System.Windows.Forms.TextBox();
             this.employeeDatabaseDataGridView = new System.Windows.Forms.DataGridView();
             this.ginNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -75,12 +81,7 @@
             this.hasSymptomsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.symptomsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.loadDatabaseButton = new System.Windows.Forms.Button();
-            this.saveDatabaseButton = new System.Windows.Forms.Button();
             this.viewOnlySuspectCheckBox = new System.Windows.Forms.CheckBox();
-            this.loadDatabaseOpenFileDialog = new System.Windows.Forms.OpenFileDialog();
-            this.saveDatabaseSaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -103,8 +104,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.employeeToRemoveBindingSource)).BeginInit();
             this.viewGroupBox.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -423,14 +424,15 @@
             // 
             this.employeeToRemoveDataGridView.AllowUserToAddRows = false;
             this.employeeToRemoveDataGridView.AutoGenerateColumns = false;
+            this.employeeToRemoveDataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.employeeToRemoveDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.employeeToRemoveDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ginNumberDataGridViewTextBoxColumn1,
             this.nameDataGridViewTextBoxColumn1,
+            this.bodyTemperatureDataGridViewTextBoxColumn1,
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1,
             this.hasSymptomsDataGridViewCheckBoxColumn1,
-            this.symptomsDataGridViewTextBoxColumn1,
-            this.bodyTemperatureDataGridViewTextBoxColumn1});
+            this.symptomsDataGridViewTextBoxColumn1});
             this.employeeToRemoveDataGridView.DataSource = this.employeeToRemoveBindingSource;
             this.employeeToRemoveDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.employeeToRemoveDataGridView.Location = new System.Drawing.Point(3, 67);
@@ -454,12 +456,21 @@
             this.nameDataGridViewTextBoxColumn1.Name = "nameDataGridViewTextBoxColumn1";
             this.nameDataGridViewTextBoxColumn1.ReadOnly = true;
             // 
+            // bodyTemperatureDataGridViewTextBoxColumn1
+            // 
+            this.bodyTemperatureDataGridViewTextBoxColumn1.DataPropertyName = "BodyTemperature";
+            this.bodyTemperatureDataGridViewTextBoxColumn1.HeaderText = "BodyTemperature";
+            this.bodyTemperatureDataGridViewTextBoxColumn1.Name = "bodyTemperatureDataGridViewTextBoxColumn1";
+            this.bodyTemperatureDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.bodyTemperatureDataGridViewTextBoxColumn1.Visible = false;
+            // 
             // hasHubeiTravelHistoryDataGridViewCheckBoxColumn1
             // 
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.DataPropertyName = "HasHubeiTravelHistory";
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.HeaderText = "HasHubeiTravelHistory";
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.Name = "hasHubeiTravelHistoryDataGridViewCheckBoxColumn1";
             this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn1.Visible = false;
             // 
             // hasSymptomsDataGridViewCheckBoxColumn1
             // 
@@ -467,6 +478,7 @@
             this.hasSymptomsDataGridViewCheckBoxColumn1.HeaderText = "HasSymptoms";
             this.hasSymptomsDataGridViewCheckBoxColumn1.Name = "hasSymptomsDataGridViewCheckBoxColumn1";
             this.hasSymptomsDataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.hasSymptomsDataGridViewCheckBoxColumn1.Visible = false;
             // 
             // symptomsDataGridViewTextBoxColumn1
             // 
@@ -474,13 +486,7 @@
             this.symptomsDataGridViewTextBoxColumn1.HeaderText = "Symptoms";
             this.symptomsDataGridViewTextBoxColumn1.Name = "symptomsDataGridViewTextBoxColumn1";
             this.symptomsDataGridViewTextBoxColumn1.ReadOnly = true;
-            // 
-            // bodyTemperatureDataGridViewTextBoxColumn1
-            // 
-            this.bodyTemperatureDataGridViewTextBoxColumn1.DataPropertyName = "BodyTemperature";
-            this.bodyTemperatureDataGridViewTextBoxColumn1.HeaderText = "BodyTemperature";
-            this.bodyTemperatureDataGridViewTextBoxColumn1.Name = "bodyTemperatureDataGridViewTextBoxColumn1";
-            this.bodyTemperatureDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.symptomsDataGridViewTextBoxColumn1.Visible = false;
             // 
             // employeeToRemoveBindingSource
             // 
@@ -510,28 +516,75 @@
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.Controls.Add(this.employeeDatabaseDataGridView, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.loadDatabaseButton, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.saveDatabaseButton, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.viewOnlySuspectCheckBox, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.loadDatabaseButton, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.saveDatabaseButton, 2, 2);
+            this.tableLayoutPanel2.Controls.Add(this.viewOnlySuspectCheckBox, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.searchTextBox, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 17);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.24F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.52F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.4F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.22364F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.38658F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.389777F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(623, 625);
             this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // employeeBindingSource
+            // 
+            this.employeeBindingSource.DataSource = typeof(EmployeeHealthRecord.Employee);
+            // 
+            // loadDatabaseButton
+            // 
+            this.loadDatabaseButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.loadDatabaseButton.Location = new System.Drawing.Point(157, 592);
+            this.loadDatabaseButton.Name = "loadDatabaseButton";
+            this.loadDatabaseButton.Size = new System.Drawing.Size(120, 25);
+            this.loadDatabaseButton.TabIndex = 1;
+            this.loadDatabaseButton.Text = "Load";
+            this.loadDatabaseButton.UseVisualStyleBackColor = true;
+            this.loadDatabaseButton.Click += new System.EventHandler(this.loadDatabaseButton_Click);
+            // 
+            // saveDatabaseButton
+            // 
+            this.saveDatabaseButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.saveDatabaseButton.Location = new System.Drawing.Point(406, 592);
+            this.saveDatabaseButton.Name = "saveDatabaseButton";
+            this.saveDatabaseButton.Size = new System.Drawing.Size(120, 25);
+            this.saveDatabaseButton.TabIndex = 2;
+            this.saveDatabaseButton.Text = "Save";
+            this.saveDatabaseButton.UseVisualStyleBackColor = true;
+            this.saveDatabaseButton.Click += new System.EventHandler(this.saveDatabaseButton_Click);
+            // 
+            // loadDatabaseOpenFileDialog
+            // 
+            this.loadDatabaseOpenFileDialog.FileName = "test";
+            this.loadDatabaseOpenFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
+            // 
+            // saveDatabaseSaveFileDialog
+            // 
+            this.saveDatabaseSaveFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
+            // 
+            // searchTextBox
+            // 
+            this.searchTextBox.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.searchTextBox.Location = new System.Drawing.Point(167, 21);
+            this.searchTextBox.Name = "searchTextBox";
+            this.searchTextBox.Size = new System.Drawing.Size(100, 21);
+            this.searchTextBox.TabIndex = 4;
             // 
             // employeeDatabaseDataGridView
             // 
             this.employeeDatabaseDataGridView.AllowUserToAddRows = false;
             this.employeeDatabaseDataGridView.AllowUserToDeleteRows = false;
             this.employeeDatabaseDataGridView.AutoGenerateColumns = false;
+            this.employeeDatabaseDataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.employeeDatabaseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.employeeDatabaseDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ginNumberDataGridViewTextBoxColumn,
@@ -541,7 +594,7 @@
             this.hasSymptomsDataGridViewCheckBoxColumn,
             this.symptomsDataGridViewTextBoxColumn,
             this.Notes});
-            this.tableLayoutPanel2.SetColumnSpan(this.employeeDatabaseDataGridView, 2);
+            this.tableLayoutPanel2.SetColumnSpan(this.employeeDatabaseDataGridView, 3);
             this.employeeDatabaseDataGridView.DataSource = this.employeeBindingSource;
             this.employeeDatabaseDataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.employeeDatabaseDataGridView.Location = new System.Drawing.Point(3, 66);
@@ -549,7 +602,7 @@
             this.employeeDatabaseDataGridView.ReadOnly = true;
             this.employeeDatabaseDataGridView.RowTemplate.Height = 23;
             this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(617, 515);
-            this.employeeDatabaseDataGridView.TabIndex = 0;
+            this.employeeDatabaseDataGridView.TabIndex = 5;
             // 
             // ginNumberDataGridViewTextBoxColumn
             // 
@@ -611,53 +664,17 @@
             this.Notes.Name = "Notes";
             this.Notes.ReadOnly = true;
             // 
-            // employeeBindingSource
-            // 
-            this.employeeBindingSource.DataSource = typeof(EmployeeHealthRecord.Employee);
-            // 
-            // loadDatabaseButton
-            // 
-            this.loadDatabaseButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.loadDatabaseButton.Location = new System.Drawing.Point(95, 592);
-            this.loadDatabaseButton.Name = "loadDatabaseButton";
-            this.loadDatabaseButton.Size = new System.Drawing.Size(120, 25);
-            this.loadDatabaseButton.TabIndex = 1;
-            this.loadDatabaseButton.Text = "Load";
-            this.loadDatabaseButton.UseVisualStyleBackColor = true;
-            this.loadDatabaseButton.Click += new System.EventHandler(this.loadDatabaseButton_Click);
-            // 
-            // saveDatabaseButton
-            // 
-            this.saveDatabaseButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.saveDatabaseButton.Location = new System.Drawing.Point(407, 592);
-            this.saveDatabaseButton.Name = "saveDatabaseButton";
-            this.saveDatabaseButton.Size = new System.Drawing.Size(120, 25);
-            this.saveDatabaseButton.TabIndex = 2;
-            this.saveDatabaseButton.Text = "Save";
-            this.saveDatabaseButton.UseVisualStyleBackColor = true;
-            this.saveDatabaseButton.Click += new System.EventHandler(this.saveDatabaseButton_Click);
-            // 
             // viewOnlySuspectCheckBox
             // 
-            this.viewOnlySuspectCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.viewOnlySuspectCheckBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.viewOnlySuspectCheckBox.AutoSize = true;
-            this.tableLayoutPanel2.SetColumnSpan(this.viewOnlySuspectCheckBox, 2);
-            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(3, 23);
+            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(373, 23);
             this.viewOnlySuspectCheckBox.Name = "viewOnlySuspectCheckBox";
             this.viewOnlySuspectCheckBox.Size = new System.Drawing.Size(186, 16);
             this.viewOnlySuspectCheckBox.TabIndex = 3;
             this.viewOnlySuspectCheckBox.Text = "View Only Suspect Employees";
             this.viewOnlySuspectCheckBox.UseVisualStyleBackColor = true;
             this.viewOnlySuspectCheckBox.CheckedChanged += new System.EventHandler(this.viewOnlySuspectCheckBox_CheckedChanged);
-            // 
-            // loadDatabaseOpenFileDialog
-            // 
-            this.loadDatabaseOpenFileDialog.FileName = "test";
-            this.loadDatabaseOpenFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
-            // 
-            // saveDatabaseSaveFileDialog
-            // 
-            this.saveDatabaseSaveFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
             // 
             // EmployeeHealthRecorderV2
             // 
@@ -696,8 +713,8 @@
             this.viewGroupBox.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -736,10 +753,18 @@
         private System.Windows.Forms.Button removeButton;
         private System.Windows.Forms.GroupBox viewGroupBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.DataGridView employeeDatabaseDataGridView;
         private System.Windows.Forms.Button loadDatabaseButton;
         private System.Windows.Forms.Button saveDatabaseButton;
-        private System.Windows.Forms.CheckBox viewOnlySuspectCheckBox;
+        private System.Windows.Forms.BindingSource employeeBindingSource;
+        private System.Windows.Forms.BindingSource employeeToRemoveBindingSource;
+        private System.Windows.Forms.Button addEmployeeToRemoveButton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ginNumberDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bodyTemperatureDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasHubeiTravelHistoryDataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn hasSymptomsDataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn symptomsDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridView employeeDatabaseDataGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn ginNumberDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn bodyTemperatureDataGridViewTextBoxColumn;
@@ -747,15 +772,8 @@
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasSymptomsDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn symptomsDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn Notes;
-        private System.Windows.Forms.BindingSource employeeBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ginNumberDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nameDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn hasHubeiTravelHistoryDataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn hasSymptomsDataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn symptomsDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bodyTemperatureDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.BindingSource employeeToRemoveBindingSource;
-        private System.Windows.Forms.Button addEmployeeToRemoveButton;
+        private System.Windows.Forms.TextBox searchTextBox;
+        private System.Windows.Forms.CheckBox viewOnlySuspectCheckBox;
     }
 }
 
