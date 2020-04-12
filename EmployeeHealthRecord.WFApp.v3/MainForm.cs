@@ -131,7 +131,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
         }
 
-        private void searchTextBox_TextChanged(object sender, EventArgs e)
+        private void SearchTextBox_TextChanged(object sender, EventArgs e)
         {
             ValidExistedGinNumberInputWithTipInfo(searchTextBox, searchTipLabel);
 
@@ -179,7 +179,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidExistedGinNumber);
         }
 
-        private void viewOnlySuspectCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void ViewOnlySuspectCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             RefreshEmployeeAndSuspectEmployeeDatabaseGridView();
         }
@@ -190,13 +190,13 @@ namespace EmployeeHealthRecord.WFApp.v3
         }
 
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveDatabaseToFile();
         }
 
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -206,18 +206,18 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         }
 
-        private void viewCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewCodeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // TODO
             System.Diagnostics.Process.Start("https://github.com/kristol07/Csharp--/tree/master/EmployeeHealthRecord.WFApp.v3");
         }
 
-        private void aboutHealthRecorderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutHealthRecorderToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show("This is an application for helping recording and management of employee health info during the outbreak of COVID-19.", "About Employee Health Recorder");
         }
 
-        private void ginNumberTextBox_TextChanged(object sender, EventArgs e)
+        private void GinNumberTextBox_TextChanged(object sender, EventArgs e)
         {
             AddTipInfoForInvalidInput(ginNumberTextBox, ginNumberTipLabel, GIN_NUMBER_VALUE_TIP, WFAPPInputValidator.IsValidGinNumberType);
             ClearTipInfoWhenInputIsEmptyOrValid(ginNumberTextBox, ginNumberTipLabel, WFAPPInputValidator.IsValidGinNumberType);
@@ -225,12 +225,12 @@ namespace EmployeeHealthRecord.WFApp.v3
             recordUnchanged = false;
         }
 
-        private void nameTextBox_TextChanged(object sender, EventArgs e)
+        private void NameTextBox_TextChanged(object sender, EventArgs e)
         {
             recordUnchanged = false;
         }
 
-        private void checkdateTimePicker_ValueChanged(object sender, EventArgs e)
+        private void CheckdateTimePicker_ValueChanged(object sender, EventArgs e)
         {
             if (!WFAPPInputValidator.IsValidCheckDate(checkdateTimePicker.Value))
             {
@@ -244,7 +244,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             //recordUnchanged = false;
         }
 
-        private void bodyTemperatureTextBox_TextChanged(object sender, EventArgs e)
+        private void BodyTemperatureTextBox_TextChanged(object sender, EventArgs e)
         {
             ValidBodyTemperatureInputWithTipInfo(bodyTemperatureTextBox, bodyTemperatureTipLabel);
 
@@ -259,23 +259,23 @@ namespace EmployeeHealthRecord.WFApp.v3
         }
 
 
-        private void hasHubeiTravelHistoryCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void HasHubeiTravelHistoryCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             recordUnchanged = false;
         }
 
-        private void hasSymptomsCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void HasSymptomsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             recordUnchanged = false;
         }
 
 
-        private void notesRichTextBox_TextChanged(object sender, EventArgs e)
+        private void NotesRichTextBox_TextChanged(object sender, EventArgs e)
         {
             //recordUnchanged = false;
         }
 
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             if (GetEmptyInputItems().Count != 0)
             {
@@ -328,7 +328,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
         }
 
-        private void deleteButton_Click(object sender, EventArgs e)
+        private void DeleteButton_Click(object sender, EventArgs e)
         {
             if (recordUnchanged == true)
             {
@@ -352,27 +352,27 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-            //ClearHealthInfoInput();
+            ClearHealthInfoInput();
             searchTextBox.Text = "";
             
         }
 
-        private void viewOnlySuspectEployeeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewOnlySuspectEployeeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             employeeBindingSource.DataSource = employeeDatabase.SuspectEmployeeList;
         }
 
-        private void viewAllEmployeesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewAllEmployeesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             employeeBindingSource.DataSource = employeeDatabase.EmployeeList;
         }
 
-        private void importFromFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ImportFromFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ImportDatabaseFromFile();
         }
 
-        private void saveAsToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void SaveAsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             SaveDatabaseToFile();
         }

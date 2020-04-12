@@ -142,14 +142,14 @@
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.saveAsToolStripMenuItem.Text = "&Save As...";
-            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // databaseToolStripMenuItem
             // 
@@ -180,14 +180,14 @@
             this.viewCodeToolStripMenuItem.Name = "viewCodeToolStripMenuItem";
             this.viewCodeToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.viewCodeToolStripMenuItem.Text = "&View Code";
-            this.viewCodeToolStripMenuItem.Click += new System.EventHandler(this.viewCodeToolStripMenuItem_Click);
+            this.viewCodeToolStripMenuItem.Click += new System.EventHandler(this.ViewCodeToolStripMenuItem_Click);
             // 
             // aboutHealthRecorderToolStripMenuItem
             // 
             this.aboutHealthRecorderToolStripMenuItem.Name = "aboutHealthRecorderToolStripMenuItem";
             this.aboutHealthRecorderToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.aboutHealthRecorderToolStripMenuItem.Text = "&About Employee Health Recorder";
-            this.aboutHealthRecorderToolStripMenuItem.Click += new System.EventHandler(this.aboutHealthRecorderToolStripMenuItem_Click);
+            this.aboutHealthRecorderToolStripMenuItem.Click += new System.EventHandler(this.AboutHealthRecorderToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -250,14 +250,14 @@
             this.importFromFileToolStripMenuItem.Name = "importFromFileToolStripMenuItem";
             this.importFromFileToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.importFromFileToolStripMenuItem.Text = "Import From...";
-            this.importFromFileToolStripMenuItem.Click += new System.EventHandler(this.importFromFileToolStripMenuItem_Click);
+            this.importFromFileToolStripMenuItem.Click += new System.EventHandler(this.ImportFromFileToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem1
             // 
             this.saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
             this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(206, 22);
             this.saveAsToolStripMenuItem1.Text = "Save As...";
-            this.saveAsToolStripMenuItem1.Click += new System.EventHandler(this.saveAsToolStripMenuItem1_Click);
+            this.saveAsToolStripMenuItem1.Click += new System.EventHandler(this.SaveAsToolStripMenuItem1_Click);
             // 
             // viewOnlySuspectEmployeeToolStripMenuItem
             // 
@@ -273,14 +273,14 @@
             this.viewOnlySuspectEployeeToolStripMenuItem.Name = "viewOnlySuspectEployeeToolStripMenuItem";
             this.viewOnlySuspectEployeeToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.viewOnlySuspectEployeeToolStripMenuItem.Text = "View Only Suspect Employees";
-            this.viewOnlySuspectEployeeToolStripMenuItem.Click += new System.EventHandler(this.viewOnlySuspectEployeeToolStripMenuItem_Click);
+            this.viewOnlySuspectEployeeToolStripMenuItem.Click += new System.EventHandler(this.ViewOnlySuspectEployeeToolStripMenuItem_Click);
             // 
             // viewAllEmployeesToolStripMenuItem
             // 
             this.viewAllEmployeesToolStripMenuItem.Name = "viewAllEmployeesToolStripMenuItem";
             this.viewAllEmployeesToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
             this.viewAllEmployeesToolStripMenuItem.Text = "View All Employees";
-            this.viewAllEmployeesToolStripMenuItem.Click += new System.EventHandler(this.viewAllEmployeesToolStripMenuItem_Click);
+            this.viewAllEmployeesToolStripMenuItem.Click += new System.EventHandler(this.ViewAllEmployeesToolStripMenuItem_Click);
             // 
             // addNewRecordToolStripMenuItem1
             // 
@@ -316,7 +316,7 @@
             this.searchTextBox.Name = "searchTextBox";
             this.searchTextBox.Size = new System.Drawing.Size(115, 23);
             this.searchTextBox.TabIndex = 0;
-            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
+            this.searchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
             // 
             // searchTipLabel
             // 
@@ -400,7 +400,7 @@
             this.ginNumberTextBox.Name = "ginNumberTextBox";
             this.ginNumberTextBox.Size = new System.Drawing.Size(231, 23);
             this.ginNumberTextBox.TabIndex = 0;
-            this.ginNumberTextBox.TextChanged += new System.EventHandler(this.ginNumberTextBox_TextChanged);
+            this.ginNumberTextBox.TextChanged += new System.EventHandler(this.GinNumberTextBox_TextChanged);
             // 
             // nameGroupBox
             // 
@@ -432,7 +432,7 @@
             this.nameTextBox.Name = "nameTextBox";
             this.nameTextBox.Size = new System.Drawing.Size(231, 23);
             this.nameTextBox.TabIndex = 0;
-            this.nameTextBox.TextChanged += new System.EventHandler(this.nameTextBox_TextChanged);
+            this.nameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
             // checkdateGroupBox
             // 
@@ -464,7 +464,7 @@
             this.checkdateTimePicker.Name = "checkdateTimePicker";
             this.checkdateTimePicker.Size = new System.Drawing.Size(231, 23);
             this.checkdateTimePicker.TabIndex = 0;
-            this.checkdateTimePicker.ValueChanged += new System.EventHandler(this.checkdateTimePicker_ValueChanged);
+            this.checkdateTimePicker.ValueChanged += new System.EventHandler(this.CheckdateTimePicker_ValueChanged);
             // 
             // bodyTemperatureGroupBox
             // 
@@ -496,7 +496,7 @@
             this.bodyTemperatureTextBox.Name = "bodyTemperatureTextBox";
             this.bodyTemperatureTextBox.Size = new System.Drawing.Size(231, 23);
             this.bodyTemperatureTextBox.TabIndex = 0;
-            this.bodyTemperatureTextBox.TextChanged += new System.EventHandler(this.bodyTemperatureTextBox_TextChanged);
+            this.bodyTemperatureTextBox.TextChanged += new System.EventHandler(this.BodyTemperatureTextBox_TextChanged);
             // 
             // hasHubeiTravelHistoryCheckBox
             // 
@@ -511,7 +511,7 @@
             this.hasHubeiTravelHistoryCheckBox.TabIndex = 4;
             this.hasHubeiTravelHistoryCheckBox.Text = "Has Hubei Travel History";
             this.hasHubeiTravelHistoryCheckBox.UseVisualStyleBackColor = true;
-            this.hasHubeiTravelHistoryCheckBox.CheckedChanged += new System.EventHandler(this.hasHubeiTravelHistoryCheckBox_CheckedChanged);
+            this.hasHubeiTravelHistoryCheckBox.CheckedChanged += new System.EventHandler(this.HasHubeiTravelHistoryCheckBox_CheckedChanged);
             // 
             // hasSymptomsCheckBox
             // 
@@ -526,7 +526,7 @@
             this.hasSymptomsCheckBox.TabIndex = 5;
             this.hasSymptomsCheckBox.Text = "Has Any Symptoms";
             this.hasSymptomsCheckBox.UseVisualStyleBackColor = true;
-            this.hasSymptomsCheckBox.CheckedChanged += new System.EventHandler(this.hasSymptomsCheckBox_CheckedChanged);
+            this.hasSymptomsCheckBox.CheckedChanged += new System.EventHandler(this.HasSymptomsCheckBox_CheckedChanged);
             // 
             // notesGroupBox
             // 
@@ -550,7 +550,7 @@
             this.notesRichTextBox.Size = new System.Drawing.Size(231, 110);
             this.notesRichTextBox.TabIndex = 0;
             this.notesRichTextBox.Text = "";
-            this.notesRichTextBox.TextChanged += new System.EventHandler(this.notesRichTextBox_TextChanged);
+            this.notesRichTextBox.TextChanged += new System.EventHandler(this.NotesRichTextBox_TextChanged);
             // 
             // saveButton
             // 
@@ -562,7 +562,7 @@
             this.saveButton.Text = "Save";
             this.saveButtonToolTip.SetToolTip(this.saveButton, "Save current changes. If GinNumber is new, Add new record to database.");
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // deleteButton
             // 
@@ -573,7 +573,7 @@
             this.deleteButton.TabIndex = 8;
             this.deleteButton.Text = "Delete";
             this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.deleteButton_Click);
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
             // 
             // clearButton
             // 
@@ -640,7 +640,7 @@
             this.viewOnlySuspectCheckBox.TabIndex = 1;
             this.viewOnlySuspectCheckBox.Text = "View Only Suspect Employees";
             this.viewOnlySuspectCheckBox.UseVisualStyleBackColor = true;
-            this.viewOnlySuspectCheckBox.CheckedChanged += new System.EventHandler(this.viewOnlySuspectCheckBox_CheckedChanged);
+            this.viewOnlySuspectCheckBox.CheckedChanged += new System.EventHandler(this.ViewOnlySuspectCheckBox_CheckedChanged);
             // 
             // ginNumberDataGridViewTextBoxColumn
             // 
