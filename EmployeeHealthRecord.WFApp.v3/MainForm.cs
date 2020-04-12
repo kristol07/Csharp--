@@ -20,7 +20,7 @@ namespace EmployeeHealthRecord.WFApp.v3
         const string GIN_NUMBER_NOT_FOUND_TIP = "Not found.";
         const string NAME_EXISTED_TIP = "Existed!"; //"Employee with same Name existed, try new one!";
         const string BODY_TEMPERATURE_VALUE_TIP = "Human Body Temperature should be 35 - 43.";
-        const string BODY_TEMPERATURE_TYPE_TIP = "Only numerical value is allowed for Temperature.";
+        const string BODY_TEMPERATURE_TYPE_TIP = "Not valid Temperature type (Numbers)."; //"Only numerical value is allowed for Temperature.";
         const string HAS_HUBEI_TRAVEL_HISTORY_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
         const string HAS_SYMPTOMS_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
         const string CHECK_DATE_VALUE_TIP = "Check date can not be future date.";
