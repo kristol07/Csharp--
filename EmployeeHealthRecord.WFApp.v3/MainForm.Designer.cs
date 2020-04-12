@@ -42,6 +42,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.employeeDatabaseDataGridView = new System.Windows.Forms.DataGridView();
             this.databaseContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,9 +51,11 @@
             this.viewAllEmployeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewRecordToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteCurrentRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.searchLabel = new System.Windows.Forms.Label();
             this.searchTextBox = new System.Windows.Forms.TextBox();
             this.searchTipLabel = new System.Windows.Forms.Label();
+            this.viewOnlySuspectCheckBox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.ginNumberGroupBox = new System.Windows.Forms.GroupBox();
@@ -68,25 +71,23 @@
             this.bodyTemperatureTipLabel = new System.Windows.Forms.Label();
             this.bodyTemperatureTextBox = new System.Windows.Forms.TextBox();
             this.hasHubeiTravelHistoryCheckBox = new System.Windows.Forms.CheckBox();
-            this.hasSymptomsCheckBox = new System.Windows.Forms.CheckBox();
             this.notesGroupBox = new System.Windows.Forms.GroupBox();
             this.notesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.saveButton = new System.Windows.Forms.Button();
             this.deleteButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
+            this.hasSymptomsCheckBox = new System.Windows.Forms.CheckBox();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.saveButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.Notes = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeDatabaseDataGridView = new System.Windows.Forms.DataGridView();
-            this.viewOnlySuspectCheckBox = new System.Windows.Forms.CheckBox();
-            this.ginNumberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bodyTemperatureDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.hasSymptomsDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.symptomsDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.employeeRecordBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.notesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -94,7 +95,9 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
             this.databaseContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.ginNumberGroupBox.SuspendLayout();
@@ -102,8 +105,7 @@
             this.checkdateGroupBox.SuspendLayout();
             this.bodyTemperatureGroupBox.SuspendLayout();
             this.notesGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -117,7 +119,7 @@
             this.menuStrip.Location = new System.Drawing.Point(3, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1020, 25);
+            this.menuStrip.Size = new System.Drawing.Size(1124, 25);
             this.menuStrip.TabIndex = 0;
             // 
             // fileToolStripMenuItem
@@ -198,7 +200,7 @@
             this.panel1.Location = new System.Drawing.Point(4, 28);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.panel1.Size = new System.Drawing.Size(1017, 565);
+            this.panel1.Size = new System.Drawing.Size(1121, 565);
             this.panel1.TabIndex = 2;
             // 
             // splitContainer1
@@ -214,8 +216,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(1011, 565);
-            this.splitContainer1.SplitterDistance = 746;
+            this.splitContainer1.Size = new System.Drawing.Size(1115, 565);
+            this.splitContainer1.SplitterDistance = 822;
             this.splitContainer1.TabIndex = 0;
             // 
             // groupBox1
@@ -229,10 +231,39 @@
             this.groupBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(746, 565);
+            this.groupBox1.Size = new System.Drawing.Size(822, 565);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "View Records";
+            // 
+            // employeeDatabaseDataGridView
+            // 
+            this.employeeDatabaseDataGridView.AllowUserToAddRows = false;
+            this.employeeDatabaseDataGridView.AllowUserToDeleteRows = false;
+            this.employeeDatabaseDataGridView.AllowUserToResizeRows = false;
+            this.employeeDatabaseDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.employeeDatabaseDataGridView.AutoGenerateColumns = false;
+            this.employeeDatabaseDataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.employeeDatabaseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.employeeDatabaseDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.checkDateDataGridViewTextBoxColumn,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewCheckBoxColumn1,
+            this.dataGridViewCheckBoxColumn2,
+            this.notesDataGridViewTextBoxColumn});
+            this.employeeDatabaseDataGridView.ContextMenuStrip = this.databaseContextMenuStrip;
+            this.employeeDatabaseDataGridView.DataSource = this.employeeRecordBindingSource;
+            this.employeeDatabaseDataGridView.Location = new System.Drawing.Point(9, 50);
+            this.employeeDatabaseDataGridView.Name = "employeeDatabaseDataGridView";
+            this.employeeDatabaseDataGridView.ReadOnly = true;
+            this.employeeDatabaseDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.employeeDatabaseDataGridView.RowTemplate.Height = 23;
+            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(807, 505);
+            this.employeeDatabaseDataGridView.TabIndex = 4;
             // 
             // databaseContextMenuStrip
             // 
@@ -314,7 +345,7 @@
             this.searchTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.searchTextBox.Location = new System.Drawing.Point(148, 19);
             this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(115, 23);
+            this.searchTextBox.Size = new System.Drawing.Size(191, 23);
             this.searchTextBox.TabIndex = 0;
             this.searchTextBox.TextChanged += new System.EventHandler(this.SearchTextBox_TextChanged);
             // 
@@ -322,10 +353,22 @@
             // 
             this.searchTipLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.searchTipLabel.AutoSize = true;
-            this.searchTipLabel.Location = new System.Drawing.Point(269, 22);
+            this.searchTipLabel.Location = new System.Drawing.Point(345, 22);
             this.searchTipLabel.Name = "searchTipLabel";
             this.searchTipLabel.Size = new System.Drawing.Size(0, 17);
             this.searchTipLabel.TabIndex = 3;
+            // 
+            // viewOnlySuspectCheckBox
+            // 
+            this.viewOnlySuspectCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.viewOnlySuspectCheckBox.AutoSize = true;
+            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(610, 21);
+            this.viewOnlySuspectCheckBox.Name = "viewOnlySuspectCheckBox";
+            this.viewOnlySuspectCheckBox.Size = new System.Drawing.Size(200, 21);
+            this.viewOnlySuspectCheckBox.TabIndex = 1;
+            this.viewOnlySuspectCheckBox.Text = "View Only Suspect Employees";
+            this.viewOnlySuspectCheckBox.UseVisualStyleBackColor = true;
+            this.viewOnlySuspectCheckBox.CheckedChanged += new System.EventHandler(this.ViewOnlySuspectCheckBox_CheckedChanged);
             // 
             // groupBox2
             // 
@@ -334,7 +377,7 @@
             this.groupBox2.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(261, 565);
+            this.groupBox2.Size = new System.Drawing.Size(289, 565);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Update Record";
@@ -367,7 +410,7 @@
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.261194F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.13953F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.037565F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(255, 543);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(283, 543);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // ginNumberGroupBox
@@ -380,7 +423,7 @@
             this.ginNumberGroupBox.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.ginNumberGroupBox.Name = "ginNumberGroupBox";
             this.ginNumberGroupBox.Padding = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.ginNumberGroupBox.Size = new System.Drawing.Size(243, 70);
+            this.ginNumberGroupBox.Size = new System.Drawing.Size(271, 70);
             this.ginNumberGroupBox.TabIndex = 0;
             this.ginNumberGroupBox.TabStop = false;
             this.ginNumberGroupBox.Text = "GinNumber";
@@ -398,7 +441,7 @@
             this.ginNumberTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.ginNumberTextBox.Location = new System.Drawing.Point(6, 19);
             this.ginNumberTextBox.Name = "ginNumberTextBox";
-            this.ginNumberTextBox.Size = new System.Drawing.Size(231, 23);
+            this.ginNumberTextBox.Size = new System.Drawing.Size(259, 23);
             this.ginNumberTextBox.TabIndex = 0;
             this.ginNumberTextBox.TextChanged += new System.EventHandler(this.GinNumberTextBox_TextChanged);
             // 
@@ -412,7 +455,7 @@
             this.nameGroupBox.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.nameGroupBox.Name = "nameGroupBox";
             this.nameGroupBox.Padding = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.nameGroupBox.Size = new System.Drawing.Size(243, 70);
+            this.nameGroupBox.Size = new System.Drawing.Size(271, 70);
             this.nameGroupBox.TabIndex = 1;
             this.nameGroupBox.TabStop = false;
             this.nameGroupBox.Text = "Name";
@@ -430,7 +473,7 @@
             this.nameTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.nameTextBox.Location = new System.Drawing.Point(6, 19);
             this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(231, 23);
+            this.nameTextBox.Size = new System.Drawing.Size(259, 23);
             this.nameTextBox.TabIndex = 0;
             this.nameTextBox.TextChanged += new System.EventHandler(this.NameTextBox_TextChanged);
             // 
@@ -444,7 +487,7 @@
             this.checkdateGroupBox.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.checkdateGroupBox.Name = "checkdateGroupBox";
             this.checkdateGroupBox.Padding = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.checkdateGroupBox.Size = new System.Drawing.Size(243, 70);
+            this.checkdateGroupBox.Size = new System.Drawing.Size(271, 70);
             this.checkdateGroupBox.TabIndex = 2;
             this.checkdateGroupBox.TabStop = false;
             this.checkdateGroupBox.Text = "Check Date";
@@ -462,7 +505,7 @@
             this.checkdateTimePicker.Dock = System.Windows.Forms.DockStyle.Top;
             this.checkdateTimePicker.Location = new System.Drawing.Point(6, 19);
             this.checkdateTimePicker.Name = "checkdateTimePicker";
-            this.checkdateTimePicker.Size = new System.Drawing.Size(231, 23);
+            this.checkdateTimePicker.Size = new System.Drawing.Size(259, 23);
             this.checkdateTimePicker.TabIndex = 0;
             this.checkdateTimePicker.ValueChanged += new System.EventHandler(this.CheckdateTimePicker_ValueChanged);
             // 
@@ -476,7 +519,7 @@
             this.bodyTemperatureGroupBox.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
             this.bodyTemperatureGroupBox.Name = "bodyTemperatureGroupBox";
             this.bodyTemperatureGroupBox.Padding = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.bodyTemperatureGroupBox.Size = new System.Drawing.Size(243, 70);
+            this.bodyTemperatureGroupBox.Size = new System.Drawing.Size(271, 70);
             this.bodyTemperatureGroupBox.TabIndex = 3;
             this.bodyTemperatureGroupBox.TabStop = false;
             this.bodyTemperatureGroupBox.Text = "Body Temperature";
@@ -494,7 +537,7 @@
             this.bodyTemperatureTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.bodyTemperatureTextBox.Location = new System.Drawing.Point(6, 19);
             this.bodyTemperatureTextBox.Name = "bodyTemperatureTextBox";
-            this.bodyTemperatureTextBox.Size = new System.Drawing.Size(231, 23);
+            this.bodyTemperatureTextBox.Size = new System.Drawing.Size(259, 23);
             this.bodyTemperatureTextBox.TabIndex = 0;
             this.bodyTemperatureTextBox.TextChanged += new System.EventHandler(this.BodyTemperatureTextBox_TextChanged);
             // 
@@ -513,6 +556,64 @@
             this.hasHubeiTravelHistoryCheckBox.UseVisualStyleBackColor = true;
             this.hasHubeiTravelHistoryCheckBox.CheckedChanged += new System.EventHandler(this.HasHubeiTravelHistoryCheckBox_CheckedChanged);
             // 
+            // notesGroupBox
+            // 
+            this.tableLayoutPanel3.SetColumnSpan(this.notesGroupBox, 3);
+            this.notesGroupBox.Controls.Add(this.notesRichTextBox);
+            this.notesGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.notesGroupBox.Location = new System.Drawing.Point(6, 363);
+            this.notesGroupBox.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
+            this.notesGroupBox.Name = "notesGroupBox";
+            this.notesGroupBox.Padding = new System.Windows.Forms.Padding(6, 3, 6, 6);
+            this.notesGroupBox.Size = new System.Drawing.Size(271, 135);
+            this.notesGroupBox.TabIndex = 6;
+            this.notesGroupBox.TabStop = false;
+            this.notesGroupBox.Text = "Notes";
+            // 
+            // notesRichTextBox
+            // 
+            this.notesRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.notesRichTextBox.Location = new System.Drawing.Point(6, 19);
+            this.notesRichTextBox.Name = "notesRichTextBox";
+            this.notesRichTextBox.Size = new System.Drawing.Size(259, 110);
+            this.notesRichTextBox.TabIndex = 0;
+            this.notesRichTextBox.Text = "";
+            this.notesRichTextBox.TextChanged += new System.EventHandler(this.NotesRichTextBox_TextChanged);
+            // 
+            // saveButton
+            // 
+            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.saveButton.Location = new System.Drawing.Point(16, 509);
+            this.saveButton.Name = "saveButton";
+            this.saveButton.Size = new System.Drawing.Size(62, 26);
+            this.saveButton.TabIndex = 7;
+            this.saveButton.Text = "Save";
+            this.saveButtonToolTip.SetToolTip(this.saveButton, "Save current changes. If GinNumber is new, Add new record to database.");
+            this.saveButton.UseVisualStyleBackColor = true;
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // deleteButton
+            // 
+            this.deleteButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.deleteButton.Location = new System.Drawing.Point(110, 509);
+            this.deleteButton.Name = "deleteButton";
+            this.deleteButton.Size = new System.Drawing.Size(62, 26);
+            this.deleteButton.TabIndex = 8;
+            this.deleteButton.Text = "Delete";
+            this.deleteButton.UseVisualStyleBackColor = true;
+            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
+            // clearButton
+            // 
+            this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.clearButton.Location = new System.Drawing.Point(204, 509);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(62, 26);
+            this.clearButton.TabIndex = 9;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = true;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
             // hasSymptomsCheckBox
             // 
             this.hasSymptomsCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Left;
@@ -528,64 +629,6 @@
             this.hasSymptomsCheckBox.UseVisualStyleBackColor = true;
             this.hasSymptomsCheckBox.CheckedChanged += new System.EventHandler(this.HasSymptomsCheckBox_CheckedChanged);
             // 
-            // notesGroupBox
-            // 
-            this.tableLayoutPanel3.SetColumnSpan(this.notesGroupBox, 3);
-            this.notesGroupBox.Controls.Add(this.notesRichTextBox);
-            this.notesGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.notesGroupBox.Location = new System.Drawing.Point(6, 363);
-            this.notesGroupBox.Margin = new System.Windows.Forms.Padding(6, 3, 6, 3);
-            this.notesGroupBox.Name = "notesGroupBox";
-            this.notesGroupBox.Padding = new System.Windows.Forms.Padding(6, 3, 6, 6);
-            this.notesGroupBox.Size = new System.Drawing.Size(243, 135);
-            this.notesGroupBox.TabIndex = 6;
-            this.notesGroupBox.TabStop = false;
-            this.notesGroupBox.Text = "Notes";
-            // 
-            // notesRichTextBox
-            // 
-            this.notesRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.notesRichTextBox.Location = new System.Drawing.Point(6, 19);
-            this.notesRichTextBox.Name = "notesRichTextBox";
-            this.notesRichTextBox.Size = new System.Drawing.Size(231, 110);
-            this.notesRichTextBox.TabIndex = 0;
-            this.notesRichTextBox.Text = "";
-            this.notesRichTextBox.TextChanged += new System.EventHandler(this.NotesRichTextBox_TextChanged);
-            // 
-            // saveButton
-            // 
-            this.saveButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.saveButton.Location = new System.Drawing.Point(11, 509);
-            this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(62, 26);
-            this.saveButton.TabIndex = 7;
-            this.saveButton.Text = "Save";
-            this.saveButtonToolTip.SetToolTip(this.saveButton, "Save current changes. If GinNumber is new, Add new record to database.");
-            this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
-            // 
-            // deleteButton
-            // 
-            this.deleteButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.deleteButton.Location = new System.Drawing.Point(95, 509);
-            this.deleteButton.Name = "deleteButton";
-            this.deleteButton.Size = new System.Drawing.Size(62, 26);
-            this.deleteButton.TabIndex = 8;
-            this.deleteButton.Text = "Delete";
-            this.deleteButton.UseVisualStyleBackColor = true;
-            this.deleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
-            // 
-            // clearButton
-            // 
-            this.clearButton.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.clearButton.Location = new System.Drawing.Point(180, 509);
-            this.clearButton.Name = "clearButton";
-            this.clearButton.Size = new System.Drawing.Size(62, 26);
-            this.clearButton.TabIndex = 9;
-            this.clearButton.Text = "Clear";
-            this.clearButton.UseVisualStyleBackColor = true;
-            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
-            // 
             // openFileDialog
             // 
             this.openFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
@@ -594,117 +637,76 @@
             // 
             this.saveFileDialog.Filter = "CSV Files|*.csv|TXT Files|*.txt";
             // 
-            // Notes
+            // employeeRecordBindingSource
             // 
-            this.Notes.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Notes.HeaderText = "Notes";
-            this.Notes.Name = "Notes";
-            this.Notes.ReadOnly = true;
+            this.employeeRecordBindingSource.DataSource = typeof(EmployeeHealthInfoRecord.EmployeeRecord);
             // 
-            // employeeDatabaseDataGridView
+            // dataGridViewTextBoxColumn1
             // 
-            this.employeeDatabaseDataGridView.AllowUserToAddRows = false;
-            this.employeeDatabaseDataGridView.AllowUserToDeleteRows = false;
-            this.employeeDatabaseDataGridView.AllowUserToResizeRows = false;
-            this.employeeDatabaseDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.employeeDatabaseDataGridView.AutoGenerateColumns = false;
-            this.employeeDatabaseDataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.employeeDatabaseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.employeeDatabaseDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ginNumberDataGridViewTextBoxColumn,
-            this.nameDataGridViewTextBoxColumn,
-            this.bodyTemperatureDataGridViewTextBoxColumn,
-            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn,
-            this.hasSymptomsDataGridViewCheckBoxColumn,
-            this.Notes,
-            this.symptomsDataGridViewTextBoxColumn});
-            this.employeeDatabaseDataGridView.ContextMenuStrip = this.databaseContextMenuStrip;
-            this.employeeDatabaseDataGridView.DataSource = this.employeeBindingSource;
-            this.employeeDatabaseDataGridView.Location = new System.Drawing.Point(9, 50);
-            this.employeeDatabaseDataGridView.Name = "employeeDatabaseDataGridView";
-            this.employeeDatabaseDataGridView.ReadOnly = true;
-            this.employeeDatabaseDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.employeeDatabaseDataGridView.RowTemplate.Height = 23;
-            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(728, 505);
-            this.employeeDatabaseDataGridView.TabIndex = 4;
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "GinNumber";
+            this.dataGridViewTextBoxColumn1.HeaderText = "GinNumber";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
             // 
-            // viewOnlySuspectCheckBox
+            // dataGridViewTextBoxColumn2
             // 
-            this.viewOnlySuspectCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.viewOnlySuspectCheckBox.AutoSize = true;
-            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(534, 21);
-            this.viewOnlySuspectCheckBox.Name = "viewOnlySuspectCheckBox";
-            this.viewOnlySuspectCheckBox.Size = new System.Drawing.Size(200, 21);
-            this.viewOnlySuspectCheckBox.TabIndex = 1;
-            this.viewOnlySuspectCheckBox.Text = "View Only Suspect Employees";
-            this.viewOnlySuspectCheckBox.UseVisualStyleBackColor = true;
-            this.viewOnlySuspectCheckBox.CheckedChanged += new System.EventHandler(this.ViewOnlySuspectCheckBox_CheckedChanged);
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 68;
             // 
-            // ginNumberDataGridViewTextBoxColumn
+            // checkDateDataGridViewTextBoxColumn
             // 
-            this.ginNumberDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ginNumberDataGridViewTextBoxColumn.DataPropertyName = "GinNumber";
-            this.ginNumberDataGridViewTextBoxColumn.HeaderText = "GinNumber";
-            this.ginNumberDataGridViewTextBoxColumn.Name = "ginNumberDataGridViewTextBoxColumn";
-            this.ginNumberDataGridViewTextBoxColumn.ReadOnly = true;
+            this.checkDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.checkDateDataGridViewTextBoxColumn.DataPropertyName = "CheckDate";
+            this.checkDateDataGridViewTextBoxColumn.HeaderText = "CheckDate";
+            this.checkDateDataGridViewTextBoxColumn.Name = "checkDateDataGridViewTextBoxColumn";
+            this.checkDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.checkDateDataGridViewTextBoxColumn.Width = 95;
             // 
-            // nameDataGridViewTextBoxColumn
+            // dataGridViewTextBoxColumn3
             // 
-            this.nameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.nameDataGridViewTextBoxColumn.DataPropertyName = "Name";
-            this.nameDataGridViewTextBoxColumn.HeaderText = "Name";
-            this.nameDataGridViewTextBoxColumn.Name = "nameDataGridViewTextBoxColumn";
-            this.nameDataGridViewTextBoxColumn.ReadOnly = true;
-            this.nameDataGridViewTextBoxColumn.Width = 68;
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "BodyTemperature";
+            this.dataGridViewTextBoxColumn3.HeaderText = "BodyTemperature";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 138;
             // 
-            // bodyTemperatureDataGridViewTextBoxColumn
+            // dataGridViewCheckBoxColumn1
             // 
-            this.bodyTemperatureDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.bodyTemperatureDataGridViewTextBoxColumn.DataPropertyName = "BodyTemperature";
-            this.bodyTemperatureDataGridViewTextBoxColumn.HeaderText = "BodyTemperature";
-            this.bodyTemperatureDataGridViewTextBoxColumn.Name = "bodyTemperatureDataGridViewTextBoxColumn";
-            this.bodyTemperatureDataGridViewTextBoxColumn.ReadOnly = true;
-            this.bodyTemperatureDataGridViewTextBoxColumn.Width = 138;
+            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn1.DataPropertyName = "HasHubeiTravelHistory";
+            this.dataGridViewCheckBoxColumn1.HeaderText = "HasHubeiTravelHistory";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn1.Width = 146;
             // 
-            // hasHubeiTravelHistoryDataGridViewCheckBoxColumn
+            // dataGridViewCheckBoxColumn2
             // 
-            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.DataPropertyName = "HasHubeiTravelHistory";
-            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.HeaderText = "HasHubeiTravelHistory";
-            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.Name = "hasHubeiTravelHistoryDataGridViewCheckBoxColumn";
-            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.hasHubeiTravelHistoryDataGridViewCheckBoxColumn.Width = 146;
+            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn2.DataPropertyName = "HasSymptoms";
+            this.dataGridViewCheckBoxColumn2.HeaderText = "HasSymptoms";
+            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn2.Width = 97;
             // 
-            // hasSymptomsDataGridViewCheckBoxColumn
+            // notesDataGridViewTextBoxColumn
             // 
-            this.hasSymptomsDataGridViewCheckBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.hasSymptomsDataGridViewCheckBoxColumn.DataPropertyName = "HasSymptoms";
-            this.hasSymptomsDataGridViewCheckBoxColumn.HeaderText = "HasSymptoms";
-            this.hasSymptomsDataGridViewCheckBoxColumn.Name = "hasSymptomsDataGridViewCheckBoxColumn";
-            this.hasSymptomsDataGridViewCheckBoxColumn.ReadOnly = true;
-            this.hasSymptomsDataGridViewCheckBoxColumn.Width = 97;
-            // 
-            // symptomsDataGridViewTextBoxColumn
-            // 
-            this.symptomsDataGridViewTextBoxColumn.DataPropertyName = "Symptoms";
-            this.symptomsDataGridViewTextBoxColumn.HeaderText = "Symptoms";
-            this.symptomsDataGridViewTextBoxColumn.Name = "symptomsDataGridViewTextBoxColumn";
-            this.symptomsDataGridViewTextBoxColumn.ReadOnly = true;
-            this.symptomsDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // employeeBindingSource
-            // 
-            this.employeeBindingSource.DataSource = typeof(EmployeeHealthRecord.Employee);
+            this.notesDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.notesDataGridViewTextBoxColumn.DataPropertyName = "Notes";
+            this.notesDataGridViewTextBoxColumn.HeaderText = "Notes";
+            this.notesDataGridViewTextBoxColumn.Name = "notesDataGridViewTextBoxColumn";
+            this.notesDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1026, 601);
+            this.ClientSize = new System.Drawing.Size(1130, 601);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panel1);
             this.MainMenuStrip = this.menuStrip;
@@ -720,7 +722,9 @@
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).EndInit();
             this.databaseContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
@@ -733,8 +737,7 @@
             this.bodyTemperatureGroupBox.ResumeLayout(false);
             this.bodyTemperatureGroupBox.PerformLayout();
             this.notesGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -797,8 +800,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn bodyTemperatureDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasHubeiTravelHistoryDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn hasSymptomsDataGridViewCheckBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Notes;
         private System.Windows.Forms.DataGridViewTextBoxColumn symptomsDataGridViewTextBoxColumn;
+        private System.Windows.Forms.BindingSource employeeRecordBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn checkDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
     }
 }
 

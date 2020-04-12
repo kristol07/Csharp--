@@ -66,6 +66,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\EmployeeHealthInfoRecord.EmployeeRecord.datasource" />
     <None Include="Properties\DataSources\EmployeeHealthRecord.Employee.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -81,10 +82,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Employee_Health_Record\Employee_Health_Record.csproj">
-      <Project>{70cf8a23-0c27-49cd-a9ff-1bcd51725789}</Project>
-      <Name>Employee_Health_Record</Name>
+    <ProjectReference Include="..\EmployeeHealthInfoRecord\EmployeeHealthInfoRecord.csproj">
+      <Project>{e2b6f4fa-f7b8-41f6-be95-f21b7b86bf66}</Project>
+      <Name>EmployeeHealthInfoRecord</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

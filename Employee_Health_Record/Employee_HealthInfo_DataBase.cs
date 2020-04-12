@@ -79,11 +79,11 @@ namespace EmployeeHealthRecord
         {
             List<Employee> listOfSuspectEmployee = new List<Employee>();
 
-            foreach (var Employee in EmployeeData.Values)
+            foreach (var employee in EmployeeData.Values)
             {
-                if (!string.IsNullOrEmpty(Employee.GetAbnormalInfo()))
+                if (!string.IsNullOrEmpty(employee.GetAbnormalInfo()))
                 {
-                    listOfSuspectEmployee.Add(Employee);
+                    listOfSuspectEmployee.Add(employee);
                 }
             }
 
