@@ -136,7 +136,7 @@ namespace EmployeeHealthInfoRecord
         public void AddRecord(string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
             // HACK: use notes to show date key string
-            EmployeeRecord newRecord = new EmployeeRecord(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, checkDate.ToShortDateString());
+            EmployeeRecord newRecord = new EmployeeRecord(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
 
             if (!HasEmployeeRecord(ginNumber))
             {

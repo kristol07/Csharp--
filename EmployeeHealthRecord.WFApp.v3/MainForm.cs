@@ -16,45 +16,51 @@ namespace EmployeeHealthRecord.WFApp.v3
 
     public partial class MainForm : Form
     {
-        const string SEARCH_TEXT_UNVALID_TIP = "Search Text Unrecognized.";
-        const string GIN_NUMBER_EXISTED_TIP = "Existed!"; //"Employee with same GinNumber existed, try new one!";
-        const string GIN_NUMBER_TYPE_TIP = "Not valid GinNumber type (Integer)."; //"Only integer is allowed for ginNumber.";
-        const string GIN_NUMBER_NOT_FOUND_TIP = "Record of same GinNumber Not found.";
-        const string CHECKDATE_TYPE_TIP = "Not valid Date type (YY/MM/DD).";
-        const string CHECKDATE_VALUE_TIP = "Check date can not be future date.";
-        const string CHECKDATE_NOT_FOUND_TIP = "Record of same Date Not found.";
-        const string RECORD_NOT_FOUND_TIP = "Record Not found.";
-        const string NAME_EXISTED_TIP = "Existed!"; //"Employee with same Name existed, try new one!";
-        const string BODY_TEMPERATURE_VALUE_TIP = "Human Body Temperature should be 35 - 43.";
-        const string BODY_TEMPERATURE_TYPE_TIP = "Not valid Temperature type (Numbers)."; //"Only numerical value is allowed for Temperature.";
-        const string HAS_HUBEI_TRAVEL_HISTORY_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
-        const string HAS_SYMPTOMS_VALUE_TIP = "Only \"yes/y/no/n\" (case insensitive) is allowed.";
+        readonly string GIN_NUMBER_EXISTED_TIP;
+        readonly string GIN_NUMBER_TYPE_TIP;
+        readonly string GIN_NUMBER_NOT_FOUND_TIP;
+        readonly string CHECKDATE_VALUE_TIP;
+        readonly string CHECKDATE_NOT_FOUND_TIP;
+        readonly string RECORD_NOT_FOUND_TIP;
+        readonly string NAME_EXISTED_TIP;
+        readonly string BODY_TEMPERATURE_VALUE_TIP;
+        readonly string BODY_TEMPERATURE_TYPE_TIP;
 
 
         private EmployeeRecords employeeRecords;
-        private BindingList<EmployeeRecord> previousBindingList;
         private bool recordUnchanged;
 
         public MainForm()
         {
             InitializeComponent();
 
+            GIN_NUMBER_EXISTED_TIP = "Existed!"; //"Employee with same GinNumber existed, try new one!";
+            GIN_NUMBER_TYPE_TIP = "? Number Only";//"Not valid GinNumber type (Integer)."; //"Only integer is allowed for ginNumber.";
+            GIN_NUMBER_NOT_FOUND_TIP = "X Not Found";//"No such GinNumber found.";//"Record of same GinNumber Not found.";
+            CHECKDATE_VALUE_TIP = "Check date can not be future date.";
+            CHECKDATE_NOT_FOUND_TIP = "Record of same Date Not found.";
+            RECORD_NOT_FOUND_TIP = "Record Not found.";
+            NAME_EXISTED_TIP = "Existed!"; //"Employee with same Name existed, try new one!";
+            BODY_TEMPERATURE_VALUE_TIP = "Human Body Temperature should be 35 - 43.";
+            BODY_TEMPERATURE_TYPE_TIP = "Not valid Temperature type (Numbers)."; //"Only numerical value is allowed for Temperature.";
+
             employeeRecords = new EmployeeRecords();
 
-            employeeBindingSource.DataSource = employeeRecords.RecordList;
+            FilterRecords();
             employeeDatabaseDataGridView.DataSource = employeeBindingSource;
-
-            previousBindingList = employeeBindingSource.DataSource as BindingList<EmployeeRecord>;
 
             recordUnchanged = false;
         }
+
+        // Validate input with tipinfo
 
         private void AddTipInfoForInvalidInput(TextBox textbox, Label tipLabel, string tipInfo, DataValidator dataValidator)
         {
             if (!dataValidator(textbox.Text.Trim()))
             {
-                textbox.BackColor = Color.FromArgb(255, 186, 205);
+                //textbox.BackColor = Color.FromArgb(255, 186, 205);
                 tipLabel.Text = tipInfo;
+                tipLabel.ForeColor = Color.Red;
             }
         }
 
@@ -62,8 +68,9 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             if (!dataValidator(textbox.Text.Trim(), employeeRecords))
             {
-                textbox.BackColor = Color.FromArgb(255, 186, 205);
+                //textbox.BackColor = Color.FromArgb(255, 186, 205);
                 tipLabel.Text = tipInfo;
+                tipLabel.ForeColor = Color.Red;
             }
         }
 
@@ -71,7 +78,7 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text.Trim()))
             {
-                textbox.BackColor = Color.White;
+                //textbox.BackColor = Color.White;
                 tipLabel.Text = "";
             }
         }
@@ -80,10 +87,26 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text.Trim(), employeeRecords))
             {
-                textbox.BackColor = Color.White;
+                //textbox.BackColor = Color.White;
                 tipLabel.Text = "";
             }
         }
+
+        private void ValidExistedGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
+        {
+            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
+            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_TYPE_TIP, WFAPPInputValidator.IsValidGinNumberType);
+            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidExistedGinNumber);
+        }
+
+        private void ValidBodyTemperatureInputWithTipInfo(TextBox textbox, Label tipLabel)
+        {
+            AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_VALUE_TIP, WFAPPInputValidator.IsValidBodyTemperatureValue);
+            AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_TYPE_TIP, WFAPPInputValidator.IsValidBodyTemperatureType);
+            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidBodyTemperature);
+        }
+
+        // 
 
         private bool IsAllItemsValid()
         {
@@ -128,111 +151,11 @@ namespace EmployeeHealthRecord.WFApp.v3
             return emptyItems;
         }
 
-        private void RefreshEmployeeAndSuspectEmployeeDatabaseGridView()
-        {
-            if (viewOnlySuspectCheckBox.Checked)
-            {
-                previousBindingList = employeeBindingSource.DataSource as BindingList<EmployeeRecord>;
-                BindingList<EmployeeRecord> records = employeeBindingSource.DataSource as BindingList<EmployeeRecord>;
-
-                employeeBindingSource.DataSource = GetOnlySuspectRecord(records);
-            }
-            else
-            {
-                employeeBindingSource.DataSource = previousBindingList;
-            }
-        }
-
-
-        private BindingList<EmployeeRecord> GetOnlySuspectRecord(BindingList<EmployeeRecord> records)
-        {
-            BindingList<EmployeeRecord> suspectRecords = new BindingList<EmployeeRecord>();
-            foreach (var record in records)
-            {
-                if (!string.IsNullOrEmpty(record.GetAbnormalInfo()))
-                {
-                    suspectRecords.Add(record);
-                }
-            }
-            return suspectRecords;
-        }
-
-        private void SearchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            string ginNumber;
-            string checkDate;
-
-            switch (WFAPPInputValidator.GetSearchTextType(searchTextBox.Text.Trim()))
-            {
-                case "Number":
-                    ValidExistedGinNumberInputWithTipInfo(searchTextBox, searchTipLabel);
-                    ginNumber = searchTextBox.Text.Trim();
-                    if (WFAPPInputValidator.IsValidExistedGinNumber(ginNumber, employeeRecords))
-                    {
-                        employeeBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(employeeRecords.GetAllRecordsOfSpecificEmployee(ginNumber).ToArray());
-                    }
-                    break;
-                case "Time":
-                    checkDate = searchTextBox.Text.Trim();
-                    if (!WFAPPInputValidator.IsValidExistedCheckDate(checkDate, employeeRecords))
-                    {
-                        searchTextBox.BackColor = Color.FromArgb(255, 186, 205);
-                        searchTipLabel.Text = CHECKDATE_NOT_FOUND_TIP;
-                    }
-                    else
-                    {
-                        searchTextBox.BackColor = Color.White;
-                        searchTipLabel.Text = "";
-
-                        employeeBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(employeeRecords.GetAllRecordsOfSpecificCheckDate(checkDate).ToArray());
-                    }
-                    break;
-                case "Record":
-
-                    ClearHealthInfoInput();
-
-                    string searchText = searchTextBox.Text;
-                    ginNumber = searchText.Split('&')[0];
-                    checkDate = searchText.Split('&')[1];
-                    if (!WFAPPInputValidator.IsValidExistedRecord(ginNumber, checkDate, employeeRecords))
-                    {
-                        searchTextBox.BackColor = Color.FromArgb(255, 186, 205);
-                        searchTipLabel.Text = RECORD_NOT_FOUND_TIP;
-                    }
-                    else
-                    {
-                        searchTextBox.BackColor = Color.White;
-                        searchTipLabel.Text = "";
-
-                        ShowCurrentEmployeeHealthInfo(ginNumber, checkDate);
-
-                        recordUnchanged = true;
-
-                        employeeBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(employeeRecords.GetEmployeeRecordGivenSpecificDate(ginNumber, checkDate));
-                    }
-                    break;
-                case "Invalid":
-                    ClearHealthInfoInput();
-                    employeeBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(employeeRecords.GetAllRecords().ToArray());
-                    searchTextBox.BackColor = Color.FromArgb(255, 186, 205);
-                    searchTipLabel.Text = SEARCH_TEXT_UNVALID_TIP;
-                    break;
-                case "Empty":
-                    ClearHealthInfoInput();
-                    employeeBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(employeeRecords.GetAllRecords().ToArray());
-                    searchTextBox.BackColor = Color.White;
-                    searchTipLabel.Text = "";
-                    break;
-            }
-        }
-
-
-
         private void ShowCurrentEmployeeHealthInfo(string ginNumber, string checkDate)
         {
             EmployeeRecord employeeRecord = employeeRecords.GetEmployeeRecordGivenSpecificDate(ginNumber, checkDate);
 
-            if(employeeRecord != null)
+            if (employeeRecord != null)
             {
                 ginNumberTextBox.Text = employeeRecord.GinNumber;
                 nameTextBox.Text = employeeRecord.Name;
@@ -255,132 +178,6 @@ namespace EmployeeHealthRecord.WFApp.v3
             notesRichTextBox.Text = "";
         }
 
-        private void ValidExistedGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
-        {
-            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
-            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_TYPE_TIP, WFAPPInputValidator.IsValidGinNumberType);
-            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidExistedGinNumber);
-        }
-
-        private void ViewOnlySuspectCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            RefreshEmployeeAndSuspectEmployeeDatabaseGridView();
-        }
-
-        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ImportDatabaseFromFile();
-        }
-
-        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveDatabaseToFile();
-        }
-
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void addNewRecordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // UNDONE
-        }
-
-        private void ViewCodeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // HACK
-            System.Diagnostics.Process.Start("https://github.com/kristol07/Csharp--/tree/master/EmployeeHealthRecord.WFApp.v3");
-        }
-
-        private void AboutHealthRecorderToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show("This is an application for helping recording and management of employee health info during the outbreak of COVID-19.", "About Employee Health Recorder");
-        }
-
-        private void GinNumberTextBox_TextChanged(object sender, EventArgs e)
-        {
-            AddTipInfoForInvalidInput(ginNumberTextBox, ginNumberTipLabel, GIN_NUMBER_TYPE_TIP, WFAPPInputValidator.IsValidGinNumberType);
-            ClearTipInfoWhenInputIsEmptyOrValid(ginNumberTextBox, ginNumberTipLabel, WFAPPInputValidator.IsValidGinNumberType);
-
-            recordUnchanged = false;
-        }
-
-        private void NameTextBox_TextChanged(object sender, EventArgs e)
-        {
-            recordUnchanged = false;
-        }
-
-        private void CheckdateTimePicker_ValueChanged(object sender, EventArgs e)
-        {
-            if (!WFAPPInputValidator.IsValidCheckDateValue(checkdateTimePicker.Value.ToShortDateString()))
-            {
-                checkdateTipLabel.Text = CHECKDATE_VALUE_TIP;
-            }
-            else
-            {
-                checkdateTipLabel.Text = "";
-            }
-
-            recordUnchanged = false;
-        }
-
-        private void BodyTemperatureTextBox_TextChanged(object sender, EventArgs e)
-        {
-            ValidBodyTemperatureInputWithTipInfo(bodyTemperatureTextBox, bodyTemperatureTipLabel);
-
-            recordUnchanged = false;
-        }
-
-        private void ValidBodyTemperatureInputWithTipInfo(TextBox textbox, Label tipLabel)
-        {
-            AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_VALUE_TIP, WFAPPInputValidator.IsValidBodyTemperatureValue);
-            AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_TYPE_TIP, WFAPPInputValidator.IsValidBodyTemperatureType);
-            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidBodyTemperature);
-        }
-
-        private void HasHubeiTravelHistoryCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            recordUnchanged = false;
-        }
-
-        private void HasSymptomsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            recordUnchanged = false;
-        }
-
-        private void NotesRichTextBox_TextChanged(object sender, EventArgs e)
-        {
-            recordUnchanged = false;
-        }
-
-        private void SaveButton_Click(object sender, EventArgs e)
-        {
-            if (GetEmptyInputItems().Count != 0)
-            {
-                string errorMessage = GetErrorMessageWhenUpdate();
-                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK);
-                return;
-            }
-
-            if (!IsAllItemsValid())
-            {
-                MessageBox.Show("Items invalid, check items labeled with correcting tip.", "Error", MessageBoxButtons.OK);
-                return;
-            }
-
-            if (WFAPPInputValidator.IsValidExistedRecord(ginNumberTextBox.Text.Trim(), checkdateTimePicker.Value.ToShortDateString(), employeeRecords))
-            {
-                string confirmMessage = "You are trying to update existed record, are you sure?";
-                TrySaveWithConfirmMessage(confirmMessage);
-            }
-            else if (WFAPPInputValidator.IsValidNewRecord(ginNumberTextBox.Text.Trim(), checkdateTimePicker.Value.ToShortDateString(), employeeRecords))
-            {
-                string confirmMessage = "You are trying to add new record, are you sure?";
-                TrySaveWithConfirmMessage(confirmMessage);
-            }
-        }
-
         private void TrySaveWithConfirmMessage(string confirmMessage)
         {
             if (MessageBox.Show(confirmMessage, "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
@@ -396,73 +193,27 @@ namespace EmployeeHealthRecord.WFApp.v3
                 employeeRecords.RemoveRecord(ginNumber, checkDate);
                 employeeRecords.AddRecord(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
 
-                employeeBindingSource.DataSource = employeeRecords.RecordList;
-                UpdateAutoCompleteStringForSearchTextBox();
+                FilterRecords();
+                UpdateAutoCompleteStringForFilterGinNumberTextBox(filterGinNumberTextBox);
 
                 MessageBox.Show($"Record of Employee \"{name}\" with GinNumber \"{ginNumber}\" in \"{checkDate}\" updated.", "Update Employee", MessageBoxButtons.OK);
 
                 //ClearHealthInfoInput();
-                string memorySearchText = searchTextBox.Text;
-                searchTextBox.Text = "";
-                searchTextBox.Text = memorySearchText;
+                string memorySearchText = filterGinNumberTextBox.Text;
+                filterGinNumberTextBox.Text = "";
+                filterGinNumberTextBox.Text = memorySearchText;
             }
         }
 
-        private void UpdateAutoCompleteStringForSearchTextBox()
+        // Update autocomplete source for textbox
+        private void UpdateAutoCompleteStringForFilterGinNumberTextBox(TextBox textBox)
         {
             AutoCompleteStringCollection existedGinNumber = new AutoCompleteStringCollection();
             existedGinNumber.AddRange(employeeRecords.RecordsDatabase.Keys.ToArray());
-            searchTextBox.AutoCompleteCustomSource = existedGinNumber;
+            textBox.AutoCompleteCustomSource = existedGinNumber;
         }
 
-        private void DeleteButton_Click(object sender, EventArgs e)
-        {
-            if (recordUnchanged == true)
-            {
-                if(MessageBox.Show("You are trying to delete one record, are you sure?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
-                {
-                    employeeRecords.RemoveRecord(ginNumberTextBox.Text, checkdateTimePicker.Value);
-
-                    employeeBindingSource.DataSource = employeeRecords.RecordList;
-
-                    //ClearHealthInfoInput();
-                    string memorySearchText = searchTextBox.Text;
-                    searchTextBox.Text = "";
-                    searchTextBox.Text = memorySearchText;
-                }
-            }
-            else
-            {
-                MessageBox.Show("You have changes unsaved, try save them first!", "Error", MessageBoxButtons.OK);
-            }
-        }
-
-        private void clearButton_Click(object sender, EventArgs e)
-        {
-            ClearHealthInfoInput();
-            searchTextBox.Text = "";
-            
-        }
-
-        private void ViewOnlySuspectEployeeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            employeeBindingSource.DataSource = employeeRecords.SuspectRecordList;
-        }
-
-        private void ViewAllEmployeesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            employeeBindingSource.DataSource = employeeRecords.RecordList;
-        }
-
-        private void ImportFromFileToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ImportDatabaseFromFile();
-        }
-
-        private void SaveAsToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            SaveDatabaseToFile();
-        }
+        // data file operation
 
         private void ImportDatabaseFromFile()
         {
@@ -510,6 +261,225 @@ namespace EmployeeHealthRecord.WFApp.v3
                         break;
                 }
             }
+        }
+
+        /////////////// Filter Control Events /////////////////
+
+        private void FilterGinNumberTextBox_TextChanged(object sender, EventArgs e)
+        {
+            UpdateAutoCompleteStringForFilterGinNumberTextBox(filterGinNumberTextBox);
+
+            ValidExistedGinNumberInputWithTipInfo(filterGinNumberTextBox, filterGinNumberTipLabel);
+
+            //ClearHealthInfoInput();
+
+            FilterRecords();
+        }
+
+        private void FilterDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            FilterRecords();
+        }
+
+        private void ViewOnlySuspectCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterRecords();
+        }
+
+        private void FilterCheckDateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            FilterRecords();
+        }
+
+        private void FilterCheckDateCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            FilterRecords();
+        }
+
+        private void FilterRecords()
+        {
+            List<EmployeeRecord> filterBindingList = employeeRecords.GetAllRecords();
+            if (filterCheckDateCheckBox.Checked)
+            {
+                filterBindingList = filterBindingList.FindAll(x => x.CheckDate.ToShortDateString() == filterCheckDateTimePicker.Value.ToShortDateString());
+            }
+
+            if (viewOnlySuspectCheckBox.Checked)
+            {
+                filterBindingList = filterBindingList.FindAll(x => !string.IsNullOrEmpty(x.GetAbnormalInfo()));
+            }
+
+            string ginNumber = filterGinNumberTextBox.Text.Trim();
+            if (WFAPPInputValidator.IsValidExistedGinNumber(ginNumber, employeeRecords))
+            {
+                filterBindingList = filterBindingList.FindAll(x => x.GinNumber == ginNumber);
+            }
+
+            employeeBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(filterBindingList.ToArray());
+        }
+
+        ///////////////// Menu Strips ///////////////////
+
+        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImportDatabaseFromFile();
+        }
+
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveDatabaseToFile();
+        }
+
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void addNewRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // UNDONE
+        }
+
+        private void ViewCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // HACK
+            System.Diagnostics.Process.Start("https://github.com/kristol07/Csharp--/tree/master/EmployeeHealthRecord.WFApp.v3");
+        }
+
+        private void AboutHealthRecorderToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("This is an application for helping recording and management of employee health info during the outbreak of COVID-19.", "About Employee Health Recorder");
+        }
+
+        //////////////// Update Control Events //////////////
+
+        private void GinNumberTextBox_TextChanged(object sender, EventArgs e)
+        {
+            AddTipInfoForInvalidInput(ginNumberTextBox, ginNumberTipLabel, GIN_NUMBER_TYPE_TIP, WFAPPInputValidator.IsValidGinNumberType);
+            ClearTipInfoWhenInputIsEmptyOrValid(ginNumberTextBox, ginNumberTipLabel, WFAPPInputValidator.IsValidGinNumberType);
+
+            recordUnchanged = false;
+        }
+
+        private void NameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            recordUnchanged = false;
+        }
+
+        private void CheckdateTimePicker_ValueChanged(object sender, EventArgs e)
+        {
+            if (!WFAPPInputValidator.IsValidCheckDateValue(checkdateTimePicker.Value.ToShortDateString()))
+            {
+                checkdateTipLabel.Text = CHECKDATE_VALUE_TIP;
+            }
+            else
+            {
+                checkdateTipLabel.Text = "";
+            }
+
+            recordUnchanged = false;
+        }
+
+        private void BodyTemperatureTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ValidBodyTemperatureInputWithTipInfo(bodyTemperatureTextBox, bodyTemperatureTipLabel);
+
+            recordUnchanged = false;
+        }
+
+        private void HasHubeiTravelHistoryCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            recordUnchanged = false;
+        }
+
+        private void HasSymptomsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            recordUnchanged = false;
+        }
+
+        private void NotesRichTextBox_TextChanged(object sender, EventArgs e)
+        {
+            recordUnchanged = false;
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+            if (GetEmptyInputItems().Count != 0)
+            {
+                string errorMessage = GetErrorMessageWhenUpdate();
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (!IsAllItemsValid())
+            {
+                MessageBox.Show("Items invalid, check items labeled with correcting tip.", "Error", MessageBoxButtons.OK);
+                return;
+            }
+
+            if (WFAPPInputValidator.IsValidExistedRecord(ginNumberTextBox.Text.Trim(), checkdateTimePicker.Value.ToShortDateString(), employeeRecords))
+            {
+                string confirmMessage = "You are trying to update existed record, are you sure?";
+                TrySaveWithConfirmMessage(confirmMessage);
+            }
+            else if (WFAPPInputValidator.IsValidNewRecord(ginNumberTextBox.Text.Trim(), checkdateTimePicker.Value.ToShortDateString(), employeeRecords))
+            {
+                string confirmMessage = "You are trying to add new record, are you sure?";
+                TrySaveWithConfirmMessage(confirmMessage);
+            }
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            if (recordUnchanged == true)
+            {
+                if (MessageBox.Show("You are trying to delete one record, are you sure?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    employeeRecords.RemoveRecord(ginNumberTextBox.Text, checkdateTimePicker.Value);
+
+                    FilterRecords();
+                    UpdateAutoCompleteStringForFilterGinNumberTextBox(filterGinNumberTextBox);
+
+                    //ClearHealthInfoInput();
+                    string memorySearchText = filterGinNumberTextBox.Text;
+                    filterGinNumberTextBox.Text = "";
+                    filterGinNumberTextBox.Text = memorySearchText;
+                }
+            }
+            else
+            {
+                MessageBox.Show("You have changes unsaved, try save them first!", "Error", MessageBoxButtons.OK);
+            }
+        }
+
+        private void ClearButton_Click(object sender, EventArgs e)
+        {
+            ClearHealthInfoInput();
+            filterGinNumberTextBox.Text = "";
+        }
+
+        ///////////////// ContextMenu Strips ////////////////
+
+        private void ViewOnlySuspectEployeeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            viewOnlySuspectCheckBox.Checked = true;
+            FilterRecords();
+        }
+
+        private void ViewAllEmployeesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            viewOnlySuspectCheckBox.Checked = false;
+            FilterRecords();
+        }
+
+        private void ImportFromFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ImportDatabaseFromFile();
+        }
+
+        private void SaveAsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SaveDatabaseToFile();
         }
 
     }
