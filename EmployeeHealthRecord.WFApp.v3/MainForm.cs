@@ -47,7 +47,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             employeeRecords = new EmployeeRecords();
 
             FilterRecords();
-            employeeDatabaseDataGridView.DataSource = employeeBindingSource;
+            employeeDatabaseDataGridView.DataSource = employeeRecordBindingSource;
 
             recordUnchanged = false;
         }
@@ -194,7 +194,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                 employeeRecords.AddRecord(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
 
                 FilterRecords();
-                UpdateAutoCompleteStringForFilterGinNumberTextBox(filterGinNumberTextBox);
+                UpdateAutoCompleteStringForFilterGinNumberTextBox();
 
                 MessageBox.Show($"Record of Employee \"{name}\" with GinNumber \"{ginNumber}\" in \"{checkDate}\" updated.", "Update Employee", MessageBoxButtons.OK);
 
@@ -206,11 +206,11 @@ namespace EmployeeHealthRecord.WFApp.v3
         }
 
         // Update autocomplete source for textbox
-        private void UpdateAutoCompleteStringForFilterGinNumberTextBox(TextBox textBox)
+        private void UpdateAutoCompleteStringForFilterGinNumberTextBox()
         {
             AutoCompleteStringCollection existedGinNumber = new AutoCompleteStringCollection();
             existedGinNumber.AddRange(employeeRecords.RecordsDatabase.Keys.ToArray());
-            textBox.AutoCompleteCustomSource = existedGinNumber;
+            filterGinNumberTextBox.AutoCompleteCustomSource = existedGinNumber;
         }
 
         // data file operation
@@ -225,7 +225,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                 switch (loadResult)
                 {
                     case "success":
-                        employeeBindingSource.DataSource = employeeRecords.RecordList;
+                        FilterRecords();
                         MessageBox.Show($"Database loading from {filePath} succeed.", "Loading Database", MessageBoxButtons.OK);
                         break;
                     case "formatError":
@@ -267,7 +267,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void FilterGinNumberTextBox_TextChanged(object sender, EventArgs e)
         {
-            UpdateAutoCompleteStringForFilterGinNumberTextBox(filterGinNumberTextBox);
+            UpdateAutoCompleteStringForFilterGinNumberTextBox();
 
             ValidExistedGinNumberInputWithTipInfo(filterGinNumberTextBox, filterGinNumberTipLabel);
 
@@ -315,12 +315,18 @@ namespace EmployeeHealthRecord.WFApp.v3
                 filterBindingList = filterBindingList.FindAll(x => x.GinNumber == ginNumber);
             }
 
-            employeeBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(filterBindingList.ToArray());
+            employeeRecordBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(filterBindingList.ToArray());
+
+            if(employeeDatabaseDataGridView.SelectedRows.Count > 0)
+            {
+                EmployeeRecord currentRecord = employeeDatabaseDataGridView.SelectedRows[0].DataBoundItem as EmployeeRecord;
+                ShowCurrentEmployeeHealthInfo(currentRecord.GinNumber, currentRecord.CheckDate.ToShortDateString());
+            }
         }
 
         ///////////////// Menu Strips ///////////////////
 
-        private void openFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ImportDatabaseFromFile();
         }
@@ -335,7 +341,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             this.Close();
         }
 
-        private void addNewRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddNewRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // UNDONE
         }
@@ -348,7 +354,9 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void AboutHealthRecorderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("This is an application for helping recording and management of employee health info during the outbreak of COVID-19.", "About Employee Health Recorder");
+            AboutBox aboutBox = new AboutBox();
+            aboutBox.ShowDialog();
+            //MessageBox.Show("This is an application for helping recording and management of employee health info during the outbreak of COVID-19.", "About Employee Health Recorder");
         }
 
         //////////////// Update Control Events //////////////
@@ -438,7 +446,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                     employeeRecords.RemoveRecord(ginNumberTextBox.Text, checkdateTimePicker.Value);
 
                     FilterRecords();
-                    UpdateAutoCompleteStringForFilterGinNumberTextBox(filterGinNumberTextBox);
+                    UpdateAutoCompleteStringForFilterGinNumberTextBox();
 
                     //ClearHealthInfoInput();
                     string memorySearchText = filterGinNumberTextBox.Text;
@@ -482,5 +490,59 @@ namespace EmployeeHealthRecord.WFApp.v3
             SaveDatabaseToFile();
         }
 
+        private void AddNewRecordToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            // UNDONE
+        }
+
+        private void DeleteCurrentRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // UNDONE
+        }
+
+        //////////////// Tool Strips /////////////////////
+
+        private void ImportRecordsToolStripButton_Click(object sender, EventArgs e)
+        {
+            ImportDatabaseFromFile();
+        }
+
+        private void SaveRecordsToolStripButton_Click(object sender, EventArgs e)
+        {
+            SaveDatabaseToFile();
+        }
+
+        private void AddRecordToolStripButton_Click(object sender, EventArgs e)
+        {
+            // UNDONE
+        }
+
+        private void SaveRecordToolStripButton_Click(object sender, EventArgs e)
+        {
+            // UNDONE
+        }
+
+        private void DeleteRecordToolStripButton_Click(object sender, EventArgs e)
+        {
+            // UNDONE
+        }
+
+        private void SearchToolStripTextBox_Click(object sender, EventArgs e)
+        {
+            SearchToolStripTextBox.ForeColor = Color.Black;
+            SearchToolStripTextBox.Text = "";
+        }
+
+        private void SearchToolStripTextBox_TextChanged(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void SearchToolStripTextBox_Leave(object sender, EventArgs e)
+        {
+            SearchToolStripTextBox.ForeColor = Color.Gray;
+            SearchToolStripTextBox.Text = "Search By GinNumber & CheckDate";
+        }
     }
 }

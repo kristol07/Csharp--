@@ -35,8 +35,11 @@
             this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.databaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutHealthRecorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +51,13 @@
             this.filterCheckDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.filterLabel = new System.Windows.Forms.Label();
             this.employeeDatabaseDataGridView = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.notesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.databaseContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,6 +66,7 @@
             this.viewAllEmployeesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewRecordToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteCurrentRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.employeeRecordBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.filterGinNumberTextBox = new System.Windows.Forms.TextBox();
             this.filterGinNumberTipLabel = new System.Windows.Forms.Label();
             this.viewOnlySuspectCheckBox = new System.Windows.Forms.CheckBox();
@@ -80,23 +91,18 @@
             this.deleteButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.hasSymptomsCheckBox = new System.Windows.Forms.CheckBox();
-            this.employeeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.saveButtonToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.ToolStrip = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.ImportRecordsToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.SaveRecordsToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.notesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.employeeRecordBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.AddRecordToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.SaveRecordToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.DeleteRecordToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.SearchToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.menuStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -106,6 +112,7 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
             this.databaseContextMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.ginNumberGroupBox.SuspendLayout();
@@ -113,9 +120,7 @@
             this.checkdateGroupBox.SuspendLayout();
             this.bodyTemperatureGroupBox.SuspendLayout();
             this.notesGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).BeginInit();
             this.ToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -124,7 +129,7 @@
             this.menuStrip.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.databaseToolStripMenuItem,
+            this.recordToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(3, 0);
             this.menuStrip.Name = "menuStrip";
@@ -144,39 +149,75 @@
             // 
             // openFileToolStripMenuItem
             // 
+            this.openFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openFileToolStripMenuItem.Image")));
             this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.openFileToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.O)));
+            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.openFileToolStripMenuItem.Text = "&Open File...";
-            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.OpenFileToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
+            this.saveAsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAsToolStripMenuItem.Image")));
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.S)));
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.saveAsToolStripMenuItem.Text = "&Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Q)));
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.exitToolStripMenuItem.Text = "E&xit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
-            // databaseToolStripMenuItem
+            // recordToolStripMenuItem
             // 
-            this.databaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewRecordToolStripMenuItem});
-            this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(75, 21);
-            this.databaseToolStripMenuItem.Text = "&Database";
+            this.recordToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNewRecordToolStripMenuItem,
+            this.saveRecordToolStripMenuItem,
+            this.deleteRecordToolStripMenuItem,
+            this.findRecordToolStripMenuItem});
+            this.recordToolStripMenuItem.Name = "recordToolStripMenuItem";
+            this.recordToolStripMenuItem.Size = new System.Drawing.Size(62, 21);
+            this.recordToolStripMenuItem.Text = "&Record";
             // 
             // addNewRecordToolStripMenuItem
             // 
+            this.addNewRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecordToolStripMenuItem.Image")));
             this.addNewRecordToolStripMenuItem.Name = "addNewRecordToolStripMenuItem";
-            this.addNewRecordToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
-            this.addNewRecordToolStripMenuItem.Text = "&Add New Record...";
-            this.addNewRecordToolStripMenuItem.Click += new System.EventHandler(this.addNewRecordToolStripMenuItem_Click);
+            this.addNewRecordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.addNewRecordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addNewRecordToolStripMenuItem.Text = "&Add";
+            this.addNewRecordToolStripMenuItem.Click += new System.EventHandler(this.AddNewRecordToolStripMenuItem_Click);
+            // 
+            // saveRecordToolStripMenuItem
+            // 
+            this.saveRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveRecordToolStripMenuItem.Image")));
+            this.saveRecordToolStripMenuItem.Name = "saveRecordToolStripMenuItem";
+            this.saveRecordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
+            this.saveRecordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveRecordToolStripMenuItem.Text = "&Save";
+            // 
+            // deleteRecordToolStripMenuItem
+            // 
+            this.deleteRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteRecordToolStripMenuItem.Image")));
+            this.deleteRecordToolStripMenuItem.Name = "deleteRecordToolStripMenuItem";
+            this.deleteRecordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
+            this.deleteRecordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteRecordToolStripMenuItem.Text = "&Delete";
+            // 
+            // findRecordToolStripMenuItem
+            // 
+            this.findRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("findRecordToolStripMenuItem.Image")));
+            this.findRecordToolStripMenuItem.Name = "findRecordToolStripMenuItem";
+            this.findRecordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.findRecordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.findRecordToolStripMenuItem.Text = "&Find";
             // 
             // helpToolStripMenuItem
             // 
@@ -189,7 +230,9 @@
             // 
             // viewCodeToolStripMenuItem
             // 
+            this.viewCodeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("viewCodeToolStripMenuItem.Image")));
             this.viewCodeToolStripMenuItem.Name = "viewCodeToolStripMenuItem";
+            this.viewCodeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F1)));
             this.viewCodeToolStripMenuItem.Size = new System.Drawing.Size(271, 22);
             this.viewCodeToolStripMenuItem.Text = "&View Code";
             this.viewCodeToolStripMenuItem.Click += new System.EventHandler(this.ViewCodeToolStripMenuItem_Click);
@@ -251,6 +294,7 @@
             // 
             // filterGinNumberLabel
             // 
+            this.filterGinNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.filterGinNumberLabel.AutoSize = true;
             this.filterGinNumberLabel.BackColor = System.Drawing.SystemColors.Control;
             this.filterGinNumberLabel.Location = new System.Drawing.Point(585, 22);
@@ -310,12 +354,74 @@
             this.employeeDatabaseDataGridView.ContextMenuStrip = this.databaseContextMenuStrip;
             this.employeeDatabaseDataGridView.DataSource = this.employeeRecordBindingSource;
             this.employeeDatabaseDataGridView.Location = new System.Drawing.Point(9, 48);
+            this.employeeDatabaseDataGridView.MultiSelect = false;
             this.employeeDatabaseDataGridView.Name = "employeeDatabaseDataGridView";
             this.employeeDatabaseDataGridView.ReadOnly = true;
             this.employeeDatabaseDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.employeeDatabaseDataGridView.RowTemplate.Height = 23;
-            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(865, 539);
+            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(865, 535);
             this.employeeDatabaseDataGridView.TabIndex = 4;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "GinNumber";
+            this.dataGridViewTextBoxColumn1.HeaderText = "GinNumber";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            this.dataGridViewTextBoxColumn2.Width = 68;
+            // 
+            // checkDateDataGridViewTextBoxColumn
+            // 
+            this.checkDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.checkDateDataGridViewTextBoxColumn.DataPropertyName = "CheckDate";
+            this.checkDateDataGridViewTextBoxColumn.HeaderText = "CheckDate";
+            this.checkDateDataGridViewTextBoxColumn.Name = "checkDateDataGridViewTextBoxColumn";
+            this.checkDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.checkDateDataGridViewTextBoxColumn.Width = 95;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "BodyTemperature";
+            this.dataGridViewTextBoxColumn3.HeaderText = "BodyTemperature";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 138;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn1.DataPropertyName = "HasHubeiTravelHistory";
+            this.dataGridViewCheckBoxColumn1.HeaderText = "HasHubeiTravelHistory";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn1.Width = 146;
+            // 
+            // dataGridViewCheckBoxColumn2
+            // 
+            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn2.DataPropertyName = "HasSymptoms";
+            this.dataGridViewCheckBoxColumn2.HeaderText = "HasSymptoms";
+            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn2.Width = 97;
+            // 
+            // notesDataGridViewTextBoxColumn
+            // 
+            this.notesDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.notesDataGridViewTextBoxColumn.DataPropertyName = "Notes";
+            this.notesDataGridViewTextBoxColumn.HeaderText = "Notes";
+            this.notesDataGridViewTextBoxColumn.Name = "notesDataGridViewTextBoxColumn";
+            this.notesDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // databaseContextMenuStrip
             // 
@@ -330,6 +436,7 @@
             // 
             // importFromFileToolStripMenuItem
             // 
+            this.importFromFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFromFileToolStripMenuItem.Image")));
             this.importFromFileToolStripMenuItem.Name = "importFromFileToolStripMenuItem";
             this.importFromFileToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.importFromFileToolStripMenuItem.Text = "Import From...";
@@ -337,6 +444,7 @@
             // 
             // saveAsToolStripMenuItem1
             // 
+            this.saveAsToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("saveAsToolStripMenuItem1.Image")));
             this.saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
             this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(206, 22);
             this.saveAsToolStripMenuItem1.Text = "Save As...";
@@ -367,20 +475,27 @@
             // 
             // addNewRecordToolStripMenuItem1
             // 
+            this.addNewRecordToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecordToolStripMenuItem1.Image")));
             this.addNewRecordToolStripMenuItem1.Name = "addNewRecordToolStripMenuItem1";
             this.addNewRecordToolStripMenuItem1.Size = new System.Drawing.Size(206, 22);
             this.addNewRecordToolStripMenuItem1.Text = "Add New Record";
+            this.addNewRecordToolStripMenuItem1.Click += new System.EventHandler(this.AddNewRecordToolStripMenuItem1_Click);
             // 
             // deleteCurrentRecordToolStripMenuItem
             // 
+            this.deleteCurrentRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteCurrentRecordToolStripMenuItem.Image")));
             this.deleteCurrentRecordToolStripMenuItem.Name = "deleteCurrentRecordToolStripMenuItem";
             this.deleteCurrentRecordToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.deleteCurrentRecordToolStripMenuItem.Text = "Delete Current Record";
+            this.deleteCurrentRecordToolStripMenuItem.Click += new System.EventHandler(this.DeleteCurrentRecordToolStripMenuItem_Click);
+            // 
+            // employeeRecordBindingSource
+            // 
+            this.employeeRecordBindingSource.DataSource = typeof(EmployeeHealthInfoRecord.EmployeeRecord);
             // 
             // filterGinNumberTextBox
             // 
-            this.filterGinNumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.filterGinNumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.filterGinNumberTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.filterGinNumberTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
             this.filterGinNumberTextBox.Location = new System.Drawing.Point(663, 19);
@@ -401,7 +516,7 @@
             // 
             // viewOnlySuspectCheckBox
             // 
-            this.viewOnlySuspectCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.viewOnlySuspectCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.viewOnlySuspectCheckBox.AutoSize = true;
             this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(337, 21);
             this.viewOnlySuspectCheckBox.Name = "viewOnlySuspectCheckBox";
@@ -686,109 +801,90 @@
             // ToolStrip
             // 
             this.ToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
+            this.ImportRecordsToolStripButton,
+            this.SaveRecordsToolStripButton,
             this.toolStripSeparator1,
-            this.toolStripTextBox1});
+            this.AddRecordToolStripButton,
+            this.SaveRecordToolStripButton,
+            this.DeleteRecordToolStripButton,
+            this.toolStripSeparator2,
+            this.SearchToolStripTextBox});
             this.ToolStrip.Location = new System.Drawing.Point(3, 25);
             this.ToolStrip.Name = "ToolStrip";
             this.ToolStrip.Size = new System.Drawing.Size(1209, 25);
             this.ToolStrip.TabIndex = 1;
             this.ToolStrip.Text = "toolStrip1";
             // 
-            // toolStripButton1
+            // ImportRecordsToolStripButton
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton1.Text = "toolStripButton1";
+            this.ImportRecordsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.ImportRecordsToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("ImportRecordsToolStripButton.Image")));
+            this.ImportRecordsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ImportRecordsToolStripButton.Name = "ImportRecordsToolStripButton";
+            this.ImportRecordsToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.ImportRecordsToolStripButton.Text = "Import From File";
+            this.ImportRecordsToolStripButton.Click += new System.EventHandler(this.ImportRecordsToolStripButton_Click);
             // 
-            // toolStripButton2
+            // SaveRecordsToolStripButton
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButton2.Text = "toolStripButton2";
+            this.SaveRecordsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SaveRecordsToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("SaveRecordsToolStripButton.Image")));
+            this.SaveRecordsToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SaveRecordsToolStripButton.Name = "SaveRecordsToolStripButton";
+            this.SaveRecordsToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.SaveRecordsToolStripButton.Text = "Save To File";
+            this.SaveRecordsToolStripButton.Click += new System.EventHandler(this.SaveRecordsToolStripButton_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // toolStripTextBox1
+            // AddRecordToolStripButton
             // 
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
-            this.toolStripTextBox1.Name = "toolStripTextBox1";
-            this.toolStripTextBox1.Size = new System.Drawing.Size(100, 25);
+            this.AddRecordToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AddRecordToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("AddRecordToolStripButton.Image")));
+            this.AddRecordToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AddRecordToolStripButton.Name = "AddRecordToolStripButton";
+            this.AddRecordToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.AddRecordToolStripButton.Text = "Add New Record";
+            this.AddRecordToolStripButton.Click += new System.EventHandler(this.AddRecordToolStripButton_Click);
             // 
-            // dataGridViewTextBoxColumn1
+            // SaveRecordToolStripButton
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "GinNumber";
-            this.dataGridViewTextBoxColumn1.HeaderText = "GinNumber";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.SaveRecordToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.SaveRecordToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("SaveRecordToolStripButton.Image")));
+            this.SaveRecordToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.SaveRecordToolStripButton.Name = "SaveRecordToolStripButton";
+            this.SaveRecordToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.SaveRecordToolStripButton.Text = "Save Record";
+            this.SaveRecordToolStripButton.Click += new System.EventHandler(this.SaveRecordToolStripButton_Click);
             // 
-            // dataGridViewTextBoxColumn2
+            // DeleteRecordToolStripButton
             // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 68;
+            this.DeleteRecordToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DeleteRecordToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DeleteRecordToolStripButton.Image")));
+            this.DeleteRecordToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DeleteRecordToolStripButton.Name = "DeleteRecordToolStripButton";
+            this.DeleteRecordToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.DeleteRecordToolStripButton.Text = "Delete Record";
+            this.DeleteRecordToolStripButton.Click += new System.EventHandler(this.DeleteRecordToolStripButton_Click);
             // 
-            // checkDateDataGridViewTextBoxColumn
+            // SearchToolStripTextBox
             // 
-            this.checkDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.checkDateDataGridViewTextBoxColumn.DataPropertyName = "CheckDate";
-            this.checkDateDataGridViewTextBoxColumn.HeaderText = "CheckDate";
-            this.checkDateDataGridViewTextBoxColumn.Name = "checkDateDataGridViewTextBoxColumn";
-            this.checkDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.checkDateDataGridViewTextBoxColumn.Width = 95;
+            this.SearchToolStripTextBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
+            this.SearchToolStripTextBox.ForeColor = System.Drawing.Color.Gray;
+            this.SearchToolStripTextBox.Name = "SearchToolStripTextBox";
+            this.SearchToolStripTextBox.Size = new System.Drawing.Size(250, 25);
+            this.SearchToolStripTextBox.Text = "Search By GinNumber or CheckDate";
+            this.SearchToolStripTextBox.Leave += new System.EventHandler(this.SearchToolStripTextBox_Leave);
+            this.SearchToolStripTextBox.Click += new System.EventHandler(this.SearchToolStripTextBox_Click);
+            this.SearchToolStripTextBox.TextChanged += new System.EventHandler(this.SearchToolStripTextBox_TextChanged);
             // 
-            // dataGridViewTextBoxColumn3
+            // toolStripSeparator2
             // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "BodyTemperature";
-            this.dataGridViewTextBoxColumn3.HeaderText = "BodyTemperature";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 138;
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewCheckBoxColumn1.DataPropertyName = "HasHubeiTravelHistory";
-            this.dataGridViewCheckBoxColumn1.HeaderText = "HasHubeiTravelHistory";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn1.Width = 146;
-            // 
-            // dataGridViewCheckBoxColumn2
-            // 
-            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewCheckBoxColumn2.DataPropertyName = "HasSymptoms";
-            this.dataGridViewCheckBoxColumn2.HeaderText = "HasSymptoms";
-            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
-            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn2.Width = 97;
-            // 
-            // notesDataGridViewTextBoxColumn
-            // 
-            this.notesDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.notesDataGridViewTextBoxColumn.DataPropertyName = "Notes";
-            this.notesDataGridViewTextBoxColumn.HeaderText = "Notes";
-            this.notesDataGridViewTextBoxColumn.Name = "notesDataGridViewTextBoxColumn";
-            this.notesDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // employeeRecordBindingSource
-            // 
-            this.employeeRecordBindingSource.DataSource = typeof(EmployeeHealthInfoRecord.EmployeeRecord);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 
@@ -798,7 +894,9 @@
             this.Controls.Add(this.ToolStrip);
             this.Controls.Add(this.menuStrip);
             this.Controls.Add(this.panel1);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
+            this.MinimumSize = new System.Drawing.Size(1230, 39);
             this.Name = "MainForm";
             this.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
             this.Text = "Employee Health Recorder v3";
@@ -813,6 +911,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).EndInit();
             this.databaseContextMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
@@ -825,10 +924,8 @@
             this.bodyTemperatureGroupBox.ResumeLayout(false);
             this.bodyTemperatureGroupBox.PerformLayout();
             this.notesGroupBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.employeeBindingSource)).EndInit();
             this.ToolStrip.ResumeLayout(false);
             this.ToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -840,7 +937,7 @@
         private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem recordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addNewRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewCodeToolStripMenuItem;
@@ -852,7 +949,6 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.BindingSource employeeBindingSource;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.GroupBox ginNumberGroupBox;
         private System.Windows.Forms.TextBox ginNumberTextBox;
@@ -903,11 +999,18 @@
         private System.Windows.Forms.ToolStrip ToolStrip;
         private System.Windows.Forms.CheckBox filterCheckDateCheckBox;
         private System.Windows.Forms.DateTimePicker filterCheckDateTimePicker;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton SaveRecordsToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripTextBox toolStripTextBox1;
         private System.Windows.Forms.Label filterGinNumberLabel;
+        private System.Windows.Forms.ToolStripButton AddRecordToolStripButton;
+        private System.Windows.Forms.ToolStripButton SaveRecordToolStripButton;
+        private System.Windows.Forms.ToolStripButton DeleteRecordToolStripButton;
+        private System.Windows.Forms.ToolStripMenuItem saveRecordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteRecordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findRecordToolStripMenuItem;
+        private System.Windows.Forms.ToolStripButton ImportRecordsToolStripButton;
+        private System.Windows.Forms.ToolStripTextBox SearchToolStripTextBox;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 
