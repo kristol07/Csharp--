@@ -46,16 +46,43 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RecordDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecordDetailForm.Designer.cs">
+      <DependentUpon>RecordDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateRecordForm.Designer.cs">
+      <DependentUpon>UpdateRecordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordDetailForm.resx">
+      <DependentUpon>RecordDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateRecordForm.resx">
+      <DependentUpon>UpdateRecordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -66,6 +93,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Properties\DataSources\EmployeeHealthInfoRecord.EmployeeRecord.datasource" />
     <None Include="Properties\DataSources\EmployeeHealthRecord.Employee.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -81,10 +109,34 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Employee_Health_Record\Employee_Health_Record.csproj">
-      <Project>{70cf8a23-0c27-49cd-a9ff-1bcd51725789}</Project>
-      <Name>Employee_Health_Record</Name>
+    <ProjectReference Include="..\EmployeeHealthInfoRecord\EmployeeHealthInfoRecord.csproj">
+      <Project>{e2b6f4fa-f7b8-41f6-be95-f21b7b86bf66}</Project>
+      <Name>EmployeeHealthInfoRecord</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Icons\Add_grey_16x.png" />
+    <Content Include="Icons\DeleteListItem_16x.png" />
+    <Content Include="Icons\Edit_grey_16x.png" />
+    <Content Include="Icons\Exit_16x.png" />
+    <Content Include="Icons\GitHub-Mark-32px.png" />
+    <Content Include="Icons\OpenfileDialog_grey_16x.png" />
+    <Content Include="Icons\SaveAs_16x.png" />
+    <Content Include="Icons\Save_grey_16x.png" />
+    <Content Include="Icons\Search_16x.png" />
+    <Content Include="Icons\status\Edit_16x.png" />
+    <Content Include="Icons\status\StatusAlert_16x.png" />
+    <Content Include="Icons\status\StatusHelp_16x.png" />
+    <Content Include="Icons\status\StatusInvalid_16x.png" />
+    <Content Include="Icons\status\StatusNo_16x.png" />
+    <Content Include="Icons\status\StatusOffline_16x.png" />
+    <Content Include="Icons\status\StatusOK_blue_16x.png" />
+    <Content Include="Icons\status\StatusUpdate_16x.png" />
+    <Content Include="Icons\status\StatusWarning_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
