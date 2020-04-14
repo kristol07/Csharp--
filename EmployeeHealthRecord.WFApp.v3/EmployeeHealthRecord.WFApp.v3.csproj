@@ -58,6 +58,18 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="RecordDetailForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RecordDetailForm.Designer.cs">
+      <DependentUpon>RecordDetailForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateRecordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateRecordForm.Designer.cs">
+      <DependentUpon>UpdateRecordForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="AboutBox.resx">
@@ -65,6 +77,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordDetailForm.resx">
+      <DependentUpon>RecordDetailForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateRecordForm.resx">
+      <DependentUpon>UpdateRecordForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -103,11 +121,22 @@
   <ItemGroup>
     <Content Include="Icons\Add_grey_16x.png" />
     <Content Include="Icons\DeleteListItem_16x.png" />
-    <Content Include="Icons\GitHub-Mark-64px.png" />
+    <Content Include="Icons\Edit_grey_16x.png" />
+    <Content Include="Icons\Exit_16x.png" />
+    <Content Include="Icons\GitHub-Mark-32px.png" />
     <Content Include="Icons\OpenfileDialog_grey_16x.png" />
     <Content Include="Icons\SaveAs_16x.png" />
     <Content Include="Icons\Save_grey_16x.png" />
     <Content Include="Icons\Search_16x.png" />
+    <Content Include="Icons\status\Edit_16x.png" />
+    <Content Include="Icons\status\StatusAlert_16x.png" />
+    <Content Include="Icons\status\StatusHelp_16x.png" />
+    <Content Include="Icons\status\StatusInvalid_16x.png" />
+    <Content Include="Icons\status\StatusNo_16x.png" />
+    <Content Include="Icons\status\StatusOffline_16x.png" />
+    <Content Include="Icons\status\StatusOK_blue_16x.png" />
+    <Content Include="Icons\status\StatusUpdate_16x.png" />
+    <Content Include="Icons\status\StatusWarning_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

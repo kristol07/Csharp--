@@ -58,9 +58,9 @@ namespace EmployeeHealthInfoRecord
             return Int32.TryParse(ginNumber, out _);
         }
 
-        public static bool IsValidNewRecord(string ginNumber, string date, EmployeeRecords recordsDatabase)
+        public static bool IsValidNewRecord(string ginNumber, string checkdate, EmployeeRecords recordsDatabase)
         {
-            if (recordsDatabase.HasEmployeeRecordGivenSpecificDate(ginNumber, date))
+            if (recordsDatabase.HasEmployeeRecordGivenSpecificDate(ginNumber, checkdate))
             {
                 return false;
             }
@@ -70,9 +70,9 @@ namespace EmployeeHealthInfoRecord
             }
         }
 
-        public static bool IsValidExistedRecord(string ginNumber, string date, EmployeeRecords recordsDatabase)
+        public static bool IsValidExistedRecord(string ginNumber, string checkdate, EmployeeRecords recordsDatabase)
         {
-            if (recordsDatabase.HasEmployeeRecordGivenSpecificDate(ginNumber, date))
+            if (recordsDatabase.HasEmployeeRecordGivenSpecificDate(ginNumber, checkdate))
             {
                 return true;
             }
@@ -124,6 +124,11 @@ namespace EmployeeHealthInfoRecord
             return IsValidBodyTemperatureType(bodyTemperature) && IsValidBodyTemperatureValue(bodyTemperature);
         }
 
+        public static bool IsNormalBodyTemperature(double bodyTemperature)
+        {
+            return bodyTemperature <= 37.3;
+        }
+
         public static bool IsValidCheckDateValue(string checkDate)
         {
             DateTime result;
@@ -167,11 +172,21 @@ namespace EmployeeHealthInfoRecord
             return options.Contains(hasHubeiTravelHistoryChoice.ToLower());
         }
 
+        public static bool IsNormalHubeiTravelHistoryChoice(bool hasHubeiTravelHistoryChoice)
+        {
+            return hasHubeiTravelHistoryChoice == false;
+        }
+
         public static bool IsValidHasSymptomsChoice(string hasSymptomsChoice)
         {
             string[] options = { "yes", "y", "Y", "no", "n", "N" };
 
             return options.Contains(hasSymptomsChoice.ToLower());
+        }
+
+        public static bool IsNormalSymtomsChoice(bool hasSymptomsChoice)
+        {
+            return hasSymptomsChoice == false;
         }
     }
 }
