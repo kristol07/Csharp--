@@ -17,6 +17,8 @@ namespace EmployeeHealthRecord.WFApp.v3
         EmployeeRecord currentRecord;
         EmployeeRecords employeeRecords;
 
+        WFAPPInputValidator inputValidator;
+
         public event UpdateView updatedRecords;
 
         public RecordDetailForm(EmployeeRecord currentRecord, EmployeeRecords employeeRecords)
@@ -24,6 +26,8 @@ namespace EmployeeHealthRecord.WFApp.v3
             InitializeComponent();
             this.currentRecord = currentRecord;
             this.employeeRecords = employeeRecords;
+
+            inputValidator = new WFAPPInputValidator();
 
             ShowCurrentRecordInfo();
         }
@@ -66,7 +70,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                 nameValue.Text = currentRecord.Name;
                 checkDateValue.Text = currentRecord.CheckDate.ToShortDateString();
                 temperatureValue.Text = currentRecord.BodyTemperature.ToString();
-                if(!WFAPPInputValidator.IsNormalBodyTemperature(currentRecord.BodyTemperature))
+                if(!inputValidator.IsNormalBodyTemperature(currentRecord.BodyTemperature))
                 {
                     temperatureValue.ForeColor = Color.Red;
                 }
@@ -75,7 +79,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                     temperatureValue.ForeColor = Color.Black;
                 }
                 hasHubeiTravelHistoryValue.Text = currentRecord.HasHubeiTravelHistory.ToString();
-                if(!WFAPPInputValidator.IsNormalHubeiTravelHistoryChoice(currentRecord.HasHubeiTravelHistory))
+                if(!inputValidator.IsNormalHubeiTravelHistoryChoice(currentRecord.HasHubeiTravelHistory))
                 {
                     hasHubeiTravelHistoryValue.ForeColor = Color.Red;
                 }
@@ -84,7 +88,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                     hasHubeiTravelHistoryValue.ForeColor = Color.Black;
                 }
                 hasSymptomsValue.Text = currentRecord.HasSymptoms.ToString();
-                if(!WFAPPInputValidator.IsNormalSymtomsChoice(currentRecord.HasSymptoms))
+                if(!inputValidator.IsNormalSymtomsChoice(currentRecord.HasSymptoms))
                 {
                     hasSymptomsValue.ForeColor = Color.Red;
                 }

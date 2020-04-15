@@ -53,6 +53,7 @@
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
     <Compile Include="ControlInputTipHelper.cs" />
+    <Compile Include="IconsImageResource.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -105,9 +106,6 @@
       <Project>{e2b6f4fa-f7b8-41f6-be95-f21b7b86bf66}</Project>
       <Name>EmployeeHealthInfoRecord</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

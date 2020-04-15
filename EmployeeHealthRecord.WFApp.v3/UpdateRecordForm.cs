@@ -11,7 +11,6 @@ namespace EmployeeHealthRecord.WFApp.v3
         private EmployeeRecords employeeRecords;
         public event UpdateView updatedView;
 
-
         readonly string GIN_NUMBER_TYPE_TIP;
         readonly string CHECKDATE_VALUE_TIP;
         readonly string BODY_TEMPERATURE_VALUE_TIP;
@@ -19,6 +18,9 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         EmployeeRecord currentRecord;
         string operation;
+
+        ControlInputTipHelper tipHelper;
+        WinFormAppInputValidator inputValidator;
 
         public UpdateRecordForm(EmployeeRecords employeeRecords, EmployeeRecord currentRecord, string operation)
         {
@@ -32,6 +34,9 @@ namespace EmployeeHealthRecord.WFApp.v3
             BODY_TEMPERATURE_TYPE_TIP = "?: Number Only"; // "Not valid Temperature type (Numbers)."; //"Only numerical value is allowed for Temperature.";
 
             InitializeComponent();
+
+            tipHelper = new ControlInputTipHelper();
+            inputValidator = new WinFormAppInputValidator();
 
             if (currentRecord != null)
             {
@@ -50,9 +55,9 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         public void ValidBodyTemperatureInputWithTipInfo(TextBox textbox, Label tipLabel)
         {
-            ControlInputTipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_VALUE_TIP, WFAPPInputValidator.IsValidBodyTemperatureValue);
-            ControlInputTipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_TYPE_TIP, WFAPPInputValidator.IsValidBodyTemperatureType);
-            ControlInputTipHelper.ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidBodyTemperature);
+            tipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_VALUE_TIP, inputValidator.IsValidBodyTemperatureValue);
+            tipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, BODY_TEMPERATURE_TYPE_TIP, inputValidator.IsValidBodyTemperatureType);
+            tipHelper.ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, inputValidator.IsValidBodyTemperature);
         }
 
         // others
@@ -158,12 +163,12 @@ namespace EmployeeHealthRecord.WFApp.v3
                 string confirmMessage = "You are trying to update record, are you sure?";
                 TrySaveWithConfirmMessage(confirmMessage);
             }
-            else if (WFAPPInputValidator.IsValidExistedRecord(ginNumber, checkdate, employeeRecords))
+            else if (inputValidator.IsValidExistedRecord(ginNumber, checkdate, employeeRecords))
             {
                 string confirmMessage = "You are trying to override existed record, current record will be also deleted, are you sure?";
                 TrySaveWithConfirmMessage(confirmMessage);
             }
-            else if (WFAPPInputValidator.IsValidNewRecord(ginNumber, checkdate, employeeRecords))
+            else if (inputValidator.IsValidNewRecord(ginNumber, checkdate, employeeRecords))
             {
                 string confirmMessage = "You are trying to add new record, current record will be also deleted, are you sure?";
                 TrySaveWithConfirmMessage(confirmMessage);
@@ -175,7 +180,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             string ginNumber = ginNumberTextBox.Text.Trim();
             string checkdate = checkDateTimePicker.Value.ToShortDateString();
 
-            if (WFAPPInputValidator.IsValidNewRecord(ginNumber, checkdate, employeeRecords))
+            if (inputValidator.IsValidNewRecord(ginNumber, checkdate, employeeRecords))
             {
                 string confirmMessage = "You are trying to add new record, are you sure?";
                 TrySaveWithConfirmMessage(confirmMessage);
@@ -220,8 +225,8 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void GinNumberTextBox_TextChanged(object sender, EventArgs e)
         {
-            ControlInputTipHelper.AddTipInfoForInvalidInput(ginNumberTextBox, ginNumberTipLabel, GIN_NUMBER_TYPE_TIP, WFAPPInputValidator.IsValidGinNumberType);
-            ControlInputTipHelper.ClearTipInfoWhenInputIsEmptyOrValid(ginNumberTextBox, ginNumberTipLabel, WFAPPInputValidator.IsValidGinNumberType);
+            tipHelper.AddTipInfoForInvalidInput(ginNumberTextBox, ginNumberTipLabel, GIN_NUMBER_TYPE_TIP, inputValidator.IsValidGinNumberType);
+            tipHelper.ClearTipInfoWhenInputIsEmptyOrValid(ginNumberTextBox, ginNumberTipLabel, inputValidator.IsValidGinNumberType);
         }
 
         private void BodyTemperatureTextBox_TextChanged(object sender, EventArgs e)
@@ -231,8 +236,8 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void CheckdateTimePicker_ValueChanged(object sender, EventArgs e)
         {
-            ControlInputTipHelper.AddTipInfoForInvalidInput(checkDateTimePicker, checkDateTipLabel, CHECKDATE_VALUE_TIP, WFAPPInputValidator.IsValidCheckDateValue);
-            ControlInputTipHelper.ClearTipInfoWhenInputIsEmptyOrValid(checkDateTimePicker, checkDateTipLabel, WFAPPInputValidator.IsValidCheckDateValue);
+            tipHelper.AddTipInfoForInvalidInput(checkDateTimePicker, checkDateTipLabel, CHECKDATE_VALUE_TIP, inputValidator.IsValidCheckDateValue);
+            tipHelper.ClearTipInfoWhenInputIsEmptyOrValid(checkDateTimePicker, checkDateTipLabel, inputValidator.IsValidCheckDateValue);
         }
 
     }

@@ -9,9 +9,9 @@ using EmployeeHealthInfoRecord;
 
 namespace EmployeeHealthRecord.WFApp.v3
 {
-    public static class ControlInputTipHelper
+    public class ControlInputTipHelper
     {
-        public static void AddTipInfoForInvalidInput(Control control, Label tipLabel, string tipInfo, DataValidator dataValidator)
+        public void AddTipInfoForInvalidInput(Control control, Label tipLabel, string tipInfo, DataValidator dataValidator)
         {
             if (!dataValidator(control.Text.Trim()))
             {
@@ -21,7 +21,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
         }
 
-        public static void AddTipInfoForInvalidInput(Control control, Label tipLabel, string tipInfo, EmployeeRecords employeeRecords, DataValidatorWithDatabase dataValidator)
+        public void AddTipInfoForInvalidInput(Control control, Label tipLabel, string tipInfo, EmployeeRecords employeeRecords, DataValidatorWithDatabase dataValidator)
         {
             if (!dataValidator(control.Text.Trim(), employeeRecords))
             {
@@ -31,7 +31,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
         }
 
-        public static void ClearTipInfoWhenInputIsEmptyOrValid(Control control, Label tipLabel, DataValidator dataValidator)
+        public void ClearTipInfoWhenInputIsEmptyOrValid(Control control, Label tipLabel, DataValidator dataValidator)
         {
             if (string.IsNullOrWhiteSpace(control.Text) || dataValidator(control.Text.Trim()))
             {
@@ -40,7 +40,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
         }
 
-        public static void ClearTipInfoWhenInputIsEmptyOrValid(Control control, Label tipLabel, EmployeeRecords employeeRecords, DataValidatorWithDatabase dataValidator)
+        public void ClearTipInfoWhenInputIsEmptyOrValid(Control control, Label tipLabel, EmployeeRecords employeeRecords, DataValidatorWithDatabase dataValidator)
         {
             if (string.IsNullOrWhiteSpace(control.Text) || dataValidator(control.Text.Trim(), employeeRecords))
             {

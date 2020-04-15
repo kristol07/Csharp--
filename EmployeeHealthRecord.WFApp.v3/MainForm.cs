@@ -1,6 +1,7 @@
 ﻿using EmployeeHealthInfoRecord;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,7 +20,9 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private EmployeeRecords employeeRecords;
 
-        Dictionary<string, string> statusIconsInfo;
+        IconsImageResource iconImageResource;
+        ControlInputTipHelper tipHelper;
+        WinFormAppInputValidator inputValidator;
 
         public MainForm()
         {
@@ -28,29 +31,23 @@ namespace EmployeeHealthRecord.WFApp.v3
             GIN_NUMBER_TYPE_TIP = "? Number Only"; //"Not valid GinNumber type (Integer)."; //"Only integer is allowed for ginNumber.";
             GIN_NUMBER_NOT_FOUND_TIP = "X Not Found"; //"No such GinNumber found.";//"Record of same GinNumber Not found.";
 
-            statusIconsInfo = new Dictionary<string, string>();
-            statusIconsInfo.Add("Ready", "/Icons/status/StatusOK_blue_16x.png");
-            statusIconsInfo.Add("Working...", "/Icons/status/StatusUpdate_16x.png");
-            statusIconsInfo.Add("Editing...", "/Icons/status/Edit_16x.png");
-            statusIconsInfo.Add("Deleting...", "/Icons/status/DeleteClause_16x.png");
-            statusIconsInfo.Add("Loading...", "/Icons/status/Download_16x.png");
-            statusIconsInfo.Add("Saving...", "/Icons/status/SaveStatusBar8_16x.png");
-            statusIconsInfo.Add("Searching...", "/Icons/status/CloudSearch_16x.png");
-
             employeeRecords = new EmployeeRecords();
 
-            FilterRecords();
-            employeeDatabaseDataGridView.DataSource = employeeRecordBindingSource;
+            iconImageResource = new IconsImageResource();
+            tipHelper = new ControlInputTipHelper();
+            inputValidator = new WinFormAppInputValidator();
 
+            FilterRecords();
+            UpdateAutoCompleteStringForFilterGinNumberTextBox();
+            employeeDatabaseDataGridView.DataSource = employeeRecordBindingSource;
         }
 
         // Validate input with tipinfo
-
         public void ValidExistedGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
         {
-            ControlInputTipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_NOT_FOUND_TIP, employeeRecords, WFAPPInputValidator.IsValidExistedGinNumber);
-            ControlInputTipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_TYPE_TIP, WFAPPInputValidator.IsValidGinNumberType);
-            ControlInputTipHelper.ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, employeeRecords, WFAPPInputValidator.IsValidExistedGinNumber);
+            tipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_NOT_FOUND_TIP, employeeRecords, inputValidator.IsValidExistedGinNumber);
+            tipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_TYPE_TIP, inputValidator.IsValidGinNumberType);
+            tipHelper.ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, employeeRecords, inputValidator.IsValidExistedGinNumber);
         }
 
         // Update autocomplete source for textbox
@@ -59,6 +56,14 @@ namespace EmployeeHealthRecord.WFApp.v3
             AutoCompleteStringCollection existedGinNumber = new AutoCompleteStringCollection();
             existedGinNumber.AddRange(employeeRecords.RecordsDatabase.Keys.ToArray());
             filterGinNumberTextBox.AutoCompleteCustomSource = existedGinNumber;
+        }
+
+        // update records status info
+        private void UpdateRecordsStatus(List<EmployeeRecord> recordList)
+        {
+            List<EmployeeRecord> suspectRecords = recordList.FindAll(x => !string.IsNullOrEmpty(x.GetAbnormalInfo()));
+            suspectRecordsNumberStatusLabel.Text = suspectRecords.Count.ToString();
+            recordsStatisticsStatusLabel.Text = recordList.Count.ToString();
         }
 
         // data file operation
@@ -174,11 +179,11 @@ namespace EmployeeHealthRecord.WFApp.v3
         }
 
         // status update
-        private void ChangeStatusInfo(string message)
+        private void ChangeStatusInfo(string description)
         {
-            statusLabel.Text = message;
+            statusLabel.Text = description;
 
-            string iconPath = statusIconsInfo[message];
+            string iconPath = iconImageResource.IconImagePath[description];
             statusLabel.Image = Image.FromFile(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + iconPath);
         }
 
@@ -229,15 +234,13 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
 
             string ginNumber = filterGinNumberTextBox.Text.Trim();
-            if (WFAPPInputValidator.IsValidExistedGinNumber(ginNumber, employeeRecords))
+            if (inputValidator.IsValidExistedGinNumber(ginNumber, employeeRecords))
             {
                 filterBindingList = filterBindingList.FindAll(x => x.GinNumber == ginNumber);
             }
 
             // status bar: records statistics
-            List<EmployeeRecord> suspectRecords = filterBindingList.FindAll(x => !string.IsNullOrEmpty(x.GetAbnormalInfo()));
-            recordsStatisticsStatusLabel.Text = filterBindingList.Count.ToString();
-            suspectRecordsNumberStatusLabel.Text = suspectRecords.Count.ToString();
+            UpdateRecordsStatus(filterBindingList);
 
             // update datagrid view/source
             employeeRecordBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(filterBindingList.ToArray());
@@ -245,43 +248,43 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         ///////////////// Menu Strips ///////////////////
 
-        private void OpenFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenFileMenuItem_Click(object sender, EventArgs e)
         {
             ImportDatabaseFromFile();
         }
 
-        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsMenuItem_Click(object sender, EventArgs e)
         {
             SaveDatabaseToFile();
         }
 
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void AddNewRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AddNewRecordMenuItem_Click(object sender, EventArgs e)
         {
             AddNewRecord();
         }
 
-        private void EditRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditRecordMenuItem_Click(object sender, EventArgs e)
         {
             EditCurrentRecord();
         }
 
-        private void DeleteRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DeleteRecordMenuItem_Click(object sender, EventArgs e)
         {
             DeleteCurrentRecord();
         }
 
-        private void ViewCodeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewCodeMenuItem_Click(object sender, EventArgs e)
         {
             // HACK
             System.Diagnostics.Process.Start("https://github.com/kristol07/Csharp--/tree/master/EmployeeHealthRecord.WFApp.v3");
         }
 
-        private void AboutHealthRecorderToolStripMenuItem_Click(object sender, EventArgs e)
+        private void AboutHealthRecorderMenuItem_Click(object sender, EventArgs e)
         {
             AboutBox aboutBox = new AboutBox();
             aboutBox.ShowDialog();
@@ -290,39 +293,39 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         ///////////////// ContextMenu Strips ////////////////
 
-        private void ViewOnlySuspectEployeeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewOnlySuspectEployeeContextMenuItem_Click(object sender, EventArgs e)
         {
             viewOnlySuspectCheckBox.Checked = true;
             FilterRecords();
         }
 
-        private void ViewAllEmployeesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ViewAllEmployeesContextMenuItem_Click(object sender, EventArgs e)
         {
             viewOnlySuspectCheckBox.Checked = false;
             FilterRecords();
         }
 
-        private void ImportFromFileToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ImportFromFileContextpMenuItem_Click(object sender, EventArgs e)
         {
             ImportDatabaseFromFile();
         }
 
-        private void SaveAsToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void SaveAsContextMenuItem_Click(object sender, EventArgs e)
         {
             SaveDatabaseToFile();
         }
 
-        private void AddNewRecordToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void AddNewRecordContextMenuItem_Click(object sender, EventArgs e)
         {
             AddNewRecord();
         }
 
-        private void DeleteCurrentRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DeleteCurrentRecordContextMenuItem_Click(object sender, EventArgs e)
         {
             DeleteCurrentRecord();
         }
 
-        private void EditCurrentRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditCurrentRecordContextMenuItem_Click(object sender, EventArgs e)
         {
             EditCurrentRecord();
         }
