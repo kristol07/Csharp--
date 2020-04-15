@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace EmployeeHealthInfoRecord
 {
-    public static class WFAPPInputValidator
+    public class WinFormAppInputValidator
     {
-        public static string GetSearchTextType(string searchText)
+        public string GetSearchTextType(string searchText)
         {
             if(string.IsNullOrWhiteSpace(searchText))
             {
@@ -38,27 +38,27 @@ namespace EmployeeHealthInfoRecord
             return "Invalid";
         }
 
-        public static bool IsValidNewGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
+        public bool IsValidNewGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
         {
             return IsValidNotExistedGinNumber(ginNumber, recordsDatabase) && IsValidGinNumberType(ginNumber);
         }
 
-        public static bool IsValidNotExistedGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
+        public bool IsValidNotExistedGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
         {
             return !recordsDatabase.HasEmployeeRecord(ginNumber);
         }
 
-        public static bool IsValidExistedGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
+        public bool IsValidExistedGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
         {
             return recordsDatabase.HasEmployeeRecord(ginNumber);
         }
 
-        public static bool IsValidGinNumberType(string ginNumber)
+        public bool IsValidGinNumberType(string ginNumber)
         {
             return Int32.TryParse(ginNumber, out _);
         }
 
-        public static bool IsValidNewRecord(string ginNumber, string checkdate, EmployeeRecords recordsDatabase)
+        public bool IsValidNewRecord(string ginNumber, string checkdate, EmployeeRecords recordsDatabase)
         {
             if (recordsDatabase.HasEmployeeRecordGivenSpecificDate(ginNumber, checkdate))
             {
@@ -70,7 +70,7 @@ namespace EmployeeHealthInfoRecord
             }
         }
 
-        public static bool IsValidExistedRecord(string ginNumber, string checkdate, EmployeeRecords recordsDatabase)
+        public bool IsValidExistedRecord(string ginNumber, string checkdate, EmployeeRecords recordsDatabase)
         {
             if (recordsDatabase.HasEmployeeRecordGivenSpecificDate(ginNumber, checkdate))
             {
@@ -82,17 +82,17 @@ namespace EmployeeHealthInfoRecord
             }
         }
 
-        public static bool IsValidNewName(string name, EmployeeRecords recordsDatabase)
+        public bool IsValidNewName(string name, EmployeeRecords recordsDatabase)
         {
             return true;
         }
 
-        public static bool IsValidExistedName(string name, EmployeeRecords recordsDatabase)
+        public bool IsValidExistedName(string name, EmployeeRecords recordsDatabase)
         {
             return true;
         }
 
-        public static bool IsValidBodyTemperatureType(string bodyTemperature)
+        public bool IsValidBodyTemperatureType(string bodyTemperature)
         {
             double result;
             if (double.TryParse(bodyTemperature, out result))
@@ -105,7 +105,7 @@ namespace EmployeeHealthInfoRecord
             }
         }
 
-        public static bool IsValidBodyTemperatureValue(string bodyTemperature)
+        public bool IsValidBodyTemperatureValue(string bodyTemperature)
         {
             double result;
             double.TryParse(bodyTemperature, out result);
@@ -119,29 +119,29 @@ namespace EmployeeHealthInfoRecord
             }
         }
 
-        public static bool IsValidBodyTemperature(string bodyTemperature)
+        public bool IsValidBodyTemperature(string bodyTemperature)
         {
             return IsValidBodyTemperatureType(bodyTemperature) && IsValidBodyTemperatureValue(bodyTemperature);
         }
 
-        public static bool IsNormalBodyTemperature(double bodyTemperature)
+        public bool IsNormalBodyTemperature(double bodyTemperature)
         {
             return bodyTemperature <= 37.3;
         }
 
-        public static bool IsValidCheckDateValue(string checkDate)
+        public bool IsValidCheckDateValue(string checkDate)
         {
             DateTime result;
             DateTime.TryParse(checkDate, out result);
             return (result.Date <= DateTime.Today);
         }
 
-        public static bool IsValidCheckDateType(string checkDate)
+        public bool IsValidCheckDateType(string checkDate)
         {
             return DateTime.TryParse(checkDate, out _);
         }
 
-        public static bool IsValidExistedCheckDate(string checkDate, EmployeeRecords recordsDatabase)
+        public bool IsValidExistedCheckDate(string checkDate, EmployeeRecords recordsDatabase)
         {
             if(IsValidCheckDateType(checkDate))
             {
@@ -157,7 +157,7 @@ namespace EmployeeHealthInfoRecord
             return false;
         }
 
-        //public static bool IsValidComboBoxInput(string input)
+        //public bool IsValidComboBoxInput(string input)
         //{
 
         //    string[] options = { "yes", "y", "Y", "no", "n", "N" };
@@ -165,26 +165,26 @@ namespace EmployeeHealthInfoRecord
         //    return options.Contains(input.ToLower());
         //}
 
-        public static bool IsValidHasHubeiTravelHistoryChoice(string hasHubeiTravelHistoryChoice)
+        public bool IsValidHasHubeiTravelHistoryChoice(string hasHubeiTravelHistoryChoice)
         {
             string[] options = { "yes", "y", "Y", "no", "n", "N" };
 
             return options.Contains(hasHubeiTravelHistoryChoice.ToLower());
         }
 
-        public static bool IsNormalHubeiTravelHistoryChoice(bool hasHubeiTravelHistoryChoice)
+        public bool IsNormalHubeiTravelHistoryChoice(bool hasHubeiTravelHistoryChoice)
         {
             return hasHubeiTravelHistoryChoice == false;
         }
 
-        public static bool IsValidHasSymptomsChoice(string hasSymptomsChoice)
+        public bool IsValidHasSymptomsChoice(string hasSymptomsChoice)
         {
             string[] options = { "yes", "y", "Y", "no", "n", "N" };
 
             return options.Contains(hasSymptomsChoice.ToLower());
         }
 
-        public static bool IsNormalSymtomsChoice(bool hasSymptomsChoice)
+        public bool IsNormalSymtomsChoice(bool hasSymptomsChoice)
         {
             return hasSymptomsChoice == false;
         }
