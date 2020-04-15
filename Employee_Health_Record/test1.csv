@@ -3,8 +3,9 @@ GinNumber,Date,Name,BodyTemperature,HasHubeiTravelHistory,HasSymptoms,Notes
 0,2020/4/10,jo,37.2,True,False,2020/4/10
 0,2020/4/11,jo,36.7,False,False,2020/4/11
 0,2020/4/12,jo,37.1,False,False,2020/4/12
-1,2020/4/9,joe,36.7,False,True,2020/4/9
+1,2020/4/9,joel,36.7,False,True,2020/4/9
 1,2020/4/12,joel,38.2,False,False,2020/4/12
+1,2020/4/15,joel,36.3,True,True,
 2,2020/4/9,joel,36.7,False,True,2020/4/9
 2,2020/4/12,joel,38.2,False,False,2020/4/12
 2,2020/4/8,joel,38,True,True,2020/4/8

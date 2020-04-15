@@ -41,6 +41,38 @@ namespace EmployeeHealthInfoRecord
             get; set;
         }
 
+        public int TotalRecords
+        {
+            get
+            {
+                int totalRecords = 0;
+                foreach(var ginNumber in RecordsDatabase.Keys)
+                {
+                    totalRecords += RecordsDatabase[ginNumber].Count;
+                }
+                return totalRecords;
+            }
+        }
+
+        public int TotalSuspectRecords
+        {
+            get
+            {
+                int totalSuspectRecords = 0;
+                foreach (var ginNumber in RecordsDatabase.Keys)
+                {
+                    foreach(var record in RecordsDatabase[ginNumber].Values)
+                    {
+                        if(!string.IsNullOrEmpty(record.GetAbnormalInfo()))
+                        {
+                            totalSuspectRecords += 1;
+                        }
+                    }
+                }
+                return totalSuspectRecords;
+            }
+        }
+
         public EmployeeRecords()
         {
             RecordsDatabase = new Dictionary<string, Dictionary<string, EmployeeRecord>>();
@@ -146,11 +178,11 @@ namespace EmployeeHealthInfoRecord
             RecordsDatabase[ginNumber].Add(checkDate.ToShortDateString(), newRecord);
         }
 
-        public void RemoveRecord(string ginNumber, params DateTime[] checkDates)
+        public void RemoveRecord(string ginNumber, params string[] checkDates)
         {
             foreach (var checkDate in checkDates)
             {
-                if (!HasEmployeeRecordGivenSpecificDate(ginNumber, checkDate.ToShortDateString()))
+                if (!HasEmployeeRecordGivenSpecificDate(ginNumber, checkDate))
                 {
                     return;
                 }
@@ -158,7 +190,7 @@ namespace EmployeeHealthInfoRecord
 
             foreach (var checkDate in checkDates)
             {
-                RecordsDatabase[ginNumber].Remove(checkDate.ToShortDateString());
+                RecordsDatabase[ginNumber].Remove(checkDate);
             }
 
             if (RecordsDatabase[ginNumber].Values.Count == 0)

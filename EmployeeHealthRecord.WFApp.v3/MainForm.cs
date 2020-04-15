@@ -1,12 +1,9 @@
 ﻿using EmployeeHealthInfoRecord;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace EmployeeHealthRecord.WFApp.v3
@@ -22,12 +19,23 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private EmployeeRecords employeeRecords;
 
+        Dictionary<string, string> statusIconsInfo;
+
         public MainForm()
         {
             InitializeComponent();
 
             GIN_NUMBER_TYPE_TIP = "? Number Only"; //"Not valid GinNumber type (Integer)."; //"Only integer is allowed for ginNumber.";
             GIN_NUMBER_NOT_FOUND_TIP = "X Not Found"; //"No such GinNumber found.";//"Record of same GinNumber Not found.";
+
+            statusIconsInfo = new Dictionary<string, string>();
+            statusIconsInfo.Add("Ready", "/Icons/status/StatusOK_blue_16x.png");
+            statusIconsInfo.Add("Working...", "/Icons/status/StatusUpdate_16x.png");
+            statusIconsInfo.Add("Editing...", "/Icons/status/Edit_16x.png");
+            statusIconsInfo.Add("Deleting...", "/Icons/status/DeleteClause_16x.png");
+            statusIconsInfo.Add("Loading...", "/Icons/status/Download_16x.png");
+            statusIconsInfo.Add("Saving...", "/Icons/status/SaveStatusBar8_16x.png");
+            statusIconsInfo.Add("Searching...", "/Icons/status/CloudSearch_16x.png");
 
             employeeRecords = new EmployeeRecords();
 
@@ -38,53 +46,15 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         // Validate input with tipinfo
 
-        public void AddTipInfoForInvalidInput(TextBox textbox, Label tipLabel, string tipInfo, DataValidator dataValidator)
-        {
-            if (!dataValidator(textbox.Text.Trim()))
-            {
-                //textbox.BackColor = Color.FromArgb(255, 186, 205);
-                tipLabel.Text = tipInfo;
-                tipLabel.ForeColor = Color.Red;
-            }
-        }
-
-        public void AddTipInfoForInvalidInput(TextBox textbox, Label tipLabel, string tipInfo, DataValidatorWithDatabase dataValidator)
-        {
-            if (!dataValidator(textbox.Text.Trim(), employeeRecords))
-            {
-                //textbox.BackColor = Color.FromArgb(255, 186, 205);
-                tipLabel.Text = tipInfo;
-                tipLabel.ForeColor = Color.Red;
-            }
-        }
-
-        public void ClearTipInfoWhenInputIsEmptyOrValid(TextBox textbox, Label tipLabel, DataValidator dataValidator)
-        {
-            if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text.Trim()))
-            {
-                //textbox.BackColor = Color.White;
-                tipLabel.Text = "";
-            }
-        }
-
-        public void ClearTipInfoWhenInputIsEmptyOrValid(TextBox textbox, Label tipLabel, DataValidatorWithDatabase dataValidator)
-        {
-            if (string.IsNullOrWhiteSpace(textbox.Text) || dataValidator(textbox.Text.Trim(), employeeRecords))
-            {
-                //textbox.BackColor = Color.White;
-                tipLabel.Text = "";
-            }
-        }
-
         public void ValidExistedGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
         {
-            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_NOT_FOUND_TIP, WFAPPInputValidator.IsValidExistedGinNumber);
-            AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_TYPE_TIP, WFAPPInputValidator.IsValidGinNumberType);
-            ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, WFAPPInputValidator.IsValidExistedGinNumber);
+            ControlInputTipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_NOT_FOUND_TIP, employeeRecords, WFAPPInputValidator.IsValidExistedGinNumber);
+            ControlInputTipHelper.AddTipInfoForInvalidInput(textbox, tipLabel, GIN_NUMBER_TYPE_TIP, WFAPPInputValidator.IsValidGinNumberType);
+            ControlInputTipHelper.ClearTipInfoWhenInputIsEmptyOrValid(textbox, tipLabel, employeeRecords, WFAPPInputValidator.IsValidExistedGinNumber);
         }
 
         // Update autocomplete source for textbox
-        public void UpdateAutoCompleteStringForFilterGinNumberTextBox()
+        private void UpdateAutoCompleteStringForFilterGinNumberTextBox()
         {
             AutoCompleteStringCollection existedGinNumber = new AutoCompleteStringCollection();
             existedGinNumber.AddRange(employeeRecords.RecordsDatabase.Keys.ToArray());
@@ -93,9 +63,9 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         // data file operation
 
-        public void ImportDatabaseFromFile()
+        private void ImportDatabaseFromFile()
         {
-            statusLabel.Text = "Loading...";
+            ChangeStatusInfo("Loading...");
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -120,12 +90,12 @@ namespace EmployeeHealthRecord.WFApp.v3
                 }
             }
 
-            statusLabel.Text = "Ready";
+            ChangeStatusInfo("Ready");
         }
 
-        public void SaveDatabaseToFile()
+        private void SaveDatabaseToFile()
         {
-            statusLabel.Text = "Saving...";
+            ChangeStatusInfo("Saving...");
 
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -146,15 +116,15 @@ namespace EmployeeHealthRecord.WFApp.v3
                 }
             }
 
-            statusLabel.Text = "Ready";
+            ChangeStatusInfo("Ready");
         }
 
         private void EditCurrentRecord()
         {
             if (employeeDatabaseDataGridView.SelectedRows.Count != 0)
             {
-                statusLabel.Text = "Editing...";
-                //statusLabel.Image = Bitmap.FromFile("Icons/status/Edit_16x.png");
+
+                ChangeStatusInfo("Editing...");
 
                 string ginNumber = (string)employeeDatabaseDataGridView.SelectedRows[0].Cells[0].Value;
                 string checkDate = ((DateTime)employeeDatabaseDataGridView.SelectedRows[0].Cells[2].Value).ToShortDateString();
@@ -166,14 +136,13 @@ namespace EmployeeHealthRecord.WFApp.v3
                 editRecordForm.updatedView += UpdateAutoCompleteStringForFilterGinNumberTextBox;
                 editRecordForm.ShowDialog();
 
-                statusLabel.Text = "Ready";
+                ChangeStatusInfo("Ready");
             }
         }
 
         private void AddNewRecord()
         {
-            statusLabel.Text = "Working...";
-            //statusLabel.Image = Bitmap.FromFile("Icons/status/StatusUpdate_16x.png");
+            ChangeStatusInfo("Working...");
 
             UpdateRecordForm addNewRecordForm = new UpdateRecordForm(employeeRecords, null, "Add");
             addNewRecordForm.Text = "Add New Record";
@@ -181,23 +150,36 @@ namespace EmployeeHealthRecord.WFApp.v3
             addNewRecordForm.updatedView += UpdateAutoCompleteStringForFilterGinNumberTextBox;
             addNewRecordForm.ShowDialog();
 
-            statusLabel.Text = "Ready";
+            ChangeStatusInfo("Ready");
         }
 
         private void DeleteCurrentRecord()
         {
             if (employeeDatabaseDataGridView.SelectedRows.Count != 0)
             {
+                ChangeStatusInfo("Deleting...");
+
                 if (MessageBox.Show("You are trying to delete this record, are you sure?", "Confirm Delete", MessageBoxButtons.OKCancel) == DialogResult.OK)
                 {
                     string ginNumber = (string)employeeDatabaseDataGridView.SelectedRows[0].Cells[0].Value;
                     DateTime checkDate = (DateTime)employeeDatabaseDataGridView.SelectedRows[0].Cells[2].Value;
-                    employeeRecords.RemoveRecord(ginNumber, checkDate);
+                    employeeRecords.RemoveRecord(ginNumber, checkDate.ToShortDateString());
 
                     FilterRecords();
                     UpdateAutoCompleteStringForFilterGinNumberTextBox();
                 }
+
+                ChangeStatusInfo("Ready");
             }
+        }
+
+        // status update
+        private void ChangeStatusInfo(string message)
+        {
+            statusLabel.Text = message;
+
+            string iconPath = statusIconsInfo[message];
+            statusLabel.Image = Image.FromFile(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + iconPath);
         }
 
         /////////////// Filter Control Events /////////////////
@@ -252,10 +234,12 @@ namespace EmployeeHealthRecord.WFApp.v3
                 filterBindingList = filterBindingList.FindAll(x => x.GinNumber == ginNumber);
             }
 
+            // status bar: records statistics
             List<EmployeeRecord> suspectRecords = filterBindingList.FindAll(x => !string.IsNullOrEmpty(x.GetAbnormalInfo()));
             recordsStatisticsStatusLabel.Text = filterBindingList.Count.ToString();
             suspectRecordsNumberStatusLabel.Text = suspectRecords.Count.ToString();
 
+            // update datagrid view/source
             employeeRecordBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(filterBindingList.ToArray());
         }
 
@@ -289,11 +273,6 @@ namespace EmployeeHealthRecord.WFApp.v3
         private void DeleteRecordToolStripMenuItem_Click(object sender, EventArgs e)
         {
             DeleteCurrentRecord();
-        }
-
-        private void FindRecordToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // TODO
         }
 
         private void ViewCodeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -348,20 +327,6 @@ namespace EmployeeHealthRecord.WFApp.v3
             EditCurrentRecord();
         }
 
-        private void ViewDetailToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (employeeDatabaseDataGridView.SelectedRows.Count != 0)
-            {
-                string ginNumber = (string)employeeDatabaseDataGridView.SelectedRows[0].Cells[0].Value;
-                string checkDate = ((DateTime)employeeDatabaseDataGridView.SelectedRows[0].Cells[2].Value).ToShortDateString();
-                EmployeeRecord currentRecord = employeeRecords.GetEmployeeRecordGivenSpecificDate(ginNumber, checkDate);
-                RecordDetailForm recordDetailForm = new RecordDetailForm(currentRecord, employeeRecords);
-                recordDetailForm.updatedRecords += FilterRecords;
-                recordDetailForm.updatedRecords += UpdateAutoCompleteStringForFilterGinNumberTextBox;
-                recordDetailForm.ShowDialog();
-            }
-        }
-
         //////////////// Tool Strips /////////////////////
 
         private void ImportRecordsToolStripButton_Click(object sender, EventArgs e)
@@ -397,14 +362,20 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void SearchToolStripTextBox_TextChanged(object sender, EventArgs e)
         {
-
-
+            // UNDONE
         }
 
         private void SearchToolStripTextBox_Leave(object sender, EventArgs e)
         {
             SearchToolStripTextBox.ForeColor = Color.Gray;
             SearchToolStripTextBox.Text = "Search By GinNumber & CheckDate";
+        }
+
+        ///////////////// status strip //////////////////////
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            timeStatusLabel.Text = DateTime.Today.ToShortDateString() + " " + DateTime.Now.ToLongTimeString();
         }
 
     }

@@ -47,7 +47,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             if (MessageBox.Show("You are trying to delete this record, are you sure?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
 
-                employeeRecords.RemoveRecord(currentRecord.GinNumber, currentRecord.CheckDate);
+                employeeRecords.RemoveRecord(currentRecord.GinNumber, currentRecord.CheckDate.ToShortDateString());
 
                 if (updatedRecords != null)
                 {

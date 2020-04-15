@@ -52,17 +52,12 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="ControlInputTipHelper.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="RecordDetailForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RecordDetailForm.Designer.cs">
-      <DependentUpon>RecordDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UpdateRecordForm.cs">
       <SubType>Form</SubType>
@@ -77,9 +72,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RecordDetailForm.resx">
-      <DependentUpon>RecordDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UpdateRecordForm.resx">
       <DependentUpon>UpdateRecordForm.cs</DependentUpon>
@@ -121,14 +113,29 @@
   <ItemGroup>
     <Content Include="Icons\Add_grey_16x.png" />
     <Content Include="Icons\DeleteListItem_16x.png" />
+    <Content Include="Icons\detail\Account_16x.png" />
+    <Content Include="Icons\detail\DetailPageItemTemplate_16x.png" />
+    <Content Include="Icons\detail\DisplayName_16x.png" />
+    <Content Include="Icons\detail\GeoLocation_16x.png" />
+    <Content Include="Icons\detail\Guid_16x.png" />
+    <Content Include="Icons\detail\Health_16x.png" />
+    <Content Include="Icons\detail\Integer_16x.png" />
+    <Content Include="Icons\detail\Log_16x.png" />
     <Content Include="Icons\Edit_grey_16x.png" />
     <Content Include="Icons\Exit_16x.png" />
     <Content Include="Icons\GitHub-Mark-32px.png" />
+    <Content Include="Icons\detail\HeatMap_16x.png" />
+    <Content Include="Icons\detail\KeyUp_16x.png" />
+    <Content Include="Icons\detail\MapTileLayer_16x.png" />
     <Content Include="Icons\OpenfileDialog_grey_16x.png" />
     <Content Include="Icons\SaveAs_16x.png" />
     <Content Include="Icons\Save_grey_16x.png" />
     <Content Include="Icons\Search_16x.png" />
+    <Content Include="Icons\status\CloudSearch_16x.png" />
+    <Content Include="Icons\status\DeleteClause_16x.png" />
+    <Content Include="Icons\status\Download_16x.png" />
     <Content Include="Icons\status\Edit_16x.png" />
+    <Content Include="Icons\status\SaveStatusBar8_16x.png" />
     <Content Include="Icons\status\StatusAlert_16x.png" />
     <Content Include="Icons\status\StatusHelp_16x.png" />
     <Content Include="Icons\status\StatusInvalid_16x.png" />

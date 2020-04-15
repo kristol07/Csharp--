@@ -39,11 +39,10 @@
             this.addNewRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.findRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutHealthRecorderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.contentPanel = new System.Windows.Forms.Panel();
             this.filterLabel = new System.Windows.Forms.Label();
             this.filterCheckDateCheckBox = new System.Windows.Forms.CheckBox();
             this.filterCheckDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -62,7 +61,6 @@
             this.databaseContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importFromFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewRecordToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewDetailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editCurrentRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteCurrentRecordToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewOnlySuspectEmployeeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,8 +87,10 @@
             this.recordsStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.recordsStatisticsStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.recordsStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timeStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
             this.databaseContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).BeginInit();
@@ -156,8 +156,7 @@
             this.recordToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addNewRecordToolStripMenuItem,
             this.saveRecordToolStripMenuItem,
-            this.deleteRecordToolStripMenuItem,
-            this.findRecordToolStripMenuItem});
+            this.deleteRecordToolStripMenuItem});
             this.recordToolStripMenuItem.Name = "recordToolStripMenuItem";
             this.recordToolStripMenuItem.Size = new System.Drawing.Size(62, 21);
             this.recordToolStripMenuItem.Text = "&Record";
@@ -167,7 +166,7 @@
             this.addNewRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecordToolStripMenuItem.Image")));
             this.addNewRecordToolStripMenuItem.Name = "addNewRecordToolStripMenuItem";
             this.addNewRecordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.addNewRecordToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.addNewRecordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addNewRecordToolStripMenuItem.Text = "&Add";
             this.addNewRecordToolStripMenuItem.Click += new System.EventHandler(this.AddNewRecordToolStripMenuItem_Click);
             // 
@@ -176,7 +175,7 @@
             this.saveRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveRecordToolStripMenuItem.Image")));
             this.saveRecordToolStripMenuItem.Name = "saveRecordToolStripMenuItem";
             this.saveRecordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.saveRecordToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.saveRecordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveRecordToolStripMenuItem.Text = "&Edit";
             this.saveRecordToolStripMenuItem.Click += new System.EventHandler(this.EditRecordToolStripMenuItem_Click);
             // 
@@ -185,18 +184,9 @@
             this.deleteRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteRecordToolStripMenuItem.Image")));
             this.deleteRecordToolStripMenuItem.Name = "deleteRecordToolStripMenuItem";
             this.deleteRecordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deleteRecordToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.deleteRecordToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteRecordToolStripMenuItem.Text = "&Delete";
             this.deleteRecordToolStripMenuItem.Click += new System.EventHandler(this.DeleteRecordToolStripMenuItem_Click);
-            // 
-            // findRecordToolStripMenuItem
-            // 
-            this.findRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("findRecordToolStripMenuItem.Image")));
-            this.findRecordToolStripMenuItem.Name = "findRecordToolStripMenuItem";
-            this.findRecordToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.findRecordToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
-            this.findRecordToolStripMenuItem.Text = "&Find";
-            this.findRecordToolStripMenuItem.Click += new System.EventHandler(this.FindRecordToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -223,25 +213,25 @@
             this.aboutHealthRecorderToolStripMenuItem.Text = "&About Employee Health Recorder";
             this.aboutHealthRecorderToolStripMenuItem.Click += new System.EventHandler(this.AboutHealthRecorderToolStripMenuItem_Click);
             // 
-            // panel1
+            // contentPanel
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.contentPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.Controls.Add(this.filterLabel);
-            this.panel1.Controls.Add(this.filterCheckDateCheckBox);
-            this.panel1.Controls.Add(this.filterCheckDateTimePicker);
-            this.panel1.Controls.Add(this.filterGinNumberLabel);
-            this.panel1.Controls.Add(this.filterGinNumberTextBox);
-            this.panel1.Controls.Add(this.filterGinNumberTipLabel);
-            this.panel1.Controls.Add(this.viewOnlySuspectCheckBox);
-            this.panel1.Controls.Add(this.employeeDatabaseDataGridView);
-            this.panel1.Location = new System.Drawing.Point(5, 56);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.panel1.Size = new System.Drawing.Size(1003, 549);
-            this.panel1.TabIndex = 2;
+            this.contentPanel.Controls.Add(this.filterLabel);
+            this.contentPanel.Controls.Add(this.filterCheckDateCheckBox);
+            this.contentPanel.Controls.Add(this.filterCheckDateTimePicker);
+            this.contentPanel.Controls.Add(this.filterGinNumberLabel);
+            this.contentPanel.Controls.Add(this.filterGinNumberTextBox);
+            this.contentPanel.Controls.Add(this.filterGinNumberTipLabel);
+            this.contentPanel.Controls.Add(this.viewOnlySuspectCheckBox);
+            this.contentPanel.Controls.Add(this.employeeDatabaseDataGridView);
+            this.contentPanel.Location = new System.Drawing.Point(5, 56);
+            this.contentPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.contentPanel.Name = "contentPanel";
+            this.contentPanel.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
+            this.contentPanel.Size = new System.Drawing.Size(1003, 549);
+            this.contentPanel.TabIndex = 2;
             // 
             // filterLabel
             // 
@@ -419,19 +409,18 @@
             this.databaseContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importFromFileToolStripMenuItem,
             this.addNewRecordToolStripMenuItem1,
-            this.viewDetailToolStripMenuItem,
             this.editCurrentRecordToolStripMenuItem,
             this.deleteCurrentRecordToolStripMenuItem,
             this.viewOnlySuspectEmployeeToolStripMenuItem,
             this.saveAsToolStripMenuItem1});
             this.databaseContextMenuStrip.Name = "databaseContextMenuStrip";
-            this.databaseContextMenuStrip.Size = new System.Drawing.Size(250, 158);
+            this.databaseContextMenuStrip.Size = new System.Drawing.Size(224, 136);
             // 
             // importFromFileToolStripMenuItem
             // 
             this.importFromFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFromFileToolStripMenuItem.Image")));
             this.importFromFileToolStripMenuItem.Name = "importFromFileToolStripMenuItem";
-            this.importFromFileToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.importFromFileToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.importFromFileToolStripMenuItem.Text = "Import From...";
             this.importFromFileToolStripMenuItem.Click += new System.EventHandler(this.ImportFromFileToolStripMenuItem_Click);
             // 
@@ -439,30 +428,23 @@
             // 
             this.addNewRecordToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecordToolStripMenuItem1.Image")));
             this.addNewRecordToolStripMenuItem1.Name = "addNewRecordToolStripMenuItem1";
-            this.addNewRecordToolStripMenuItem1.Size = new System.Drawing.Size(249, 22);
+            this.addNewRecordToolStripMenuItem1.Size = new System.Drawing.Size(206, 22);
             this.addNewRecordToolStripMenuItem1.Text = "Add New Record";
             this.addNewRecordToolStripMenuItem1.Click += new System.EventHandler(this.AddNewRecordToolStripMenuItem1_Click);
-            // 
-            // viewDetailToolStripMenuItem
-            // 
-            this.viewDetailToolStripMenuItem.Name = "viewDetailToolStripMenuItem";
-            this.viewDetailToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.viewDetailToolStripMenuItem.Text = "View Detail of Current Record";
-            this.viewDetailToolStripMenuItem.Click += new System.EventHandler(this.ViewDetailToolStripMenuItem_Click);
             // 
             // editCurrentRecordToolStripMenuItem
             // 
             this.editCurrentRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editCurrentRecordToolStripMenuItem.Image")));
             this.editCurrentRecordToolStripMenuItem.Name = "editCurrentRecordToolStripMenuItem";
-            this.editCurrentRecordToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
-            this.editCurrentRecordToolStripMenuItem.Text = "Edit Current Record";
+            this.editCurrentRecordToolStripMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.editCurrentRecordToolStripMenuItem.Text = "View/Edit Current Record";
             this.editCurrentRecordToolStripMenuItem.Click += new System.EventHandler(this.EditCurrentRecordToolStripMenuItem_Click);
             // 
             // deleteCurrentRecordToolStripMenuItem
             // 
             this.deleteCurrentRecordToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteCurrentRecordToolStripMenuItem.Image")));
             this.deleteCurrentRecordToolStripMenuItem.Name = "deleteCurrentRecordToolStripMenuItem";
-            this.deleteCurrentRecordToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.deleteCurrentRecordToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.deleteCurrentRecordToolStripMenuItem.Text = "Delete Current Record";
             this.deleteCurrentRecordToolStripMenuItem.Click += new System.EventHandler(this.DeleteCurrentRecordToolStripMenuItem_Click);
             // 
@@ -472,7 +454,7 @@
             this.viewOnlySuspectEployeeToolStripMenuItem,
             this.viewAllEmployeesToolStripMenuItem});
             this.viewOnlySuspectEmployeeToolStripMenuItem.Name = "viewOnlySuspectEmployeeToolStripMenuItem";
-            this.viewOnlySuspectEmployeeToolStripMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.viewOnlySuspectEmployeeToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
             this.viewOnlySuspectEmployeeToolStripMenuItem.Text = "Filter...";
             // 
             // viewOnlySuspectEployeeToolStripMenuItem
@@ -493,7 +475,7 @@
             // 
             this.saveAsToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("saveAsToolStripMenuItem1.Image")));
             this.saveAsToolStripMenuItem1.Name = "saveAsToolStripMenuItem1";
-            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(249, 22);
+            this.saveAsToolStripMenuItem1.Size = new System.Drawing.Size(206, 22);
             this.saveAsToolStripMenuItem1.Text = "Save As...";
             this.saveAsToolStripMenuItem1.Click += new System.EventHandler(this.SaveAsToolStripMenuItem1_Click);
             // 
@@ -623,10 +605,11 @@
             this.suspectRecordsNumberStatusLabel,
             this.recordsStatusLabel1,
             this.recordsStatisticsStatusLabel,
-            this.recordsStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(742, 609);
+            this.recordsStatusLabel2,
+            this.timeStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(773, 609);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(269, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(238, 22);
             this.statusStrip1.TabIndex = 4;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -656,6 +639,17 @@
             this.recordsStatusLabel2.Size = new System.Drawing.Size(107, 17);
             this.recordsStatusLabel2.Text = "Records In Total.";
             // 
+            // timeStatusLabel
+            // 
+            this.timeStatusLabel.Name = "timeStatusLabel";
+            this.timeStatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // timer
+            // 
+            this.timer.Enabled = true;
+            this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.Timer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -665,7 +659,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.ToolStrip);
             this.Controls.Add(this.menuStrip);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.contentPanel);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
@@ -676,8 +670,8 @@
             this.Text = "Employee Health Recorder v3";
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.contentPanel.ResumeLayout(false);
+            this.contentPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).EndInit();
             this.databaseContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).EndInit();
@@ -703,7 +697,7 @@
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem viewCodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutHealthRecorderToolStripMenuItem;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel contentPanel;
         private System.Windows.Forms.TextBox filterGinNumberTextBox;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
@@ -745,19 +739,19 @@
         private System.Windows.Forms.ToolStripButton DeleteRecordToolStripButton;
         private System.Windows.Forms.ToolStripMenuItem saveRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteRecordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem findRecordToolStripMenuItem;
         private System.Windows.Forms.ToolStripButton ImportRecordsToolStripButton;
         private System.Windows.Forms.ToolStripTextBox SearchToolStripTextBox;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.ToolStripMenuItem editCurrentRecordToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewDetailToolStripMenuItem;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel suspectRecordsNumberStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel recordsStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel recordsStatisticsStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel recordsStatusLabel2;
+        private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.ToolStripStatusLabel timeStatusLabel;
     }
 }
 
