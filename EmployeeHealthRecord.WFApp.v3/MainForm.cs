@@ -203,16 +203,16 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void ShowAndHideTreeView()
         {
-            recordsTreeView.Visible = !recordsTreeView.Visible;
-            if (recordsTreeView.Visible == true)
+            navigationBarPanel.Visible = !navigationBarPanel.Visible;
+            if (navigationBarPanel.Visible == true)
             {
-                employeeDatabaseDataGridView.Location = new Point(employeeDatabaseDataGridView.Location.X + recordsTreeView.Width, employeeDatabaseDataGridView.Location.Y);
-                employeeDatabaseDataGridView.Width -= recordsTreeView.Width;
+                contentPanel.Location = new Point(contentPanel.Location.X + navigationBarPanel.Width, contentPanel.Location.Y);
+                contentPanel.Width -= recordsTreeView.Width;
             }
             else
             {
-                employeeDatabaseDataGridView.Location = new Point(employeeDatabaseDataGridView.Location.X - recordsTreeView.Width, employeeDatabaseDataGridView.Location.Y);
-                employeeDatabaseDataGridView.Width += recordsTreeView.Width;
+                contentPanel.Location = new Point(contentPanel.Location.X - navigationBarPanel.Width, contentPanel.Location.Y);
+                contentPanel.Width += recordsTreeView.Width;
             }
         }
 
