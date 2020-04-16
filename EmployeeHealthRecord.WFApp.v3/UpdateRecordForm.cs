@@ -42,7 +42,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             if (currentRecord != null)
             {
                 ginNumberTextBox.Text = currentRecord.GinNumber;
-                ginNumberTextBox.Modified = false; // GinNumber can not be changed.
+                ginNumberTextBox.ReadOnly = true; // GinNumber can not be changed.
                 nameTextBox.Text = currentRecord.Name;
                 checkDateTimePicker.Value = currentRecord.CheckDate;
                 bodyTemperatureTextBox.Text = currentRecord.BodyTemperature.ToString();

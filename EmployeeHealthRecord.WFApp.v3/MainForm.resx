@@ -279,10 +279,10 @@
   </data>
   <data name="openCloseToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAB5SURBVDhPzYzBDYAwDAOzAR8mYHHW4cEaZQHUN8goKWnl
-        IBAPOCmCWmfL/8g5jzh9FqK8AsI6TxvOy1FeYdIydMeZHOVaO/Fi6qXILKMDgI3cLhvtyKMyeDXQlvH1
-        /5cjrIw3y+iIH/BilGutxuRWinIKBCZF+deI7DntQJCwkbcMAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAHlJREFUOE/NjMENgDAMA7MBHyZgcdbhwRplAdQ3yCgpaeUgEA84KYJaZ8v/yDmP
+        OH0WorwCwjpPG87LUV5h0jJ0x5kc5Vo78WLqpcgsowOAjdwuG+3IozJ4NdCW8fX/lyOsjDfL6Igf8GKU
+        a63G5FaKcgoEJkX514jsOe1AkLCRtwwAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="employeeDatabaseDataGridView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -302,10 +302,10 @@
   </data>
   <data name="openSidebarToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABrSURBVDhPzZFhCsAgCEY90s7g4bxuf8S/bjKFaMqCYuyD
-        R5A9C4N/hZkPEWkX2tFs34/UCZmIFBHV1lW5xLU7o/zG/gaWaGLFGVx7JjtckA/XitmzR8of2tKgIoZc
-        ylliuEuy3d4xJ38YgBMd8H4gPSvGEgAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAGtJREFUOE/NkWEKwCAIRj3SzuDhvG5/xL9uMoVoyoJi7INHkD0Lg3+FmQ8RaRfa
+        0Wzfj9QJmYgUEdXWVbnEtTuj/Mb+BpZoYsUZXHsmO1yQD9eK2bNHyh/a0qAihlzKWWK4S7Ld3jEnfxiA
+        Ex3wfiA9K8YSAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="addNewRecordContextMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

@@ -409,6 +409,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.recordsTreeView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.recordsTreeView.ContextMenuStrip = this.treeViewContextMenuStrip;
+            this.recordsTreeView.Indent = 15;
             this.recordsTreeView.Location = new System.Drawing.Point(0, 52);
             this.recordsTreeView.Name = "recordsTreeView";
             treeNode1.Name = "allRecords";
