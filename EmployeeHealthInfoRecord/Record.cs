@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace EmployeeHealthInfoRecord
 {
@@ -20,7 +21,26 @@ namespace EmployeeHealthInfoRecord
 
         public string Notes { get; set; }
 
-        public EmployeeRecord(string ginNumber, DateTime date, string name, double bodyTemperature, bool hasHubeiTravelHistory = false, bool hasSymptoms = false, string notes = "")
+        public readonly DateTime createTime;
+
+        public List<DateTime> EditTimeHistory { get; set; }
+
+        public EmployeeRecord(string ginNumber, DateTime date, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes = "")
+        {
+            this.GinNumber = ginNumber;
+            this.CheckDate = date;
+            this.Name = name;
+            this.BodyTemperature = bodyTemperature;
+            this.HasHubeiTravelHistory = hasHubeiTravelHistory;
+            this.HasSymptoms = hasSymptoms;
+
+            createTime = DateTime.Now;
+            this.Notes = notes + "||" + createTime.ToString();  // HACK: use notes to save create time
+            EditTimeHistory = new List<DateTime>();
+            EditTimeHistory.Add(createTime);
+        }
+
+        public void Edit(string ginNumber, DateTime date, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
             this.GinNumber = ginNumber;
             this.CheckDate = date;
@@ -29,6 +49,7 @@ namespace EmployeeHealthInfoRecord
             this.HasHubeiTravelHistory = hasHubeiTravelHistory;
             this.HasSymptoms = hasSymptoms;
             this.Notes = notes;
+            EditTimeHistory.Add(DateTime.Now);
         }
 
         public string FormatForSave()
@@ -40,7 +61,8 @@ namespace EmployeeHealthInfoRecord
                 BodyTemperature.ToString(),
                 HasHubeiTravelHistory.ToString(),
                 HasSymptoms.ToString(),
-                Notes
+                Notes,
+                string.Join("|", EditTimeHistory)
             };
             string seperator = ",";
 

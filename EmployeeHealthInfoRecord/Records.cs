@@ -24,29 +24,12 @@ namespace EmployeeHealthInfoRecord
             }
         }
 
-        public static BindingList<EmployeeRecord> TransformRecordListToBindingSource(params EmployeeRecord[] arrayOfRecords)
-        {
-            BindingList<EmployeeRecord> recordList = new BindingList<EmployeeRecord>();
-
-            foreach (var record in arrayOfRecords)
-            {
-                recordList.Add(record);
-            }
-
-            return recordList;
-        }
-
-        public Dictionary<string, Dictionary<string, EmployeeRecord>> RecordsDatabase
-        {
-            get; set;
-        }
-
         public int TotalRecords
         {
             get
             {
                 int totalRecords = 0;
-                foreach(var ginNumber in RecordsDatabase.Keys)
+                foreach (var ginNumber in RecordsDatabase.Keys)
                 {
                     totalRecords += RecordsDatabase[ginNumber].Count;
                 }
@@ -61,9 +44,9 @@ namespace EmployeeHealthInfoRecord
                 int totalSuspectRecords = 0;
                 foreach (var ginNumber in RecordsDatabase.Keys)
                 {
-                    foreach(var record in RecordsDatabase[ginNumber].Values)
+                    foreach (var record in RecordsDatabase[ginNumber].Values)
                     {
-                        if(!string.IsNullOrEmpty(record.GetAbnormalInfo()))
+                        if (!string.IsNullOrEmpty(record.GetAbnormalInfo()))
                         {
                             totalSuspectRecords += 1;
                         }
@@ -73,9 +56,26 @@ namespace EmployeeHealthInfoRecord
             }
         }
 
+        public Dictionary<string, Dictionary<string, EmployeeRecord>> RecordsDatabase
+        {
+            get; set;
+        }
+
         public EmployeeRecords()
         {
             RecordsDatabase = new Dictionary<string, Dictionary<string, EmployeeRecord>>();
+        }
+
+        public static BindingList<EmployeeRecord> TransformRecordListToBindingSource(params EmployeeRecord[] arrayOfRecords)
+        {
+            BindingList<EmployeeRecord> recordList = new BindingList<EmployeeRecord>();
+
+            foreach (var record in arrayOfRecords)
+            {
+                recordList.Add(record);
+            }
+
+            return recordList;
         }
 
         public bool HasEmployeeRecord(string ginNumber)
@@ -160,19 +160,30 @@ namespace EmployeeHealthInfoRecord
             return allRecordsOfSpecificCheckDate;
         }
 
-        public void EditRecord(string ginNumber, DateTime checkDate, string option, string editedValue)
+        public void EditRecord(string oldGinNumber, DateTime oldCheckDate, string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
-            // UNDONE
+            if (!RecordsDatabase.Keys.Contains(oldGinNumber) || !RecordsDatabase[oldGinNumber].Keys.Contains(oldCheckDate.ToShortDateString()))
+            {
+                return;
+            }
+
+            RecordsDatabase[oldGinNumber][oldCheckDate.ToShortDateString()].Edit(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
         }
 
         public void AddRecord(string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
-            // HACK: use notes to show date key string
+            // HACK: use notes to save edit history
             EmployeeRecord newRecord = new EmployeeRecord(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
 
             if (!HasEmployeeRecord(ginNumber))
             {
                 RecordsDatabase.Add(ginNumber, new Dictionary<string, EmployeeRecord>());
+            }
+
+            // TODO: reconsider this step
+            if (RecordsDatabase[ginNumber].Keys.Contains(checkDate.ToShortDateString()))
+            {
+                return;
             }
 
             RecordsDatabase[ginNumber].Add(checkDate.ToShortDateString(), newRecord);

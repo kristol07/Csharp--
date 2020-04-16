@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace EmployeeHealthRecord.WFApp.v3
@@ -24,6 +25,8 @@ namespace EmployeeHealthRecord.WFApp.v3
         ControlInputTipHelper tipHelper;
         WinFormAppInputValidator inputValidator;
 
+        int treeViewType; // name: 0; date: 1
+
         public MainForm()
         {
             InitializeComponent();
@@ -37,9 +40,12 @@ namespace EmployeeHealthRecord.WFApp.v3
             tipHelper = new ControlInputTipHelper();
             inputValidator = new WinFormAppInputValidator();
 
+            UpdateTreeView();
+
             FilterRecords();
             UpdateAutoCompleteStringForFilterGinNumberTextBox();
             employeeDatabaseDataGridView.DataSource = employeeRecordBindingSource;
+
         }
 
         // Validate input with tipinfo
@@ -80,7 +86,9 @@ namespace EmployeeHealthRecord.WFApp.v3
                 switch (loadResult)
                 {
                     case "success":
+                        UpdateTreeView();
                         FilterRecords();
+                        UpdateAutoCompleteStringForFilterGinNumberTextBox();
                         MessageBox.Show($"Database loading from {filePath} succeed.", "Loading Database", MessageBoxButtons.OK);
                         break;
                     case "formatError":
@@ -128,7 +136,6 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             if (employeeDatabaseDataGridView.SelectedRows.Count != 0)
             {
-
                 ChangeStatusInfo("Editing...");
 
                 string ginNumber = (string)employeeDatabaseDataGridView.SelectedRows[0].Cells[0].Value;
@@ -137,6 +144,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
                 UpdateRecordForm editRecordForm = new UpdateRecordForm(employeeRecords, currentRecord, "Edit");
                 editRecordForm.Text = "Edit Record";
+                editRecordForm.updatedView += UpdateTreeView;
                 editRecordForm.updatedView += FilterRecords;
                 editRecordForm.updatedView += UpdateAutoCompleteStringForFilterGinNumberTextBox;
                 editRecordForm.ShowDialog();
@@ -151,6 +159,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
             UpdateRecordForm addNewRecordForm = new UpdateRecordForm(employeeRecords, null, "Add");
             addNewRecordForm.Text = "Add New Record";
+            addNewRecordForm.updatedView += UpdateTreeView;
             addNewRecordForm.updatedView += FilterRecords;
             addNewRecordForm.updatedView += UpdateAutoCompleteStringForFilterGinNumberTextBox;
             addNewRecordForm.ShowDialog();
@@ -170,6 +179,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                     DateTime checkDate = (DateTime)employeeDatabaseDataGridView.SelectedRows[0].Cells[2].Value;
                     employeeRecords.RemoveRecord(ginNumber, checkDate.ToShortDateString());
 
+                    UpdateTreeView();
                     FilterRecords();
                     UpdateAutoCompleteStringForFilterGinNumberTextBox();
                 }
@@ -187,12 +197,104 @@ namespace EmployeeHealthRecord.WFApp.v3
             statusLabel.Image = Image.FromFile(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + iconPath);
         }
 
+        // tree view
+
+        private void UpdateTreeView()
+        {
+            if (treeViewType == 0)
+            {
+                ShowNameBasedTreeViewNodes();
+            }
+            else
+            {
+                ShowCheckDateBasedTreeViewNodes();
+            }
+        }
+
+        private List<EmployeeRecord> GetRecordsOfCurrentSelectedTreeNode()
+        {
+            TreeNode currentTreeNode = recordsTreeView.SelectedNode;
+            // name based
+
+            if (currentTreeNode.Level == 0)
+            {
+                return employeeRecords.GetAllRecords();
+            }
+            if (treeViewType == 0) // name based treeview
+            {
+                if (currentTreeNode.Level == 1) // name level 1
+                {
+                    string name = currentTreeNode.Text;
+                    List<EmployeeRecord> recordsWithSameName = employeeRecords.GetAllRecords().FindAll(x => x.Name == name).ToList();
+                    return recordsWithSameName;
+                }
+                else // ginNumber level 2
+                {
+                    string name = currentTreeNode.Parent.Text;
+                    string ginNumber = currentTreeNode.Text;
+                    List<EmployeeRecord> recordsWithSameNameAndGinNumber = employeeRecords.GetAllRecords().FindAll(x => x.Name == name && x.GinNumber == ginNumber).ToList();
+                    return recordsWithSameNameAndGinNumber;
+                }
+            }
+            else // check date based treeview
+            {
+                string checkDate = currentTreeNode.Text;
+                List<EmployeeRecord> recordsWithSameCheckDate = employeeRecords.GetAllRecordsOfSpecificCheckDate(checkDate);
+                return recordsWithSameCheckDate;
+            }
+        }
+
+        private void ShowNameBasedTreeViewNodes()
+        {
+            List<string> allNames = employeeRecords.GetAllRecords().Select(x => x.Name).Distinct().ToList();
+            allNames.Sort();
+            recordsTreeView.BeginUpdate();
+            recordsTreeView.Nodes[0].Nodes.Clear();
+            int i = 0;
+            foreach (var name in allNames)
+            {
+                recordsTreeView.Nodes[0].Nodes.Add(name);
+                List<string> allGinNumbersForSameName = employeeRecords.GetAllRecords().FindAll(x => x.Name == name)
+                                                                                        .Select(x => x.GinNumber)
+                                                                                        .Distinct().ToList();
+                allGinNumbersForSameName.Sort();
+
+                foreach (var ginNumber in allGinNumbersForSameName)
+                {
+                    recordsTreeView.Nodes[0].Nodes[i].Nodes.Add(ginNumber);
+                }
+                i++;
+            }
+            recordsTreeView.EndUpdate();
+
+            recordsTreeView.SelectedNode = recordsTreeView.Nodes[0];
+            recordsTreeView.ExpandAll();
+
+            treeViewType = 0;
+        }
+
+        private void ShowCheckDateBasedTreeViewNodes()
+        {
+            List<DateTime> allDates = employeeRecords.GetAllRecords().Select(x => x.CheckDate).Distinct().ToList();
+            allDates.Sort();
+            recordsTreeView.BeginUpdate();
+            recordsTreeView.Nodes[0].Nodes.Clear();
+            foreach (var date in allDates)
+            {
+                recordsTreeView.Nodes[0].Nodes.Add(date.ToShortDateString());
+            }
+            recordsTreeView.EndUpdate();
+
+            recordsTreeView.SelectedNode = recordsTreeView.Nodes[0];
+            recordsTreeView.ExpandAll();
+
+            treeViewType = 1;
+        }
+
         /////////////// Filter Control Events /////////////////
 
         private void FilterGinNumberTextBox_TextChanged(object sender, EventArgs e)
         {
-            UpdateAutoCompleteStringForFilterGinNumberTextBox();
-
             ValidExistedGinNumberInputWithTipInfo(filterGinNumberTextBox, filterGinNumberTipLabel);
 
             //ClearHealthInfoInput();
@@ -222,7 +324,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void FilterRecords()
         {
-            List<EmployeeRecord> filterBindingList = employeeRecords.GetAllRecords();
+            List<EmployeeRecord> filterBindingList = GetRecordsOfCurrentSelectedTreeNode();
             if (filterCheckDateCheckBox.Checked)
             {
                 filterBindingList = filterBindingList.FindAll(x => x.CheckDate.ToShortDateString() == filterCheckDateTimePicker.Value.ToShortDateString());
@@ -278,6 +380,24 @@ namespace EmployeeHealthRecord.WFApp.v3
             DeleteCurrentRecord();
         }
 
+        private void NameBasedMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowNameBasedTreeViewNodes();
+            FilterRecords();
+        }
+
+        private void CheckDateBasedMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowCheckDateBasedTreeViewNodes();
+            FilterRecords();
+        }
+
+        private void ViewOnlySuspectsMenuItem_Click(object sender, EventArgs e)
+        {
+            viewOnlySuspectCheckBox.Checked = true;
+            FilterRecords();
+        }
+
         private void ViewCodeMenuItem_Click(object sender, EventArgs e)
         {
             // HACK
@@ -330,6 +450,18 @@ namespace EmployeeHealthRecord.WFApp.v3
             EditCurrentRecord();
         }
 
+        private void NameBasedContextMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowNameBasedTreeViewNodes();
+            FilterRecords();
+        }
+
+        private void CheckDateBasedContextMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowCheckDateBasedTreeViewNodes();
+            FilterRecords();
+        }
+
         //////////////// Tool Strips /////////////////////
 
         private void ImportRecordsToolStripButton_Click(object sender, EventArgs e)
@@ -357,6 +489,18 @@ namespace EmployeeHealthRecord.WFApp.v3
             DeleteCurrentRecord();
         }
 
+        private void NameBasedTreeViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowNameBasedTreeViewNodes();
+            FilterRecords();
+        }
+
+        private void CheckDateBasedTreeViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowCheckDateBasedTreeViewNodes();
+            FilterRecords();
+        }
+
         private void SearchToolStripTextBox_Click(object sender, EventArgs e)
         {
             SearchToolStripTextBox.ForeColor = Color.Black;
@@ -381,5 +525,11 @@ namespace EmployeeHealthRecord.WFApp.v3
             timeStatusLabel.Text = DateTime.Today.ToShortDateString() + " " + DateTime.Now.ToLongTimeString();
         }
 
+        ////////////////// tree view ////////////////////////
+
+        private void RecordsTreeView_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            FilterRecords();
+        }
     }
 }

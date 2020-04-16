@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using EmployeeHealthInfoRecord;
 
@@ -41,6 +42,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             if (currentRecord != null)
             {
                 ginNumberTextBox.Text = currentRecord.GinNumber;
+                ginNumberTextBox.Modified = false; // GinNumber can not be changed.
                 nameTextBox.Text = currentRecord.Name;
                 checkDateTimePicker.Value = currentRecord.CheckDate;
                 bodyTemperatureTextBox.Text = currentRecord.BodyTemperature.ToString();
@@ -48,7 +50,6 @@ namespace EmployeeHealthRecord.WFApp.v3
                 hasSymptomsCheckBox.Checked = currentRecord.HasSymptoms;
                 notesRichTextBox.Text = currentRecord.Notes;
             }
-
         }
 
         /////////// Validate input with tip reminder  //////////////
@@ -135,11 +136,13 @@ namespace EmployeeHealthRecord.WFApp.v3
 
                 if (currentRecord != null)
                 {
-                    employeeRecords.RemoveRecord(currentRecord.GinNumber, currentRecord.CheckDate.ToShortDateString());
+                    employeeRecords.EditRecord(currentRecord.GinNumber, currentRecord.CheckDate, ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
+                }
+                else
+                {
+                    employeeRecords.AddRecord(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
                 }
 
-                employeeRecords.RemoveRecord(ginNumber, checkDate.ToShortDateString());
-                employeeRecords.AddRecord(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
                 UpdateCurrentRecord();
 
                 MessageBox.Show($"Record of Employee \"{name}\" with GinNumber \"{ginNumber}\" in \"{checkDate}\" updated.", "Update Employee Records", MessageBoxButtons.OK);
@@ -165,8 +168,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
             else if (inputValidator.IsValidExistedRecord(ginNumber, checkdate, employeeRecords))
             {
-                string confirmMessage = "You are trying to override existed record, current record will be also deleted, are you sure?";
-                TrySaveWithConfirmMessage(confirmMessage);
+                MessageBox.Show("You are trying to override existed record. Try edit directly that one.");
             }
             else if (inputValidator.IsValidNewRecord(ginNumber, checkdate, employeeRecords))
             {

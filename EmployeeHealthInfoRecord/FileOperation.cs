@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Security;
 
 namespace EmployeeHealthInfoRecord
@@ -12,7 +13,7 @@ namespace EmployeeHealthInfoRecord
             {
                 using (StreamWriter sw = new StreamWriter(filePath))
                 {
-                    string header = "GinNumber,Date,Name,BodyTemperature,HasHubeiTravelHistory,HasSymptoms,Notes";
+                    string header = "GinNumber,Date,Name,BodyTemperature,HasHubeiTravelHistory,HasSymptoms,Notes,EditHistory";
                     sw.WriteLine(header);
 
                     foreach (EmployeeRecord employeeRecord in employeeRecords.GetAllRecords())
@@ -57,6 +58,7 @@ namespace EmployeeHealthInfoRecord
                         bool hasHubeiTravelHistory = bool.Parse(employeeRecord[4]);
                         bool hasSymptoms = bool.Parse(employeeRecord[5]);
                         string notes = employeeRecord[6];
+                        //string[] editTimeHistory = employeeRecord[7].Split('|');
                         newEmployeeRecords.AddRecord(ginNumber, date, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
                     }
                 }

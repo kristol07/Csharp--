@@ -112,6 +112,7 @@
     <Content Include="Icons\Add_grey_16x.png" />
     <Content Include="Icons\DeleteListItem_16x.png" />
     <Content Include="Icons\detail\Account_16x.png" />
+    <Content Include="Icons\detail\DateTimeAxis_16x.png" />
     <Content Include="Icons\detail\DetailPageItemTemplate_16x.png" />
     <Content Include="Icons\detail\DisplayName_16x.png" />
     <Content Include="Icons\detail\GeoLocation_16x.png" />
@@ -121,6 +122,7 @@
     <Content Include="Icons\detail\Log_16x.png" />
     <Content Include="Icons\Edit_grey_16x.png" />
     <Content Include="Icons\Exit_16x.png" />
+    <Content Include="Icons\Filter_16x.png" />
     <Content Include="Icons\GitHub-Mark-32px.png" />
     <Content Include="Icons\detail\HeatMap_16x.png" />
     <Content Include="Icons\detail\KeyUp_16x.png" />
@@ -142,6 +144,7 @@
     <Content Include="Icons\status\StatusOK_blue_16x.png" />
     <Content Include="Icons\status\StatusUpdate_16x.png" />
     <Content Include="Icons\status\StatusWarning_16x.png" />
+    <Content Include="Icons\TreeView_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
