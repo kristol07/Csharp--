@@ -40,6 +40,7 @@
             this.treeViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameBasedMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkDateBasedMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeViewStatusMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewOnlySuspectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recordMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,11 +51,18 @@
             this.viewCodeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutHealthRecorderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contentPanel = new System.Windows.Forms.Panel();
+            this.filterGroupBox = new System.Windows.Forms.GroupBox();
+            this.filterCheckDateCheckBox = new System.Windows.Forms.CheckBox();
+            this.filterCheckDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.viewOnlySuspectCheckBox = new System.Windows.Forms.CheckBox();
+            this.filterGinNumberLabel = new System.Windows.Forms.Label();
+            this.filterGinNumberTextBox = new System.Windows.Forms.TextBox();
+            this.filterGinNumberTipLabel = new System.Windows.Forms.Label();
             this.recordsTreeView = new System.Windows.Forms.TreeView();
             this.treeViewContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.nameBasedContextMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.checkDateBasedContextMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.filterGinNumberTipLabel = new System.Windows.Forms.Label();
+            this.openCloseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.employeeDatabaseDataGridView = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,6 +73,7 @@
             this.notesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.databaseContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importFromFileContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openSidebarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addNewRecordContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editCurrentRecordCntextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteCurrentRecordContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,6 +96,7 @@
             this.tressViewToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.nameBasedTreeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkDateBasedTreeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openCloseTreeviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.SearchToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -98,14 +108,9 @@
             this.recordsStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timeStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.filterGroupBox = new System.Windows.Forms.GroupBox();
-            this.viewOnlySuspectCheckBox = new System.Windows.Forms.CheckBox();
-            this.filterGinNumberTextBox = new System.Windows.Forms.TextBox();
-            this.filterGinNumberLabel = new System.Windows.Forms.Label();
-            this.filterCheckDateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.filterCheckDateCheckBox = new System.Windows.Forms.CheckBox();
             this.menuStrip.SuspendLayout();
             this.contentPanel.SuspendLayout();
+            this.filterGroupBox.SuspendLayout();
             this.treeViewContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
             this.databaseContextMenuStrip.SuspendLayout();
@@ -113,7 +118,6 @@
             this.ToolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.filterGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -182,7 +186,8 @@
             // 
             this.treeViewMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nameBasedMenuItem,
-            this.checkDateBasedMenuItem});
+            this.checkDateBasedMenuItem,
+            this.treeViewStatusMenuItem});
             this.treeViewMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("treeViewMenuItem.Image")));
             this.treeViewMenuItem.Name = "treeViewMenuItem";
             this.treeViewMenuItem.Size = new System.Drawing.Size(129, 22);
@@ -207,6 +212,16 @@
             this.checkDateBasedMenuItem.Size = new System.Drawing.Size(248, 22);
             this.checkDateBasedMenuItem.Text = "Check&Date Based";
             this.checkDateBasedMenuItem.Click += new System.EventHandler(this.CheckDateBasedMenuItem_Click);
+            // 
+            // treeViewStatusMenuItem
+            // 
+            this.treeViewStatusMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("treeViewStatusMenuItem.Image")));
+            this.treeViewStatusMenuItem.Name = "treeViewStatusMenuItem";
+            this.treeViewStatusMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.S)));
+            this.treeViewStatusMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.treeViewStatusMenuItem.Text = "&Open/Close";
+            this.treeViewStatusMenuItem.Click += new System.EventHandler(this.TreeViewStatusMenuItem_Click);
             // 
             // filterMenuItem
             // 
@@ -303,6 +318,91 @@
             this.contentPanel.Size = new System.Drawing.Size(1003, 549);
             this.contentPanel.TabIndex = 2;
             // 
+            // filterGroupBox
+            // 
+            this.filterGroupBox.Controls.Add(this.filterCheckDateCheckBox);
+            this.filterGroupBox.Controls.Add(this.filterCheckDateTimePicker);
+            this.filterGroupBox.Controls.Add(this.viewOnlySuspectCheckBox);
+            this.filterGroupBox.Controls.Add(this.filterGinNumberLabel);
+            this.filterGroupBox.Controls.Add(this.filterGinNumberTextBox);
+            this.filterGroupBox.Controls.Add(this.filterGinNumberTipLabel);
+            this.filterGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.filterGroupBox.Location = new System.Drawing.Point(3, 0);
+            this.filterGroupBox.Name = "filterGroupBox";
+            this.filterGroupBox.Size = new System.Drawing.Size(997, 45);
+            this.filterGroupBox.TabIndex = 11;
+            this.filterGroupBox.TabStop = false;
+            this.filterGroupBox.Text = "Filters";
+            // 
+            // filterCheckDateCheckBox
+            // 
+            this.filterCheckDateCheckBox.AutoSize = true;
+            this.filterCheckDateCheckBox.Location = new System.Drawing.Point(112, 16);
+            this.filterCheckDateCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.filterCheckDateCheckBox.Name = "filterCheckDateCheckBox";
+            this.filterCheckDateCheckBox.Size = new System.Drawing.Size(89, 21);
+            this.filterCheckDateCheckBox.TabIndex = 0;
+            this.filterCheckDateCheckBox.Text = "CheckDate";
+            this.filterCheckDateCheckBox.UseVisualStyleBackColor = true;
+            this.filterCheckDateCheckBox.CheckedChanged += new System.EventHandler(this.FilterCheckDateCheckBox_CheckedChanged);
+            // 
+            // filterCheckDateTimePicker
+            // 
+            this.filterCheckDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.filterCheckDateTimePicker.Location = new System.Drawing.Point(206, 15);
+            this.filterCheckDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.filterCheckDateTimePicker.Name = "filterCheckDateTimePicker";
+            this.filterCheckDateTimePicker.Size = new System.Drawing.Size(88, 23);
+            this.filterCheckDateTimePicker.TabIndex = 1;
+            this.filterCheckDateTimePicker.ValueChanged += new System.EventHandler(this.FilterCheckDateTimePicker_ValueChanged);
+            // 
+            // viewOnlySuspectCheckBox
+            // 
+            this.viewOnlySuspectCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.viewOnlySuspectCheckBox.AutoSize = true;
+            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(389, 17);
+            this.viewOnlySuspectCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.viewOnlySuspectCheckBox.Name = "viewOnlySuspectCheckBox";
+            this.viewOnlySuspectCheckBox.Size = new System.Drawing.Size(200, 21);
+            this.viewOnlySuspectCheckBox.TabIndex = 2;
+            this.viewOnlySuspectCheckBox.Text = "View Only Suspect Employees";
+            this.viewOnlySuspectCheckBox.UseVisualStyleBackColor = true;
+            this.viewOnlySuspectCheckBox.CheckedChanged += new System.EventHandler(this.ViewOnlySuspectCheckBox_CheckedChanged);
+            // 
+            // filterGinNumberLabel
+            // 
+            this.filterGinNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.filterGinNumberLabel.AutoSize = true;
+            this.filterGinNumberLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.filterGinNumberLabel.Location = new System.Drawing.Point(679, 18);
+            this.filterGinNumberLabel.Name = "filterGinNumberLabel";
+            this.filterGinNumberLabel.Size = new System.Drawing.Size(75, 17);
+            this.filterGinNumberLabel.TabIndex = 9;
+            this.filterGinNumberLabel.Text = "GinNumber";
+            // 
+            // filterGinNumberTextBox
+            // 
+            this.filterGinNumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.filterGinNumberTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.filterGinNumberTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
+            this.filterGinNumberTextBox.Location = new System.Drawing.Point(759, 15);
+            this.filterGinNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.filterGinNumberTextBox.Name = "filterGinNumberTextBox";
+            this.filterGinNumberTextBox.Size = new System.Drawing.Size(123, 23);
+            this.filterGinNumberTextBox.TabIndex = 3;
+            this.filterGinNumberTextBox.TextChanged += new System.EventHandler(this.FilterGinNumberTextBox_TextChanged);
+            // 
+            // filterGinNumberTipLabel
+            // 
+            this.filterGinNumberTipLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.filterGinNumberTipLabel.AutoSize = true;
+            this.filterGinNumberTipLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.filterGinNumberTipLabel.ForeColor = System.Drawing.Color.Red;
+            this.filterGinNumberTipLabel.Location = new System.Drawing.Point(886, 18);
+            this.filterGinNumberTipLabel.Name = "filterGinNumberTipLabel";
+            this.filterGinNumberTipLabel.Size = new System.Drawing.Size(0, 17);
+            this.filterGinNumberTipLabel.TabIndex = 3;
+            // 
             // recordsTreeView
             // 
             this.recordsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -323,9 +423,10 @@
             // 
             this.treeViewContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nameBasedContextMenuItem1,
-            this.checkDateBasedContextMenuItem1});
+            this.checkDateBasedContextMenuItem1,
+            this.openCloseToolStripMenuItem});
             this.treeViewContextMenuStrip.Name = "treeViewContextMenuStrip";
-            this.treeViewContextMenuStrip.Size = new System.Drawing.Size(179, 48);
+            this.treeViewContextMenuStrip.Size = new System.Drawing.Size(179, 70);
             // 
             // nameBasedContextMenuItem1
             // 
@@ -343,16 +444,13 @@
             this.checkDateBasedContextMenuItem1.Text = "CheckDate Based";
             this.checkDateBasedContextMenuItem1.Click += new System.EventHandler(this.CheckDateBasedContextMenuItem_Click);
             // 
-            // filterGinNumberTipLabel
+            // openCloseToolStripMenuItem
             // 
-            this.filterGinNumberTipLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.filterGinNumberTipLabel.AutoSize = true;
-            this.filterGinNumberTipLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.filterGinNumberTipLabel.ForeColor = System.Drawing.Color.Red;
-            this.filterGinNumberTipLabel.Location = new System.Drawing.Point(886, 18);
-            this.filterGinNumberTipLabel.Name = "filterGinNumberTipLabel";
-            this.filterGinNumberTipLabel.Size = new System.Drawing.Size(0, 17);
-            this.filterGinNumberTipLabel.TabIndex = 3;
+            this.openCloseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openCloseToolStripMenuItem.Image")));
+            this.openCloseToolStripMenuItem.Name = "openCloseToolStripMenuItem";
+            this.openCloseToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.openCloseToolStripMenuItem.Text = "Close";
+            this.openCloseToolStripMenuItem.Click += new System.EventHandler(this.OpenCloseToolStripMenuItem_Click);
             // 
             // employeeDatabaseDataGridView
             // 
@@ -375,7 +473,7 @@
             this.notesDataGridViewTextBoxColumn});
             this.employeeDatabaseDataGridView.ContextMenuStrip = this.databaseContextMenuStrip;
             this.employeeDatabaseDataGridView.DataSource = this.employeeRecordBindingSource;
-            this.employeeDatabaseDataGridView.Location = new System.Drawing.Point(127, 52);
+            this.employeeDatabaseDataGridView.Location = new System.Drawing.Point(128, 52);
             this.employeeDatabaseDataGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.employeeDatabaseDataGridView.MultiSelect = false;
             this.employeeDatabaseDataGridView.Name = "employeeDatabaseDataGridView";
@@ -383,7 +481,7 @@
             this.employeeDatabaseDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.employeeDatabaseDataGridView.RowTemplate.Height = 23;
             this.employeeDatabaseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(876, 497);
+            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(875, 497);
             this.employeeDatabaseDataGridView.TabIndex = 4;
             // 
             // dataGridViewTextBoxColumn1
@@ -451,27 +549,36 @@
             // 
             this.databaseContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importFromFileContextMenuItem,
+            this.openSidebarToolStripMenuItem,
             this.addNewRecordContextMenuItem,
             this.editCurrentRecordCntextMenuItem,
             this.deleteCurrentRecordContextMenuItem,
             this.filterContextMenuItem,
             this.saveAsContextMenuItem});
             this.databaseContextMenuStrip.Name = "databaseContextMenuStrip";
-            this.databaseContextMenuStrip.Size = new System.Drawing.Size(224, 136);
+            this.databaseContextMenuStrip.Size = new System.Drawing.Size(262, 158);
             // 
             // importFromFileContextMenuItem
             // 
             this.importFromFileContextMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("importFromFileContextMenuItem.Image")));
             this.importFromFileContextMenuItem.Name = "importFromFileContextMenuItem";
-            this.importFromFileContextMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.importFromFileContextMenuItem.Size = new System.Drawing.Size(261, 22);
             this.importFromFileContextMenuItem.Text = "Import From...";
             this.importFromFileContextMenuItem.Click += new System.EventHandler(this.ImportFromFileContextpMenuItem_Click);
+            // 
+            // openSidebarToolStripMenuItem
+            // 
+            this.openSidebarToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openSidebarToolStripMenuItem.Image")));
+            this.openSidebarToolStripMenuItem.Name = "openSidebarToolStripMenuItem";
+            this.openSidebarToolStripMenuItem.Size = new System.Drawing.Size(261, 22);
+            this.openSidebarToolStripMenuItem.Text = "Open/Close Navigation Sidebar";
+            this.openSidebarToolStripMenuItem.Click += new System.EventHandler(this.OpenSidebarToolStripMenuItem_Click);
             // 
             // addNewRecordContextMenuItem
             // 
             this.addNewRecordContextMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecordContextMenuItem.Image")));
             this.addNewRecordContextMenuItem.Name = "addNewRecordContextMenuItem";
-            this.addNewRecordContextMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.addNewRecordContextMenuItem.Size = new System.Drawing.Size(261, 22);
             this.addNewRecordContextMenuItem.Text = "Add New Record";
             this.addNewRecordContextMenuItem.Click += new System.EventHandler(this.AddNewRecordContextMenuItem_Click);
             // 
@@ -479,7 +586,7 @@
             // 
             this.editCurrentRecordCntextMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editCurrentRecordCntextMenuItem.Image")));
             this.editCurrentRecordCntextMenuItem.Name = "editCurrentRecordCntextMenuItem";
-            this.editCurrentRecordCntextMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.editCurrentRecordCntextMenuItem.Size = new System.Drawing.Size(261, 22);
             this.editCurrentRecordCntextMenuItem.Text = "View/Edit Current Record";
             this.editCurrentRecordCntextMenuItem.Click += new System.EventHandler(this.EditCurrentRecordContextMenuItem_Click);
             // 
@@ -487,7 +594,7 @@
             // 
             this.deleteCurrentRecordContextMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteCurrentRecordContextMenuItem.Image")));
             this.deleteCurrentRecordContextMenuItem.Name = "deleteCurrentRecordContextMenuItem";
-            this.deleteCurrentRecordContextMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.deleteCurrentRecordContextMenuItem.Size = new System.Drawing.Size(261, 22);
             this.deleteCurrentRecordContextMenuItem.Text = "Delete Current Record";
             this.deleteCurrentRecordContextMenuItem.Click += new System.EventHandler(this.DeleteCurrentRecordContextMenuItem_Click);
             // 
@@ -497,7 +604,7 @@
             this.viewOnlySuspectEployeeContextMenuItem,
             this.viewAllEmployeesContextMenuItem});
             this.filterContextMenuItem.Name = "filterContextMenuItem";
-            this.filterContextMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.filterContextMenuItem.Size = new System.Drawing.Size(261, 22);
             this.filterContextMenuItem.Text = "Filter...";
             // 
             // viewOnlySuspectEployeeContextMenuItem
@@ -518,7 +625,7 @@
             // 
             this.saveAsContextMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAsContextMenuItem.Image")));
             this.saveAsContextMenuItem.Name = "saveAsContextMenuItem";
-            this.saveAsContextMenuItem.Size = new System.Drawing.Size(223, 22);
+            this.saveAsContextMenuItem.Size = new System.Drawing.Size(261, 22);
             this.saveAsContextMenuItem.Text = "Save As...";
             this.saveAsContextMenuItem.Click += new System.EventHandler(this.SaveAsContextMenuItem_Click);
             // 
@@ -618,7 +725,8 @@
             this.tressViewToolStripDropDownButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tressViewToolStripDropDownButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nameBasedTreeViewToolStripMenuItem,
-            this.checkDateBasedTreeViewToolStripMenuItem});
+            this.checkDateBasedTreeViewToolStripMenuItem,
+            this.openCloseTreeviewToolStripMenuItem});
             this.tressViewToolStripDropDownButton.Image = ((System.Drawing.Image)(resources.GetObject("tressViewToolStripDropDownButton.Image")));
             this.tressViewToolStripDropDownButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tressViewToolStripDropDownButton.Name = "tressViewToolStripDropDownButton";
@@ -640,6 +748,14 @@
             this.checkDateBasedTreeViewToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.checkDateBasedTreeViewToolStripMenuItem.Text = "CheckDate Based TreeView";
             this.checkDateBasedTreeViewToolStripMenuItem.Click += new System.EventHandler(this.CheckDateBasedTreeViewToolStripMenuItem_Click);
+            // 
+            // openCloseTreeviewToolStripMenuItem
+            // 
+            this.openCloseTreeviewToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openCloseTreeviewToolStripMenuItem.Image")));
+            this.openCloseTreeviewToolStripMenuItem.Name = "openCloseTreeviewToolStripMenuItem";
+            this.openCloseTreeviewToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
+            this.openCloseTreeviewToolStripMenuItem.Text = "Open/Close";
+            this.openCloseTreeviewToolStripMenuItem.Click += new System.EventHandler(this.SwitchTreeviewToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
@@ -728,80 +844,6 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
-            // filterGroupBox
-            // 
-            this.filterGroupBox.Controls.Add(this.filterCheckDateCheckBox);
-            this.filterGroupBox.Controls.Add(this.filterCheckDateTimePicker);
-            this.filterGroupBox.Controls.Add(this.viewOnlySuspectCheckBox);
-            this.filterGroupBox.Controls.Add(this.filterGinNumberLabel);
-            this.filterGroupBox.Controls.Add(this.filterGinNumberTextBox);
-            this.filterGroupBox.Controls.Add(this.filterGinNumberTipLabel);
-            this.filterGroupBox.Dock = System.Windows.Forms.DockStyle.Top;
-            this.filterGroupBox.Location = new System.Drawing.Point(3, 0);
-            this.filterGroupBox.Name = "filterGroupBox";
-            this.filterGroupBox.Size = new System.Drawing.Size(997, 45);
-            this.filterGroupBox.TabIndex = 11;
-            this.filterGroupBox.TabStop = false;
-            this.filterGroupBox.Text = "Filters";
-            // 
-            // viewOnlySuspectCheckBox
-            // 
-            this.viewOnlySuspectCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.viewOnlySuspectCheckBox.AutoSize = true;
-            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(389, 17);
-            this.viewOnlySuspectCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.viewOnlySuspectCheckBox.Name = "viewOnlySuspectCheckBox";
-            this.viewOnlySuspectCheckBox.Size = new System.Drawing.Size(200, 21);
-            this.viewOnlySuspectCheckBox.TabIndex = 2;
-            this.viewOnlySuspectCheckBox.Text = "View Only Suspect Employees";
-            this.viewOnlySuspectCheckBox.UseVisualStyleBackColor = true;
-            this.viewOnlySuspectCheckBox.CheckedChanged += new System.EventHandler(this.ViewOnlySuspectCheckBox_CheckedChanged);
-            // 
-            // filterGinNumberTextBox
-            // 
-            this.filterGinNumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.filterGinNumberTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
-            this.filterGinNumberTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.filterGinNumberTextBox.Location = new System.Drawing.Point(759, 15);
-            this.filterGinNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.filterGinNumberTextBox.Name = "filterGinNumberTextBox";
-            this.filterGinNumberTextBox.Size = new System.Drawing.Size(123, 23);
-            this.filterGinNumberTextBox.TabIndex = 3;
-            this.filterGinNumberTextBox.TextChanged += new System.EventHandler(this.FilterGinNumberTextBox_TextChanged);
-            // 
-            // filterGinNumberLabel
-            // 
-            this.filterGinNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.filterGinNumberLabel.AutoSize = true;
-            this.filterGinNumberLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.filterGinNumberLabel.Location = new System.Drawing.Point(679, 18);
-            this.filterGinNumberLabel.Name = "filterGinNumberLabel";
-            this.filterGinNumberLabel.Size = new System.Drawing.Size(75, 17);
-            this.filterGinNumberLabel.TabIndex = 9;
-            this.filterGinNumberLabel.Text = "GinNumber";
-            // 
-            // filterCheckDateTimePicker
-            // 
-            this.filterCheckDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.filterCheckDateTimePicker.Location = new System.Drawing.Point(206, 15);
-            this.filterCheckDateTimePicker.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.filterCheckDateTimePicker.Name = "filterCheckDateTimePicker";
-            this.filterCheckDateTimePicker.Size = new System.Drawing.Size(88, 23);
-            this.filterCheckDateTimePicker.TabIndex = 1;
-            this.filterCheckDateTimePicker.ValueChanged += new System.EventHandler(this.FilterCheckDateTimePicker_ValueChanged);
-            // 
-            // filterCheckDateCheckBox
-            // 
-            this.filterCheckDateCheckBox.AutoSize = true;
-            this.filterCheckDateCheckBox.Location = new System.Drawing.Point(112, 16);
-            this.filterCheckDateCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.filterCheckDateCheckBox.Name = "filterCheckDateCheckBox";
-            this.filterCheckDateCheckBox.Size = new System.Drawing.Size(89, 21);
-            this.filterCheckDateCheckBox.TabIndex = 0;
-            this.filterCheckDateCheckBox.Text = "CheckDate";
-            this.filterCheckDateCheckBox.UseVisualStyleBackColor = true;
-            this.filterCheckDateCheckBox.CheckedChanged += new System.EventHandler(this.FilterCheckDateCheckBox_CheckedChanged);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -823,6 +865,8 @@
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.contentPanel.ResumeLayout(false);
+            this.filterGroupBox.ResumeLayout(false);
+            this.filterGroupBox.PerformLayout();
             this.treeViewContextMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).EndInit();
             this.databaseContextMenuStrip.ResumeLayout(false);
@@ -833,8 +877,6 @@
             this.statusStrip.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.filterGroupBox.ResumeLayout(false);
-            this.filterGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -920,6 +962,10 @@
         private System.Windows.Forms.Label filterGinNumberLabel;
         private System.Windows.Forms.TextBox filterGinNumberTextBox;
         private System.Windows.Forms.CheckBox viewOnlySuspectCheckBox;
+        private System.Windows.Forms.ToolStripMenuItem treeViewStatusMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openCloseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openCloseTreeviewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openSidebarToolStripMenuItem;
     }
 }
 

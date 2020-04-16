@@ -144,6 +144,7 @@
     <Content Include="Icons\status\StatusOK_blue_16x.png" />
     <Content Include="Icons\status\StatusUpdate_16x.png" />
     <Content Include="Icons\status\StatusWarning_16x.png" />
+    <Content Include="Icons\SwitchSourceOrTarget_16x.png" />
     <Content Include="Icons\TreeView_16x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

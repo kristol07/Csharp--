@@ -199,6 +199,21 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         // tree view
 
+        private void ChangeTreeViewStatus()
+        {
+            recordsTreeView.Visible = !recordsTreeView.Visible;
+            if (recordsTreeView.Visible == true)
+            {
+                employeeDatabaseDataGridView.Location = new Point(employeeDatabaseDataGridView.Location.X + recordsTreeView.Width, employeeDatabaseDataGridView.Location.Y);
+                employeeDatabaseDataGridView.Width -= recordsTreeView.Width;
+            }
+            else
+            {
+                employeeDatabaseDataGridView.Location = new Point(employeeDatabaseDataGridView.Location.X - recordsTreeView.Width, employeeDatabaseDataGridView.Location.Y);
+                employeeDatabaseDataGridView.Width += recordsTreeView.Width;
+            }
+        }
+
         private void UpdateTreeView()
         {
             if (treeViewType == 0)
@@ -392,6 +407,11 @@ namespace EmployeeHealthRecord.WFApp.v3
             FilterRecords();
         }
 
+        private void TreeViewStatusMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTreeViewStatus();
+        }
+
         private void ViewOnlySuspectsMenuItem_Click(object sender, EventArgs e)
         {
             viewOnlySuspectCheckBox.Checked = true;
@@ -450,16 +470,9 @@ namespace EmployeeHealthRecord.WFApp.v3
             EditCurrentRecord();
         }
 
-        private void NameBasedContextMenuItem_Click(object sender, EventArgs e)
+        private void OpenSidebarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ShowNameBasedTreeViewNodes();
-            FilterRecords();
-        }
-
-        private void CheckDateBasedContextMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowCheckDateBasedTreeViewNodes();
-            FilterRecords();
+            ChangeTreeViewStatus();
         }
 
         //////////////// Tool Strips /////////////////////
@@ -501,6 +514,11 @@ namespace EmployeeHealthRecord.WFApp.v3
             FilterRecords();
         }
 
+        private void SwitchTreeviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTreeViewStatus();
+        }
+
         private void SearchToolStripTextBox_Click(object sender, EventArgs e)
         {
             SearchToolStripTextBox.ForeColor = Color.Black;
@@ -531,5 +549,23 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             FilterRecords();
         }
+
+        private void NameBasedContextMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowNameBasedTreeViewNodes();
+            FilterRecords();
+        }
+
+        private void CheckDateBasedContextMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowCheckDateBasedTreeViewNodes();
+            FilterRecords();
+        }
+
+        private void OpenCloseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChangeTreeViewStatus();
+        }
+
     }
 }
