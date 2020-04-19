@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
@@ -15,6 +16,20 @@ namespace EmployeeHealthRecord.WFApp.v3
     public delegate bool DataValidator(string input);
     public delegate bool DataValidatorWithDatabase(string input, EmployeeRecords recordsDatabase);
     public delegate void UpdateView();
+
+    public enum Month : uint
+    {
+        January = 1,
+        February = 2,
+        March = 3,
+        April = 4,
+        May = 5,
+        June = 6,
+        July = 7,
+        August = 8,
+        September = 9,
+
+    }
 
     public partial class MainForm : Form
     {
@@ -142,7 +157,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
                 string ginNumber = (string)employeeDatabaseDataGridView.SelectedRows[0].Cells[0].Value;
                 string checkDate = ((DateTime)employeeDatabaseDataGridView.SelectedRows[0].Cells[2].Value).ToShortDateString();
-                EmployeeRecord currentRecord = employeeRecords.GetEmployeeRecordGivenSpecificDate(ginNumber, checkDate);
+                EmployeeRecord currentRecord = employeeRecords.GetEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate);
 
                 UpdateRecordForm editRecordForm = new UpdateRecordForm(employeeRecords, currentRecord, "Edit");
                 editRecordForm.Text = "Edit Record";
@@ -239,23 +254,23 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
             else if (currentTreeNode.Level == 1)
             {
-                int year = int.Parse(currentTreeNode.Text.Substring(6));
+                int year = int.Parse(currentTreeNode.Text);
                 List<EmployeeRecord> recordsWithSameYear = employeeRecords.GetAllRecords().FindAll(x => x.CheckDate.Year == year).ToList();
                 return recordsWithSameYear;
             }
             else if (currentTreeNode.Level == 2)
             {
-                int year = int.Parse(currentTreeNode.Parent.Text.Substring(6));
-                int month = int.Parse(currentTreeNode.Text.Substring(7));
-                List<EmployeeRecord> recordsWithSameYearAndMonth = employeeRecords.GetAllRecords().FindAll(x => x.CheckDate.Year == year && x.CheckDate.Month == month).ToList();
+                int year = int.Parse(currentTreeNode.Parent.Text);
+                string month = currentTreeNode.Text;
+                List<EmployeeRecord> recordsWithSameYearAndMonth = employeeRecords.GetAllRecords().FindAll(x => x.CheckDate.Year == year && x.CheckDate.ToString("MMMM", new CultureInfo("en-US")) == month).ToList();
                 return recordsWithSameYearAndMonth;
             }
             else
             {
-                int year = int.Parse(currentTreeNode.Parent.Parent.Text.Substring(6));
-                int month = int.Parse(currentTreeNode.Parent.Text.Substring(7));
-                int day = int.Parse(currentTreeNode.Text.Substring(5));
-                List<EmployeeRecord> recordsWithSameCheckDate = employeeRecords.GetAllRecords().FindAll(x => x.CheckDate.Year == year && x.CheckDate.Month == month && x.CheckDate.Day == day).ToList();
+                int year = int.Parse(currentTreeNode.Parent.Parent.Text);
+                string month = currentTreeNode.Parent.Text;
+                int day = int.Parse(currentTreeNode.Text);
+                List<EmployeeRecord> recordsWithSameCheckDate = employeeRecords.GetAllRecords().FindAll(x => x.CheckDate.Year == year && x.CheckDate.ToString("MMMM", new CultureInfo("en-US")) == month && x.CheckDate.Day == day).ToList();
                 return recordsWithSameCheckDate;
             }
         }
@@ -267,17 +282,17 @@ namespace EmployeeHealthRecord.WFApp.v3
             {
                 return employeeRecords.GetAllRecords();
             }
-            else if (currentTreeNode.Level == 1) // name level 1
+            else if (currentTreeNode.Level == 1) // first char level 1
             {
-                string name = currentTreeNode.Text;
-                List<EmployeeRecord> recordsWithSameName = employeeRecords.GetAllRecords().FindAll(x => x.Name == name).ToList();
+                string firstChar = currentTreeNode.Text;
+                List<EmployeeRecord> recordsWithSameName = employeeRecords.GetAllRecords().FindAll(x => x.Name.ElementAt(0).ToString().ToUpper() == firstChar).ToList();
                 return recordsWithSameName;
             }
-            else // ginNumber level 2
+            else // name+ginNumber level 2
             {
-                string name = currentTreeNode.Parent.Text;
-                string ginNumber = currentTreeNode.Text;
-                List<EmployeeRecord> recordsWithSameNameAndGinNumber = employeeRecords.GetAllRecords().FindAll(x => x.Name == name && x.GinNumber == ginNumber).ToList();
+                string firstChar = currentTreeNode.Parent.Text;
+                string ginNumber = currentTreeNode.Text.Split('_')[1];
+                List<EmployeeRecord> recordsWithSameNameAndGinNumber = employeeRecords.GetAllRecords().FindAll(x => x.Name.ElementAt(0).ToString().ToUpper() == firstChar && x.GinNumber == ginNumber).ToList();
                 return recordsWithSameNameAndGinNumber;
             }
         }
@@ -297,23 +312,23 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void ShowNameBasedTreeViewNodes()
         {
-            List<string> allNames = employeeRecords.GetAllRecords().Select(x => x.Name).Distinct().ToList();
-            allNames.Sort();
+            List<string> allFirstCharInName = employeeRecords.GetAllRecords().Select(x => x.Name.ElementAt(0).ToString().ToUpper()).Distinct().ToList();
+            allFirstCharInName.Sort();
 
             recordsTreeView.BeginUpdate();
             recordsTreeView.Nodes[0].Nodes.Clear();
             int i = 0;
-            foreach (var name in allNames)
+            foreach (var firstChar in allFirstCharInName)
             {
-                recordsTreeView.Nodes[0].Nodes.Add(name);
-                List<string> allGinNumbersForSameName = employeeRecords.GetAllRecords().FindAll(x => x.Name == name)
+                recordsTreeView.Nodes[0].Nodes.Add(firstChar.ToString());
+                List<string> allGinNumbersForSameFirstChar = employeeRecords.GetAllRecords().FindAll(x => x.Name.ElementAt(0).ToString().ToUpper() == firstChar)
                                                                                        .Select(x => x.GinNumber)
                                                                                        .Distinct().ToList();
-                allGinNumbersForSameName.Sort();
+                allGinNumbersForSameFirstChar.Sort();
 
-                foreach (var ginNumber in allGinNumbersForSameName)
+                foreach (var ginNumber in allGinNumbersForSameFirstChar)
                 {
-                    recordsTreeView.Nodes[0].Nodes[i].Nodes.Add(ginNumber);
+                    recordsTreeView.Nodes[0].Nodes[i].Nodes.Add(employeeRecords.GetAllRecords().FindAll(x => x.GinNumber == ginNumber).ElementAt(0).Name + "_" + ginNumber);
                 }
                 i++;
             }
@@ -340,7 +355,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             int i = 0;
             foreach (var year in allYears)
             {
-                recordsTreeView.Nodes[0].Nodes.Add("Year: " + year.ToString());
+                recordsTreeView.Nodes[0].Nodes.Add(year.ToString());
                 List<int> allMonthsForSameYear = allDates.FindAll(x => x.Year == year)
                                                          .Select(x => x.Month)
                                                          .Distinct().ToList();
@@ -348,14 +363,14 @@ namespace EmployeeHealthRecord.WFApp.v3
                 int j = 0;
                 foreach (var month in allMonthsForSameYear)
                 {
-                    recordsTreeView.Nodes[0].Nodes[i].Nodes.Add("Month: " + month.ToString());
+                    recordsTreeView.Nodes[0].Nodes[i].Nodes.Add(CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat.GetAbbreviatedMonthName(month));
                     List<int> allDaysForSameYearAndMonth = allDates.FindAll(x => x.Year == year && x.Month == month)
                                                                    .Select(x => x.Day)
                                                                    .Distinct().ToList();
                     allDaysForSameYearAndMonth.Sort();
                     foreach (var day in allDaysForSameYearAndMonth)
                     {
-                        recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Nodes.Add("Day: " + day.ToString());
+                        recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Nodes.Add(day.ToString());
                     }
                     j++;
                 }
@@ -368,6 +383,22 @@ namespace EmployeeHealthRecord.WFApp.v3
             recordsTreeView.ExpandAll();
 
             treeViewType = 1;
+        }
+
+        private void DeleteRecordsUnderSelectedNode()
+        {
+            if (MessageBox.Show("You are trying to delete all records under this selected node, are you sure?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                List<EmployeeRecord> selectedRecords = GetRecordsOfSelectedTreeNode();
+                foreach (var record in selectedRecords)
+                {
+                    employeeRecords.RemoveRecord(record.GinNumber, record.CheckDate.ToShortDateString());
+                }
+
+                UpdateTreeView();
+                FilterRecords();
+                UpdateAutoCompleteStringForFilterGinNumberTextBox();
+            }
         }
 
         /////////////// Filter Control Events /////////////////
@@ -626,10 +657,24 @@ namespace EmployeeHealthRecord.WFApp.v3
             FilterRecords();
         }
 
+        private void DeleteNodeContextMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteRecordsUnderSelectedNode();
+        }
+
         private void OpenCloseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowAndHideTreeView();
         }
 
+        private void DeleteSelectedNodeMenuItem_Click(object sender, EventArgs e)
+        {
+            DeleteRecordsUnderSelectedNode();
+        }
+
+        private void DeleteSelectedNodeToolStripButton_Click(object sender, EventArgs e)
+        {
+            DeleteRecordsUnderSelectedNode();
+        }
     }
 }

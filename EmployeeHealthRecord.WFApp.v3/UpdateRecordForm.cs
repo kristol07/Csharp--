@@ -42,7 +42,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             if (currentRecord != null)
             {
                 ginNumberTextBox.Text = currentRecord.GinNumber;
-                ginNumberTextBox.ReadOnly = true; // GinNumber can not be changed.
+                // ginNumberTextBox.ReadOnly = true; // GinNumber can not be changed.
                 nameTextBox.Text = currentRecord.Name;
                 checkDateTimePicker.Value = currentRecord.CheckDate;
                 bodyTemperatureTextBox.Text = currentRecord.BodyTemperature.ToString();
@@ -67,8 +67,9 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             if (currentRecord != null)
             {
-                currentRecord.GinNumber = ginNumberTextBox.Text;
-                currentRecord.Name = nameTextBox.Text;
+                Employee employee = employeeRecords.GetEmployeeGivenGinNumber(ginNumberTextBox.Text);
+                //currentRecord.GinNumber = ginNumberTextBox.Text;
+                //currentRecord.Name = nameTextBox.Text;
                 currentRecord.CheckDate = checkDateTimePicker.Value;
                 currentRecord.BodyTemperature = double.Parse(bodyTemperatureTextBox.Text);
                 currentRecord.HasHubeiTravelHistory = hasHubeiTravelHistoryCheckBox.Checked;
@@ -143,7 +144,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                     employeeRecords.AddRecord(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
                 }
 
-                UpdateCurrentRecord();
+                // UpdateCurrentRecord();
 
                 MessageBox.Show($"Record of Employee \"{name}\" with GinNumber \"{ginNumber}\" in \"{checkDate}\" updated.", "Update Employee Records", MessageBoxButtons.OK);
 

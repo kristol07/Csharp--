@@ -45,12 +45,12 @@ namespace EmployeeHealthInfoRecord
 
         public bool IsValidNotExistedGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
         {
-            return !recordsDatabase.HasEmployeeRecord(ginNumber);
+            return !recordsDatabase.HasEmployeeRecordGivenGinNumber(ginNumber);
         }
 
         public bool IsValidExistedGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
         {
-            return recordsDatabase.HasEmployeeRecord(ginNumber);
+            return recordsDatabase.HasEmployeeRecordGivenGinNumber(ginNumber);
         }
 
         public bool IsValidGinNumberType(string ginNumber)
@@ -60,7 +60,7 @@ namespace EmployeeHealthInfoRecord
 
         public bool IsValidNewRecord(string ginNumber, string checkdate, EmployeeRecords recordsDatabase)
         {
-            if (recordsDatabase.HasEmployeeRecordGivenSpecificDate(ginNumber, checkdate))
+            if (recordsDatabase.HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkdate))
             {
                 return false;
             }
@@ -72,7 +72,7 @@ namespace EmployeeHealthInfoRecord
 
         public bool IsValidExistedRecord(string ginNumber, string checkdate, EmployeeRecords recordsDatabase)
         {
-            if (recordsDatabase.HasEmployeeRecordGivenSpecificDate(ginNumber, checkdate))
+            if (recordsDatabase.HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkdate))
             {
                 return true;
             }

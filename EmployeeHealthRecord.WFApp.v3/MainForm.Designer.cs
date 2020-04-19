@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("All Records");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("All Records");
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -40,6 +40,7 @@
             this.treeViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.nameBasedMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkDateBasedMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteSelectedNodeMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.treeViewStatusMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.filterMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewOnlySuspectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,10 +60,10 @@
             this.filterGinNumberTextBox = new System.Windows.Forms.TextBox();
             this.filterGinNumberTipLabel = new System.Windows.Forms.Label();
             this.employeeDatabaseDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.notesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -81,6 +82,7 @@
             this.treeViewContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.nameBasedContextMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.checkDateBasedContextMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteNodeContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCloseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
@@ -110,6 +112,7 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.treeviewLabel = new System.Windows.Forms.Label();
             this.navigationBarPanel = new System.Windows.Forms.Panel();
+            this.DeleteSelectedNodeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
@@ -189,10 +192,11 @@
             this.treeViewMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nameBasedMenuItem,
             this.checkDateBasedMenuItem,
+            this.deleteSelectedNodeMenuItem,
             this.treeViewStatusMenuItem});
             this.treeViewMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("treeViewMenuItem.Image")));
             this.treeViewMenuItem.Name = "treeViewMenuItem";
-            this.treeViewMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.treeViewMenuItem.Size = new System.Drawing.Size(180, 22);
             this.treeViewMenuItem.Text = "&TreeView";
             // 
             // nameBasedMenuItem
@@ -201,8 +205,8 @@
             this.nameBasedMenuItem.Name = "nameBasedMenuItem";
             this.nameBasedMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.N)));
-            this.nameBasedMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.nameBasedMenuItem.Text = "&Name Based";
+            this.nameBasedMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.nameBasedMenuItem.Text = "&Name-Based";
             this.nameBasedMenuItem.Click += new System.EventHandler(this.NameBasedMenuItem_Click);
             // 
             // checkDateBasedMenuItem
@@ -211,9 +215,17 @@
             this.checkDateBasedMenuItem.Name = "checkDateBasedMenuItem";
             this.checkDateBasedMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.D)));
-            this.checkDateBasedMenuItem.Size = new System.Drawing.Size(248, 22);
-            this.checkDateBasedMenuItem.Text = "Check&Date Based";
+            this.checkDateBasedMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.checkDateBasedMenuItem.Text = "Check&Date-Based";
             this.checkDateBasedMenuItem.Click += new System.EventHandler(this.CheckDateBasedMenuItem_Click);
+            // 
+            // deleteSelectedNodeMenuItem
+            // 
+            this.deleteSelectedNodeMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteSelectedNodeMenuItem.Image")));
+            this.deleteSelectedNodeMenuItem.Name = "deleteSelectedNodeMenuItem";
+            this.deleteSelectedNodeMenuItem.Size = new System.Drawing.Size(249, 22);
+            this.deleteSelectedNodeMenuItem.Text = "Delete Selected Node";
+            this.deleteSelectedNodeMenuItem.Click += new System.EventHandler(this.DeleteSelectedNodeMenuItem_Click);
             // 
             // treeViewStatusMenuItem
             // 
@@ -221,7 +233,7 @@
             this.treeViewStatusMenuItem.Name = "treeViewStatusMenuItem";
             this.treeViewStatusMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
             | System.Windows.Forms.Keys.S)));
-            this.treeViewStatusMenuItem.Size = new System.Drawing.Size(248, 22);
+            this.treeViewStatusMenuItem.Size = new System.Drawing.Size(249, 22);
             this.treeViewStatusMenuItem.Text = "&Open/Close";
             this.treeViewStatusMenuItem.Click += new System.EventHandler(this.TreeViewStatusMenuItem_Click);
             // 
@@ -231,7 +243,7 @@
             this.viewOnlySuspectsToolStripMenuItem});
             this.filterMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("filterMenuItem.Image")));
             this.filterMenuItem.Name = "filterMenuItem";
-            this.filterMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.filterMenuItem.Size = new System.Drawing.Size(180, 22);
             this.filterMenuItem.Text = "&Filter";
             // 
             // viewOnlySuspectsToolStripMenuItem
@@ -258,7 +270,7 @@
             this.addNewRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecordMenuItem.Image")));
             this.addNewRecordMenuItem.Name = "addNewRecordMenuItem";
             this.addNewRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.addNewRecordMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.addNewRecordMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addNewRecordMenuItem.Text = "&Add";
             this.addNewRecordMenuItem.Click += new System.EventHandler(this.AddNewRecordMenuItem_Click);
             // 
@@ -267,7 +279,7 @@
             this.saveRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveRecordMenuItem.Image")));
             this.saveRecordMenuItem.Name = "saveRecordMenuItem";
             this.saveRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.saveRecordMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.saveRecordMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveRecordMenuItem.Text = "&Edit";
             this.saveRecordMenuItem.Click += new System.EventHandler(this.EditRecordMenuItem_Click);
             // 
@@ -276,7 +288,7 @@
             this.deleteRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteRecordMenuItem.Image")));
             this.deleteRecordMenuItem.Name = "deleteRecordMenuItem";
             this.deleteRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deleteRecordMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.deleteRecordMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteRecordMenuItem.Text = "&Delete";
             this.deleteRecordMenuItem.Click += new System.EventHandler(this.DeleteRecordMenuItem_Click);
             // 
@@ -415,10 +427,10 @@
             this.employeeDatabaseDataGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.employeeDatabaseDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.employeeDatabaseDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn1,
-            this.dataGridViewTextBoxColumn2,
-            this.checkDateDataGridViewTextBoxColumn,
             this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.checkDateDataGridViewTextBoxColumn,
+            this.dataGridViewTextBoxColumn5,
             this.dataGridViewCheckBoxColumn1,
             this.dataGridViewCheckBoxColumn2,
             this.notesDataGridViewTextBoxColumn});
@@ -435,22 +447,22 @@
             this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(874, 510);
             this.employeeDatabaseDataGridView.TabIndex = 4;
             // 
-            // dataGridViewTextBoxColumn1
+            // dataGridViewTextBoxColumn3
             // 
-            this.dataGridViewTextBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "GinNumber";
-            this.dataGridViewTextBoxColumn1.HeaderText = "GinNumber";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "GinNumber";
+            this.dataGridViewTextBoxColumn3.HeaderText = "GinNumber";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
             // 
-            // dataGridViewTextBoxColumn2
+            // dataGridViewTextBoxColumn4
             // 
-            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            this.dataGridViewTextBoxColumn2.Width = 68;
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 68;
             // 
             // checkDateDataGridViewTextBoxColumn
             // 
@@ -461,14 +473,14 @@
             this.checkDateDataGridViewTextBoxColumn.ReadOnly = true;
             this.checkDateDataGridViewTextBoxColumn.Width = 95;
             // 
-            // dataGridViewTextBoxColumn3
+            // dataGridViewTextBoxColumn5
             // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "BodyTemperature";
-            this.dataGridViewTextBoxColumn3.HeaderText = "BodyTemperature";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            this.dataGridViewTextBoxColumn3.Width = 138;
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "BodyTemperature";
+            this.dataGridViewTextBoxColumn5.HeaderText = "BodyTemperature";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 138;
             // 
             // dataGridViewCheckBoxColumn1
             // 
@@ -593,10 +605,10 @@
             this.recordsTreeView.Indent = 15;
             this.recordsTreeView.Location = new System.Drawing.Point(0, 39);
             this.recordsTreeView.Name = "recordsTreeView";
-            treeNode1.Name = "allRecords";
-            treeNode1.Text = "All Records";
+            treeNode2.Name = "allRecords";
+            treeNode2.Text = "All Records";
             this.recordsTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1});
+            treeNode2});
             this.recordsTreeView.Size = new System.Drawing.Size(128, 510);
             this.recordsTreeView.TabIndex = 10;
             this.recordsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.RecordsTreeView_AfterSelect);
@@ -606,32 +618,41 @@
             this.treeViewContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.nameBasedContextMenuItem1,
             this.checkDateBasedContextMenuItem1,
+            this.deleteNodeContextMenuItem,
             this.openCloseToolStripMenuItem});
             this.treeViewContextMenuStrip.Name = "treeViewContextMenuStrip";
-            this.treeViewContextMenuStrip.Size = new System.Drawing.Size(179, 70);
+            this.treeViewContextMenuStrip.Size = new System.Drawing.Size(180, 92);
             // 
             // nameBasedContextMenuItem1
             // 
             this.nameBasedContextMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("nameBasedContextMenuItem1.Image")));
             this.nameBasedContextMenuItem1.Name = "nameBasedContextMenuItem1";
-            this.nameBasedContextMenuItem1.Size = new System.Drawing.Size(178, 22);
-            this.nameBasedContextMenuItem1.Text = "Name Based";
+            this.nameBasedContextMenuItem1.Size = new System.Drawing.Size(179, 22);
+            this.nameBasedContextMenuItem1.Text = "Name-Based";
             this.nameBasedContextMenuItem1.Click += new System.EventHandler(this.NameBasedContextMenuItem_Click);
             // 
             // checkDateBasedContextMenuItem1
             // 
             this.checkDateBasedContextMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("checkDateBasedContextMenuItem1.Image")));
             this.checkDateBasedContextMenuItem1.Name = "checkDateBasedContextMenuItem1";
-            this.checkDateBasedContextMenuItem1.Size = new System.Drawing.Size(178, 22);
-            this.checkDateBasedContextMenuItem1.Text = "CheckDate Based";
+            this.checkDateBasedContextMenuItem1.Size = new System.Drawing.Size(179, 22);
+            this.checkDateBasedContextMenuItem1.Text = "CheckDate-Based";
             this.checkDateBasedContextMenuItem1.Click += new System.EventHandler(this.CheckDateBasedContextMenuItem_Click);
+            // 
+            // deleteNodeContextMenuItem
+            // 
+            this.deleteNodeContextMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteNodeContextMenuItem.Image")));
+            this.deleteNodeContextMenuItem.Name = "deleteNodeContextMenuItem";
+            this.deleteNodeContextMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.deleteNodeContextMenuItem.Text = "Delete Node";
+            this.deleteNodeContextMenuItem.Click += new System.EventHandler(this.DeleteNodeContextMenuItem_Click);
             // 
             // openCloseToolStripMenuItem
             // 
             this.openCloseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openCloseToolStripMenuItem.Image")));
             this.openCloseToolStripMenuItem.Name = "openCloseToolStripMenuItem";
-            this.openCloseToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
-            this.openCloseToolStripMenuItem.Text = "Close";
+            this.openCloseToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.openCloseToolStripMenuItem.Text = "Close Sidebar";
             this.openCloseToolStripMenuItem.Click += new System.EventHandler(this.OpenCloseToolStripMenuItem_Click);
             // 
             // openFileDialog
@@ -651,6 +672,7 @@
             this.AddRecordToolStripButton,
             this.EditRecordToolStripButton,
             this.DeleteRecordToolStripButton,
+            this.DeleteSelectedNodeToolStripButton,
             this.toolStripSeparator2,
             this.tressViewToolStripDropDownButton,
             this.toolStripSeparator3,
@@ -704,6 +726,7 @@
             this.EditRecordToolStripButton.Name = "EditRecordToolStripButton";
             this.EditRecordToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.EditRecordToolStripButton.Text = "Edit Record";
+            this.EditRecordToolStripButton.ToolTipText = "Edit Current Selected Record in Table";
             this.EditRecordToolStripButton.Click += new System.EventHandler(this.EditRecordToolStripButton_Click);
             // 
             // DeleteRecordToolStripButton
@@ -714,6 +737,7 @@
             this.DeleteRecordToolStripButton.Name = "DeleteRecordToolStripButton";
             this.DeleteRecordToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.DeleteRecordToolStripButton.Text = "Delete Record";
+            this.DeleteRecordToolStripButton.ToolTipText = "Delete Current Selected Record in Table";
             this.DeleteRecordToolStripButton.Click += new System.EventHandler(this.DeleteRecordToolStripButton_Click);
             // 
             // toolStripSeparator2
@@ -733,6 +757,7 @@
             this.tressViewToolStripDropDownButton.Name = "tressViewToolStripDropDownButton";
             this.tressViewToolStripDropDownButton.Size = new System.Drawing.Size(29, 22);
             this.tressViewToolStripDropDownButton.Text = "toolStripDropDownButton1";
+            this.tressViewToolStripDropDownButton.ToolTipText = "Choose different tree views";
             // 
             // nameBasedTreeViewToolStripMenuItem
             // 
@@ -865,6 +890,16 @@
             this.navigationBarPanel.Size = new System.Drawing.Size(128, 550);
             this.navigationBarPanel.TabIndex = 13;
             // 
+            // DeleteSelectedNodeToolStripButton
+            // 
+            this.DeleteSelectedNodeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DeleteSelectedNodeToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DeleteSelectedNodeToolStripButton.Image")));
+            this.DeleteSelectedNodeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DeleteSelectedNodeToolStripButton.Name = "DeleteSelectedNodeToolStripButton";
+            this.DeleteSelectedNodeToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.DeleteSelectedNodeToolStripButton.Text = "toolStripButton1";
+            this.DeleteSelectedNodeToolStripButton.Click += new System.EventHandler(this.DeleteSelectedNodeToolStripButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -960,11 +995,6 @@
         private System.Windows.Forms.BindingSource employeeRecordBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn checkDateDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
         private System.Windows.Forms.TreeView recordsTreeView;
         private System.Windows.Forms.ToolStripMenuItem viewMenuItem;
         private System.Windows.Forms.ToolStripMenuItem treeViewMenuItem;
@@ -991,6 +1021,16 @@
         private System.Windows.Forms.Label filterLabel;
         private System.Windows.Forms.Panel navigationBarPanel;
         private System.Windows.Forms.Label treeviewLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn checkDateDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn1;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn dataGridViewCheckBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn notesDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ToolStripMenuItem deleteNodeContextMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteSelectedNodeMenuItem;
+        private System.Windows.Forms.ToolStripButton DeleteSelectedNodeToolStripButton;
     }
 }
 

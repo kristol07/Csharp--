@@ -7,11 +7,33 @@ namespace EmployeeHealthInfoRecord
 {
     public class EmployeeRecord
     {
-        public string GinNumber { get; set; }
+        Employee relatedEmployee { get; set; }
+
+        public string GinNumber
+        {
+            get
+            {
+                return relatedEmployee.GinNumber;
+            }
+            set
+            {
+                relatedEmployee.GinNumber = value;
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                return relatedEmployee.Name;
+            }
+            set
+            {
+                relatedEmployee.Name = value;
+            }
+        }
 
         public DateTime CheckDate { get; set; }
-
-        public string Name { get; set; }
 
         public double BodyTemperature { get; set; }
 
@@ -25,44 +47,43 @@ namespace EmployeeHealthInfoRecord
 
         public List<DateTime> EditTimeHistory { get; set; }
 
-        public EmployeeRecord(string ginNumber, DateTime date, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes = "")
+        public EmployeeRecord(Employee employee, DateTime checkDate, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes = "")
         {
-            this.GinNumber = ginNumber;
-            this.CheckDate = date;
-            this.Name = name;
-            this.BodyTemperature = bodyTemperature;
-            this.HasHubeiTravelHistory = hasHubeiTravelHistory;
-            this.HasSymptoms = hasSymptoms;
+            relatedEmployee = employee;
+            CheckDate = checkDate;
+            BodyTemperature = bodyTemperature;
+            HasHubeiTravelHistory = hasHubeiTravelHistory;
+            HasSymptoms = hasSymptoms;
+            Notes = notes;
 
-            createTime = DateTime.Now;
-            this.Notes = notes + "||" + createTime.ToString();  // HACK: use notes to save create time
-            EditTimeHistory = new List<DateTime>();
-            EditTimeHistory.Add(createTime);
+            //createTime = DateTime.Now;
+            //Notes = notes + "||" + createTime.ToString();  // HACK: use notes to save create time
+            //EditTimeHistory = new List<DateTime>();
+            //EditTimeHistory.Add(createTime);
         }
 
-        public void Edit(string ginNumber, DateTime date, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
+        public void Edit(Employee employee, DateTime checkDate, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
-            this.GinNumber = ginNumber;
-            this.CheckDate = date;
-            this.Name = name;
-            this.BodyTemperature = bodyTemperature;
-            this.HasHubeiTravelHistory = hasHubeiTravelHistory;
-            this.HasSymptoms = hasSymptoms;
-            this.Notes = notes;
-            EditTimeHistory.Add(DateTime.Now);
+            relatedEmployee = employee;
+            CheckDate = checkDate;
+            BodyTemperature = bodyTemperature;
+            HasHubeiTravelHistory = hasHubeiTravelHistory;
+            HasSymptoms = hasSymptoms;
+            Notes = notes;
+            //EditTimeHistory.Add(DateTime.Now);
         }
 
         public string FormatForSave()
         {
             string[] allInfo = {
-                GinNumber,
+                relatedEmployee.GinNumber,
                 CheckDate.ToString("d"),
-                Name,
+                relatedEmployee.Name,
                 BodyTemperature.ToString(),
                 HasHubeiTravelHistory.ToString(),
                 HasSymptoms.ToString(),
                 Notes,
-                string.Join("|", EditTimeHistory)
+                //string.Join("|", EditTimeHistory)
             };
             string seperator = ",";
 
@@ -96,11 +117,11 @@ namespace EmployeeHealthInfoRecord
             if (IsSuspected())
             {
                 List<string> abnormalInfo = new List<string>();
-                abnormalInfo.Add(GinNumber + "-" + Name + "-" + CheckDate.ToShortTimeString());
+                abnormalInfo.Add(relatedEmployee.GinNumber + "-" + relatedEmployee.Name + "-" + CheckDate.ToShortTimeString());
 
                 if (BodyTemperature > 37.3)
                 {
-                    abnormalInfo.Add("BodyTempeature: " + BodyTemperature.ToString());
+                    abnormalInfo.Add("BodyTemperature: " + BodyTemperature.ToString());
                 }
 
                 if (HasHubeiTravelHistory)

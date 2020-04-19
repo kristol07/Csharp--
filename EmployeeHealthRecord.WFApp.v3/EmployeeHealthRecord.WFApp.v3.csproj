@@ -111,6 +111,8 @@
   <ItemGroup>
     <Content Include="Icons\Add_grey_16x.png" />
     <Content Include="Icons\DeleteListItem_16x.png" />
+    <Content Include="Icons\DeleteTableRow_16x.png" />
+    <Content Include="Icons\DeleteTag_16x.png" />
     <Content Include="Icons\detail\Account_16x.png" />
     <Content Include="Icons\detail\DateTimeAxis_16x.png" />
     <Content Include="Icons\detail\DetailPageItemTemplate_16x.png" />

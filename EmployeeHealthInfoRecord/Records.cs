@@ -7,23 +7,6 @@ namespace EmployeeHealthInfoRecord
 {
     public class EmployeeRecords
     {
-
-        public BindingList<EmployeeRecord> RecordList
-        {
-            get
-            {
-                return TransformRecordListToBindingSource(GetAllRecords().ToArray());
-            }
-        }
-
-        public BindingList<EmployeeRecord> SuspectRecordList
-        {
-            get
-            {
-                return TransformRecordListToBindingSource(GetAllSuspectRecords().ToArray());
-            }
-        }
-
         public int TotalRecords
         {
             get
@@ -56,6 +39,8 @@ namespace EmployeeHealthInfoRecord
             }
         }
 
+        public Dictionary<string, Employee> EmployeeDatabase { get; set; }
+
         public Dictionary<string, Dictionary<string, EmployeeRecord>> RecordsDatabase
         {
             get; set;
@@ -63,6 +48,7 @@ namespace EmployeeHealthInfoRecord
 
         public EmployeeRecords()
         {
+            EmployeeDatabase = new Dictionary<string, Employee>();
             RecordsDatabase = new Dictionary<string, Dictionary<string, EmployeeRecord>>();
         }
 
@@ -78,14 +64,14 @@ namespace EmployeeHealthInfoRecord
             return recordList;
         }
 
-        public bool HasEmployeeRecord(string ginNumber)
+        public bool HasEmployeeRecordGivenGinNumber(string ginNumber)
         {
-            return RecordsDatabase.ContainsKey(ginNumber);
+            return EmployeeDatabase.ContainsKey(ginNumber);
         }
 
-        public bool HasEmployeeRecordGivenSpecificDate(string ginNumber, string checkDate)
+        public bool HasEmployeeRecordGivenGinNumberAndCheckDate(string ginNumber, string checkDate)
         {
-            if (RecordsDatabase.ContainsKey(ginNumber))
+            if (EmployeeDatabase.ContainsKey(ginNumber))
             {
                 return RecordsDatabase[ginNumber].ContainsKey(checkDate);
             }
@@ -95,9 +81,21 @@ namespace EmployeeHealthInfoRecord
             }
         }
 
-        public EmployeeRecord GetEmployeeRecordGivenSpecificDate(string ginNumber, string checkDate)
+        public Employee GetEmployeeGivenGinNumber(string ginNumber)
         {
-            if (HasEmployeeRecordGivenSpecificDate(ginNumber, checkDate))
+            if(HasEmployeeRecordGivenGinNumber(ginNumber))
+            {
+                return EmployeeDatabase[ginNumber];
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public EmployeeRecord GetEmployeeRecordGivenGinNumberAndCheckDate(string ginNumber, string checkDate)
+        {
+            if (HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate))
             {
                 return RecordsDatabase[ginNumber][checkDate];
             }
@@ -115,76 +113,55 @@ namespace EmployeeHealthInfoRecord
             return allRecords;
         }
 
-        public List<EmployeeRecord> GetAllSuspectRecords()
-        {
-            List<EmployeeRecord> allSuspectRecords = new List<EmployeeRecord>();
-
-            foreach (var recordsOfSpecificEmployee in RecordsDatabase.Values)
-            {
-                foreach (var employeeRecord in recordsOfSpecificEmployee.Values)
-                {
-                    if (!string.IsNullOrEmpty(employeeRecord.GetAbnormalInfo()))
-                    {
-                        allSuspectRecords.Add(employeeRecord);
-                    }
-                }
-            }
-
-            return allSuspectRecords;
-        }
-
-        public List<EmployeeRecord> GetAllRecordsOfSpecificEmployee(string ginNumber)
-        {
-            List<EmployeeRecord> allRecordsOfSpecificEmployee = new List<EmployeeRecord>();
-
-            if (HasEmployeeRecord(ginNumber))
-            {
-                allRecordsOfSpecificEmployee.AddRange(RecordsDatabase[ginNumber].Values);
-            }
-
-            return allRecordsOfSpecificEmployee;
-        }
-
-        public List<EmployeeRecord> GetAllRecordsOfSpecificCheckDate(string checkDate)
-        {
-            List<EmployeeRecord> allRecordsOfSpecificCheckDate = new List<EmployeeRecord>();
-
-            foreach (var recordsOfEmployee in RecordsDatabase.Values)
-            {
-                if (recordsOfEmployee.ContainsKey(checkDate))
-                {
-                    allRecordsOfSpecificCheckDate.Add(recordsOfEmployee[checkDate]);
-                }
-            }
-
-            return allRecordsOfSpecificCheckDate;
-        }
-
         public void EditRecord(string oldGinNumber, DateTime oldCheckDate, string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
-            if (!RecordsDatabase.Keys.Contains(oldGinNumber) || !RecordsDatabase[oldGinNumber].Keys.Contains(oldCheckDate.ToShortDateString()))
+            if (!HasEmployeeRecordGivenGinNumberAndCheckDate(oldGinNumber, oldCheckDate.ToShortDateString()))
             {
                 return;
             }
 
-            RecordsDatabase[oldGinNumber][oldCheckDate.ToShortDateString()].Edit(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
+            if (HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate.ToShortDateString()))
+            {
+                return;
+            }
+
+            EmployeeRecord oldRecord = GetEmployeeRecordGivenGinNumberAndCheckDate(oldGinNumber, oldCheckDate.ToShortDateString());
+
+            RemoveRecord(oldGinNumber, oldCheckDate.ToShortDateString());
+
+            if(!HasEmployeeRecordGivenGinNumber(ginNumber))
+            {
+                Employee newEmployee = new Employee(ginNumber, name);
+                EmployeeDatabase.Add(ginNumber, newEmployee);
+                RecordsDatabase.Add(ginNumber, new Dictionary<string, EmployeeRecord>());
+            }
+
+            EmployeeDatabase[ginNumber].Name = name;
+
+            oldRecord.Edit(EmployeeDatabase[ginNumber], checkDate, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
+            RecordsDatabase[ginNumber].Add(checkDate.ToShortDateString(), oldRecord);
         }
 
         public void AddRecord(string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
             // HACK: use notes to save edit history
-            EmployeeRecord newRecord = new EmployeeRecord(ginNumber, checkDate, name, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
 
-            if (!HasEmployeeRecord(ginNumber))
+            if (!HasEmployeeRecordGivenGinNumber(ginNumber))
             {
+                Employee newEmployee = new Employee(ginNumber, name);
+                EmployeeDatabase.Add(ginNumber, newEmployee);
                 RecordsDatabase.Add(ginNumber, new Dictionary<string, EmployeeRecord>());
             }
 
             // TODO: reconsider this step
-            if (RecordsDatabase[ginNumber].Keys.Contains(checkDate.ToShortDateString()))
+            if (HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate.ToShortDateString()))
             {
                 return;
             }
+
+            EmployeeDatabase[ginNumber].Name = name;
+
+            EmployeeRecord newRecord = new EmployeeRecord(EmployeeDatabase[ginNumber], checkDate, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
 
             RecordsDatabase[ginNumber].Add(checkDate.ToShortDateString(), newRecord);
         }
@@ -193,7 +170,7 @@ namespace EmployeeHealthInfoRecord
         {
             foreach (var checkDate in checkDates)
             {
-                if (!HasEmployeeRecordGivenSpecificDate(ginNumber, checkDate))
+                if (!HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate))
                 {
                     return;
                 }
