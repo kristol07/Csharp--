@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="App.ico" />
     <Content Include="Icons\Add_grey_16x.png" />
     <Content Include="Icons\DeleteListItem_16x.png" />
     <Content Include="Icons\DeleteTableRow_16x.png" />

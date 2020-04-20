@@ -7,37 +7,37 @@ namespace EmployeeHealthInfoRecord
 {
     public class EmployeeRecords
     {
-        public int TotalRecords
-        {
-            get
-            {
-                int totalRecords = 0;
-                foreach (var ginNumber in RecordsDatabase.Keys)
-                {
-                    totalRecords += RecordsDatabase[ginNumber].Count;
-                }
-                return totalRecords;
-            }
-        }
+        //public int TotalRecords
+        //{
+        //    get
+        //    {
+        //        int totalRecords = 0;
+        //        foreach (var ginNumber in RecordsDatabase.Keys)
+        //        {
+        //            totalRecords += RecordsDatabase[ginNumber].Count;
+        //        }
+        //        return totalRecords;
+        //    }
+        //}
 
-        public int TotalSuspectRecords
-        {
-            get
-            {
-                int totalSuspectRecords = 0;
-                foreach (var ginNumber in RecordsDatabase.Keys)
-                {
-                    foreach (var record in RecordsDatabase[ginNumber].Values)
-                    {
-                        if (!string.IsNullOrEmpty(record.GetAbnormalInfo()))
-                        {
-                            totalSuspectRecords += 1;
-                        }
-                    }
-                }
-                return totalSuspectRecords;
-            }
-        }
+        //public int TotalSuspectRecords
+        //{
+        //    get
+        //    {
+        //        int totalSuspectRecords = 0;
+        //        foreach (var ginNumber in RecordsDatabase.Keys)
+        //        {
+        //            foreach (var record in RecordsDatabase[ginNumber].Values)
+        //            {
+        //                if (!string.IsNullOrEmpty(record.GetAbnormalInfo()))
+        //                {
+        //                    totalSuspectRecords += 1;
+        //                }
+        //            }
+        //        }
+        //        return totalSuspectRecords;
+        //    }
+        //}
 
         public Dictionary<string, Employee> EmployeeDatabase { get; set; }
 
@@ -50,18 +50,6 @@ namespace EmployeeHealthInfoRecord
         {
             EmployeeDatabase = new Dictionary<string, Employee>();
             RecordsDatabase = new Dictionary<string, Dictionary<string, EmployeeRecord>>();
-        }
-
-        public static BindingList<EmployeeRecord> TransformRecordListToBindingSource(params EmployeeRecord[] arrayOfRecords)
-        {
-            BindingList<EmployeeRecord> recordList = new BindingList<EmployeeRecord>();
-
-            foreach (var record in arrayOfRecords)
-            {
-                recordList.Add(record);
-            }
-
-            return recordList;
         }
 
         public bool HasEmployeeRecordGivenGinNumber(string ginNumber)
@@ -115,48 +103,64 @@ namespace EmployeeHealthInfoRecord
 
         public void EditRecord(string oldGinNumber, DateTime oldCheckDate, string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
+            // can not edit not existed record
             if (!HasEmployeeRecordGivenGinNumberAndCheckDate(oldGinNumber, oldCheckDate.ToShortDateString()))
             {
                 return;
             }
 
+            // can not override existed record when not editing self
+            if ( !((oldGinNumber == ginNumber) && (oldCheckDate == checkDate)) && HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate.ToShortDateString()))
+            {
+                return;
+            }
+
+            // save as new record when not editing self and no corrision with other existed record
+            if(!((oldGinNumber == ginNumber) && (oldCheckDate == checkDate)))
+            {
+                EmployeeRecord oldRecord = GetEmployeeRecordGivenGinNumberAndCheckDate(oldGinNumber, oldCheckDate.ToShortDateString());
+
+                RemoveRecord(oldGinNumber, oldCheckDate.ToShortDateString());
+
+                if (!HasEmployeeRecordGivenGinNumber(ginNumber))
+                {
+                    Employee newEmployee = new Employee(ginNumber, name);
+                    EmployeeDatabase.Add(ginNumber, newEmployee);
+                    RecordsDatabase.Add(ginNumber, new Dictionary<string, EmployeeRecord>());
+                }
+    
+                EmployeeDatabase[ginNumber].Name = name;
+
+                oldRecord.Edit(EmployeeDatabase[ginNumber], checkDate, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
+                RecordsDatabase[ginNumber].Add(checkDate.ToShortDateString(), oldRecord);
+            }
+            // edit self
+            else
+            {
+                EmployeeDatabase[ginNumber].Name = name;
+                RecordsDatabase[ginNumber][checkDate.ToShortDateString()].Edit(EmployeeDatabase[ginNumber], checkDate, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
+            }
+        }
+
+        public void AddRecord(string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
+        {
+            // only possible to edit existed record
             if (HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate.ToShortDateString()))
             {
                 return;
             }
 
-            EmployeeRecord oldRecord = GetEmployeeRecordGivenGinNumberAndCheckDate(oldGinNumber, oldCheckDate.ToShortDateString());
-
-            RemoveRecord(oldGinNumber, oldCheckDate.ToShortDateString());
-
-            if(!HasEmployeeRecordGivenGinNumber(ginNumber))
+            // can not change existed Employee name. Use edit function.
+            if(HasEmployeeRecordGivenGinNumber(ginNumber) && EmployeeDatabase[ginNumber].Name != name)
             {
-                Employee newEmployee = new Employee(ginNumber, name);
-                EmployeeDatabase.Add(ginNumber, newEmployee);
-                RecordsDatabase.Add(ginNumber, new Dictionary<string, EmployeeRecord>());
+                return;
             }
-
-            EmployeeDatabase[ginNumber].Name = name;
-
-            oldRecord.Edit(EmployeeDatabase[ginNumber], checkDate, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
-            RecordsDatabase[ginNumber].Add(checkDate.ToShortDateString(), oldRecord);
-        }
-
-        public void AddRecord(string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
-        {
-            // HACK: use notes to save edit history
 
             if (!HasEmployeeRecordGivenGinNumber(ginNumber))
             {
                 Employee newEmployee = new Employee(ginNumber, name);
                 EmployeeDatabase.Add(ginNumber, newEmployee);
                 RecordsDatabase.Add(ginNumber, new Dictionary<string, EmployeeRecord>());
-            }
-
-            // TODO: reconsider this step
-            if (HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate.ToShortDateString()))
-            {
-                return;
             }
 
             EmployeeDatabase[ginNumber].Name = name;

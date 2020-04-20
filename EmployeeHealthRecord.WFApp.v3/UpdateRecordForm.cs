@@ -182,11 +182,16 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             string ginNumber = ginNumberTextBox.Text.Trim();
             string checkdate = checkDateTimePicker.Value.ToShortDateString();
+            string name = nameTextBox.Text.Trim();
 
-            if (inputValidator.IsValidNewRecord(ginNumber, checkdate, employeeRecords))
+            if (inputValidator.IsValidNewRecord(ginNumber, checkdate, employeeRecords) && inputValidator.IsValidSameNameForExistedGinNumber(ginNumber, name, employeeRecords))
             {
                 string confirmMessage = "You are trying to add new record, are you sure?";
                 TrySaveWithConfirmMessage(confirmMessage);
+            }
+            else if (inputValidator.IsValidNewRecord(ginNumber, checkdate, employeeRecords) && !inputValidator.IsValidSameNameForExistedGinNumber(ginNumber, name, employeeRecords))
+            {
+                MessageBox.Show($"You can not change Name for existed GinNumber. Try edit function.");
             }
             else
             {

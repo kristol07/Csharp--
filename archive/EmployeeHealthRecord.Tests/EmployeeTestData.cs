@@ -23,7 +23,7 @@ namespace EmployeeHealthRecord.Tests
                 yield return new object[] { new Employee("0", "Test", 36.5, true, true) };
                 yield return new object[] { new Employee("0", "Test", 40, true, false) };
 
-                //trible
+                // treble
                 // yield return new object[] { new Employee("0", "Test", 0, true, true) };
                 yield return new object[] { new Employee("0", "Test", 40, true, true) };
             }

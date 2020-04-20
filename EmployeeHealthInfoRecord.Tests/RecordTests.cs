@@ -18,7 +18,7 @@ namespace EmployeeHealthInfoRecord.Tests
         public void FormatForSave_ReturnCorrectFormat()
         {
             string result = _record.FormatForSave();
-            Assert.Equal("1,John,2020/1/1,37,False,False,", result);
+            Assert.Equal("1,2020/1/1,John,37,False,False,", result);
         }
 
         [Theory]

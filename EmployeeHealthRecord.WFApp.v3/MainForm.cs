@@ -44,8 +44,12 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         int treeViewType; // name: 0; date: 1
 
+        CultureInfo cultureInfo;
+
         public MainForm()
         {
+            cultureInfo = new CultureInfo("en-US");
+
             InitializeComponent();
 
             GIN_NUMBER_TYPE_TIP = "? Number Only"; //"Not valid GinNumber type (Integer)."; //"Only integer is allowed for ginNumber.";
@@ -64,6 +68,19 @@ namespace EmployeeHealthRecord.WFApp.v3
             employeeDatabaseDataGridView.DataSource = employeeRecordBindingSource;
 
         }
+
+        public BindingList<EmployeeRecord> TransformRecordListToBindingSource(params EmployeeRecord[] arrayOfRecords)
+        {
+            BindingList<EmployeeRecord> recordList = new BindingList<EmployeeRecord>();
+
+            foreach (var record in arrayOfRecords)
+            {
+                recordList.Add(record);
+            }
+
+            return recordList;
+        }
+
 
         // Validate input with tipinfo
         public void ValidExistedGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
@@ -262,7 +279,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             {
                 int year = int.Parse(currentTreeNode.Parent.Text);
                 string month = currentTreeNode.Text;
-                List<EmployeeRecord> recordsWithSameYearAndMonth = employeeRecords.GetAllRecords().FindAll(x => x.CheckDate.Year == year && x.CheckDate.ToString("MMMM", new CultureInfo("en-US")) == month).ToList();
+                List<EmployeeRecord> recordsWithSameYearAndMonth = employeeRecords.GetAllRecords().FindAll(x => x.CheckDate.Year == year && cultureInfo.DateTimeFormat.GetMonthName(x.CheckDate.Month) == month).ToList();
                 return recordsWithSameYearAndMonth;
             }
             else
@@ -270,7 +287,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                 int year = int.Parse(currentTreeNode.Parent.Parent.Text);
                 string month = currentTreeNode.Parent.Text;
                 int day = int.Parse(currentTreeNode.Text);
-                List<EmployeeRecord> recordsWithSameCheckDate = employeeRecords.GetAllRecords().FindAll(x => x.CheckDate.Year == year && x.CheckDate.ToString("MMMM", new CultureInfo("en-US")) == month && x.CheckDate.Day == day).ToList();
+                List<EmployeeRecord> recordsWithSameCheckDate = employeeRecords.GetAllRecords().FindAll(x => x.CheckDate.Year == year && cultureInfo.DateTimeFormat.GetMonthName(x.CheckDate.Month) == month && x.CheckDate.Day == day).ToList();
                 return recordsWithSameCheckDate;
             }
         }
@@ -363,7 +380,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                 int j = 0;
                 foreach (var month in allMonthsForSameYear)
                 {
-                    recordsTreeView.Nodes[0].Nodes[i].Nodes.Add(CultureInfo.CreateSpecificCulture("en-US").DateTimeFormat.GetAbbreviatedMonthName(month));
+                    recordsTreeView.Nodes[0].Nodes[i].Nodes.Add(cultureInfo.DateTimeFormat.GetMonthName(month));
                     List<int> allDaysForSameYearAndMonth = allDates.FindAll(x => x.Year == year && x.Month == month)
                                                                    .Select(x => x.Day)
                                                                    .Distinct().ToList();
@@ -455,7 +472,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             UpdateRecordsStatus(filterBindingList);
 
             // update datagrid view/source
-            employeeRecordBindingSource.DataSource = EmployeeRecords.TransformRecordListToBindingSource(filterBindingList.ToArray());
+            employeeRecordBindingSource.DataSource = TransformRecordListToBindingSource(filterBindingList.ToArray());
         }
 
         ///////////////// Menu Strips ///////////////////

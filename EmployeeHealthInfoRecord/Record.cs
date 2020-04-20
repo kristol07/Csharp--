@@ -77,7 +77,7 @@ namespace EmployeeHealthInfoRecord
         {
             string[] allInfo = {
                 relatedEmployee.GinNumber,
-                CheckDate.ToString("d"),
+                CheckDate.ToShortDateString(),
                 relatedEmployee.Name,
                 BodyTemperature.ToString(),
                 HasHubeiTravelHistory.ToString(),
@@ -117,7 +117,7 @@ namespace EmployeeHealthInfoRecord
             if (IsSuspected())
             {
                 List<string> abnormalInfo = new List<string>();
-                abnormalInfo.Add(relatedEmployee.GinNumber + "-" + relatedEmployee.Name + "-" + CheckDate.ToShortTimeString());
+                abnormalInfo.Add(relatedEmployee.GinNumber + "-" + relatedEmployee.Name + "-" + CheckDate.ToShortDateString());
 
                 if (BodyTemperature > 37.3)
                 {

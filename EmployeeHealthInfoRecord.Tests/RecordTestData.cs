@@ -31,7 +31,7 @@ namespace EmployeeHealthInfoRecord.Tests
                 DateTime checkDate = DateTime.Parse("2020/01/01");
 
                 yield return new object[] { new EmployeeRecord(employee, checkDate, 38, false, false), "1-John-2020/1/1||BodyTemperature: 38" };
-                yield return new object[] { new EmployeeRecord(employee, checkDate, 37, true, false), "1-John-2020/1/1||Has been to Hubei|" };
+                yield return new object[] { new EmployeeRecord(employee, checkDate, 37, true, false), "1-John-2020/1/1||Has been to Hubei" };
                 yield return new object[] { new EmployeeRecord(employee, checkDate, 37, false, true), "1-John-2020/1/1||Has symptoms" };
                 yield return new object[] { new EmployeeRecord(employee, checkDate, 38, true, false), "1-John-2020/1/1||BodyTemperature: 38||Has been to Hubei" };
                 yield return new object[] { new EmployeeRecord(employee, checkDate, 38, false, true), "1-John-2020/1/1||BodyTemperature: 38||Has symptoms" };

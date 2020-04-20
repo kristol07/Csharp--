@@ -89,7 +89,12 @@ namespace EmployeeHealthInfoRecord
 
         public bool IsValidExistedName(string name, EmployeeRecords recordsDatabase)
         {
-            return true;
+            return recordsDatabase.EmployeeDatabase.Values.ToList().Select(x=>x.Name).Contains(name);
+        }
+
+        public bool IsValidSameNameForExistedGinNumber(string ginNumber, string name, EmployeeRecords recordsDatabse)
+        {
+            return recordsDatabse.EmployeeDatabase[ginNumber].Name == name;
         }
 
         public bool IsValidBodyTemperatureType(string bodyTemperature)

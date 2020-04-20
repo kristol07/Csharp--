@@ -94,6 +94,7 @@
             this.AddRecordToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.EditRecordToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.DeleteRecordToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.DeleteSelectedNodeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tressViewToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.nameBasedTreeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,7 +113,6 @@
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.treeviewLabel = new System.Windows.Forms.Label();
             this.navigationBarPanel = new System.Windows.Forms.Panel();
-            this.DeleteSelectedNodeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.menuStrip.SuspendLayout();
             this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
@@ -196,7 +196,7 @@
             this.treeViewStatusMenuItem});
             this.treeViewMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("treeViewMenuItem.Image")));
             this.treeViewMenuItem.Name = "treeViewMenuItem";
-            this.treeViewMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.treeViewMenuItem.Size = new System.Drawing.Size(129, 22);
             this.treeViewMenuItem.Text = "&TreeView";
             // 
             // nameBasedMenuItem
@@ -243,7 +243,7 @@
             this.viewOnlySuspectsToolStripMenuItem});
             this.filterMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("filterMenuItem.Image")));
             this.filterMenuItem.Name = "filterMenuItem";
-            this.filterMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.filterMenuItem.Size = new System.Drawing.Size(129, 22);
             this.filterMenuItem.Text = "&Filter";
             // 
             // viewOnlySuspectsToolStripMenuItem
@@ -270,7 +270,7 @@
             this.addNewRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecordMenuItem.Image")));
             this.addNewRecordMenuItem.Name = "addNewRecordMenuItem";
             this.addNewRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.addNewRecordMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addNewRecordMenuItem.Size = new System.Drawing.Size(159, 22);
             this.addNewRecordMenuItem.Text = "&Add";
             this.addNewRecordMenuItem.Click += new System.EventHandler(this.AddNewRecordMenuItem_Click);
             // 
@@ -279,7 +279,7 @@
             this.saveRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveRecordMenuItem.Image")));
             this.saveRecordMenuItem.Name = "saveRecordMenuItem";
             this.saveRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.saveRecordMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveRecordMenuItem.Size = new System.Drawing.Size(159, 22);
             this.saveRecordMenuItem.Text = "&Edit";
             this.saveRecordMenuItem.Click += new System.EventHandler(this.EditRecordMenuItem_Click);
             // 
@@ -288,7 +288,7 @@
             this.deleteRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteRecordMenuItem.Image")));
             this.deleteRecordMenuItem.Name = "deleteRecordMenuItem";
             this.deleteRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deleteRecordMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteRecordMenuItem.Size = new System.Drawing.Size(159, 22);
             this.deleteRecordMenuItem.Text = "&Delete";
             this.deleteRecordMenuItem.Click += new System.EventHandler(this.DeleteRecordMenuItem_Click);
             // 
@@ -598,7 +598,8 @@
             // 
             // recordsTreeView
             // 
-            this.recordsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.recordsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.recordsTreeView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.recordsTreeView.ContextMenuStrip = this.treeViewContextMenuStrip;
@@ -739,6 +740,16 @@
             this.DeleteRecordToolStripButton.Text = "Delete Record";
             this.DeleteRecordToolStripButton.ToolTipText = "Delete Current Selected Record in Table";
             this.DeleteRecordToolStripButton.Click += new System.EventHandler(this.DeleteRecordToolStripButton_Click);
+            // 
+            // DeleteSelectedNodeToolStripButton
+            // 
+            this.DeleteSelectedNodeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DeleteSelectedNodeToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DeleteSelectedNodeToolStripButton.Image")));
+            this.DeleteSelectedNodeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DeleteSelectedNodeToolStripButton.Name = "DeleteSelectedNodeToolStripButton";
+            this.DeleteSelectedNodeToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.DeleteSelectedNodeToolStripButton.Text = "toolStripButton1";
+            this.DeleteSelectedNodeToolStripButton.Click += new System.EventHandler(this.DeleteSelectedNodeToolStripButton_Click);
             // 
             // toolStripSeparator2
             // 
@@ -890,16 +901,6 @@
             this.navigationBarPanel.Size = new System.Drawing.Size(128, 550);
             this.navigationBarPanel.TabIndex = 13;
             // 
-            // DeleteSelectedNodeToolStripButton
-            // 
-            this.DeleteSelectedNodeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DeleteSelectedNodeToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DeleteSelectedNodeToolStripButton.Image")));
-            this.DeleteSelectedNodeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DeleteSelectedNodeToolStripButton.Name = "DeleteSelectedNodeToolStripButton";
-            this.DeleteSelectedNodeToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.DeleteSelectedNodeToolStripButton.Text = "toolStripButton1";
-            this.DeleteSelectedNodeToolStripButton.Click += new System.EventHandler(this.DeleteSelectedNodeToolStripButton_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -912,6 +913,7 @@
             this.Controls.Add(this.navigationBarPanel);
             this.Controls.Add(this.contentPanel);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
