@@ -1,0 +1,2 @@
+OpenCover.Console.exe -target:"C:/Program Files/dotnet/dotnet.exe" -targetargs:"test --configuration Debug --no-build" -output:coverage.xml -register:user -filter:"+[*]* -[*Moq]* -[xunit*]*" -oldstyle
+ReportGenerator.exe "-reports:coverage.xml" "-targetdir:CodeCoverageReport"
