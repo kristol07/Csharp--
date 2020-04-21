@@ -45,12 +45,12 @@ namespace EmployeeHealthInfoRecord
 
         public bool IsValidNotExistedGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
         {
-            return !recordsDatabase.HasEmployeeRecordGivenGinNumber(ginNumber);
+            return !recordsDatabase.HasEmployeeGivenGinNumber(ginNumber);
         }
 
         public bool IsValidExistedGinNumber(string ginNumber, EmployeeRecords recordsDatabase)
         {
-            return recordsDatabase.HasEmployeeRecordGivenGinNumber(ginNumber);
+            return recordsDatabase.HasEmployeeGivenGinNumber(ginNumber);
         }
 
         public bool IsValidGinNumberType(string ginNumber)
@@ -94,7 +94,14 @@ namespace EmployeeHealthInfoRecord
 
         public bool IsValidSameNameForExistedGinNumber(string ginNumber, string name, EmployeeRecords recordsDatabse)
         {
-            return recordsDatabse.EmployeeDatabase[ginNumber].Name == name;
+            if(recordsDatabse.EmployeeDatabase.ContainsKey(ginNumber))
+            {
+                return recordsDatabse.EmployeeDatabase[ginNumber].Name == name;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         public bool IsValidBodyTemperatureType(string bodyTemperature)

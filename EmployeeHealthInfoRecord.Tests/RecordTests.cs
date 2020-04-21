@@ -70,5 +70,42 @@ namespace EmployeeHealthInfoRecord.Tests
             string result = _record.GetAbnormalInfo();
             Assert.Equal("", result);
         }
+
+        [Fact]
+        public void CompareTo_ReturnZero_IfTwoRecordsHaveSameGinNumber()
+        {
+            Employee anotherEmployee = new Employee("1", "Test");
+            DateTime checkDate = DateTime.Parse("2020/01/01");
+            EmployeeRecord anotherRecord = new EmployeeRecord(anotherEmployee, checkDate, 36.5, false, false);
+
+            int result = _record.CompareTo(anotherRecord);
+
+            Assert.Equal(0, result);
+        }
+
+
+        [Fact]
+        public void CompareTo_ReturnOne_IfRecordHasLargerGinNumber()
+        {
+            Employee anotherEmployee = new Employee("0", "Test");
+            DateTime checkDate = DateTime.Parse("2020/01/01");
+            EmployeeRecord anotherRecord = new EmployeeRecord(anotherEmployee, checkDate, 36.5, false, false);
+
+            int result = _record.CompareTo(anotherRecord);
+
+            Assert.Equal(1, result);
+        }
+
+        [Fact]
+        public void CompareTo_ReturnMinusOne_IfRecordHasSmallerGinNumber()
+        {
+            Employee anotherEmployee = new Employee("2", "Test");
+            DateTime checkDate = DateTime.Parse("2020/01/01");
+            EmployeeRecord anotherRecord = new EmployeeRecord(anotherEmployee, checkDate, 36.5, false, false);
+
+            int result = _record.CompareTo(anotherRecord);
+
+            Assert.Equal(-1, result);
+        }
     }
 }

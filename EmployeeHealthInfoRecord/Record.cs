@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace EmployeeHealthInfoRecord
 {
-    public class EmployeeRecord
+    public class EmployeeRecord: IComparable
     {
         Employee relatedEmployee { get; set; }
 
@@ -139,6 +139,23 @@ namespace EmployeeHealthInfoRecord
             else
             {
                 return "";
+            }
+        }
+
+        public int CompareTo(object obj)
+        {
+            EmployeeRecord anotherRecord = (EmployeeRecord)obj;
+            if (Int32.Parse(this.GinNumber) < Int32.Parse(anotherRecord.GinNumber))
+            {
+                return -1;
+            }
+            else if (Int32.Parse(this.GinNumber) > Int32.Parse(anotherRecord.GinNumber))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
             }
         }
     }

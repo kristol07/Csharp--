@@ -161,6 +161,7 @@ namespace EmployeeHealthRecord.WFApp.v3
         {
             string ginNumber = ginNumberTextBox.Text.Trim();
             string checkdate = checkDateTimePicker.Value.ToShortDateString();
+            string name = nameTextBox.Text.Trim();
 
             if (ginNumber == currentRecord.GinNumber && checkdate == currentRecord.CheckDate.ToShortDateString())
             {
@@ -173,8 +174,15 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
             else if (inputValidator.IsValidNewRecord(ginNumber, checkdate, employeeRecords))
             {
-                string confirmMessage = "You are trying to add new record, current record will be also deleted, are you sure?";
-                TrySaveWithConfirmMessage(confirmMessage);
+                if (inputValidator.IsValidExistedGinNumber(ginNumber, employeeRecords) && !inputValidator.IsValidSameNameForExistedGinNumber(ginNumber, name, employeeRecords))
+                {
+                    MessageBox.Show("You are trying to edit name for existed GinNumber, this is not allowed.\nTry first edit name directly for one record without changing GinNumber and CheckDate");
+                }
+                else
+                {
+                    string confirmMessage = "You are trying to add new record, current record will be also deleted, are you sure?";
+                    TrySaveWithConfirmMessage(confirmMessage);
+                }
             }
         }
 

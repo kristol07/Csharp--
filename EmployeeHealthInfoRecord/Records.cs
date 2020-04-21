@@ -52,7 +52,7 @@ namespace EmployeeHealthInfoRecord
             RecordsDatabase = new Dictionary<string, Dictionary<string, EmployeeRecord>>();
         }
 
-        public bool HasEmployeeRecordGivenGinNumber(string ginNumber)
+        public bool HasEmployeeGivenGinNumber(string ginNumber)
         {
             return EmployeeDatabase.ContainsKey(ginNumber);
         }
@@ -71,7 +71,7 @@ namespace EmployeeHealthInfoRecord
 
         public Employee GetEmployeeGivenGinNumber(string ginNumber)
         {
-            if(HasEmployeeRecordGivenGinNumber(ginNumber))
+            if (HasEmployeeGivenGinNumber(ginNumber))
             {
                 return EmployeeDatabase[ginNumber];
             }
@@ -110,26 +110,32 @@ namespace EmployeeHealthInfoRecord
             }
 
             // can not override existed record when not editing self
-            if ( !((oldGinNumber == ginNumber) && (oldCheckDate == checkDate)) && HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate.ToShortDateString()))
+            if (!((oldGinNumber == ginNumber) && (oldCheckDate == checkDate)) && HasEmployeeRecordGivenGinNumberAndCheckDate(ginNumber, checkDate.ToShortDateString()))
             {
                 return;
             }
 
             // save as new record when not editing self and no corrision with other existed record
-            if(!((oldGinNumber == ginNumber) && (oldCheckDate == checkDate)))
+            if (!((oldGinNumber == ginNumber) && (oldCheckDate == checkDate)))
             {
+                // can not change name of existed ginNumber when not edit self
+                if (HasEmployeeGivenGinNumber(ginNumber) && EmployeeDatabase[ginNumber].Name != name)
+                {
+                    return;
+                }
+
                 EmployeeRecord oldRecord = GetEmployeeRecordGivenGinNumberAndCheckDate(oldGinNumber, oldCheckDate.ToShortDateString());
 
                 RemoveRecord(oldGinNumber, oldCheckDate.ToShortDateString());
 
-                if (!HasEmployeeRecordGivenGinNumber(ginNumber))
+                if (!HasEmployeeGivenGinNumber(ginNumber))
                 {
                     Employee newEmployee = new Employee(ginNumber, name);
                     EmployeeDatabase.Add(ginNumber, newEmployee);
                     RecordsDatabase.Add(ginNumber, new Dictionary<string, EmployeeRecord>());
                 }
-    
-                EmployeeDatabase[ginNumber].Name = name;
+
+                //EmployeeDatabase[ginNumber].Name = name;
 
                 oldRecord.Edit(EmployeeDatabase[ginNumber], checkDate, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
                 RecordsDatabase[ginNumber].Add(checkDate.ToShortDateString(), oldRecord);
@@ -151,19 +157,19 @@ namespace EmployeeHealthInfoRecord
             }
 
             // can not change existed Employee name. Use edit function.
-            if(HasEmployeeRecordGivenGinNumber(ginNumber) && EmployeeDatabase[ginNumber].Name != name)
+            if (HasEmployeeGivenGinNumber(ginNumber) && EmployeeDatabase[ginNumber].Name != name)
             {
                 return;
             }
 
-            if (!HasEmployeeRecordGivenGinNumber(ginNumber))
+            if (!HasEmployeeGivenGinNumber(ginNumber))
             {
                 Employee newEmployee = new Employee(ginNumber, name);
                 EmployeeDatabase.Add(ginNumber, newEmployee);
                 RecordsDatabase.Add(ginNumber, new Dictionary<string, EmployeeRecord>());
             }
 
-            EmployeeDatabase[ginNumber].Name = name;
+            //EmployeeDatabase[ginNumber].Name = name; // the second return has done things for this step
 
             EmployeeRecord newRecord = new EmployeeRecord(EmployeeDatabase[ginNumber], checkDate, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
 
@@ -188,6 +194,7 @@ namespace EmployeeHealthInfoRecord
             if (RecordsDatabase[ginNumber].Values.Count == 0)
             {
                 RecordsDatabase.Remove(ginNumber);
+                EmployeeDatabase.Remove(ginNumber);
             }
         }
 

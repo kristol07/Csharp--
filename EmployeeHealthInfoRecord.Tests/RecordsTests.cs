@@ -51,16 +51,16 @@ namespace EmployeeHealthInfoRecord.Tests
         }
 
         [Fact]
-        public void HasEmployeeRecordGivenGinNumber_ReturnTrue_IfDatabaseHasEmployeeWithSameGinNumber()
+        public void HasEmployeeGivenGinNumber_ReturnTrue_IfDatabaseHasEmployeeWithSameGinNumber()
         {
-            bool result = _records.HasEmployeeRecordGivenGinNumber("0");
+            bool result = _records.HasEmployeeGivenGinNumber("0");
             Assert.True(result);
         }
 
         [Fact]
-        public void HasEmployeeRecordGivenGinNumber_ReturnFalse_IfDatabaseHasNoEmployeeWithSameGinNumber()
+        public void HasEmployeeGivenGinNumber_ReturnFalse_IfDatabaseHasNoEmployeeWithSameGinNumber()
         {
-            bool result = _records.HasEmployeeRecordGivenGinNumber("3");
+            bool result = _records.HasEmployeeGivenGinNumber("3");
             Assert.False(result);
         }
 
