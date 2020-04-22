@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("All Records");
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("All Records");
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openFileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -606,10 +606,10 @@
             this.recordsTreeView.Indent = 15;
             this.recordsTreeView.Location = new System.Drawing.Point(0, 39);
             this.recordsTreeView.Name = "recordsTreeView";
-            treeNode2.Name = "allRecords";
-            treeNode2.Text = "All Records";
+            treeNode1.Name = "All Records";
+            treeNode1.Text = "All Records";
             this.recordsTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode2});
+            treeNode1});
             this.recordsTreeView.Size = new System.Drawing.Size(128, 510);
             this.recordsTreeView.TabIndex = 10;
             this.recordsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.RecordsTreeView_AfterSelect);
@@ -749,6 +749,7 @@
             this.DeleteSelectedNodeToolStripButton.Name = "DeleteSelectedNodeToolStripButton";
             this.DeleteSelectedNodeToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.DeleteSelectedNodeToolStripButton.Text = "toolStripButton1";
+            this.DeleteSelectedNodeToolStripButton.ToolTipText = "Delete All Records under Current Selected Node in TreeView";
             this.DeleteSelectedNodeToolStripButton.Click += new System.EventHandler(this.DeleteSelectedNodeToolStripButton_Click);
             // 
             // toolStripSeparator2

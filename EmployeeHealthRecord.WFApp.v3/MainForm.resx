@@ -143,14 +143,6 @@
         AABJRU5ErkJggg==
 </value>
   </data>
-  <data name="treeViewMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wwAADsMBx2+oZAAAAGNJREFUOE+9kFEKACEIRD2b9z+Pv7uIsgxuplE08H7MeVQkIk+EVqIFZv6Isgyv
-        5wKcRVqCCq+bID28nu3baGH1P7xq0cFIgDOkLZjhVUu5UOWIYPsJIwHOkLZghlct5cIvRC+aSeTe8nFE
-        eQAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="nameBasedMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
@@ -182,6 +174,14 @@
         wwAADsMBx2+oZAAAAGtJREFUOE/NkWEKwCAIRj3SzuDhvG5/xL9uMoVoyoJi7INHkD0Lg3+FmQ8RaRfa
         0Wzfj9QJmYgUEdXWVbnEtTuj/Mb+BpZoYsUZXHsmO1yQD9eK2bNHyh/a0qAihlzKWWK4S7Ld3jEnfxiA
         Ex3wfiA9K8YSAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="treeViewMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
+        wwAADsMBx2+oZAAAAGNJREFUOE+9kFEKACEIRD2b9z+Pv7uIsgxuplE08H7MeVQkIk+EVqIFZv6Isgyv
+        5wKcRVqCCq+bID28nu3baGH1P7xq0cFIgDOkLZjhVUu5UOWIYPsJIwHOkLZghlct5cIvRC+aSeTe8nFE
+        eQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="filterMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -268,35 +268,8 @@
   <metadata name="employeeDatabaseDataGridView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="filterLabel.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="filterCheckDateCheckBox.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="filterCheckDateTimePicker.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="viewOnlySuspectCheckBox.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="filterGinNumberLabel.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="filterGinNumberTextBox.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="filterGinNumberTipLabel.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="employeeDatabaseDataGridView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="databaseContextMenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>625, 17</value>
-  </metadata>
-  <metadata name="employeeRecordBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>450, 52</value>
   </metadata>
   <data name="importFromFileContextMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -354,6 +327,9 @@
         AABJRU5ErkJggg==
 </value>
   </data>
+  <metadata name="employeeRecordBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>450, 52</value>
+  </metadata>
   <metadata name="recordsTreeView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -450,28 +426,20 @@
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
         YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADJSURBVDhPrZJNDsIgEIW5gNdw7dI1axcewYU38ETudNkj
-        9CyaGlelCT9L9BEGAQslxkleOrTvfQykbKmklButtYDQ52v2buyCRH86Wgi9uN+mbrcNawfgnM8K36bn
-        wyJwXq9ciHo8E4AYp0QEMMYcYgiFMUk4Qg0AE41NABq/CRDvjif1TXcAdddLCAJGwC9APkGscRgcCF66
-        E4SrR8gFD7z4N5RSexdG/QJIigAtqgJKO+bysU/hZQ3gbeX6G2BOzYCavK1QjL0AUr1uoTL0r/kAAAAA
+        9CxNalwVEn6W6CMMFiyUGCd56dC+9zGQsrVSSu2MMQJCn6/Zu3ErEv3l7CD0Yhhkd9jHtQdwzheFb/L5
+        cAhctxsfoh7PBCAmmYgA1trTHEJhTBKPUAPARGMTgMZvAsx3x5P6pjuAuvstBgEj4Bcgn2CuaRw9CF66
+        E4SrR8gFD7z4N7TWRx9G/QJIigAtqgJKO+YKsU/hZQ0QbOX6G2BJzYCagq1QjL0ASSduns9+GyoAAAAA
         SUVORK5CYII=
 </value>
   </data>
   <data name="DeleteSelectedNodeToolStripButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADaSURBVDhPnZA/DsIgGMW5gNdwdnTuLHdw8AaepN7ATUe5
-        gVvddXQz/TOVRkJHzCN+BGpJKyQvPOB7Pz5gSqmV1lpC8MM1mxoovO53BoKX5au7bNZuPQnpmsogcFwu
-        bIg85lmAvu+3PoTC6GTWE1A0BHzbnyVGb6abyQMihDBZlkUVAKC2Ko2sS+sBUG9lZNtZ1XXjPOQA7gnn
-        kzt8Pu72dgphRqAobr8ADBhs4ABFnPOgmPZ9yCiAbsrzQxAmYd+vi3YAn9TBsDjpD0gUjq1HAf8qAKTK
-        AtIHYx8hZnRwLy4/pwAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="tressViewToolStripDropDownButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABjSURBVDhPvZBRCgAhCEQ9m/c/j7+7iLIMbqZRNPB+zHlU
-        JCJPhFaiBWb+iLIMr+cCnEVaggqvmyA9vJ7t22hh9T+8atHBSIAzpC2Y4VVLuVDliGD7CSMBzpC2YIZX
-        LeXCL0Qvmknk3vJxRHkAAAAASUVORK5CYII=
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADbSURBVDhPnZAxDsIgGIW5gNdwdnRmtndw8AaepN7AzY5y
+        A7e66+ikaelUGkk7Yh7xJ1DbtELywgP+9/ED01qv2rZVEHx/zaYGCi/7nYHg1evZnDdrt56ENFVpEDgu
+        FzZEHvMsQNd1Wx9CYXQy6wko6gO+7c8SozfTzeQBEUIYzvmoAgBUl4VRsrAeAP3WRtWNlZSV85ADuCdk
+        J3f4uN/s7RTCjECeX38BGDDYwAGKkiQJimnfhwwC6KY0PQRhEvb9utEO4KM66BdH/QGJwmPrQcC/CgCx
+        soD4wdgH/Jh0ZHEWTjkAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="nameBasedTreeViewToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -495,6 +463,14 @@
         wwAADsMBx2+oZAAAAGtJREFUOE/NkWEKwCAIRj3SzuDhvG5/xL9uMoVoyoJi7INHkD0Lg3+FmQ8RaRfa
         0Wzfj9QJmYgUEdXWVbnEtTuj/Mb+BpZoYsUZXHsmO1yQD9eK2bNHyh/a0qAihlzKWWK4S7Ld3jEnfxiA
         Ex3wfiA9K8YSAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="tressViewToolStripDropDownButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABjSURBVDhPvZBRCgAhCEQ9m/c/j7+7iLIMbqZRNPB+zHlU
+        JCJPhFaiBWb+iLIMr+cCnEVaggqvmyA9vJ7t22hh9T+8atHBSIAzpC2Y4VVLuVDliGD7CSMBzpC2YIZX
+        LeXCL0Qvmknk3vJxRHkAAAAASUVORK5CYII=
 </value>
   </data>
   <metadata name="statusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
