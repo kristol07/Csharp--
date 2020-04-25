@@ -103,7 +103,7 @@ namespace EmployeeHealthInfoRecord
 
         public void EditRecord(string oldGinNumber, DateTime oldCheckDate, string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
-            // can not edit not existed record
+            // can not edit non-existed record
             if (!HasEmployeeRecordGivenGinNumberAndCheckDate(oldGinNumber, oldCheckDate.ToShortDateString()))
             {
                 return;
@@ -115,7 +115,7 @@ namespace EmployeeHealthInfoRecord
                 return;
             }
 
-            // save as new record when not editing self and no corrision with other existed record
+            // save as new record when not editing self and no conflict with other existed records
             if (!((oldGinNumber == ginNumber) && (oldCheckDate == checkDate)))
             {
                 // can not change name of existed ginNumber when not edit self
