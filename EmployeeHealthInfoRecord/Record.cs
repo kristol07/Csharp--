@@ -155,7 +155,18 @@ namespace EmployeeHealthInfoRecord
             }
             else
             {
-                return 0;
+                if(this.CheckDate < anotherRecord.CheckDate)
+                {
+                    return -1;
+                }
+                else if(this.CheckDate < anotherRecord.CheckDate)
+                {
+                    return 1;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
     }

@@ -111,8 +111,9 @@
             this.recordsStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timeStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer = new System.Windows.Forms.Timer(this.components);
-            this.treeviewLabel = new System.Windows.Forms.Label();
             this.navigationBarPanel = new System.Windows.Forms.Panel();
+            this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.treeviewLabel = new System.Windows.Forms.Label();
             this.menuStrip.SuspendLayout();
             this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
@@ -123,6 +124,10 @@
             this.statusStrip.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.navigationBarPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).BeginInit();
+            this.mainSplitContainer.Panel1.SuspendLayout();
+            this.mainSplitContainer.Panel2.SuspendLayout();
+            this.mainSplitContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -196,7 +201,7 @@
             this.treeViewStatusMenuItem});
             this.treeViewMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("treeViewMenuItem.Image")));
             this.treeViewMenuItem.Name = "treeViewMenuItem";
-            this.treeViewMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.treeViewMenuItem.Size = new System.Drawing.Size(180, 22);
             this.treeViewMenuItem.Text = "&TreeView";
             // 
             // nameBasedMenuItem
@@ -243,7 +248,7 @@
             this.viewOnlySuspectsToolStripMenuItem});
             this.filterMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("filterMenuItem.Image")));
             this.filterMenuItem.Name = "filterMenuItem";
-            this.filterMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.filterMenuItem.Size = new System.Drawing.Size(180, 22);
             this.filterMenuItem.Text = "&Filter";
             // 
             // viewOnlySuspectsToolStripMenuItem
@@ -270,7 +275,7 @@
             this.addNewRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecordMenuItem.Image")));
             this.addNewRecordMenuItem.Name = "addNewRecordMenuItem";
             this.addNewRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.addNewRecordMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.addNewRecordMenuItem.Size = new System.Drawing.Size(180, 22);
             this.addNewRecordMenuItem.Text = "&Add";
             this.addNewRecordMenuItem.Click += new System.EventHandler(this.AddNewRecordMenuItem_Click);
             // 
@@ -279,7 +284,7 @@
             this.saveRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveRecordMenuItem.Image")));
             this.saveRecordMenuItem.Name = "saveRecordMenuItem";
             this.saveRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.saveRecordMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.saveRecordMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveRecordMenuItem.Text = "&Edit";
             this.saveRecordMenuItem.Click += new System.EventHandler(this.EditRecordMenuItem_Click);
             // 
@@ -288,7 +293,7 @@
             this.deleteRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteRecordMenuItem.Image")));
             this.deleteRecordMenuItem.Name = "deleteRecordMenuItem";
             this.deleteRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deleteRecordMenuItem.Size = new System.Drawing.Size(159, 22);
+            this.deleteRecordMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteRecordMenuItem.Text = "&Delete";
             this.deleteRecordMenuItem.Click += new System.EventHandler(this.DeleteRecordMenuItem_Click);
             // 
@@ -319,9 +324,6 @@
             // 
             // contentPanel
             // 
-            this.contentPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.contentPanel.Controls.Add(this.filterLabel);
             this.contentPanel.Controls.Add(this.filterCheckDateCheckBox);
             this.contentPanel.Controls.Add(this.filterCheckDateTimePicker);
@@ -330,11 +332,12 @@
             this.contentPanel.Controls.Add(this.filterGinNumberTextBox);
             this.contentPanel.Controls.Add(this.filterGinNumberTipLabel);
             this.contentPanel.Controls.Add(this.employeeDatabaseDataGridView);
-            this.contentPanel.Location = new System.Drawing.Point(134, 56);
+            this.contentPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.contentPanel.Location = new System.Drawing.Point(0, 0);
             this.contentPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.contentPanel.Name = "contentPanel";
             this.contentPanel.Padding = new System.Windows.Forms.Padding(3, 0, 3, 0);
-            this.contentPanel.Size = new System.Drawing.Size(874, 550);
+            this.contentPanel.Size = new System.Drawing.Size(849, 551);
             this.contentPanel.TabIndex = 2;
             // 
             // filterLabel
@@ -372,7 +375,7 @@
             // 
             this.viewOnlySuspectCheckBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.viewOnlySuspectCheckBox.AutoSize = true;
-            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(339, 11);
+            this.viewOnlySuspectCheckBox.Location = new System.Drawing.Point(326, 11);
             this.viewOnlySuspectCheckBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.viewOnlySuspectCheckBox.Name = "viewOnlySuspectCheckBox";
             this.viewOnlySuspectCheckBox.Size = new System.Drawing.Size(200, 21);
@@ -386,7 +389,7 @@
             this.filterGinNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.filterGinNumberLabel.AutoSize = true;
             this.filterGinNumberLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.filterGinNumberLabel.Location = new System.Drawing.Point(582, 14);
+            this.filterGinNumberLabel.Location = new System.Drawing.Point(557, 14);
             this.filterGinNumberLabel.Name = "filterGinNumberLabel";
             this.filterGinNumberLabel.Size = new System.Drawing.Size(75, 17);
             this.filterGinNumberLabel.TabIndex = 9;
@@ -397,7 +400,7 @@
             this.filterGinNumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.filterGinNumberTextBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.filterGinNumberTextBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource;
-            this.filterGinNumberTextBox.Location = new System.Drawing.Point(661, 11);
+            this.filterGinNumberTextBox.Location = new System.Drawing.Point(636, 11);
             this.filterGinNumberTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.filterGinNumberTextBox.Name = "filterGinNumberTextBox";
             this.filterGinNumberTextBox.Size = new System.Drawing.Size(123, 23);
@@ -410,7 +413,7 @@
             this.filterGinNumberTipLabel.AutoSize = true;
             this.filterGinNumberTipLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.filterGinNumberTipLabel.ForeColor = System.Drawing.Color.Red;
-            this.filterGinNumberTipLabel.Location = new System.Drawing.Point(789, 14);
+            this.filterGinNumberTipLabel.Location = new System.Drawing.Point(764, 14);
             this.filterGinNumberTipLabel.Name = "filterGinNumberTipLabel";
             this.filterGinNumberTipLabel.Size = new System.Drawing.Size(0, 17);
             this.filterGinNumberTipLabel.TabIndex = 3;
@@ -444,7 +447,7 @@
             this.employeeDatabaseDataGridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.employeeDatabaseDataGridView.RowTemplate.Height = 23;
             this.employeeDatabaseDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(874, 510);
+            this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(849, 511);
             this.employeeDatabaseDataGridView.TabIndex = 4;
             // 
             // dataGridViewTextBoxColumn3
@@ -603,14 +606,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.recordsTreeView.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.recordsTreeView.ContextMenuStrip = this.treeViewContextMenuStrip;
-            this.recordsTreeView.Indent = 15;
+            this.recordsTreeView.Indent = 10;
             this.recordsTreeView.Location = new System.Drawing.Point(0, 39);
             this.recordsTreeView.Name = "recordsTreeView";
             treeNode1.Name = "All Records";
             treeNode1.Text = "All Records";
             this.recordsTreeView.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
             treeNode1});
-            this.recordsTreeView.Size = new System.Drawing.Size(128, 510);
+            this.recordsTreeView.Size = new System.Drawing.Size(150, 511);
             this.recordsTreeView.TabIndex = 10;
             this.recordsTreeView.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.RecordsTreeView_AfterSelect);
             // 
@@ -882,6 +885,36 @@
             this.timer.Interval = 1000;
             this.timer.Tick += new System.EventHandler(this.Timer_Tick);
             // 
+            // navigationBarPanel
+            // 
+            this.navigationBarPanel.Controls.Add(this.treeviewLabel);
+            this.navigationBarPanel.Controls.Add(this.recordsTreeView);
+            this.navigationBarPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navigationBarPanel.Location = new System.Drawing.Point(0, 0);
+            this.navigationBarPanel.Name = "navigationBarPanel";
+            this.navigationBarPanel.Size = new System.Drawing.Size(150, 551);
+            this.navigationBarPanel.TabIndex = 13;
+            // 
+            // mainSplitContainer
+            // 
+            this.mainSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainSplitContainer.Location = new System.Drawing.Point(6, 55);
+            this.mainSplitContainer.Name = "mainSplitContainer";
+            // 
+            // mainSplitContainer.Panel1
+            // 
+            this.mainSplitContainer.Panel1.Controls.Add(this.navigationBarPanel);
+            this.mainSplitContainer.Panel1MinSize = 0;
+            // 
+            // mainSplitContainer.Panel2
+            // 
+            this.mainSplitContainer.Panel2.Controls.Add(this.contentPanel);
+            this.mainSplitContainer.Size = new System.Drawing.Size(1003, 551);
+            this.mainSplitContainer.SplitterDistance = 150;
+            this.mainSplitContainer.TabIndex = 14;
+            // 
             // treeviewLabel
             // 
             this.treeviewLabel.AutoSize = true;
@@ -891,28 +924,16 @@
             this.treeviewLabel.TabIndex = 12;
             this.treeviewLabel.Text = "Navigation Bar";
             // 
-            // navigationBarPanel
-            // 
-            this.navigationBarPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.navigationBarPanel.Controls.Add(this.treeviewLabel);
-            this.navigationBarPanel.Controls.Add(this.recordsTreeView);
-            this.navigationBarPanel.Location = new System.Drawing.Point(6, 56);
-            this.navigationBarPanel.Name = "navigationBarPanel";
-            this.navigationBarPanel.Size = new System.Drawing.Size(128, 550);
-            this.navigationBarPanel.TabIndex = 13;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1014, 631);
+            this.Controls.Add(this.mainSplitContainer);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.ToolStrip);
             this.Controls.Add(this.menuStrip);
-            this.Controls.Add(this.navigationBarPanel);
-            this.Controls.Add(this.contentPanel);
             this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
@@ -938,6 +959,10 @@
             this.statusStrip1.PerformLayout();
             this.navigationBarPanel.ResumeLayout(false);
             this.navigationBarPanel.PerformLayout();
+            this.mainSplitContainer.Panel1.ResumeLayout(false);
+            this.mainSplitContainer.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).EndInit();
+            this.mainSplitContainer.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1023,7 +1048,6 @@
         private System.Windows.Forms.ToolStripMenuItem openSidebarToolStripMenuItem;
         private System.Windows.Forms.Label filterLabel;
         private System.Windows.Forms.Panel navigationBarPanel;
-        private System.Windows.Forms.Label treeviewLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.DataGridViewTextBoxColumn checkDateDataGridViewTextBoxColumn;
@@ -1034,6 +1058,8 @@
         private System.Windows.Forms.ToolStripMenuItem deleteNodeContextMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteSelectedNodeMenuItem;
         private System.Windows.Forms.ToolStripButton DeleteSelectedNodeToolStripButton;
+        private System.Windows.Forms.SplitContainer mainSplitContainer;
+        private System.Windows.Forms.Label treeviewLabel;
     }
 }
 

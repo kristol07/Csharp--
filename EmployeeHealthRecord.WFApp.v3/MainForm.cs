@@ -235,17 +235,18 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void ShowAndHideTreeView()
         {
-            navigationBarPanel.Visible = !navigationBarPanel.Visible;
-            if (navigationBarPanel.Visible == true)
-            {
-                contentPanel.Location = new Point(contentPanel.Location.X + navigationBarPanel.Width, contentPanel.Location.Y);
-                contentPanel.Width -= recordsTreeView.Width;
-            }
-            else
-            {
-                contentPanel.Location = new Point(contentPanel.Location.X - navigationBarPanel.Width, contentPanel.Location.Y);
-                contentPanel.Width += recordsTreeView.Width;
-            }
+            mainSplitContainer.Panel1Collapsed = !mainSplitContainer.Panel1Collapsed;
+            //navigationBarPanel.Visible = !navigationBarPanel.Visible;
+            //if (navigationBarPanel.Visible == true)
+            //{
+            //    contentPanel.Location = new Point(contentPanel.Location.X + navigationBarPanel.Width, contentPanel.Location.Y);
+            //    contentPanel.Width -= recordsTreeView.Width;
+            //}
+            //else
+            //{
+            //    contentPanel.Location = new Point(contentPanel.Location.X - navigationBarPanel.Width, contentPanel.Location.Y);
+            //    contentPanel.Width += recordsTreeView.Width;
+            //}
         }
 
         private void UpdateTreeView()
@@ -399,7 +400,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                 foreach (var month in allMonthsForSameYear)
                 {
                     recordsTreeView.Nodes[0].Nodes[i].Nodes.Add(cultureInfo.DateTimeFormat.GetMonthName(month));
-                    recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Name = cultureInfo.DateTimeFormat.GetMonthName(month);
+                    recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Name = year.ToString() + cultureInfo.DateTimeFormat.GetMonthName(month);
                     List<int> allDaysForSameYearAndMonth = allDates.FindAll(x => x.Year == year && x.Month == month)
                                                                    .Select(x => x.Day)
                                                                    .Distinct().ToList();
@@ -408,7 +409,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                     foreach (var day in allDaysForSameYearAndMonth)
                     {
                         recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Nodes.Add(day.ToString());
-                        recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Nodes[k].Name = day.ToString();
+                        recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Nodes[k].Name = year.ToString() + cultureInfo.DateTimeFormat.GetMonthName(month) + day.ToString();
                         k++;
                     }
                     j++;
@@ -420,6 +421,13 @@ namespace EmployeeHealthRecord.WFApp.v3
 
             recordsTreeView.SelectedNode = RefindPreviousSelectedNode(previousSelectedNodeName);
             recordsTreeView.ExpandAll();
+            //foreach(TreeNode yearNode in recordsTreeView.Nodes[0].Nodes)
+            //{
+            //    foreach(TreeNode monthNode in yearNode.Nodes)
+            //    {
+            //        monthNode.Collapse();
+            //    }
+            //}
 
             treeViewType = 1;
         }
