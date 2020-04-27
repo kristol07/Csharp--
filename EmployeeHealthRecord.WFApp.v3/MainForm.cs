@@ -337,7 +337,8 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void ShowNameBasedTreeViewNodes()
         {
-            List<string> allFirstCharInName = employeeRecords.GetAllRecords().Select(x => x.Name.ElementAt(0).ToString().ToUpper()).Distinct().ToList();
+            List<string> allFirstCharInName = employeeRecords.GetAllEmployees().Select(x => x.Name.ElementAt(0).ToString().ToUpper()).Distinct().ToList();
+            //List<string> allFirstCharInName = employeeRecords.GetAllRecords().Select(x => x.Name.ElementAt(0).ToString().ToUpper()).Distinct().ToList();
             allFirstCharInName.Sort();
 
             string previousSelectedNodeName = recordsTreeView.SelectedNode == null ? "All Records" : recordsTreeView.SelectedNode.Name;
@@ -349,15 +350,20 @@ namespace EmployeeHealthRecord.WFApp.v3
             {
                 recordsTreeView.Nodes[0].Nodes.Add(firstChar.ToString());
                 recordsTreeView.Nodes[0].Nodes[i].Name = firstChar.ToString();
-                List<string> allGinNumbersForSameFirstChar = employeeRecords.GetAllRecords().FindAll(x => x.Name.ElementAt(0).ToString().ToUpper() == firstChar)
-                                                                                       .Select(x => x.GinNumber)
-                                                                                       .Distinct().ToList();
-                allGinNumbersForSameFirstChar.Sort();
+                //List<string> allGinNumbersForSameFirstChar = employeeRecords.GetAllRecords().FindAll(x => x.Name.ElementAt(0).ToString().ToUpper() == firstChar)
+                //                                                                       .Select(x => x.GinNumber)
+                //                                                                       .Distinct().ToList();
+                //allGinNumbersForSameFirstChar.Sort();
+
+                List<Employee> allEmployeeWithSameFirstChar = employeeRecords.GetAllEmployees().FindAll(x => x.Name.ElementAt(0).ToString().ToUpper() == firstChar);
+                allEmployeeWithSameFirstChar.Sort();
+                List<string> allGinNumbersForSameFirstChar = allEmployeeWithSameFirstChar.Select(x => x.GinNumber).ToList();
 
                 int j = 0;
                 foreach (var ginNumber in allGinNumbersForSameFirstChar)
                 {
-                    string labelText = employeeRecords.GetAllRecords().FindAll(x => x.GinNumber == ginNumber).ElementAt(0).Name + "_" + ginNumber;
+                    string labelText = employeeRecords.GetEmployeeGivenGinNumber(ginNumber).Name + "_" + ginNumber;
+                    //string labelText = employeeRecords.GetAllRecords().FindAll(x => x.GinNumber == ginNumber).ElementAt(0).Name + "_" + ginNumber;
                     recordsTreeView.Nodes[0].Nodes[i].Nodes.Add(labelText);
                     recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Name = labelText;
                     j++;

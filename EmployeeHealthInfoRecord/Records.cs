@@ -101,6 +101,11 @@ namespace EmployeeHealthInfoRecord
             return allRecords;
         }
 
+        public List<Employee> GetAllEmployees()
+        {
+            return EmployeeDatabase.Values.ToList();
+        }
+
         public void EditRecord(string oldGinNumber, DateTime oldCheckDate, string ginNumber, DateTime checkDate, string name, double bodyTemperature, bool hasHubeiTravelHistory, bool hasSymptoms, string notes)
         {
             // can not edit non-existed record
