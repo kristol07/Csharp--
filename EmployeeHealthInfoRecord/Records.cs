@@ -98,6 +98,7 @@ namespace EmployeeHealthInfoRecord
             {
                 allRecords.AddRange(recordsOfSpecificEmployee.Values);
             }
+            allRecords.Sort();
             return allRecords;
         }
 

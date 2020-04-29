@@ -488,7 +488,7 @@ namespace EmployeeHealthRecord.WFApp.v3
         private void FilterRecords()
         {
             List<EmployeeRecord> filterBindingList = GetRecordsOfSelectedTreeNode();
-            filterBindingList.Sort();
+            //filterBindingList.Sort();
             if (filterCheckDateCheckBox.Checked)
             {
                 filterBindingList = filterBindingList.FindAll(x => x.CheckDate.ToShortDateString() == filterCheckDateTimePicker.Value.ToShortDateString());

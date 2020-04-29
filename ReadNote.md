@@ -38,6 +38,8 @@
     - [静态类](#%e9%9d%99%e6%80%81%e7%b1%bb)
     - [扩展方法](#%e6%89%a9%e5%b1%95%e6%96%b9%e6%b3%95)
     - [命名约定](#%e5%91%bd%e5%90%8d%e7%ba%a6%e5%ae%9a)
+  - [Chapter 13: 委托](#chapter-13-%e5%a7%94%e6%89%98)
+  - [Chapter 14: 事件](#chapter-14-%e4%ba%8b%e4%bb%b6)
   - [Chapter 15: 接口](#chapter-15-%e6%8e%a5%e5%8f%a3)
     - [接口的作用](#%e6%8e%a5%e5%8f%a3%e7%9a%84%e4%bd%9c%e7%94%a8)
     - [接口的声明](#%e6%8e%a5%e5%8f%a3%e7%9a%84%e5%a3%b0%e6%98%8e)
@@ -403,6 +405,39 @@ static class ExtendMyData
   - 方法声明的形参名称
   - 私有和受保护的字段
 
+
+## Chapter 13: 委托
+
+委托是一种用户自定义的**类型**。
+类表示的是数据和方法的集合，而委托则持有一个或多个方法，以及一系列预定义操作。
+
+委托的声明：无方法主体
+
+`delegate 返回类型 委托类型名 ( 签名 )`
+
+委托是恒定的，委托对象被创建后不能再被改变。 
+
+简化委托的初始化：
+1. 匿名方法： `delegate ( parameters ) { Implementation code}` 
+2. `Lambda` 表达式
+
+## Chapter 14: 事件
+
+事件是类或结构的**成员**，必须声明在类或结构中。
+
+事件的声明： `public event 委托类型 事件名`
+
+标准事件的用法：
+使用`System`命名空间声明的`EventHandler`委托类型。
+第一个参数用来保存触发事件的对象的引用，第二个参数用来保存状态信息，指明什么类型适用于该应用程序。
+
+`public delegate void EventHandler(object sender, EventArgs e);`
+
+`EventArgs`类设计为不能传递任何数据，如果希望传递数据，必须声明一个派生自`EventArgs`的类，使用合适的字段来保存需要传递的数据。
+
+`object`类和`EventArgs`类总是基类，这样`EventHandler`就能提供一个对所有事件和事件处理器都通用的签名，只允许两个参数，而不是各自都有不同的签名。
+
+事件访问器：`add` & `remove` 用于自定义运算符`+=`和`-=`的行为。
 
 ## Chapter 15: 接口
 
