@@ -169,14 +169,6 @@ namespace EmployeeHealthInfoRecord
             return false;
         }
 
-        //public bool IsValidComboBoxInput(string input)
-        //{
-
-        //    string[] options = { "yes", "y", "Y", "no", "n", "N" };
-
-        //    return options.Contains(input.ToLower());
-        //}
-
         public bool IsValidHasHubeiTravelHistoryChoice(string hasHubeiTravelHistoryChoice)
         {
             string[] options = { "yes", "y", "Y", "no", "n", "N" };

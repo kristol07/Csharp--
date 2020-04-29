@@ -60,13 +60,6 @@
             this.filterGinNumberTextBox = new System.Windows.Forms.TextBox();
             this.filterGinNumberTipLabel = new System.Windows.Forms.Label();
             this.employeeDatabaseDataGridView = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.notesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.databaseContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.importFromFileContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSidebarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,7 +70,6 @@
             this.viewOnlySuspectEployeeContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewAllEmployeesContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.employeeRecordBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.recordsTreeView = new System.Windows.Forms.TreeView();
             this.treeViewContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.nameBasedContextMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,12 +86,12 @@
             this.AddRecordToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.EditRecordToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.DeleteRecordToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.DeleteSelectedNodeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tressViewToolStripDropDownButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.nameBasedTreeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkDateBasedTreeViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openCloseTreeviewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.DeleteSelectedNodeToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.SearchToolStripTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -112,13 +104,20 @@
             this.timeStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.navigationBarPanel = new System.Windows.Forms.Panel();
-            this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
             this.treeviewLabel = new System.Windows.Forms.Label();
+            this.mainSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkDateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewCheckBoxColumn1 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dataGridViewCheckBoxColumn2 = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.notesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.employeeRecordBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip.SuspendLayout();
             this.contentPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).BeginInit();
             this.databaseContextMenuStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).BeginInit();
             this.treeViewContextMenuStrip.SuspendLayout();
             this.ToolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -128,6 +127,7 @@
             this.mainSplitContainer.Panel1.SuspendLayout();
             this.mainSplitContainer.Panel2.SuspendLayout();
             this.mainSplitContainer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip
@@ -275,7 +275,7 @@
             this.addNewRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addNewRecordMenuItem.Image")));
             this.addNewRecordMenuItem.Name = "addNewRecordMenuItem";
             this.addNewRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.addNewRecordMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.addNewRecordMenuItem.Size = new System.Drawing.Size(159, 22);
             this.addNewRecordMenuItem.Text = "&Add";
             this.addNewRecordMenuItem.Click += new System.EventHandler(this.AddNewRecordMenuItem_Click);
             // 
@@ -284,7 +284,7 @@
             this.saveRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveRecordMenuItem.Image")));
             this.saveRecordMenuItem.Name = "saveRecordMenuItem";
             this.saveRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.E)));
-            this.saveRecordMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveRecordMenuItem.Size = new System.Drawing.Size(159, 22);
             this.saveRecordMenuItem.Text = "&Edit";
             this.saveRecordMenuItem.Click += new System.EventHandler(this.EditRecordMenuItem_Click);
             // 
@@ -293,7 +293,7 @@
             this.deleteRecordMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteRecordMenuItem.Image")));
             this.deleteRecordMenuItem.Name = "deleteRecordMenuItem";
             this.deleteRecordMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.deleteRecordMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteRecordMenuItem.Size = new System.Drawing.Size(159, 22);
             this.deleteRecordMenuItem.Text = "&Delete";
             this.deleteRecordMenuItem.Click += new System.EventHandler(this.DeleteRecordMenuItem_Click);
             // 
@@ -450,67 +450,6 @@
             this.employeeDatabaseDataGridView.Size = new System.Drawing.Size(849, 511);
             this.employeeDatabaseDataGridView.TabIndex = 4;
             // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "GinNumber";
-            this.dataGridViewTextBoxColumn3.HeaderText = "GinNumber";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Name";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Name";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            this.dataGridViewTextBoxColumn4.Width = 68;
-            // 
-            // checkDateDataGridViewTextBoxColumn
-            // 
-            this.checkDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.checkDateDataGridViewTextBoxColumn.DataPropertyName = "CheckDate";
-            this.checkDateDataGridViewTextBoxColumn.HeaderText = "CheckDate";
-            this.checkDateDataGridViewTextBoxColumn.Name = "checkDateDataGridViewTextBoxColumn";
-            this.checkDateDataGridViewTextBoxColumn.ReadOnly = true;
-            this.checkDateDataGridViewTextBoxColumn.Width = 95;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "BodyTemperature";
-            this.dataGridViewTextBoxColumn5.HeaderText = "BodyTemperature";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            this.dataGridViewTextBoxColumn5.Width = 138;
-            // 
-            // dataGridViewCheckBoxColumn1
-            // 
-            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewCheckBoxColumn1.DataPropertyName = "HasHubeiTravelHistory";
-            this.dataGridViewCheckBoxColumn1.HeaderText = "HasHubeiTravelHistory";
-            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
-            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn1.Width = 146;
-            // 
-            // dataGridViewCheckBoxColumn2
-            // 
-            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.dataGridViewCheckBoxColumn2.DataPropertyName = "HasSymptoms";
-            this.dataGridViewCheckBoxColumn2.HeaderText = "HasSymptoms";
-            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
-            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
-            this.dataGridViewCheckBoxColumn2.Width = 97;
-            // 
-            // notesDataGridViewTextBoxColumn
-            // 
-            this.notesDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.notesDataGridViewTextBoxColumn.DataPropertyName = "Notes";
-            this.notesDataGridViewTextBoxColumn.HeaderText = "Notes";
-            this.notesDataGridViewTextBoxColumn.Name = "notesDataGridViewTextBoxColumn";
-            this.notesDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // databaseContextMenuStrip
             // 
             this.databaseContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -595,10 +534,6 @@
             this.saveAsContextMenuItem.Text = "Save As...";
             this.saveAsContextMenuItem.Click += new System.EventHandler(this.SaveAsContextMenuItem_Click);
             // 
-            // employeeRecordBindingSource
-            // 
-            this.employeeRecordBindingSource.DataSource = typeof(EmployeeHealthInfoRecord.EmployeeRecord);
-            // 
             // recordsTreeView
             // 
             this.recordsTreeView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -676,9 +611,9 @@
             this.AddRecordToolStripButton,
             this.EditRecordToolStripButton,
             this.DeleteRecordToolStripButton,
-            this.DeleteSelectedNodeToolStripButton,
             this.toolStripSeparator2,
             this.tressViewToolStripDropDownButton,
+            this.DeleteSelectedNodeToolStripButton,
             this.toolStripSeparator3,
             this.SearchToolStripTextBox});
             this.ToolStrip.Location = new System.Drawing.Point(3, 27);
@@ -744,17 +679,6 @@
             this.DeleteRecordToolStripButton.ToolTipText = "Delete Current Selected Record in Table";
             this.DeleteRecordToolStripButton.Click += new System.EventHandler(this.DeleteRecordToolStripButton_Click);
             // 
-            // DeleteSelectedNodeToolStripButton
-            // 
-            this.DeleteSelectedNodeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.DeleteSelectedNodeToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DeleteSelectedNodeToolStripButton.Image")));
-            this.DeleteSelectedNodeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.DeleteSelectedNodeToolStripButton.Name = "DeleteSelectedNodeToolStripButton";
-            this.DeleteSelectedNodeToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.DeleteSelectedNodeToolStripButton.Text = "toolStripButton1";
-            this.DeleteSelectedNodeToolStripButton.ToolTipText = "Delete All Records under Current Selected Node in TreeView";
-            this.DeleteSelectedNodeToolStripButton.Click += new System.EventHandler(this.DeleteSelectedNodeToolStripButton_Click);
-            // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
@@ -797,6 +721,17 @@
             this.openCloseTreeviewToolStripMenuItem.Size = new System.Drawing.Size(235, 22);
             this.openCloseTreeviewToolStripMenuItem.Text = "Open/Close";
             this.openCloseTreeviewToolStripMenuItem.Click += new System.EventHandler(this.SwitchTreeviewToolStripMenuItem_Click);
+            // 
+            // DeleteSelectedNodeToolStripButton
+            // 
+            this.DeleteSelectedNodeToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.DeleteSelectedNodeToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("DeleteSelectedNodeToolStripButton.Image")));
+            this.DeleteSelectedNodeToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.DeleteSelectedNodeToolStripButton.Name = "DeleteSelectedNodeToolStripButton";
+            this.DeleteSelectedNodeToolStripButton.Size = new System.Drawing.Size(23, 22);
+            this.DeleteSelectedNodeToolStripButton.Text = "toolStripButton1";
+            this.DeleteSelectedNodeToolStripButton.ToolTipText = "Delete All Records under Current Selected Node in TreeView";
+            this.DeleteSelectedNodeToolStripButton.Click += new System.EventHandler(this.DeleteSelectedNodeToolStripButton_Click);
             // 
             // toolStripSeparator3
             // 
@@ -895,6 +830,15 @@
             this.navigationBarPanel.Size = new System.Drawing.Size(150, 551);
             this.navigationBarPanel.TabIndex = 13;
             // 
+            // treeviewLabel
+            // 
+            this.treeviewLabel.AutoSize = true;
+            this.treeviewLabel.Location = new System.Drawing.Point(3, 12);
+            this.treeviewLabel.Name = "treeviewLabel";
+            this.treeviewLabel.Size = new System.Drawing.Size(95, 17);
+            this.treeviewLabel.TabIndex = 12;
+            this.treeviewLabel.Text = "Navigation Bar";
+            // 
             // mainSplitContainer
             // 
             this.mainSplitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -915,14 +859,70 @@
             this.mainSplitContainer.SplitterDistance = 150;
             this.mainSplitContainer.TabIndex = 14;
             // 
-            // treeviewLabel
+            // dataGridViewTextBoxColumn3
             // 
-            this.treeviewLabel.AutoSize = true;
-            this.treeviewLabel.Location = new System.Drawing.Point(3, 12);
-            this.treeviewLabel.Name = "treeviewLabel";
-            this.treeviewLabel.Size = new System.Drawing.Size(95, 17);
-            this.treeviewLabel.TabIndex = 12;
-            this.treeviewLabel.Text = "Navigation Bar";
+            this.dataGridViewTextBoxColumn3.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "GinNumber";
+            this.dataGridViewTextBoxColumn3.HeaderText = "GinNumber";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Name";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 68;
+            // 
+            // checkDateDataGridViewTextBoxColumn
+            // 
+            this.checkDateDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.checkDateDataGridViewTextBoxColumn.DataPropertyName = "CheckDate";
+            this.checkDateDataGridViewTextBoxColumn.HeaderText = "CheckDate";
+            this.checkDateDataGridViewTextBoxColumn.Name = "checkDateDataGridViewTextBoxColumn";
+            this.checkDateDataGridViewTextBoxColumn.ReadOnly = true;
+            this.checkDateDataGridViewTextBoxColumn.Width = 95;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "BodyTemperature";
+            this.dataGridViewTextBoxColumn5.HeaderText = "BodyTemperature";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 138;
+            // 
+            // dataGridViewCheckBoxColumn1
+            // 
+            this.dataGridViewCheckBoxColumn1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn1.DataPropertyName = "HasHubeiTravelHistory";
+            this.dataGridViewCheckBoxColumn1.HeaderText = "HasHubeiTravelHistory";
+            this.dataGridViewCheckBoxColumn1.Name = "dataGridViewCheckBoxColumn1";
+            this.dataGridViewCheckBoxColumn1.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn1.Width = 146;
+            // 
+            // dataGridViewCheckBoxColumn2
+            // 
+            this.dataGridViewCheckBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.dataGridViewCheckBoxColumn2.DataPropertyName = "HasSymptoms";
+            this.dataGridViewCheckBoxColumn2.HeaderText = "HasSymptoms";
+            this.dataGridViewCheckBoxColumn2.Name = "dataGridViewCheckBoxColumn2";
+            this.dataGridViewCheckBoxColumn2.ReadOnly = true;
+            this.dataGridViewCheckBoxColumn2.Width = 97;
+            // 
+            // notesDataGridViewTextBoxColumn
+            // 
+            this.notesDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.notesDataGridViewTextBoxColumn.DataPropertyName = "Notes";
+            this.notesDataGridViewTextBoxColumn.HeaderText = "Notes";
+            this.notesDataGridViewTextBoxColumn.Name = "notesDataGridViewTextBoxColumn";
+            this.notesDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // employeeRecordBindingSource
+            // 
+            this.employeeRecordBindingSource.DataSource = typeof(EmployeeHealthInfoRecord.EmployeeRecord);
             // 
             // MainForm
             // 
@@ -949,7 +949,6 @@
             this.contentPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.employeeDatabaseDataGridView)).EndInit();
             this.databaseContextMenuStrip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).EndInit();
             this.treeViewContextMenuStrip.ResumeLayout(false);
             this.ToolStrip.ResumeLayout(false);
             this.ToolStrip.PerformLayout();
@@ -963,6 +962,7 @@
             this.mainSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainSplitContainer)).EndInit();
             this.mainSplitContainer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.employeeRecordBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

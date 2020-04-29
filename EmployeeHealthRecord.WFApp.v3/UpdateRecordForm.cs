@@ -18,7 +18,7 @@ namespace EmployeeHealthRecord.WFApp.v3
         readonly string BODY_TEMPERATURE_TYPE_TIP;
 
         EmployeeRecord currentRecord;
-        string operation;
+        string operation;  // edit or add
 
         ControlInputTipHelper tipHelper;
         WinFormAppInputValidator inputValidator;

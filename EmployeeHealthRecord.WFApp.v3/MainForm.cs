@@ -17,20 +17,6 @@ namespace EmployeeHealthRecord.WFApp.v3
     public delegate bool DataValidatorWithDatabase(string input, EmployeeRecords recordsDatabase);
     public delegate void UpdateView();
 
-    public enum Month : uint
-    {
-        January = 1,
-        February = 2,
-        March = 3,
-        April = 4,
-        May = 5,
-        June = 6,
-        July = 7,
-        August = 8,
-        September = 9,
-
-    }
-
     public partial class MainForm : Form
     {
         readonly string GIN_NUMBER_TYPE_TIP;
@@ -64,7 +50,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             UpdateTreeView();
 
             FilterRecords();
-            UpdateAutoCompleteStringForFilterGinNumberTextBox();
+            UpdateAutoSuggestionForFilterGinNumberTextBox();
             employeeDatabaseDataGridView.DataSource = employeeRecordBindingSource;
 
         }
@@ -81,7 +67,6 @@ namespace EmployeeHealthRecord.WFApp.v3
             return recordList;
         }
 
-
         // Validate input with tipinfo
         public void ValidExistedGinNumberInputWithTipInfo(TextBox textbox, Label tipLabel)
         {
@@ -91,15 +76,15 @@ namespace EmployeeHealthRecord.WFApp.v3
         }
 
         // Update autocomplete source for textbox
-        private void UpdateAutoCompleteStringForFilterGinNumberTextBox()
+        private void UpdateAutoSuggestionForFilterGinNumberTextBox()
         {
             AutoCompleteStringCollection existedGinNumber = new AutoCompleteStringCollection();
             existedGinNumber.AddRange(employeeRecords.RecordsDatabase.Keys.ToArray());
             filterGinNumberTextBox.AutoCompleteCustomSource = existedGinNumber;
         }
 
-        // update records status info
-        private void UpdateRecordsStatus(List<EmployeeRecord> recordList)
+        // update records statistics info
+        private void UpdateRecordsStatistics(List<EmployeeRecord> recordList)
         {
             List<EmployeeRecord> suspectRecords = recordList.FindAll(x => !string.IsNullOrEmpty(x.GetAbnormalInfo()));
             suspectRecordsNumberStatusLabel.Text = suspectRecords.Count.ToString();
@@ -122,7 +107,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                     case "success":
                         UpdateTreeView();
                         FilterRecords();
-                        UpdateAutoCompleteStringForFilterGinNumberTextBox();
+                        UpdateAutoSuggestionForFilterGinNumberTextBox();
                         MessageBox.Show($"Database loading from {filePath} succeed.", "Loading Database", MessageBoxButtons.OK);
                         break;
                     case "formatError":
@@ -180,7 +165,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                 editRecordForm.Text = "Edit Record";
                 editRecordForm.updatedView += UpdateTreeView;
                 editRecordForm.updatedView += FilterRecords;
-                editRecordForm.updatedView += UpdateAutoCompleteStringForFilterGinNumberTextBox;
+                editRecordForm.updatedView += UpdateAutoSuggestionForFilterGinNumberTextBox;
                 editRecordForm.ShowDialog();
 
                 ChangeStatusInfo("Ready");
@@ -195,7 +180,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             addNewRecordForm.Text = "Add New Record";
             addNewRecordForm.updatedView += UpdateTreeView;
             addNewRecordForm.updatedView += FilterRecords;
-            addNewRecordForm.updatedView += UpdateAutoCompleteStringForFilterGinNumberTextBox;
+            addNewRecordForm.updatedView += UpdateAutoSuggestionForFilterGinNumberTextBox;
             addNewRecordForm.ShowDialog();
 
             ChangeStatusInfo("Ready");
@@ -215,7 +200,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
                     UpdateTreeView();
                     FilterRecords();
-                    UpdateAutoCompleteStringForFilterGinNumberTextBox();
+                    UpdateAutoSuggestionForFilterGinNumberTextBox();
                 }
 
                 ChangeStatusInfo("Ready");
@@ -236,17 +221,6 @@ namespace EmployeeHealthRecord.WFApp.v3
         private void ShowAndHideTreeView()
         {
             mainSplitContainer.Panel1Collapsed = !mainSplitContainer.Panel1Collapsed;
-            //navigationBarPanel.Visible = !navigationBarPanel.Visible;
-            //if (navigationBarPanel.Visible == true)
-            //{
-            //    contentPanel.Location = new Point(contentPanel.Location.X + navigationBarPanel.Width, contentPanel.Location.Y);
-            //    contentPanel.Width -= recordsTreeView.Width;
-            //}
-            //else
-            //{
-            //    contentPanel.Location = new Point(contentPanel.Location.X - navigationBarPanel.Width, contentPanel.Location.Y);
-            //    contentPanel.Width += recordsTreeView.Width;
-            //}
         }
 
         private void UpdateTreeView()
@@ -450,7 +424,7 @@ namespace EmployeeHealthRecord.WFApp.v3
 
                 UpdateTreeView();
                 FilterRecords();
-                UpdateAutoCompleteStringForFilterGinNumberTextBox();
+                UpdateAutoSuggestionForFilterGinNumberTextBox();
             }
         }
 
@@ -506,7 +480,7 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
 
             // status bar: records statistics
-            UpdateRecordsStatus(filterBindingList);
+            UpdateRecordsStatistics(filterBindingList);
 
             // update datagrid view/source
             employeeRecordBindingSource.DataSource = TransformRecordListToBindingSource(filterBindingList.ToArray());
