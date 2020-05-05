@@ -53,6 +53,17 @@
     - [用户自定义转换](#%e7%94%a8%e6%88%b7%e8%87%aa%e5%ae%9a%e4%b9%89%e8%bd%ac%e6%8d%a2)
       - [多步用户自定义转换](#%e5%a4%9a%e6%ad%a5%e7%94%a8%e6%88%b7%e8%87%aa%e5%ae%9a%e4%b9%89%e8%bd%ac%e6%8d%a2)
     - [`is`和`as`运算符](#is%e5%92%8cas%e8%bf%90%e7%ae%97%e7%ac%a6)
+  - [Chapter 17: 泛型](#chapter-17-%e6%b3%9b%e5%9e%8b)
+    - [泛型类](#%e6%b3%9b%e5%9e%8b%e7%b1%bb)
+      - [类型参数的约束](#%e7%b1%bb%e5%9e%8b%e5%8f%82%e6%95%b0%e7%9a%84%e7%ba%a6%e6%9d%9f)
+    - [泛型方法](#%e6%b3%9b%e5%9e%8b%e6%96%b9%e6%b3%95)
+      - [泛型类的扩展方法](#%e6%b3%9b%e5%9e%8b%e7%b1%bb%e7%9a%84%e6%89%a9%e5%b1%95%e6%96%b9%e6%b3%95)
+    - [协变，逆变和不变](#%e5%8d%8f%e5%8f%98%e9%80%86%e5%8f%98%e5%92%8c%e4%b8%8d%e5%8f%98)
+  - [Chapter 18: 枚举器和迭代器](#chapter-18-%e6%9e%9a%e4%b8%be%e5%99%a8%e5%92%8c%e8%bf%ad%e4%bb%a3%e5%99%a8)
+  - [Chapter 19: `LINQ`](#chapter-19-linq)
+    - [匿名类型](#%e5%8c%bf%e5%90%8d%e7%b1%bb%e5%9e%8b)
+    - [`LINQ` 查询表达式](#linq-%e6%9f%a5%e8%af%a2%e8%a1%a8%e8%be%be%e5%bc%8f)
+    - [`XML` 类](#xml-%e7%b1%bb)
 
 ## Chapter 5: 方法
 
@@ -576,3 +587,152 @@ Expr is TargetType
 
 \<Effective Csharp\> Item3: Prefer the `is` or `as` Operators to Casts
 
+## Chapter 17: 泛型
+
+把类的行为提取或重构出来，使之不仅能应用到它们编码的数据类型上，而且还能应用到其他类型上。 
+=> 让多个类型共享一组代码，用“类型占位符”来写代码，然后再创建类的实例时指明真实的类型。（类型参数化）
+
+类型不是对象而是对象的模板，泛型类型也不是类型，而是类型的模板。
+
+- 类
+- 结构
+- 接口
+- 委托
+
+### 泛型类
+
+声明泛型类型 -> 通过提供真实类型创建构造类型 -> 从构建类型创建实例
+
+在类名后放置一组尖括号，用占位符字符串来表示提供的类型（类型参数），并在声明的主体中使用类型参数来表示应该替代的类型。
+
+可以从同一个泛型类型构建出很多不同的类类型，每一个都有独立的类类型，就好像它们都有独立的非泛型类声明一样。
+
+#### 类型参数的约束
+
+提供额外的信息让编译器知道参数可以接受哪些类型，只有符合约束的类型才能替代给定的类型参数，来产生构造类型。
+
+约束用where字句列出，并在类型参数列表的关闭尖括号后。
+`where TypeParam : constraint, constraint, ...`
+
+约束类型： p318
+- 类名：该类型或继承该类型的类
+- `class`：任何引用类型
+- `struct`：任何值类型
+- 接口名：该接口或实现了该接口的类型。可以有任意多的接口名约束
+- `new()`：任何带有无参公共构造函数的类型。如果有这种约束，则必须放在最后
+
+### 泛型方法
+
+可以在泛型和非泛型类以及结构和接口中声明
+
+泛型方法有两个参数列表：
+- 方法参数列表，封闭在圆括号内。后面可放置可选的约束字句
+- 类型参数列表，封闭在尖括号内，在方法名称后、方法参数列表前。
+
+调用时，当可以从方法参数中推断类型参数，我们可以省略类型参数和调用中的尖括号。
+
+#### 泛型类的扩展方法
+
+- 必须声明为 `static`
+- 必须是静态类的成员
+- 第一个参数类型中必须有关键字 `this` ，后面是扩展的泛型类的名字
+
+### 协变，逆变和不变
+
+**赋值兼容性**：可以将派生类对象的实例赋值给基类的变量。
+
+`Problem`：尽管 `Dog` 是 `Animal` 的派生类，但委托 `Factory<Dog>` 没有从 `Factory<Animal>` 派生，相反，两个委托对象是同级的，都从delegate类型派生，所以它们两者之间没用相互的派生关系，复制兼容性不适用。
+
+**协变**： 如果类型参数只用作输出值，我们可以使用out关键字标记委托声明中的类型参数。
+`delegate T Factory<out T>();`
+
+如果类型参数只用作委托方法中的输入参数，在期望传入基类时允许传入派生对象的特性叫做**逆变**，通过在类型参数中显式使用 `in` 关键字来使用。
+`delegate void Action<in T>(T a);`
+
+显式变化使用 `in` 和 `out` 关键字只适用于委托和接口。
+
+## Chapter 18: 枚举器和迭代器
+
+枚举器（`enumerator`，一个对象）：知道项的次序并跟踪其在序列中位置并返回请求的当前项。
+=> 实现 `IEnumerator` 接口，包含3个函数成员: `Current, MoveNext & Reset`
+
+对于有枚举器的类型，必须有方法来获取它（调用 `GetEnumerator` 方法），实现该方法（实现 `IEnumerable` 接口）的类型叫做可枚举类型(`enumerable`)。
+
+`foreach (var xx in IEnumerable)`
+
+除了以上手动编码实现可枚举类型和枚举器的方法外，还可以使用迭代器（`yield return`）快速生成可返回可枚举类型和枚举器的方法或属性。
+
+## Chapter 19: `LINQ`
+
+`LINQ`，发音为 `link`，`Language Integrated Query`
+
+`LINQ` 提供程序(`provider`)，可实现 `LINQ` 应用于各种不同类型数据源。
+- LINQ to Objects
+- LINQ to XML
+- BLINQ (ASP.NET)
+- LINQ to SQL, Datasets, Entities ...
+
+### 匿名类型
+
+经常用于 `LINQ` 查询结果的创建中。
+
+初始化语句中允许的形式：
+- 赋值形式
+- 成员访问表达式
+- 标识符形式
+
+```csharp
+var student = new { Age = 19, Other.Name, Major };
+```
+
+### `LINQ` 查询表达式
+
+- 查询语法，类似SQL语句，使用查询表达式书写
+  - from 子句：引入迭代变量，作为数据源
+  - ``join`` 子句：结合更多集合的数据，创建新的临时的对象集合
+  - `let` 子句：接受表达式的运算并赋值给一个需要在其他运算中使用的标识符
+  - `where` 子句：去除不符合指定条件的项
+  - `orderby` 子句：根据表达式按顺序返回结果项（默认升序）
+  - `select` 子句：指定所选对象的哪部分被 `select`（整个数据项，数据项的一个字段，或几个字段组成的新对象）
+  - `group` 子句：把 `select` 的对象根据一些标准进行分组
+  - `into` 子句：接受查询的一部分结果并赋予一个名字以在查询的另一部分中使用（查询延续）
+- 方法语法，使用标准的方法调用，是一组叫做标准查询运算符（p371）的方法
+  - 将委托作为参数，以提供自定义功能
+    - `Func` 委托
+    - `Action` 委托
+  - `Lambda` 表达式
+
+`LINQ` 查询返回类型：
+- 枚举，满足查询参数的项列表
+- 标量，满足查询条件的结果
+
+### `XML` 类
+
+p381 XML节点的容器结构
+- XDocument
+  - XDeclaration: XML 版本号，使用的字符编码类型，文档是否依赖外部引用
+  - XDocumentType
+  - XProcessingInstruction：用于提供XML文档如何被使用和翻译的额外数据，最常用的就是把处理指令用于关联XML文档和一个样式表
+  - XElement
+    - XElement
+    - XComment
+    - XAttribute
+    - XProcessingInstruction
+
+```csharp
+static void Main()
+{
+  XDocument xd = new XDocuement(
+    new XDeclaration("1.0", "utf-8", "yes"),
+    new XComment("This is a comment"),
+    new XProcessingInstruction("xml-stylesheet",
+                                @"href=""stories.css"" type=""text/css"""),
+    new XElement("root",
+        new XAttribute("color", "red"),
+        new XAttribute("size", "large"),
+      new XElement("first"),
+      new XElement("second")
+    )
+  );
+}
+```

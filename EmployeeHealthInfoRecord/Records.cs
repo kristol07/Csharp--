@@ -39,7 +39,10 @@ namespace EmployeeHealthInfoRecord
         //    }
         //}
 
-        public Dictionary<string, Employee> EmployeeDatabase { get; set; }
+        public Dictionary<string, Employee> EmployeeDatabase
+        { 
+            get; set; 
+        }
 
         public Dictionary<string, Dictionary<string, EmployeeRecord>> RecordsDatabase
         {
@@ -175,7 +178,7 @@ namespace EmployeeHealthInfoRecord
                 RecordsDatabase.Add(ginNumber, new Dictionary<string, EmployeeRecord>());
             }
 
-            //EmployeeDatabase[ginNumber].Name = name; // the second return has done things for this step
+            //EmployeeDatabase[ginNumber].Name = name; // the second return did same thing for this step
 
             EmployeeRecord newRecord = new EmployeeRecord(EmployeeDatabase[ginNumber], checkDate, bodyTemperature, hasHubeiTravelHistory, hasSymptoms, notes);
 
