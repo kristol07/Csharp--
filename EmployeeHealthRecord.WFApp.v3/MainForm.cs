@@ -353,7 +353,6 @@ namespace EmployeeHealthRecord.WFApp.v3
             }
             recordsTreeView.EndUpdate();
 
-
             recordsTreeView.SelectedNode = SearchPreviousSelectedNode(previousSelectedNodeName);
             recordsTreeView.ExpandAll();
 
@@ -387,7 +386,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                 foreach (var month in allMonthsForSameYear)
                 {
                     recordsTreeView.Nodes[0].Nodes[i].Nodes.Add(cultureInfo.DateTimeFormat.GetMonthName(month));
-                    recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Name = year.ToString() + cultureInfo.DateTimeFormat.GetMonthName(month);
+                    recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Name = year.ToString() + "-" + cultureInfo.DateTimeFormat.GetMonthName(month);
                     List<int> allDaysForSameYearAndMonth = allDates.FindAll(x => x.Year == year && x.Month == month)
                                                                    .Select(x => x.Day)
                                                                    .Distinct().ToList();
@@ -396,7 +395,7 @@ namespace EmployeeHealthRecord.WFApp.v3
                     foreach (var day in allDaysForSameYearAndMonth)
                     {
                         recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Nodes.Add(day.ToString());
-                        recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Nodes[k].Name = year.ToString() + cultureInfo.DateTimeFormat.GetMonthName(month) + day.ToString();
+                        recordsTreeView.Nodes[0].Nodes[i].Nodes[j].Nodes[k].Name = year.ToString() + "-" + cultureInfo.DateTimeFormat.GetMonthName(month) + "-" + day.ToString();
                         k++;
                     }
                     j++;
@@ -414,17 +413,21 @@ namespace EmployeeHealthRecord.WFApp.v3
 
         private void DeleteRecordsUnderSelectedNode()
         {
-            if (MessageBox.Show("You are trying to delete all records under this selected node, are you sure?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if(employeeDatabaseDataGridView.Rows.Count != 0)
             {
-                List<EmployeeRecord> selectedRecords = GetRecordsOfSelectedTreeNode();
-                foreach (var record in selectedRecords)
+                string nameOfCurrentSelectedNode = recordsTreeView.SelectedNode.Name;
+                if (MessageBox.Show($"You are trying to delete all records for the selected node \"{nameOfCurrentSelectedNode}\", are you sure?", "Confirm Delete", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    employeeRecords.RemoveRecord(record.GinNumber, record.CheckDate.ToShortDateString());
-                }
+                    List<EmployeeRecord> selectedRecords = GetRecordsOfSelectedTreeNode();
+                    foreach (var record in selectedRecords)
+                    {
+                        employeeRecords.RemoveRecord(record.GinNumber, record.CheckDate.ToShortDateString());
+                    }
 
-                UpdateTreeView();
-                FilterRecords();
-                UpdateAutoSuggestionForFilterGinNumberTextBox();
+                    UpdateTreeView();
+                    FilterRecords();
+                    UpdateAutoSuggestionForFilterGinNumberTextBox();
+                }
             }
         }
 

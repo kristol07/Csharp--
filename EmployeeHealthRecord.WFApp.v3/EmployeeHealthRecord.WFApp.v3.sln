@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeHealthRecord.WFApp.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeHealthInfoRecord", "..\EmployeeHealthInfoRecord\EmployeeHealthInfoRecord.csproj", "{E2B6F4FA-F7B8-41F6-BE95-F21B7B86BF66}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmployeeHealthInfoRecord.Tests", "..\EmployeeHealthInfoRecord.Tests\EmployeeHealthInfoRecord.Tests.csproj", "{CAD19868-69BF-403A-8AC0-827EC870BA4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{E2B6F4FA-F7B8-41F6-BE95-F21B7B86BF66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2B6F4FA-F7B8-41F6-BE95-F21B7B86BF66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E2B6F4FA-F7B8-41F6-BE95-F21B7B86BF66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAD19868-69BF-403A-8AC0-827EC870BA4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAD19868-69BF-403A-8AC0-827EC870BA4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAD19868-69BF-403A-8AC0-827EC870BA4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAD19868-69BF-403A-8AC0-827EC870BA4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
