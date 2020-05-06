@@ -1,10 +1,11 @@
 ## Project: Daily Health Monitor Windows Application
 
-A Windows GUI application for recording daily health of special groups of people.
+A Windows GUI application for recording daily health in convenience.
 
+### Video & Screenshots:
 
-### Screenshots:
-
+[Video](Presentation-video.mp4)
+|
 ![Main form](imgs/MainForm.png)
 |
 ![Record Detail Form - add/edit](imgs/edit.png)
@@ -65,13 +66,43 @@ A Windows GUI application for recording daily health of special groups of people
 
 Make sure you have `.Net Framework 4.x` installed.
 
-
-
-### User Documentation
+To be continued.... (no release version for now)
 
 ### Developer Documentation
 
+This application is built with [Windows Forms programming](https://docs.microsoft.com/en-us/dotnet/framework/winforms/), and (default) IDE
+[Visual Studio](https://visualstudio.microsoft.com/vs/compare/) is required for development.
+
 #### Getting Started
+
+Clone the repo
+
+```shell
+$ git clone git@github.com:kristol07/Csharp--.git
+```
+
+, open the solution file `Csharp--/EmployeeHealthRecord.WFApp.v3/EmployeeHealthRecord.WFApp.v3.sln` with Visual Studio, and build the program.
+
+The solution includes two projects:
+- `EmployeeHealthInfoRecord` generating the **class library** used by GUI program. Input validator, data model and file operation handling are declared in this project. See detail [here](../EmployeeHealthInfoRecord/README.md).
+- `EmployeeHealthRecord.WFApp.v3` generating the **GUI program**. Use Visual Studio Designer to view or redesign `Main Form` and `Record Detail Form`.
 
 #### Testing
 
+All test codes or documents are saved in `Csharp--\EmployeeHealthInfoRecord.Tests`.
+
+##### GUI Test
+
+You can find test case documents under directory `TestCaseDocument`. Follow test cases and use different databases under directory `TestData` to test the GUI program. (Use the most updated test case design, i.e., test cases in Xmind file.)
+
+You can also use codes under directory `RecordRandomGenerator` to generate new test database.
+
+##### Unit Test
+
+```shell
+$ cd Csharp--\EmployeeHealthInfoRecord.Tests
+
+$ dotnet test # Run the test
+
+$ ./GenerateCodeCoverageReport.bat # use .bat file to generate code coverage report automatically
+```

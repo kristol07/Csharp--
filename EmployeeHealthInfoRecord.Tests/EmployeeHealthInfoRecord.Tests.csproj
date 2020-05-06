@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EmployeeHealthInfoRecord\EmployeeHealthInfoRecord.csproj" />
+    <Compile Remove="RecordRandomGenerator/**"/>
   </ItemGroup>
 
 </Project>
