@@ -6,7 +6,7 @@ A Windows GUI application for recording daily health of special groups of people
 ### Screenshots:
 
 ![Main form](imgs/MainForm.png)
-/
+|
 ![Record Detail Form - add/edit](imgs/edit.png)
 
 ### Features:
@@ -21,7 +21,7 @@ A Windows GUI application for recording daily health of special groups of people
   - GinNumber
   - Check Date
   - Suspect records
-  - Name (through navigation siderbar)
+  - Name (through navigation sidebar)
 - GUI
   - Switch Treeview navigation sidebar
   - Context menus inside navigation sidebar and datagrid table
