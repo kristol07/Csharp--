@@ -2,9 +2,11 @@
 
 #### Data model
 
+- `Employee`
+    - `GinNumber`(string), non-negative integer and unique for each Employee
+    - `Name`(string)
 - `Record`
-  - `GinNumber`(string), non-negative integer and unique for each Employee
-  - `Name`(string)
+  - `RelatedEmployee`(Employee)
   - `CheckDate`(DateTime), cannot be future date
   - `BodyTemperature`(double), positive number and range from 35 to 42 
   - `HasHubeiTravelHistory`(bool)
