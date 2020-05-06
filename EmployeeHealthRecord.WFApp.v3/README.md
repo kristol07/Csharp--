@@ -2,7 +2,21 @@
 
 A Windows GUI application for recording daily health in convenience.
 
-### Video & Screenshots:
+  - [Video & Screenshots](#video--screenshots)
+  - [Features](#features)
+    - [Special Requirements](#special-requirements)
+    - [Shortcuts](#shortcuts)
+    - [To do](#to-do)
+  - [Installation](#installation)
+    - [Prerequisites](#prerequisites)
+  - [Developer Documentation](#developer-documentation)
+    - [Getting Started](#getting-started)
+    - [Testing](#testing)
+      - [GUI Test](#gui-test)
+      - [Unit Test](#unit-test)
+  - [Bugs and Feature Requests](#bugs-and-feature-requests)
+
+### Video & Screenshots
 
 [Video](Presentation-video.mp4)
 |
@@ -10,7 +24,7 @@ A Windows GUI application for recording daily health in convenience.
 |
 ![Record Detail Form - add/edit](imgs/edit.png)
 
-### Features:
+### Features
 
 - Basic
   - Load Database From csv/txt file
@@ -29,7 +43,7 @@ A Windows GUI application for recording daily health in convenience.
   - Working status & records statistics auto-update in status bar
   - key shortcuts & access key support
 
-#### Special Requirements:
+#### Special Requirements
 
 - Cannot add new record which has conflict with existed records in case of
    - same ginNumber & same checkdate
@@ -52,7 +66,7 @@ A Windows GUI application for recording daily health in convenience.
 - `Ctrl+D1` - Open external browser and redirect to source repository
 - `Ctrl+Q` - Exit program
 
-#### To do:
+#### To do
 
 - [ ] Search textbox function
 - [ ] EditHistory property in record
@@ -106,3 +120,8 @@ $ dotnet test # Run the test
 
 $ ./GenerateCodeCoverageReport.bat # use .bat file to generate code coverage report automatically
 ```
+
+### Bugs and Feature Requests
+
+Open new issue [here](https://github.com/kristol07/Csharp--/issues). 
+(See [help](https://help.github.com/en/github/managing-your-work-on-github/creating-an-issue) for how to create issue in Github.)
